@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+
+  backend:
+    container_name: backend
+    image: docker.io/bitnami/laravel:8
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laradb
+      DB_USERNAME: root
+      DB_PASSWORD:
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      - mysql
+    networks:
+      - app
+
+  frontend:
+    container_name: frontend
+    build:  
+      context: ./frontend
+      dockerfile: Dockerfile
+    tty:  true
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app/frontend
+    depends_on:
+      - backend
+    networks:
+      - app
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7.22
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laradb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    networks:
+      - app
+
+networks:
+  app:
+   driver: bridge
+
+
+
+
