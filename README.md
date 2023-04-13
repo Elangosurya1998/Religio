@@ -39,7 +39,7 @@ cd ..
 docker-compose build
 ```
 ```
-dokcer-compose up
+docker-compose up
 ```
 
 
