@@ -12,6 +12,8 @@ cd backend
 
 ```
 composer update
+or 
+composer update --ignore-platform-reqs
 ```
 ```
 copy .env.example .env
