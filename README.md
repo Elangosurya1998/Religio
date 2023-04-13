@@ -1,13 +1,13 @@
 # Project laravel-react-mysql-docker-app
 
 ### Installing and running the Following commands
-```
-cd reactlaravel
-```
+
 ```
 git clone https://github.com/Elangosurya1998/reactlaravel.git
 ```
-
+```
+cd reactlaravel
+```
 ```
 cd backend
 ```
