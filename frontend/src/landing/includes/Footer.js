@@ -11,7 +11,7 @@ function Footer() {
                   <div className="single-footer-caption mb-30">
                     {/* logo */}
                     <div className="footer-logo">
-                      <a href="index.html"><img src="./landing/assets/img/logo/logo2_footer.png" alt="" /></a>
+                      <a href=""><img src="./logo.png" alt="" /></a>
                     </div>
                     <div className="footer-tittle">
                       <div className="footer-pera">
