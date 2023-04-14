@@ -2,7 +2,7 @@ import Header from "./includes/Header";
 import Main from "./includes/Main";
 import Footer from "./includes/Footer";
 
-function Layouts() {
+function Layoutsland() {
     return (
         <>
         <Header/>
@@ -12,4 +12,4 @@ function Layouts() {
     );
 }
   
-export default Layouts;
+export default Layoutsland;
