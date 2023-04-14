@@ -22,6 +22,12 @@ function Sidemenubar() {
                   <i className="mdi mdi-home menu-icon" />
                 </a>
               </li>
+              <li className="nav-item ">
+                <a className="nav-link" href="/Religio/ClientRegistration">
+                  <span className="menu-title">Client Registration</span>
+                  <i className="mdi mdi-account-plus menu-icon" />
+                </a>
+              </li>
               <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                   <span className="menu-title">Basic UI Elements</span>
