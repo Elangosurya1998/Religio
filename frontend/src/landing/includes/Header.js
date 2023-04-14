@@ -10,7 +10,7 @@ function Header() {
                 {/* Logo */}
                 <div className="col-xl-2 col-lg-2 col-md-2">
                   <div className="logo">
-                    <a href=""><img src="./logo.png" alt="" /></a>
+                    <a href="/Religio/Dashboard"><img src="./logo.png" alt="" /></a>
                   </div>
                 </div>
                 <div className="col-xl-10 col-lg-10 col-md-10">

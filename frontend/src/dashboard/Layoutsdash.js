@@ -1,7 +1,9 @@
 import Navbar from "./includes/Navbar";
 import Sidemenubar from "./includes/Sidemenubar";
-import Content from "./includes/Content";
+import Main from "./includes/Main";
 import Footer from "./includes/Footer";
+
+import "./scss/style.scss";
 
 function DashLayouts() {
     return (
@@ -9,10 +11,8 @@ function DashLayouts() {
             <Navbar />
             <div className="container-fluid page-body-wrapper">
             <Sidemenubar />
-                
                 <div className="main-panel">
-                    
-                    <Content />
+                    <Main />
                     <Footer/>
                 </div>
             </div>
