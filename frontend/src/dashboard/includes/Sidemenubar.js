@@ -1,5 +1,3 @@
-import Content from "./Content";
-
 function Sidemenubar() {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
