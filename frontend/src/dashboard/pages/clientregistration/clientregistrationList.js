@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -81,8 +81,7 @@ const deleteregister = async (e,id) =>{
 
               </div>
               <div className="col-lg-2"> 
-              <a href="/Religio/RegistrationAdd" > <label className="btn"> Add <i className="mdi mdi-account-multiple-plus" />
-                </label></a>
+              <Link to="/Religio/RegistrationAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
                </div>
             </div>
                 <table className="table table-striped Mytable">

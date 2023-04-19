@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Sidemenubar() {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
@@ -17,28 +19,24 @@ function Sidemenubar() {
                 </a>
               </li>
               <li className="nav-item active">
-                <a className="nav-link" href="/Religio/Dashboard">
-                  <span className="menu-title">Dashboard</span>
-                  <i className="mdi mdi-home menu-icon" />
-                </a>
+                <Link to="/Religio/Dashboard" className="nav-link" >
+                   <span className="menu-title">Dashboard</span>
+                  <i className="mdi mdi-home menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/Religio/ClientRegistration">
+                <Link to="/Religio/ClientRegistration" className="nav-link" >
                   <span className="menu-title">Client Registration</span>
-                  <i className="mdi mdi-account-multiple-plus menu-icon" />
-                </a>
+                  <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/Religio/Congregation">
+                <Link to="/Religio/Congregation" className="nav-link" >
                   <span className="menu-title">Congregation</span>
-                  <i className="mdi mdi-account-plus menu-icon" />
-                </a>
+                  <i className="mdi mdi-account-plus menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/Religio/Province">
+                <Link to="/Religio/Province" className="nav-link" >
                   <span className="menu-title">Province</span>
-                  <i className="mdi mdi-account-plus menu-icon" />
-                </a>
+                  <i className="mdi mdi-account-plus menu-icon" /></Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">

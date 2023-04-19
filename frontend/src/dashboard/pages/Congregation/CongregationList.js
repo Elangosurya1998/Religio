@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
-import { Navigate,useNavigate } from "react-router-dom";
+import { Link, Navigate,useNavigate } from "react-router-dom";
 
 
 function CongregationList(){
@@ -69,8 +69,8 @@ const navigate = useNavigate();
               <h4 className="card-title">Congregation List</h4>
               </div>
               <div className="col-lg-2"> 
-             <a href="/Religio/CongregationAdd" > <label className="btn"> Add <i className="mdi mdi-account-multiple-plus" />
-                </label></a>
+              <Link to="/Religio/CongregationAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+                
                </div>
             </div>
                 <table className="table table-striped">

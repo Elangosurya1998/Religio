@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function ProvinceList(){
@@ -67,10 +67,9 @@ const deleteProvince = async (e,id) =>{
               <div className="col-lg-10">
               <h4 className="card-title">Province List</h4>
               </div>
-              <div className="col-lg-2"> 
-              <a href="/Religio/ProvinceAdd" > <label className="btn"> Add <i className="mdi mdi-account-multiple-plus" />
-                </label></a>
-               </div>
+              <div className="col-lg-2">
+              <Link to="/Religio/ProvinceAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+            </div>
             </div>
                 <table className="table table-striped">
                   <thead>
