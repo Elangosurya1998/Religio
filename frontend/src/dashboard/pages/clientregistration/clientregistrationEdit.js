@@ -231,10 +231,10 @@ const navigate = useNavigate();
                              <label className="col-sm-3 col-form-label">Project Value</label>
                              <div className="col-sm-9">
                              <input type="text" className="form-control" name="ProjectValue" 
-                             {...register("ProjectValue", { required: true , pattern: {value: /^[A-Za-z ]+$/, } })}
+                             {...register("ProjectValue", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.ProjectValue ? "true" : "false"}  />
                              {errors?.ProjectValue?.type === 'required' && <div className='text-danger text_error'>Project Value is required</div>}
-                             {errors?.ProjectValue?.type === "pattern" && <div className='text-danger text_error '>Project Value can contain only alphabets</div>}
+                             {errors?.ProjectValue?.type === "pattern" && <div className='text-danger text_error '>Project Value can contain only Numbers</div>}
                           </div>
                            </div>
                          </div>
@@ -243,10 +243,10 @@ const navigate = useNavigate();
                             <label className="col-sm-3 col-form-label">AMC value</label>
                             <div className="col-sm-9">
                               <input type="text" className="form-control"  name="AMCvalue"
-                                {...register("AMCvalue", { required: true , pattern: {value: /^[A-Za-z ]+$/, } })}
+                                {...register("AMCvalue", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
                                 aria-invalid={errors?.AMCvalue ? "true" : "false"}  />
                                 {errors?.AMCvalue?.type === 'required' && <div className='text-danger text_error'>AMC value is required</div>}
-                                {errors?.AMCvalue?.type === "pattern" && <div className='text-danger text_error '>AMC value can contain only alphabets</div>}
+                                {errors?.AMCvalue?.type === "pattern" && <div className='text-danger text_error '>AMC value can contain only Numbers</div>}
                             </div>
                           </div>
                         </div>
