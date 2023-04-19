@@ -69,7 +69,7 @@ const navigate = useNavigate();
               <h4 className="card-title">Congregation List</h4>
               </div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/CongregationAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/CongregationAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
                 
                </div>
             </div>
@@ -93,8 +93,8 @@ const navigate = useNavigate();
                           <td>{item.state}</td>
                           <td>{item.Address2}</td>
                           <td>{item.Postcode }</td>
-                          <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> / 
-                              &nbsp; <a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                          <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                            &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   
                       ))

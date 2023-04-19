@@ -68,7 +68,7 @@ const deleteProvince = async (e,id) =>{
               <h4 className="card-title">Province List</h4>
               </div>
               <div className="col-lg-2">
-              <Link to="/Religio/ProvinceAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/ProvinceAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
             </div>
             </div>
                 <table className="table table-striped">
@@ -80,7 +80,7 @@ const deleteProvince = async (e,id) =>{
                       <th>State</th>
                       <th>Address2</th>
                       <th>Postcode</th>
-                      <th>City</th>
+                      {/* <th>City</th> */}
                       {/* <th>country</th> */}
                       <th>Action</th>
                     </tr>
@@ -95,10 +95,10 @@ const deleteProvince = async (e,id) =>{
                           <td>{item.state}</td>
                           <td>{item.Address2}</td>
                           <td>{item.Postcode }</td>
-                          <td>{item.City }</td>
+                          {/* <td>{item.City }</td> */}
                           {/* <td>{item.country }</td> */}
-                          <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a> / 
-                              &nbsp; <a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
+                          <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a>/
+                              &nbsp;<a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   
                       ))

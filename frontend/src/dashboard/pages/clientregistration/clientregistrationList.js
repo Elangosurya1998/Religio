@@ -81,7 +81,7 @@ const deleteregister = async (e,id) =>{
 
               </div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/RegistrationAdd" className="btn"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/RegistrationAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
                </div>
             </div>
                 <table className="table table-striped Mytable">
@@ -104,8 +104,8 @@ const deleteregister = async (e,id) =>{
                           <td>{item.Name}</td>
                           <td>{item.Place}</td>
                           <td>{item.FinancialYear }</td>
-                          <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> / 
-                              &nbsp; <a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-delete" id="print">Delete</a>
+                          <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                              &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   
                       ))
