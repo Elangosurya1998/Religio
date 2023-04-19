@@ -3,16 +3,18 @@ function Main() {
     return (
         <main>
           {/* Slider Area Start*/}
-          <div className="slider-area ">
+          <div className="slider-area" id="Home">
             <div className="slider-active">
               <div className="single-slider slider-height slider-padding sky-blue d-flex align-items-center">
                 <div className="container">
                   <div className="row d-flex align-items-center">
                     <div className="col-lg-6 col-md-9 ">
                       <div className="hero__caption">
-                        <span data-animation="fadeInUp" data-delay=".4s">App Landing Page</span>
-                        <h1 data-animation="fadeInUp" data-delay=".6s">Get things done<br />with Appco</h1>
-                        <p data-animation="fadeInUp" data-delay=".8s">Dorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusm tempor incididunt ulabore et dolore magna aliqua.</p>
+                        <div className="section-tittle">
+                          <h2>Religio</h2>
+                        </div>
+                        <h1 data-animation="fadeInUp" data-delay=".6s">Integrated Software Solution For Managing & Administration Of Congregation, Province & Diocese</h1>
+                        <p data-animation="fadeInUp" data-delay=".8s">User-friendly software tool for the religious head of a religious institute, province secretary, institute/community heads and for all province members - to manage all communications (circular, email, meetings), create records (chronicles, concerns), maintain member critical and personal information, assignments, history, institution/community information, planning, reporting and archiving. </p>
                         {/* Slider btn */}
                         <div className="slider-btns">
                           {/* Hero-btn */}
@@ -34,7 +36,7 @@ function Main() {
           </div>
           {/* Slider Area End */}
           {/* Best Features Start */}
-          <section className="best-features-area section-padd4">
+          <section className="best-features-area section-padd4" id="Feature">
             <div className="container">
               <div className="row justify-content-end">
                 <div className="col-xl-8 col-lg-10">
@@ -51,10 +53,10 @@ function Main() {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div className="single-features mb-70">
                         <div className="features-icon">
-                          <span className="flaticon-support" />
+                          <span className="flaticon-costomize" />
                         </div>
                         <div className="features-caption">
-                          <h3>Easy to Costomize</h3>
+                          <h3>Easy to Documents Management</h3>
                           <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                         </div>
                       </div>
@@ -62,10 +64,10 @@ function Main() {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div className="single-features mb-70">
                         <div className="features-icon">
-                          <span className="flaticon-support" />
+                          <span className="flaticon-transfer" />
                         </div>
                         <div className="features-caption">
-                          <h3>Extreme Security</h3>
+                          <h3>Transfers Made Easy</h3>
                           <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                         </div>
                       </div>
@@ -73,10 +75,10 @@ function Main() {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div className="single-features mb-70">
                         <div className="features-icon">
-                          <span className="flaticon-support" />
+                          <span className="flaticon-member" />
                         </div>
                         <div className="features-caption">
-                          <h3>Customer Support</h3>
+                          <h3>Easy Member Update</h3>
                           <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                         </div>
                       </div>
@@ -87,7 +89,7 @@ function Main() {
                           <span className="flaticon-support" />
                         </div>
                         <div className="features-caption">
-                          <h3>Creative Design</h3>
+                          <h3>Customer Support</h3>
                           <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                         </div>
                       </div>
@@ -103,14 +105,36 @@ function Main() {
           </section>
           {/* Best Features End */}
 
+          {/* Available App  Start*/}
+          <div className="available-app-area">
+            <div className="container">
+              <div className="row d-flex justify-content-between">
+                <div className="col-xl-12 col-lg-12">
+                  <div className="app-caption">
+                    <div className="section-tittle section-tittle3">
+                      <center><h1></h1></center>
+                      <h2>“Congregation Sans Paper” A paperless technology driver back office for an administration.</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Shape */}
+            <div className="app-shape say-shape">
+              <img src="./landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
+              <img src="./landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
+            </div>
+          </div>
+          {/* Available App End*/}
+
           {/* Services Area Start */}
-          <section className="service-area sky-blue section-padding2">
+          <section className="service-area sky-blue section-padding2"  id="Services">
             <div className="container">
               {/* Section Tittle */}
               <div className="row d-flex justify-content-center">
                 <div className="col-lg-6">
                   <div className="section-tittle text-center">
-                    <h2>How Can We HelpYour<br />with Appco!</h2>
+                    <h2>How Can We HelpYour<br />with Religio!</h2>
                   </div>
                 </div>
               </div>
@@ -122,18 +146,18 @@ function Main() {
                       <span className="flaticon-businessman" />
                     </div> 
                     <div className="service-cap">
-                      <h4><a href="#">Easily Manage</a></h4>
+                      <h4><a href="#">Members Info Online</a></h4>
                       <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="services-caption active text-center mb-30">
+                  <div className="services-caption text-center mb-30">
                     <div className="service-icon">
                       <span className="flaticon-pay" />
                     </div> 
                     <div className="service-cap">
-                      <h4><a href="#">Get Payments Easily</a></h4>
+                      <h4><a href="#">Calendar / Events</a></h4>
                       <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
                     </div>
                   </div>
@@ -144,7 +168,7 @@ function Main() {
                       <span className="flaticon-plane" />
                     </div> 
                     <div className="service-cap">
-                      <h4><a href="#">Quick Messaging</a></h4>
+                      <h4><a href="#">Circular Management</a></h4>
                       <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
                     </div>
                   </div>
@@ -155,24 +179,31 @@ function Main() {
           {/* Services Area End */}
 
           {/* Applic App Start */}
-          <div className="applic-apps section-padding2">
+          <div className="applic-apps section-padding2" id="Gallery">
             <div className="container-fluid">
               <div className="row">
                 {/* slider Heading */}
                 <div className="col-xl-4 col-lg-4 col-md-8">
                   <div className="single-cases-info mb-30">
-                    <h3>Applic Apps<br /> Screenshot</h3>
+                    <h3>Application Apps<br /> Screenshot</h3>
                     <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra maecenasan lacus vel facilisis. </p>
                   </div>
                 </div>
+                <div className="col-xl-6 col-lg-6">
+                  <div className="row d-flex justify-content-between">
+                    <div className="app-img">
+                      <img src="./landing/assets/img/shape/available-app.png" alt="" />
+                    </div>
+                  </div>
+                </div>
                 {/* OwL */}
-                <div className="col-xl-8 col-lg-8 col-md-col-md-7">
+                {/* <div className="col-xl-8 col-lg-8 col-md-7">
                   <div className="app-active owl-carousel"> 
                     <div className="single-cases-img">
                       <img src="./landing/assets/img/gallery/App1.png" alt="" />
                     </div>
                     <div className="single-cases-img">
-                      <img src="./landing/assets/img/gallery/App2.png" alt="" />
+                      
                     </div>
                     <div className="single-cases-img">
                       <img src="./landing/assets/img/gallery/App3.png" alt="" />
@@ -184,7 +215,7 @@ function Main() {
                       <img src="./landing/assets/img/gallery/App1.png" alt="" />
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -266,7 +297,7 @@ function Main() {
           {/* Pricing Card End */}
 
           {/* Our Customer Start */}
-          <div className="our-customer section-padd-top30">
+          <div className="our-customer sky-blue section-padd-top30">
             <div className="container-fluid">
               <div className="our-customer-wrapper">
                 {/* Section Tittle */}
@@ -280,15 +311,6 @@ function Main() {
                 <div className="row">
                   <div className="col-12">
                     <div className="customar-active dot-style d-flex dot-style">
-                      <div className="single-customer mb-100">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man1.png" alt="" />
-                        </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
                       <div className="single-customer mb-100">
                         <div className="what-img">
                           <img src="./landing/assets/img/shape/man2.png" alt="" />
@@ -355,30 +377,6 @@ function Main() {
             </div>
           </div>
           {/* Available App End*/}
-          
-          {/* Say Something Start */}
-          <div className="say-something-aera pt-90 pb-90 fix">
-            <div className="container">
-              <div className="row justify-content-between align-items-center">
-                <div className="offset-xl-1 offset-lg-1 col-xl-5 col-lg-5">
-                  <div className="say-something-cap">
-                    <h2>Say Hello To The Collaboration Hub.</h2>
-                  </div>
-                </div>
-                <div className="col-xl-2 col-lg-3">
-                  <div className="say-btn">
-                    <a href="#" className="btn radius-btn">Contact Us</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* shape */}
-            <div className="say-shape">
-              <img src="./landing/assets/img/shape/say-shape-left.png" alt="" className="say-shape1 rotateme d-none d-xl-block" />
-              <img src="./landing/assets/img/shape/say-shape-right.png" alt="" className="say-shape2 d-none d-lg-block" />
-            </div>
-          </div>
-          {/* Say Something End */}
         </main>
     );
 }

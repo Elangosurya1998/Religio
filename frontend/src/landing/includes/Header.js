@@ -18,11 +18,11 @@ function Header() {
                   <div className="main-menu f-right d-none d-lg-block">
                     <nav>
                       <ul id="navigation">    
-                        <li><a href=""> Home</a></li>
+                        <li><a href="#Home"> Home</a></li>
                         {/* <li className="active"><a href="index.html"> Home</a></li> */}
-                        <li><a href="">Feature</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">Pricing</a></li>
+                        <li><a href="#Feature">Feature</a></li>
+                        <li><a href="#Services">Services</a></li>
+                        <li><a href="#Gallery">Gallery</a></li>
                         <li><a href="#">Pages</a>
                           <ul className="submenu">
                             <li><a href="">Blog</a></li>
