@@ -1,18 +1,28 @@
  
-import { useForm } from "react-hook-form";
+import { useForm  } from "react-hook-form";
 import axios from "axios"; 
+import Swal from "sweetalert2";
+import ApiUrl from "../Api/Api";
+import { Link, useNavigate } from "react-router-dom";
  
  
- function Province() {
+ function CongregationCreate() {
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' }); 
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' }); 
 
+const navigate = useNavigate();
     
-  function onSubmitCongregationform(data){
-    axios.post('https://jsonplaceholder.typicode.com/posts',{data})
-    .then(Response => console.log(Response))
-    .catch(err =>console.log(err))
-   
+  function onSubmitCongregationform(data,e){
+    axios.post(`${ApiUrl}/Religio/Congregation/store`,data)
+    .then(Response => console.log(Response),
+    Swal.fire(
+      'Created Successfully..!',
+      'Congregation Add ..',
+      'success'
+    ),e.target.reset())
+    navigate('/Religio/Congregation')
+    .catch(err =>console.log(err))  
+    
   }
       return (
  <div className="content-wrapper">
@@ -20,7 +30,7 @@ import axios from "axios";
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Province
+          </span> Congregation
         </h3>
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -34,37 +44,23 @@ import axios from "axios";
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <div className="row"><b className="card-description"> Province </b></div>
+              <div className="row"><b className="card-description"> Congregation </b></div>
               <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Congregation</label>
-                            <div className="col-sm-9">
-                            <select className="form-control" name="Congregation"
-                             {...register("Congregation", { required: true })}
-                             aria-invalid={errors?.Congregation ? "true" : "false"}>
-                            <option value="">Select Congregation</option>
-                                <option>Con</option>
-                                <option>gregation</option>
-                              </select>
-                              {errors?.Congregation?.type === 'required' && <div className='text-danger text_error'>Please Choose One Congregation</div>}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Province</label>
-                            <div className="col-sm-9">
-                            <input type="text" className="form-control" name="Province"
-                            {...register("Province", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                            aria-invalid={errors?.Province ? "true" : "false"}  />
-                            {errors?.Province?.type === 'required' && <div className='text-danger text_error'>Province Name is required</div>}
-                            {errors?.Province?.type === "pattern" && <div className='text-danger text_error '>Province can contain only alphabets</div>}
-                            </div>
-                          </div>
-                        </div>
+                  <div className="col-md-12">
+                    <div className="form-group row">
+                      <label className="col-form-label">Congregation Name</label>
+                      <div className="col-sm-12">
+                        <input type="text" className="form-control" name="CongregationName"
+                        {...register("CongregationName", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        aria-invalid={errors?.CongregationName ? "true" : "false"}  />
+                        {errors?.CongregationName?.type === 'required' && <div className='text-danger text_error'>Congregation Name is required</div>}
+                        {errors?.CongregationName?.type === "pattern" && <div className='text-danger text_error '>Congregation Name can contain only alphabets</div>}
+                       
                       </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="row"><b className="card-description"> Address </b></div>
                 <div className="row">
                   <div className="col-md-6">
@@ -139,6 +135,7 @@ import axios from "axios";
                          {...register("country", { required: true })}
                          aria-invalid={errors?.country ? "true" : "false"}>
                           <option value="">Select Country</option>
+                          <option value="India">India</option>
                           <option value="America">America</option>
                           <option value="Italy">Italy</option>
                           <option value="Russia">Russia</option>
@@ -151,6 +148,8 @@ import axios from "axios";
                 </div>
                 <div className="text-center">
                 <button class="btn btn-gradient-primary font-weight-bold " type="submit">Submit</button>
+                &nbsp; &nbsp; &nbsp;
+                <Link to="/Religio/Congregation" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                 </div>  
               </form>
             </div>
@@ -160,5 +159,5 @@ import axios from "axios";
         </div>
       );
     }
-    export default Province;
+    export default CongregationCreate;
   

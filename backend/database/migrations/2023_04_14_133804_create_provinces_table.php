@@ -8,19 +8,18 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('congregation', function (Blueprint $table) {
-            $table->id()->index();
-            $table->string('CongregationName')->nullable()->index();
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->id();
+            $table->string('Congregation')->nullable();
+            $table->string('Province')->nullable();
             $table->string('Address1')->nullable();
             $table->string('state')->nullable();
             $table->string('Address2')->nullable();
             $table->string('Postcode')->nullable();
-            $table->string('City')->nullable();
+            $table->string('City')->nullable(); 
             $table->string('country')->nullable(); 
             $table->timestamps();
         });
@@ -28,11 +27,9 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('congregation');
+        Schema::dropIfExists('provinces');
     }
 };

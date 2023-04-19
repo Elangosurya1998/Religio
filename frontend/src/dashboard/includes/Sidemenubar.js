@@ -17,7 +17,7 @@ function Sidemenubar() {
                 </a>
               </li>
               <li className="nav-item active">
-                <a className="nav-link" href="">
+                <a className="nav-link" href="/Religio/Dashboard">
                   <span className="menu-title">Dashboard</span>
                   <i className="mdi mdi-home menu-icon" />
                 </a>
@@ -25,19 +25,31 @@ function Sidemenubar() {
               <li className="nav-item ">
                 <a className="nav-link" href="/Religio/ClientRegistration">
                   <span className="menu-title">Client Registration</span>
+                  <i className="mdi mdi-account-multiple-plus menu-icon" />
+                </a>
+              </li>
+              <li className="nav-item ">
+                <a className="nav-link" href="/Religio/Congregation">
+                  <span className="menu-title">Congregation</span>
+                  <i className="mdi mdi-account-plus menu-icon" />
+                </a>
+              </li>
+              <li className="nav-item ">
+                <a className="nav-link" href="/Religio/Province">
+                  <span className="menu-title">Province</span>
                   <i className="mdi mdi-account-plus menu-icon" />
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                  <span className="menu-title">Basic UI Elements</span>
+                  <span className="menu-title">Defaults</span>
                   <i className="menu-arrow" />
                   <i className="mdi mdi-crosshairs-gps menu-icon" />
                 </a>
                 <div className="collapse" id="ui-basic">
                   <ul className="nav flex-column sub-menu">
-                    <li className="nav-item"> <a className="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li className="nav-item"> <a className="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                    <li className="nav-item"> <a className="nav-link" href="/Religio/Congregation">Congregation</a></li>
+                    <li className="nav-item"> <a className="nav-link" href="/Religio/Province">Province</a></li>
                   </ul>
                 </div>
               </li>

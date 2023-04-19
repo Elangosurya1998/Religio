@@ -1,21 +1,72 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import axios from "axios"; 
+import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import ApiUrl from "../Api/Api";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-function ClientRegistration() {
-  const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });  
+function ClientRegistrationEdit() {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
 
-  function onSubmitform(data){
-    axios.post('https://jsonplaceholder.typicode.com/posts',{data})
-    .then(Response => console.log(Response))
-    .catch(err =>console.log(err))
-   
+  // const id ="23";
+  const {id} = useParams();
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/Registeredit/${id}`).then((res) => {
+        return res.json();
+    }).then((resp) => {
+       reset(resp.data[0]);
+    }).catch((err) => {
+        console.log(err.message);
+    })
+  }, [])
+  
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
+        return res.json();
+    }).then((resp) => {
+      Congregation(resp.data);
+    }).catch((err) => {
+        console.log(err.message);
+    })
+  }, [])
+
+  const [ congre, Congregation ] = useState([]);
+
+useEffect(() => {
+  fetch(`${ApiUrl}/Religio/Province`).then((res) => {
+      return res.json();
+  }).then((resp) => {
+    SetProvince(resp.data);
+  }).catch((err) => {
+      console.log(err.message);
+  })
+}, [])
+
+const [ Pro, SetProvince ] = useState([]);
+const navigate = useNavigate();
+
+  function onSubmitformregister(data,e){
+   console.log(data);
+    axios.put(`${ApiUrl}/Religio/Clientregistrationupdate/${id}`,data)
+    .then((response) => {
+      if (response.status === 200) {
+        Swal.fire(
+            'Updated Successfully..!',
+            'Data Updated ..',
+            'success'
+          );
+          navigate('/Religio/ClientRegistration');
+          e.target.reset();  
+      }
+    })
+    
   }
   return (    
       <div className="content-wrapper">
         <div className="page-header">
           <h3 className="page-title">
             <span className="page-title-icon bg-gradient-primary text-white me-2">
-              <i className="mdi mdi-account-plus menu-icon" />
+              <i className="mdi mdi-account-multiple-plus menu-icon" />
             </span> Client Registration
           </h3>
           <nav aria-label="breadcrumb">
@@ -31,7 +82,7 @@ function ClientRegistration() {
                 <div className="card">
                   <div className="card-body">
                     <h4 className="card-title"> Client Registration</h4>
-                    <form className="form-sample" onSubmit={handleSubmit(onSubmitform)}>
+                    <form className="form-sample" onSubmit={handleSubmit(onSubmitformregister)}>
                       <br></br>
                       <div className="row">
                         <div className="col-md-6">
@@ -41,9 +92,11 @@ function ClientRegistration() {
                             <select className="form-control" name="Congregation"
                              {...register("Congregation", { required: true })}
                              aria-invalid={errors?.Congregation ? "true" : "false"}>
-                            <option value="">Select Congregation</option>
-                                <option>Con</option>
-                                <option>gregation</option>
+                            <option value="SelectCongregation">Select Congregation</option>
+                            {         
+                           congre && congre.map(item => (
+                          <option value={item.CongregationName}>{item.CongregationName  }</option>))
+                             }
                               </select>
                               {errors?.Congregation?.type === 'required' && <div className='text-danger text_error'>Please Choose One Congregation</div>}
                             </div>
@@ -56,8 +109,11 @@ function ClientRegistration() {
                             <select className="form-control"  name="Province"
                             {...register("Province", { required: true })}
                             aria-invalid={errors?.Province ? "true" : "false"}>
-                                <option value="">Select Province</option>
-                                <option>vince</option>
+                                <option value="Select Province">Select Province</option>
+                                {         
+                           Pro && Pro.map(item => (
+                          <option value={item.Province}>{item.Province  }</option>))
+                             }
                               </select>
                               {errors?.Province?.type === 'required' && <div className='text-danger text_error'>Please Choose One Province</div>}
 
@@ -100,7 +156,9 @@ function ClientRegistration() {
                             {...register("ClientType", { required: true })}
                             aria-invalid={errors?.ClientType ? "true" : "false"}>
                                 <option value="">Select Client Type</option>
-                                <option>New</option>
+                                <option value="Priest">Priest</option>
+                                <option value="Sisters">Sisters</option>
+                                <option value="LayBrothers">Lay Brothers</option>
                               </select>
                               {errors?.ClientType?.type === 'required' && <div className='text-danger text_error'>Please Choose One ClientType</div>}
                             </div>
@@ -110,12 +168,11 @@ function ClientRegistration() {
                           <div className="form-group row">
                             <label className="col-sm-3 col-form-label">Financial Year</label>
                             <div className="col-sm-9">
-                            <input type="text" className="form-control" placeholder="YYYY" max="2023" name="FinancialYear"
-                             {...register("FinancialYear", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
+                            <input type="date" className="form-control" placeholder="YYYY" name="FinancialYear"
+                             {...register("FinancialYear", { required: true })}
                              aria-invalid={errors?.FinancialYear ? "true" : "false"}  />
                              {errors?.FinancialYear?.type === 'required' && <div className='text-danger text_error'>Financial Year is required</div>}
-                             {errors?.FinancialYear?.type === "pattern" && <div className='text-danger text_error '>Financial Year can contain only Years</div>}
-                           </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -193,8 +250,7 @@ function ClientRegistration() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      {/* <p className="card-description"> Address </p> */}
+                      </div> 
                       <div className="row">
                       <div className="col-md-6">
                            <div className="form-group row">
@@ -203,7 +259,7 @@ function ClientRegistration() {
                             <select className="form-control" name="ProjectStatus"
                             {...register("ProjectStatus", { required: true })}
                             aria-invalid={errors?.ProjectStatus ? "true" : "false"}>
-                                <option value="" selected disabled>Select Project Status</option>
+                                <option value="Select Project" >Select Project Status</option>
                                 <option value="Completed">Completed</option>
                                 <option value="InProgress">InProgress</option>
                                 <option value="Notstrated">Not Started</option>
@@ -212,7 +268,7 @@ function ClientRegistration() {
                             </div>
                            </div>
                          </div>
-                         <div className="col-md-6">
+                        {/* <div className="col-md-6">
                            <div className="form-group row">
                              <label className="col-sm-3 col-form-label">File Attachment</label>
                              <div className="col-sm-9">
@@ -222,11 +278,98 @@ function ClientRegistration() {
                                {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'>Choose a File</div>}
                               </div>
                            </div>
-                         </div>
-                      </div>   
+                         </div> */}
+                      </div> 
+                      <div className="row"><b className="card-description"> Address </b></div>
+                      <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Address 1</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="Address1"
+                        {...register("Address1", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        aria-invalid={errors?.Address1 ? "true" : "false"}  />
+                        {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
+                        {errors?.Address1?.type === "pattern" && <div className='text-danger text_error '>Address 1 can contain only alphabets</div>}
+                        </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">State</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="state"
+                        {...register("state", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        aria-invalid={errors?.state ? "true" : "false"}  />
+                        {errors?.state?.type === 'required' && <div className='text-danger text_error'>State is required</div>}
+                        {errors?.state?.type === "pattern" && <div className='text-danger text_error '>State can contain only alphabets</div>}
+                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Address 2</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="Address2"
+                        {...register("Address2", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        aria-invalid={errors?.Address2 ? "true" : "false"}  />
+                        {errors?.Address2?.type === 'required' && <div className='text-danger text_error'>Address 2 is required</div>}
+                        {errors?.Address2?.type === "pattern" && <div className='text-danger text_error '>Address 2 can contain only alphabets</div>}
+                       </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Postcode</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="Postcode"
+                        {...register("Postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                        aria-invalid={errors?.Postcode ? "true" : "false"}  />
+                        {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'>Postcode is required</div>}
+                        {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '>Postcode can contain only Numbers</div>}
+                     </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">City</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="City"
+                        {...register("City", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        aria-invalid={errors?.City ? "true" : "false"}  />
+                        {errors?.City?.type === 'required' && <div className='text-danger text_error'>City is required</div>}
+                        {errors?.City?.type === "pattern" && <div className='text-danger text_error '>City can contain only alphabets</div>}
+                       </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Country</label>
+                      <div className="col-sm-9">
+                        <select className="form-control" name="country"
+                         {...register("country", { required: true })}
+                         aria-invalid={errors?.country ? "true" : "false"}>
+                          <option value="">Select Country</option>
+                          <option value="India">India</option>
+                          <option value="America">America</option>
+                          <option value="Italy">Italy</option>
+                          <option value="Russia">Russia</option>
+                          <option value="Britain">Britain</option>
+                        </select>
+                        {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
+                      </div>
+                    </div>
+                  </div>
+                </div>  
                       <div className="text-center">
-                      <button class="btn btn-gradient-primary font-weight-bold " type="submit">Register</button>
-                      </div>  
+                      <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
+                      &nbsp; &nbsp; &nbsp; 
+                      <Link to="/Religio/ClientRegistration" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                </div>  
                     </form>
                   </div>
                 </div>
@@ -236,4 +379,4 @@ function ClientRegistration() {
          );
     }
 
-  export default ClientRegistration;
+  export default ClientRegistrationEdit;

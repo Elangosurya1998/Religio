@@ -4,44 +4,48 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Congregation;
+use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
-class ReligioController extends Controller
+class ProvinceController extends Controller
 { 
         Private $status = 200;
        
-        public function Congregation(Request $request)
+        public function Provincestore(Request $request)
         {
            
             $validator    =  Validator::make($request->all(), 
             [
-                "CongregationName" => 'required',
+                "Congregation" => 'required',
+                "Province"   => "required",
                 "Address1"  => "required",
                 "state"  => "required",
                 "Address2"   => "required",
                 "Postcode"=> "required",
-                "country"  => "required"
+                "City"  => "required",
+                "country"  => "required",
             ]
            );
                 if($validator->fails()) {
                     return response()->json(["status" => "failed", 
                                     "validation_errors" => $validator->errors()]);
                 }
-                 $projectArray['params'] = array(
-                                "CongregationName" => $request->CongregationName,
+                 $ProvinceArray['params'] = array(
+                                "Congregation" => $request->Congregation,
+                                "Province" => $request->Province,
                                 "Address1" => $request->Address1,
                                 "state" => $request->state,
                                 "Address2" => $request->Address2,
-                                "Postcode" => $request->Postcode,
-                                "City"   => $request->City,
-                                "country"   => $request->country 
+                                "Postcode"   => $request->Postcode, 
+                                "City"   => $request->City, 
+                                "country"   => $request->country, 
                          );
     
-                $project  = Congregation::create($projectArray['params']);
+                $Province  = Province::create($ProvinceArray['params']);
     
                 if(!is_null($project)){ 
     
                     return response()->json(["status" => $this->status, "success" => true, 
-                            "message" => "project record created successfully", "data" => $project]);
+                            "message" => "Province created successfully", "data" => $Province]);
                 }    
                 else {
                     return response()->json(["status" => "failed", "success" => false,
@@ -51,9 +55,31 @@ class ReligioController extends Controller
     
         // list value
     
-        public function CongregationList() {
+        public function ProvinceList() {
     
-        $Congregation = Congregation::all();
+        $ProvinceAll = Province::all();
+            if(count($ProvinceAll) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($ProvinceAll), "data" => $ProvinceAll]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+        }
+
+        public function ProvinceDelete($id){
+
+            $Congregationdel =Province::find($id);
+            $Congregationdel->delete();
+            return response()->json(
+                ["status" => $this->status, "success" => true, 
+                "message" => " Province deleted  successfully"]);
+        }
+
+        public function ProvinceCongregation(){
+
+            $Congregation =Congregation::all();
             if(count($Congregation) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Congregation), "data" => $Congregation]);
@@ -63,18 +89,9 @@ class ReligioController extends Controller
                 "success" => false, "message" => "Whoops! no record found"]);
             }
         }
-
-        public function CongregationDelete($id){
-
-            $Congregationdel =Congregation::find($id);
-            $Congregationdel->delete();
-            return response()->json(
-                ["status" => $this->status, "success" => true, 
-                "message" => " Congregation deleted  successfully"]);
-        }
-        public function CongregationEdit($id){
+        public function ProvinceEdit($id){
            
-            $Congregationedit = Congregation::where('id',$id)->get();
+            $Congregationedit = Province::where('id',$id)->get();
             if(count($Congregationedit) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Congregationedit), "data" => $Congregationedit]);
@@ -83,20 +100,22 @@ class ReligioController extends Controller
                 return response()->json(["status" => "failed",
                 "success" => false, "message" => "Whoops! no record found"]);
             }
-        }public function Congregationupdate($id,Request $request){
+        }public function Provinceupdate($id,Request $request){
            
-            $Congregationupdate = Congregation::where('id',$id)
+            $Congregationupdate = Province::where('id',$id)
             ->update([
-                "CongregationName" => $request->CongregationName,
+                "Congregation" => $request->Congregation,
+                "Province" => $request->Province,
                 "Address1" => $request->Address1,
                 "state" => $request->state,
                 "Address2" => $request->Address2,
-                "Postcode" => $request->Postcode,
-                "City"   => $request->City,
-                "country"   => $request->country 
+                "Postcode"   => $request->Postcode, 
+                "City"   => $request->City, 
+                "country"   => $request->country, 
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
         }
 }
+

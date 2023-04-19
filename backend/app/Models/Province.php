@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Congregation extends Model
+class Province extends Model
 {
     use HasFactory;
 
-    protected $table = 'congregation';
+    protected $table = 'provinces';
 
     protected $fillable = [
         'id',
-        'CongregationName',
+        'Congregation',
+        'Province',
         'Address1',
         'state',
         'Address2',
