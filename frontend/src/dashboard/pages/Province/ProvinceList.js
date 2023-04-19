@@ -6,15 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 function ProvinceList(){
+  const fetchData = ()=>{
+        fetch(`${ApiUrl}/Religio/Province`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        SetProvince(resp.data);
+      }).catch((err) => {
+          console.log(err.message);
+      })
+  }
 
 useEffect(() => {
-  fetch(`${ApiUrl}/Religio/Province`).then((res) => {
-      return res.json();
-  }).then((resp) => {
-    SetProvince(resp.data);
-  }).catch((err) => {
-      console.log(err.message);
-  })
+  fetchData();
 }, [])
 
 
@@ -34,7 +37,9 @@ const deleteProvince = async (e,id) =>{
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      const res = axios.delete(`${ApiUrl}/Religio/Province/${id}`);
+     axios.delete(`${ApiUrl}/Religio/Province/${id}`).then((res)=>{
+      fetchData();
+     })
       Swal.fire(
         'Deleted!',
         'Your record has been deleted.',

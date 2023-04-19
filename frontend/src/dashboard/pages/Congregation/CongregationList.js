@@ -6,44 +6,51 @@ import { Link, Navigate,useNavigate } from "react-router-dom";
 
 
 function CongregationList(){
+  const [ Cong, Setcongregation ] = useState([]);
 
-useEffect(() => {
-  fetch(`${ApiUrl}/Religio/Congregation`).then((res) => {
-      return res.json();
-  }).then((resp) => {
-    Setcongregation(resp.data);
-  }).catch((err) => {
-      console.log(err.message);
-  })
-}, [])
-
-
-const [ Cong, Setcongregation ] = useState([]);
-
-const deleteCongregation = async (e,id) =>{
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      const res = axios.delete(`${ApiUrl}/Religio/Congregation/${id}`);
-      Swal.fire(
-        'Deleted!',
-        'Your record has been deleted.',
-        'success'
-      )
+    const fetchData = ()=>{
+        fetch(`${ApiUrl}/Religio/Congregation`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        Setcongregation(resp.data);
+        console.log(resp.data);
+      }).catch((err) => {
+          console.log(err.message);
+      })
     }
-  })
+
+    useEffect(() => {
+      fetchData();
+    }, [])
+
+  const deleteCongregation = async (e,id) =>{
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+           axios.delete(`${ApiUrl}/Religio/Congregation/${id}`).then((res)=>{
+            fetchData();
+           })
+            Swal.fire(
+              'Deleted!',
+              'Your record has been deleted.',
+              'success'
+            )};
+           
+        })
 }
-const navigate = useNavigate();
- const EditCongregation =async (e,id)=>{
-  navigate("/Religio/CongregationEdit/" + id);
- }
+
+
+    const navigate = useNavigate();
+    const EditCongregation =async (e,id)=>{
+      navigate("/Religio/CongregationEdit/" + id);
+    }
     return (
         <div className="content-wrapper">
         <div className="page-header">
