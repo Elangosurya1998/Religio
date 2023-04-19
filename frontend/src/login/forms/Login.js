@@ -5,9 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import LoginHeader from '../../landing/includes/LoginHeader';
-
-
 
 function Login() {
   const validationSchema = Yup.object().shape({
@@ -56,58 +53,41 @@ function Login() {
       );
 
   }
-
-  return (
-
-    <>
-      <LoginHeader />
-      <div style={{ marginTop: "150px" }}>
-        <h3 className="card-title" style={{ marginLeft: "50%" }}>Login Form</h3>
-        <div className="col-md-6 grid-margin stretch-card" style={{ marginLeft: "27%" }}>
-          <div className="card">
-            <div className="card-body">
-              <form className="forms-sample" onSubmit={handleSubmit(onSubmitLoginform)}>
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputEmail2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Email <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+return (
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+              <div class="brand-logo">
+              <a href='/'> <img src="./logo.png"/></a>
+              </div>
+              <h4>Hello! let's get started</h4>
+              <h6 class="font-weight-light">Sign in to continue.</h6>
+              <form class="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
+                <div class="form-group">
+                  <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="email" />
                     <div className="invalid-feedback">{errors.email?.message}</div>
-                  </div>
-
                 </div>
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputPassword2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Password <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.password?.message}</div>
-                  </div>
+                <div class="form-group">
+                  <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" />
+                  <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
-                <div className="text-center mt-12 font-weight-light"> Don't have an account? <a href="/register" className="text-primary">Register Here</a>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
-                <br></br><br></br>
-                <div className="col-sm-9" style={{ marginLeft: "28%" }}>
-                  <button type="submit" className="btn btn-gradient-primary " style={{ marginLeft: "5%" }}>
-                    Login
-                  </button>
-                  <Link to="/" className="btn btn-light" style={{ marginLeft: "5%" }}>Back</Link>
+                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" class="text-primary" style={{textDecoration:"none"}}>Create</a>
+                </div>
+                <div class="text-center mt-4 font-weight-light"><a href="/" class="text-primary" style={{textDecoration:"none"}}>Home</a>
                 </div>
               </form>
             </div>
           </div>
-        </div></div>
-
-    </>
-  );
+        </div>
+      </div>
+    </div>
+  </div>
+);
 }
-
-export default Login;
+ export default Login;

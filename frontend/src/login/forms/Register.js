@@ -5,19 +5,19 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import LoginHeader from '../../landing/includes/LoginHeader';
+
 
 function Register() {
   const validationSchema = Yup.object().shape({
-    userName: Yup.string()
-      .required('* User name is required'),
+    username: Yup.string()
+      .required('* Username is required'),
     email: Yup.string()
       .required('* Email is required')
       .email('* Email is invalid'),
     password: Yup.string()
       .min(6, '* Password must be at least 6 characters')
       .required('* Password is required'),
-    confirmPassword: Yup.string()
+      confirmpassword: Yup.string()
       .oneOf([Yup.ref('password'), null], '* Passwords must match')
       .required('* Confirm Password is required'),
   });
@@ -47,78 +47,48 @@ function Register() {
   }
 
   return (
-    <>
-      <LoginHeader />
-      <div style={{ marginTop: "150px" }}>
-        <h3 className="card-title" style={{ marginLeft: "50%" }}>Register Form</h3>
-        <div className="col-md-6 grid-margin stretch-card" style={{ marginLeft: "27%" }}>
-          <div className="card">
-            <div className="card-body">
-              <form className="forms-sample" onSubmit={handleSubmit(onSubmitRegisterform)} >
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputUsername2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Username <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="userName" value={name} type="text" {...register('userName',)} className={`form-control ${errors.userName ? 'is-invalid' : ''}`} onChange={handleChange} />
-                    <div className="invalid-feedback">{errors.userName?.message}</div>
-                  </div>
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+              <div class="brand-logo">
+               <a href='/'> <img src="./logo.png"/></a>
+              </div>
+              <h4>New here?</h4>
+              <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
+              <form class="pt-3" onSubmit={handleSubmit(onSubmitRegisterform)} >
+                <div class="form-group">
+                  <input name="username" placeholder='username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} />
+                    <div className="invalid-feedback">{errors.username?.message}</div>
                 </div>
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputEmail2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Email <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="email" type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.email?.message}</div>
-                  </div>
+                <div class="form-group">
+                  <input name="email" placeholder='email' type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                  <div className="invalid-feedback">{errors.email?.message}</div>
                 </div>
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputPassword2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Password <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.password?.message}</div>
-                  </div>
+                <div class="form-group">
+                  <input name="password" placeholder='password' type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
+                  <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
-                <div className="form-group row">
-                  <label
-                    htmlFor="exampleInputCPassword2"
-                    className="col-sm-3 col-form-label"
-                  >
-                    Confirm Password <span className='error' style={{ color: "red" }}>*</span>
-                  </label>
-                  <div className="col-sm-9">
-                    <input name="confirmPassword" type="password" {...register('confirmPassword')} className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.confirmPassword?.message}</div>
-                  </div>
+                <div class="form-group">
+                  <input name="confirmpassword" placeholder='confirmpassword' type="password" {...register('confirmpassword')} className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`} />
+                    <div className="invalid-feedback">{errors.confirmpassword?.message}</div>
                 </div>
-                <div className="text-center mt-12 font-weight-light"> Already have an account? <a href="/login " className="text-primary">Login Here</a>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
-                <br></br><br></br>
-                <div className="col-sm-9" style={{ marginLeft: "28%" }}>
-                  <button type="submit" className="btn btn-gradient-primary " style={{ marginLeft: "5%" }} >
-                    Register
-                  </button>
-                  <Link to="/login" className="btn btn-light" style={{ marginLeft: "5%" }}>Back</Link>
+                <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="/login" class="text-primary" style={{textDecoration:"none"}}>Login</a>
+                </div>
+                <div class="text-center mt-4 font-weight-light"><a href="/" class="text-primary" style={{textDecoration:"none"}}>Home</a>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
+  </div>
   );
 }
 export default Register;
-
