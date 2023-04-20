@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router";
+
 function Navbar() {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    localStorage.removeItem("userDetails");
+    navigate("/");
+  };
     return (
         <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -134,7 +141,7 @@ function Navbar() {
                 </div>
               </li>
               <li className="nav-item nav-logout d-none d-lg-block">
-                <a className="nav-link" href="#">
+                <a className="nav-link" onClick={()=>handleSignOut()} style={{cursor:"pointer"}}>
                   <i className="mdi mdi-power" />
                 </a>
               </li>

@@ -32,6 +32,7 @@ function Header() {
                           </ul>
                         </li> */}
                         <li><a href="">Contact</a></li>
+                        <li><a href="/login">Login</a></li>
                       </ul>
                     </nav>
                   </div>

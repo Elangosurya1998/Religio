@@ -1,23 +1,55 @@
  
-import { useForm  } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios"; 
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import ApiUrl from "../Api/Api";
+import { Link, useNavigate, useParams } from "react-router-dom";
  
- 
- function Congregation() {
+ function ProvinceEdit() {
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' }); 
-
+    const { register, handleSubmit, reset,  formState: { errors } } = useForm({ mode: 'onChange' }); 
+  
+    const navigate = useNavigate();
+  
+    const {id} = useParams();
+    useEffect(() => {
+      fetch(`${ApiUrl}/Religio/Provinceedit/${id}`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        console.log(resp);
+         reset(resp.data[0]);
+      }).catch((err) => {
+          console.log(err.message);
+      })
+    }, [])
     
-  function onSubmitCongregationform(data,e){
-    axios.post('http://127.0.0.1:8000/api/Religio/Congregation/store',data)
-    .then(Response => console.log(Response))
-    .catch(err =>console.log(err))  
+    useEffect(() => {
+      fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        Congregation(resp.data);
+      }).catch((err) => {
+          console.log(err.message);
+      })
+    }, [])
+    const [ congre, Congregation ] = useState([]);
+
+
+
+  function onSubmitCongregationform(data ,e){
+    axios.put(`${ApiUrl}/Religio/Provinceupdate/${id}`,data)
+    .then(Response => console.log(Response),
     Swal.fire(
-        'Created Successfully..!',
-        'Congregation Add ..',
-        'success'
-      );e.target.reset();
+      'Province Updated Successfully..!',
+      'Province Updated..',
+      'success'
+    ),
+    navigate('/Religio/Province'),
+    e.target.reset() )
+
+    .catch(err =>console.log(err))
+  
   }
       return (
  <div className="content-wrapper">
@@ -25,7 +57,7 @@ import Swal from "sweetalert2";
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Congregation
+          </span> Province Update
         </h3>
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -39,23 +71,39 @@ import Swal from "sweetalert2";
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <div className="row"><b className="card-description"> Congregation </b></div>
+              <div className="row"><b className="card-description"> Province </b></div>
               <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
-                  <div className="col-md-12">
-                    <div className="form-group row">
-                      <label className="col-form-label">Congregation Name</label>
-                      <div className="col-sm-12">
-                        <input type="text" className="form-control" name="CongregationName"
-                        {...register("CongregationName", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.CongregationName ? "true" : "false"}  />
-                        {errors?.CongregationName?.type === 'required' && <div className='text-danger text_error'>Congregation Name is required</div>}
-                        {errors?.CongregationName?.type === "pattern" && <div className='text-danger text_error '>Congregation Name can contain only alphabets</div>}
-                       
+                        <div className="col-md-6">
+                          <div className="form-group row">
+                            <label className="col-sm-3 col-form-label">Congregation</label>
+                            <div className="col-sm-9">
+                            <select className="form-control" name="Congregation"
+                             {...register("Congregation", { required: true })}
+                             aria-invalid={errors?.Congregation ? "true" : "false"}>
+                            <option value="SelectCongregation">Select Congregation</option>
+                            {         
+                           congre && congre.map(item => (
+                          <option value={item.CongregationName}>{item.CongregationName}</option>))
+                             }
+                              </select>
+                              {errors?.Congregation?.type === 'required' && <div className='text-danger text_error'>Please Choose One Congregation</div>}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-group row">
+                            <label className="col-sm-3 col-form-label">Province</label>
+                            <div className="col-sm-9">
+                            <input type="text" className="form-control" name="Province"
+                            {...register("Province", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                            aria-invalid={errors?.Province ? "true" : "false"}  />
+                            {errors?.Province?.type === 'required' && <div className='text-danger text_error'>Province Name is required</div>}
+                            {errors?.Province?.type === "pattern" && <div className='text-danger text_error '>Province can contain only alphabets</div>}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
                 <div className="row"><b className="card-description"> Address </b></div>
                 <div className="row">
                   <div className="col-md-6">
@@ -130,6 +178,7 @@ import Swal from "sweetalert2";
                          {...register("country", { required: true })}
                          aria-invalid={errors?.country ? "true" : "false"}>
                           <option value="">Select Country</option>
+                          <option value="India">India</option>
                           <option value="America">America</option>
                           <option value="Italy">Italy</option>
                           <option value="Russia">Russia</option>
@@ -141,7 +190,10 @@ import Swal from "sweetalert2";
                   </div>
                 </div>
                 <div className="text-center">
-                <button class="btn btn-gradient-primary font-weight-bold " type="submit">Submit</button>
+                <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
+                &nbsp; &nbsp; &nbsp; 
+                <Link to="/Religio/Province" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+
                 </div>  
               </form>
             </div>
@@ -151,5 +203,5 @@ import Swal from "sweetalert2";
         </div>
       );
     }
-    export default Congregation;
+    export default ProvinceEdit;
   
