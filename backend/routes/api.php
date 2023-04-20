@@ -20,6 +20,9 @@ use App\Http\Controllers\ClientregistrationController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/Register',[RegisterController::class,'Register']);
+Route::post('/Login',[RegisterController::class,'Login']);
         
 // Congregation
 Route::post('/Religio/Congregation/store',[ReligioController::class, 'Congregation']);
@@ -27,6 +30,7 @@ Route::get('/Religio/Congregation',[ReligioController::class, 'CongregationList'
 Route::delete('/Religio/Congregation/{id}',[ReligioController::class, 'CongregationDelete']);
 Route::get('/Religio/Congregationedit/{id}',[ReligioController::class, 'CongregationEdit']);
 Route::put('/Religio/Congregationupdate/{id}',[ReligioController::class, 'Congregationupdate']);
+
 // Province
 Route::post('/Religio/Province/store',[ProvinceController::class, 'Provincestore']);
 Route::delete('/Religio/Province/{id}',[ProvinceController::class, 'ProvinceDelete']);
@@ -34,7 +38,6 @@ Route::get('/Religio/Province',[ProvinceController::class, 'ProvinceList']);
 Route::get('/Religio/Province/Congregation',[ProvinceController::class, 'ProvinceCongregation']);
 Route::get('/Religio/Provinceedit/{id}',[ProvinceController::class, 'ProvinceEdit']);
 Route::put('/Religio/Provinceupdate/{id}',[ProvinceController::class, 'Provinceupdate']);
-
 
 // ClientRegisteration
 Route::post('/Religio/Clientregistration/store',[ClientregistrationController::class, 'Clientregistrationstore']);
