@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReligioController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\ClientregistrationController;
