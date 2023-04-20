@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Sidemenubar() {
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
@@ -17,43 +19,51 @@ function Sidemenubar() {
                 </a>
               </li>
               <li className="nav-item active">
-                <a className="nav-link" href="">
-                  <span className="menu-title">Dashboard</span>
-                  <i className="mdi mdi-home menu-icon" />
-                </a>
+                <Link to="/Religio/Dashboard" className="nav-link" >
+                   <span className="menu-title">Dashboard</span>
+                  <i className="mdi mdi-home menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link" href="/Religio/ClientRegistration">
+                <Link to="/Religio/ClientRegistration" className="nav-link" >
                   <span className="menu-title">Client Registration</span>
-                  <i className="mdi mdi-account-plus menu-icon" />
-                </a>
+                  <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item ">
+                <Link to="/Religio/Congregation" className="nav-link" >
+                  <span className="menu-title">Congregation</span>
+                  <i className="mdi mdi-account-plus menu-icon" /></Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/Religio/Province" className="nav-link" >
+                  <span className="menu-title">Province</span>
+                  <i className="mdi mdi-account-plus menu-icon" /></Link>
+              </li>
+              {/* <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                  <span className="menu-title">Basic UI Elements</span>
+                  <span className="menu-title">Defaults</span>
                   <i className="menu-arrow" />
                   <i className="mdi mdi-crosshairs-gps menu-icon" />
                 </a>
                 <div className="collapse" id="ui-basic">
                   <ul className="nav flex-column sub-menu">
-                    <li className="nav-item"> <a className="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li className="nav-item"> <a className="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                    <li className="nav-item"> <a className="nav-link" href="/Religio/Congregation">Congregation</a></li>
+                    <li className="nav-item"> <a className="nav-link" href="/Religio/Province">Province</a></li>
                   </ul>
                 </div>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a className="nav-link" href="pages/icons/mdi.html">
                   <span className="menu-title">Icons</span>
                   <i className="mdi mdi-contacts menu-icon" />
                 </a>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a className="nav-link" href="">
                   <span className="menu-title">Forms</span>
                   <i className="mdi mdi-format-list-bulleted menu-icon" />
                 </a>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a className="nav-link" href="">
                   <span className="menu-title">Charts</span>
                   <i className="mdi mdi-chart-bar menu-icon" />
@@ -64,8 +74,8 @@ function Sidemenubar() {
                   <span className="menu-title">Tables</span>
                   <i className="mdi mdi-table-large menu-icon" />
                 </a>
-              </li>
-              <li className="nav-item">
+              </li> */}
+              {/* <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
                   <span className="menu-title">Sample Pages</span>
                   <i className="menu-arrow" />
@@ -80,8 +90,8 @@ function Sidemenubar() {
                     <li className="nav-item"> <a className="nav-link" href=""> 500 </a></li>
                   </ul>
                 </div>
-              </li>
-              <li className="nav-item sidebar-actions">
+              </li> */}
+              {/* <li className="nav-item sidebar-actions">
                 <span className="nav-link">
                   <div className="border-bottom">
                     <h6 className="font-weight-normal mb-3">Projects</h6>
@@ -97,7 +107,7 @@ function Sidemenubar() {
                     </ul>
                   </div>
                 </span>
-              </li>
+              </li> */}
             </ul>
           </nav>
     )
