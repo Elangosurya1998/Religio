@@ -1,6 +1,7 @@
-import { Switch, Route } from 'react-router'
-import { BrowserRouter, createBrowserRouter, RouterProvider, Routes } from "react-router-dom";
-
+import { Route } from 'react-router'
+import { BrowserRouter,Routes } from "react-router-dom";
+import Login from "./login/forms/Login";
+import Register from "./login/forms/Register";
 import DashLayouts from "./dashboard/Layoutsdash";
 import Layoutsland from "./landing/Layoutsland";
 import RegLayouts from './dashboard/registerationlayout';
@@ -12,6 +13,7 @@ import CongaddLayouts from './dashboard/Congregationaddlayout';
 import ProlistLayouts from './dashboard/Provincelistlayout';
 import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
         <Route exact path="/Religio/Province" element={<ProlistLayouts />}/>
         <Route exact path="/Religio/ProvinceEdit/:id" element={<ProeditLayouts />}/>
         <Route exact path="/Religio/ProvinceAdd" element={<ProaddLayouts/>}/>
+
       </Routes>
     </BrowserRouter>
   );

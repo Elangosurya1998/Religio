@@ -6,8 +6,6 @@ use App\Http\Controllers\ReligioController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\ClientregistrationController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,6 +42,4 @@ Route::get('/Religio/Clientregistration',[ClientregistrationController::class, '
 Route::delete('/Religio/Clientregistration/{id}',[ClientregistrationController::class, 'ClientregistrationDelete']);
 Route::get('/Religio/Registeredit/{id}',[ClientregistrationController::class, 'ClientregistrationEdit']);
 Route::put('/Religio/Clientregistrationupdate/{id}',[ClientregistrationController::class, 'Clientregistrationupdate']);
-
-
 
