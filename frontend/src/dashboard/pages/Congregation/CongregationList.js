@@ -13,7 +13,7 @@ function CongregationList(){
           return res.json();
       }).then((resp) => {
         Setcongregation(resp.data);
-        console.log(resp.data);
+        // console.log(resp.data);
       }).catch((err) => {
           console.log(err.message);
       })
@@ -76,7 +76,7 @@ function CongregationList(){
               <h4 className="card-title">Congregation List</h4>
               </div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/CongregationAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/CongregationAdd" className="btn btn-gradient-light">Add</Link>
                 
                </div>
             </div>

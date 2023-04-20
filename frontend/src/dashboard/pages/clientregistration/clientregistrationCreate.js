@@ -47,6 +47,13 @@ const [ Pro, SetProvince ] = useState([]);
           navigate('/Religio/ClientRegistration');
           e.target.reset();  
       }
+    }).catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: err.message
+      })
     })
     
   }
