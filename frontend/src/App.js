@@ -14,12 +14,10 @@ import ProlistLayouts from './dashboard/Provincelistlayout';
 import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
         <Route exact path="/" element={<Layoutsland/>}/>
         <Route exact path="/Religio/Dashboard" element={<DashLayouts/>}/>
         <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />}/>
@@ -31,7 +29,6 @@ function App() {
         <Route exact path="/Religio/Province" element={<ProlistLayouts />}/>
         <Route exact path="/Religio/ProvinceEdit/:id" element={<ProeditLayouts />}/>
         <Route exact path="/Religio/ProvinceAdd" element={<ProaddLayouts/>}/>
-
       </Routes>
     </BrowserRouter>
   );
