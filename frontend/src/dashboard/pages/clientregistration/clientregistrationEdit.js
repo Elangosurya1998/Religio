@@ -52,12 +52,19 @@ const navigate = useNavigate();
       if (response.status === 200) {
         Swal.fire(
             'Updated Successfully..!',
-            'Data Updated ..',
+            'Client Data Updated ..',
             'success'
           );
           navigate('/Religio/ClientRegistration');
           e.target.reset();  
       }
+    }).catch((err)=>{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: err.message
+      })
     })
     
   }

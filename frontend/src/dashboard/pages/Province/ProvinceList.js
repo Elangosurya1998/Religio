@@ -73,7 +73,7 @@ const deleteProvince = async (e,id) =>{
               <h4 className="card-title">Province List</h4>
               </div>
               <div className="col-lg-2">
-              <Link to="/Religio/ProvinceAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/ProvinceAdd" className="btn btn-gradient-light">Add</Link>
             </div>
             </div>
                 <table className="table table-striped">

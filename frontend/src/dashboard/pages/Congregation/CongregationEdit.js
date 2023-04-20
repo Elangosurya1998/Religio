@@ -26,15 +26,24 @@ const navigate = useNavigate();
     
   function onSubmitCongregationform(data,e){
     axios.put(`${ApiUrl}/Religio/Congregationupdate/${id}`,data)
-    .then(Response => console.log(Response.data),
-    Swal.fire(
-        'Updated Successfully..!',
-        'Congregation updated ..',
-        'success'
-      ),
-      navigate('/Religio/Congregation'),
-      e.target.reset())
-    .catch(err =>console.log(err)) 
+    .then((Response)=>{
+      if (Response.status === 200) {
+        Swal.fire(
+          'Updated Successfully..!',
+          'Congregation Update ..',
+          'success'
+        );
+        e.target.reset();
+    navigate('/Religio/Congregation');
+    }     
+  }).catch((err)=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: err.message
+    })
+  })  
   }
       return (
  <div className="content-wrapper">

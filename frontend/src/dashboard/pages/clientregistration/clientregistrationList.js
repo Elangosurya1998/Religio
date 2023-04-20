@@ -85,7 +85,7 @@ const deleteregister = async (e,id) =>{
 
               </div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/RegistrationAdd" className="btn btn-gradient-light"><i className="mdi mdi-account-multiple-plus" />Add</Link>
+              <Link to="/Religio/RegistrationAdd" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
                 <table className="table table-striped Mytable">

@@ -14,14 +14,25 @@ const navigate = useNavigate();
     
   function onSubmitCongregationform(data,e){
     axios.post(`${ApiUrl}/Religio/Congregation/store`,data)
-    .then(Response => console.log(Response),
-    Swal.fire(
-      'Created Successfully..!',
-      'Congregation Add ..',
-      'success'
-    ),e.target.reset())
-    navigate('/Religio/Congregation')
-    .catch(err =>console.log(err))  
+    .then((Response)=>{
+      if (Response.status === 200) {
+        Swal.fire(
+          'Created Successfully..!',
+          'Congregation Add ..',
+          'success'
+        );
+        e.target.reset();
+    navigate('/Religio/Congregation');
+    }     
+  }).catch((err)=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: err.message
+    })
+  })  
+ 
     
   }
       return (

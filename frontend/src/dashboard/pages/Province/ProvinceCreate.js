@@ -23,15 +23,24 @@ import { Link, useNavigate } from "react-router-dom";
 
   function onSubmitCongregationform(data ,e){
     axios.post(`${ApiUrl}/Religio/Province/store`,data)
-    .then(Response => console.log(Response),
-    Swal.fire(
-      'Province Created Successfully..!',
-      'Province Added ..',
-      'success'
-    ),
-    navigate('/Religio/Province'),
-    e.target.reset() )
-    .catch(err =>console.log(err))
+    .then((Response)=>{
+      if (Response.status === 200) {
+        Swal.fire(
+          'Province Created Successfully..!',
+          'Province Added ..',
+          'success'
+        );
+        e.target.reset();
+    navigate('/Religio/Province');
+    }     
+  }).catch((err)=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: err.message
+    })
+  })  
   
   }
       return (

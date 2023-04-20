@@ -39,16 +39,24 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
   function onSubmitCongregationform(data ,e){
     axios.put(`${ApiUrl}/Religio/Provinceupdate/${id}`,data)
-    .then(Response => console.log(Response),
-    Swal.fire(
-      'Province Updated Successfully..!',
-      'Province Updated..',
-      'success'
-    ),
-    navigate('/Religio/Province'),
-    e.target.reset() )
-
-    .catch(err =>console.log(err))
+    .then((Response)=>{
+      if (Response.status === 200) {
+        Swal.fire(
+          'Province Updated Successfully..!',
+          'Province updated ..',
+          'success'
+        );
+        e.target.reset();
+    navigate('/Religio/Province');
+    }     
+  }).catch((err)=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: err.message
+    })
+  })  
   
   }
       return (

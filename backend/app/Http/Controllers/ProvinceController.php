@@ -42,7 +42,7 @@ class ProvinceController extends Controller
     
                 $Province  = Province::create($ProvinceArray['params']);
     
-                if(!is_null($project)){ 
+                if(!is_null($Province)){ 
     
                     return response()->json(["status" => $this->status, "success" => true, 
                             "message" => "Province created successfully", "data" => $Province]);
