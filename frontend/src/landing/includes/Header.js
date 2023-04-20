@@ -23,13 +23,14 @@ function Header() {
                         <li><a href="#Feature">Feature</a></li>
                         <li><a href="#Services">Services</a></li>
                         <li><a href="#Gallery">Gallery</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="">Blog</a></li>
+                        {/* <li><a href="#">Pages</a>
                           <ul className="submenu">
                             <li><a href="">Blog</a></li>
                             <li><a href="">Blog Details</a></li>
                             <li><a href="">Element</a></li>
                           </ul>
-                        </li>
+                        </li> */}
                         <li><a href="">Contact</a></li>
                       </ul>
                     </nav>

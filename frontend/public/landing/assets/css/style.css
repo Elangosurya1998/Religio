@@ -2226,28 +2226,28 @@ hr {
 }
 
 .section-padd-top30 {
-	padding-top: 170px;
-	padding-bottom: 200px
+	padding-top: 110px;
+	padding-bottom: 120px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.section-padd-top30 {
-		padding-top: 170px;
-		padding-bottom: 200px
+		padding-top: 110px;
+		padding-bottom: 120px
 	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.section-padd-top30 {
-		padding-top: 170px;
-		padding-bottom: 200px
+		padding-top: 110px;
+		padding-bottom: 120px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.section-padd-top30 {
-		padding-top: 100px;
-		padding-bottom: 160px
+		padding-top: 90px;
+		padding-bottom: 100px
 	}
 }
 
@@ -5303,7 +5303,7 @@ del {
 
 .main-header .main-menu ul li>a {
 	color: #450b78;
-	font-weight: 400 !important;
+	font-weight: 600 !important;
 	padding: 39px 16px;
 	display: block;
 	font-size: 16px;
@@ -5803,7 +5803,7 @@ z .slider-area .hero-cap h2 {
 	font-size: 50px;
 	font-weight: 700;
 	line-height: 1.2;
-	margin-bottom: 90px
+	margin-bottom: 40px
 }
 
 .hero__caption .section-tittle h2 {
@@ -6950,3 +6950,45 @@ ul {
     margin-top: 0;
     margin-bottom: 0rem !important;
 }
+
+:root {
+    --marquee-element-width: 100%;
+    --marquee-animation-duration: calc(var(--marquee-elements) * 5s);
+}
+
+.marquee {
+    position: relative;
+	animation: animatedImage 10s linear infinite;
+}
+
+.marquee-content {
+    list-style: none;
+    height: 50%;
+    display: flex;
+}
+
+.marquee-content li {
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
+	width: 20%;
+    max-height: 150%;
+    font-size: calc(var(--marquee-height)*3/4);
+}
+
+.marquee-content li div img {
+    width: 60%;
+}
+
+
+@keyframes animatedImage {
+    from {
+		transform: translateX(-200px);
+	}
+	to {
+		transform: translateX(-800px);
+	}
+}
+

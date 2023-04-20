@@ -56,7 +56,7 @@ function Main() {
                           <span className="flaticon-costomize" />
                         </div>
                         <div className="features-caption">
-                          <h3>Easy to Documents Management</h3>
+                          <h3>Easy Member Update</h3>
                           <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                         </div>
                       </div>
@@ -338,6 +338,291 @@ function Main() {
                           <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>           
+          {/* Our Customer End */}
+
+          {/* Our Customer Start */}
+          <div className="our-customer section-padd-top30">
+            <div className="container-fluid">
+              <div className="our-customer-wrapper">
+                {/* Section Tittle */}
+                <div className="d-flex justify-content-center">
+                  <div className="col-xl-8">
+                    <div className="section-tittle text-center">
+                      <h2>Our Clients</h2>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="customar-active dot-style d-flex dot-style">
+                      <div>
+                        <div className="marquee">
+                          <ul className="marquee-content">
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man2.png" alt="" />
+                              </div>
+                            </li>
+                            <li>
+                              <div className="what-img">
+                                <img src="./landing/assets/img/shape/man3.png" alt="" />
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                        {/* <div className="single-customer mb-100">
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </div>
+                        <div className="single-customer mb-100">
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </div>
+                        <div className="single-customer mb-100">
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </div> */}
                     </div>
                   </div>
                 </div>

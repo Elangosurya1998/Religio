@@ -69,7 +69,7 @@ function Footer() {
                     <div className="col-xl-12 ">
                     <div className="footer-copy-right">
                         <p>
-                        Copyright © All rights reserved | <i className="ti-heart" aria-hidden="true" /> by <a href="" target="_blank">Boscosoft Technologies</a>
+                        Copyright © All rights reserved | by <a href="" target="_blank">Boscosoft Technologies</a>
                         </p>
                     </div>
                     </div>
