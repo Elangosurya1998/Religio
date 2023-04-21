@@ -32,7 +32,9 @@ class Clientregistration extends Model
         'Address2',
         'Postcode',
         'City',
-        'country'
+        'country',
+        'Mobile',
+        'Email'
         
     ];
 }

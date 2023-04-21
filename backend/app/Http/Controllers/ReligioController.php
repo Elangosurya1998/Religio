@@ -17,9 +17,10 @@ class ReligioController extends Controller
                 "CongregationName" => 'required',
                 "Address1"  => "required",
                 "state"  => "required",
-                "Address2"   => "required",
                 "Postcode"=> "required",
-                "country"  => "required"
+                "country"  => "required",
+                "Mobile"  => "required",
+                "Email"  => "required",
             ]
            );
                 if($validator->fails()) {
@@ -33,7 +34,9 @@ class ReligioController extends Controller
                                 "Address2" => $request->Address2,
                                 "Postcode" => $request->Postcode,
                                 "City"   => $request->City,
-                                "country"   => $request->country 
+                                "country" => $request->country,
+                                "Mobile"   => $request->Mobile, 
+                                "Email"   => $request->Email,  
                          );
     
                 $project  = Congregation::create($projectArray['params']);
@@ -93,7 +96,9 @@ class ReligioController extends Controller
                 "Address2" => $request->Address2,
                 "Postcode" => $request->Postcode,
                 "City"   => $request->City,
-                "country"   => $request->country 
+                "country"   => $request->country,
+                "Mobile"   => $request->Mobile, 
+                "Email"   => $request->Email, 
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 

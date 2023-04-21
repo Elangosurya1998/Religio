@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Congregation;
 use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
+use DB;
+
 class ProvinceController extends Controller
 { 
         Private $status = 200;
@@ -19,10 +21,11 @@ class ProvinceController extends Controller
                 "Province"   => "required",
                 "Address1"  => "required",
                 "state"  => "required",
-                "Address2"   => "required",
                 "Postcode"=> "required",
                 "City"  => "required",
                 "country"  => "required",
+                "Mobile"  => "required",
+                "Email"  => "required",
             ]
            );
                 if($validator->fails()) {
@@ -38,6 +41,8 @@ class ProvinceController extends Controller
                                 "Postcode"   => $request->Postcode, 
                                 "City"   => $request->City, 
                                 "country"   => $request->country, 
+                                "Mobile"   => $request->Mobile, 
+                                "Email"   => $request->Email, 
                          );
     
                 $Province  = Province::create($ProvinceArray['params']);
@@ -57,7 +62,11 @@ class ProvinceController extends Controller
     
         public function ProvinceList() {
     
-        $ProvinceAll = Province::all();
+            $ProvinceAll = DB::table('provinces as pr')
+            ->select('pr.*','co.CongregationName')
+            ->leftjoin('congregation as co','co.id','pr.Congregation')
+            ->get();
+    
             if(count($ProvinceAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ProvinceAll), "data" => $ProvinceAll]);
@@ -76,7 +85,6 @@ class ProvinceController extends Controller
                 ["status" => $this->status, "success" => true, 
                 "message" => " Province deleted  successfully"]);
         }
-
         public function ProvinceCongregation(){
 
             $Congregation =Congregation::all();
@@ -89,6 +97,7 @@ class ProvinceController extends Controller
                 "success" => false, "message" => "Whoops! no record found"]);
             }
         }
+
         public function ProvinceEdit($id){
            
             $Congregationedit = Province::where('id',$id)->get();
@@ -100,7 +109,30 @@ class ProvinceController extends Controller
                 return response()->json(["status" => "failed",
                 "success" => false, "message" => "Whoops! no record found"]);
             }
-        }public function Provinceupdate($id,Request $request){
+
+        }
+
+        public function Provinceget($id){
+         
+            // $Provinceget = Province::where('id',$id)->get();
+            
+            $Provinceget = DB::table('provinces as pr')
+            ->select('pr.*','co.CongregationName')
+            ->leftjoin('congregation as co','co.id','pr.Congregation')
+            ->where('co.id',$id)
+            ->get();
+           
+            if(count($Provinceget) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Provinceget), "data" => $Provinceget]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+
+        }
+        public function Provinceupdate($id,Request $request){
            
             $Congregationupdate = Province::where('id',$id)
             ->update([
@@ -111,8 +143,11 @@ class ProvinceController extends Controller
                 "Address2" => $request->Address2,
                 "Postcode"   => $request->Postcode, 
                 "City"   => $request->City, 
-                "country"   => $request->country, 
+                "country"   => $request->country,
+                "Mobile"   => $request->Mobile, 
+                "Email"   => $request->Email,  
             ]);
+
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);

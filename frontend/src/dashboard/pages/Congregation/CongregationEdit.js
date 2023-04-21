@@ -10,8 +10,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
  function CongregationEdit() {
 
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm({ mode: 'onChange' }); 
-const navigate = useNavigate();
-  
+   const navigate = useNavigate();
+   const country = require('country-state-city').Country
+   const value = country.getAllCountries()
     const {id} = useParams();
 
       useEffect(() => {
@@ -19,6 +20,10 @@ const navigate = useNavigate();
             return res.json();
         }).then((resp) => {
            reset(resp.data[0]);
+           const value =resp.data[0].country
+           const State = require('country-state-city').State
+           var getValue = State.getStatesOfCountry(value) 
+           data(getValue);
         }).catch((err) => {
             console.log(err.message);
         })
@@ -45,6 +50,14 @@ const navigate = useNavigate();
     })
   })  
   }
+  function countrySelect(event ) {
+    var value =event.target.value
+    const State = require('country-state-city').State
+    var getValue = State.getStatesOfCountry(value) 
+    data(getValue);
+  }
+ const [ selectState, data ] = useState([]);
+
       return (
  <div className="content-wrapper">
         <div className="page-header">
@@ -73,53 +86,53 @@ const navigate = useNavigate();
                       <label className="col-form-label">Congregation Name</label>
                       <div className="col-sm-12">
                         <input type="text" className="form-control" name="CongregationName"
-                        {...register("CongregationName", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        {...register("CongregationName", { required: true})}
                         aria-invalid={errors?.CongregationName ? "true" : "false"}  />
                         {errors?.CongregationName?.type === 'required' && <div className='text-danger text_error'>Congregation Name is required</div>}
-                        {errors?.CongregationName?.type === "pattern" && <div className='text-danger text_error '>Congregation Name can contain only alphabets</div>}
-                       
+                        
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="row"><b className="card-description"> Address </b></div>
                 <div className="row">
+                      <div className="col-md-6">
+                        <div className="form-group row">
+                          <label className="col-sm-3 col-form-label">Mobile No</label>
+                          <div className="col-sm-9">
+                            <input type="text" className="form-control" name="Mobile"
+                            {...register("Mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
+                            aria-invalid={errors?.Mobile ? "true" : "false"}  />
+                            {errors?.Mobile?.type === 'required' && <div className='text-danger text_error'>Mobile Number is required</div>}
+                            {errors?.Mobile?.type === "minLength" && <div className='text-danger text_error '>Mobile Number shoul be minimum Numbers 10</div>}
+                            {errors?.Mobile?.type === "maxLength" && <div className='text-danger text_error '>Mobile Number shoul be  maximum Numbers12</div>}
+                            {errors?.Mobile?.type === "pattern" && <div className='text-danger text_error '>Mobile Number can contain only Numbers</div>}
+                            </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-group row">
+                          <label className="col-sm-3 col-form-label">Email</label>
+                          <div className="col-sm-9">
+                            <input type="text" className="form-control" name="Email"
+                            {...register("Email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
+                            aria-invalid={errors?.Email ? "true" : "false"}  />
+                            {errors?.Email?.type === 'required' && <div className='text-danger text_error'>Email is required</div>}
+                            {errors?.Email?.type === "pattern" && <div className='text-danger text_error '>Invalid email address</div>}
+                        </div>
+                        </div>
+                      </div>
+                    </div> 
+                <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 1</label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control" name="Address1"
-                        {...register("Address1", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                        {...register("Address1", { required: true })}
                         aria-invalid={errors?.Address1 ? "true" : "false"}  />
                         {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
-                        {errors?.Address1?.type === "pattern" && <div className='text-danger text_error '>Address 1 can contain only alphabets</div>}
                         </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">State</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="state"
-                        {...register("state", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.state ? "true" : "false"}  />
-                        {errors?.state?.type === 'required' && <div className='text-danger text_error'>State is required</div>}
-                        {errors?.state?.type === "pattern" && <div className='text-danger text_error '>State can contain only alphabets</div>}
-                       </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Address 2</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Address2"
-                        {...register("Address2", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.Address2 ? "true" : "false"}  />
-                        {errors?.Address2?.type === 'required' && <div className='text-danger text_error'>Address 2 is required</div>}
-                        {errors?.Address2?.type === "pattern" && <div className='text-danger text_error '>Address 2 can contain only alphabets</div>}
-                       </div>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -138,6 +151,34 @@ const navigate = useNavigate();
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Address 2</label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="Address2"
+                        {...register("Address2")}/>
+                       </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Country</label>
+                      <div className="col-sm-9">
+                      <select className="form-control Countryvalue" name="country" 
+                         {...register("country", { required: true,onChange: countrySelect })}
+                         aria-invalid={errors?.country ? "true" : "false"}>
+                           <option value="">Select Country</option>
+                              {         
+                           value && value.map(item => (
+                          <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
+                             }
+                        </select> 
+                        {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
                       <label className="col-sm-3 col-form-label">City</label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control" name="City"
@@ -150,20 +191,18 @@ const navigate = useNavigate();
                   </div>
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Country</label>
+                      <label className="col-sm-3 col-form-label">State</label>
                       <div className="col-sm-9">
-                        <select className="form-control" name="country"
-                         {...register("country", { required: true })}
-                         aria-invalid={errors?.country ? "true" : "false"}>
-                          <option value="">Select Country</option>
-                          <option value="India">India</option>
-                          <option value="America">America</option>
-                          <option value="Italy">Italy</option>
-                          <option value="Russia">Russia</option>
-                          <option value="Britain">Britain</option>
-                        </select>
-                        {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
-                      </div>
+                        <select className="form-control Countryindia" name="state"
+                             {...register("state", { required: true })}
+                             aria-invalid={errors?.state ? "true" : "false"}>
+                            <option value="">Select State</option>
+                            {         
+                           selectState && selectState.map(item => (
+                          <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
+                             }
+                            </select>
+                       </div>
                     </div>
                   </div>
                 </div>

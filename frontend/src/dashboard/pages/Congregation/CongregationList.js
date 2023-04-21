@@ -3,9 +3,21 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, Navigate,useNavigate } from "react-router-dom";
+import $ from 'jquery'
 
 
 function CongregationList(){
+  
+  $(document).ready(function () {
+    $(".Congregation").on("keyup", function () {
+      
+        var value = $(this).val().toLowerCase();
+        $(".CongregationList tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+  });
+  
   const [ Cong, Setcongregation ] = useState([]);
 
     const fetchData = ()=>{
@@ -13,7 +25,6 @@ function CongregationList(){
           return res.json();
       }).then((resp) => {
         Setcongregation(resp.data);
-        // console.log(resp.data);
       }).catch((err) => {
           console.log(err.message);
       })
@@ -71,16 +82,18 @@ function CongregationList(){
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-                <div className="row">
-              <div className="col-lg-10">
-              <h4 className="card-title">Congregation List</h4>
+              <h4 className="card-title">Congregation List</h4>  
+            <div className="row">
+              <div className="col-lg-4">
+              <input id="myInput" type="text" className="form-control Congregation" placeholder="Search.." />
               </div>
+              <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
               <Link to="/Religio/CongregationAdd" className="btn btn-gradient-light">Add</Link>
-                
                </div>
             </div>
-                <table className="table table-striped">
+            <br></br>
+                <table className="table table-striped CongregationList">
                   <thead>
                     <tr>
                       <th>Congregation Name </th>
@@ -96,9 +109,9 @@ function CongregationList(){
                     Cong && Cong.map(item => (
                       <tr key={item.id}>
                           <td>{item.CongregationName}</td>
+                          <td>{item.Mobile}</td>
+                          <td>{item.Email}</td>
                           <td>{item.Address1}</td>
-                          <td>{item.state}</td>
-                          <td>{item.Address2}</td>
                           <td>{item.Postcode }</td>
                           <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
                             &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>

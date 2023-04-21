@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use DB;
+
 class ClientregistrationController extends Controller
 { 
         Private $status = 200;
@@ -33,7 +35,9 @@ class ClientregistrationController extends Controller
                 "Address2"   => "required",
                 "Postcode"=> "required",
                 "City"  => "required",
-                "country"  => "required"
+                "country"  => "required",
+                "Mobile"  => "required",
+                "Email"  => "required",
             ]
            );
            
@@ -66,7 +70,9 @@ class ClientregistrationController extends Controller
                                 "Address2" => $request->Address2,
                                 "Postcode" => $request->Postcode,
                                 "City"   => $request->City,
-                                "country"   => $request->country 
+                                "country"   => $request->country,
+                                "Mobile"   => $request->Mobile, 
+                                "Email"   => $request->Email, 
                          );
 
                       
@@ -90,7 +96,12 @@ class ClientregistrationController extends Controller
     
         public function ClientregistrationList() {
     
-        $ClientregistrationAll = Clientregistration::all();
+            $ClientregistrationAll = DB::table('client_registrations as cr')
+            ->select('cr.*','co.CongregationName','pr.Province')
+            ->leftjoin('congregation as co','co.id','cr.Congregation')
+            ->leftjoin('provinces as pr','pr.id','cr.Province')
+            ->get();
+
             if(count($ClientregistrationAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ClientregistrationAll), "data" => $ClientregistrationAll]);
@@ -108,6 +119,7 @@ class ClientregistrationController extends Controller
                 ["status" => $this->status, "success" => true, 
                 "message" => " Province deleted  successfully"]);
         }
+
         public function ClientregistrationEdit($id){
            
             $Congregationedit = Clientregistration::where('id',$id)->get();
@@ -119,7 +131,10 @@ class ClientregistrationController extends Controller
                 return response()->json(["status" => "failed",
                 "success" => false, "message" => "Whoops! no record found"]);
             }
-        }public function Clientregistrationupdate($id,Request $request){
+
+        }
+        
+        public function Clientregistrationupdate($id,Request $request){
            
             $Congregationupdate = Clientregistration::where('id',$id)
             ->update([
@@ -141,7 +156,9 @@ class ClientregistrationController extends Controller
                 "Address2" => $request->Address2,
                 "Postcode" => $request->Postcode,
                 "City"   => $request->City,
-                "country"   => $request->country 
+                "country"   => $request->country,
+                "Mobile"   => $request->Mobile, 
+                "Email"   => $request->Email,  
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 

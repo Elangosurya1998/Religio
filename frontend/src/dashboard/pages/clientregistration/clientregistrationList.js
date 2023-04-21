@@ -3,11 +3,21 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
-
-
+import $ from 'jquery'
+;
 
 
 function ClientregistrationList(){
+
+$(document).ready(function () {
+  $(".myInput").on("keyup", function () {
+    
+      var value = $(this).val().toLowerCase();
+      $(".Mytable tbody tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+  });
+});
   const fetchData = ()=>{
         fetch(`${ApiUrl}/Religio/Clientregistration`).then((res) => {
           return res.json();
@@ -50,14 +60,7 @@ const deleteregister = async (e,id) =>{
     }
   })
 }
-// $(document).ready(function () {
-//   $("#myInput").on("keyup", function () {
-//       var value = $(this).val().toLowerCase();
-//       $("#Mytable tbody td").filter(function () {
-//           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-//       });
-//   });
-// });
+
     return (
         <div className="content-wrapper">
         <div className="page-header">
@@ -80,14 +83,15 @@ const deleteregister = async (e,id) =>{
               <div className="card-body">
               <h4 className="card-title">Client Registration List</h4>
               <div className="row">
-              <div className="col-lg-10">
-              {/* <input id="myInput" type="text" placeholder="Search.."></input> */}
-
+              <div className="col-lg-4">
+              <input id="myInput" type="text" className="form-control myInput" placeholder="Search.." />
               </div>
+              <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
               <Link to="/Religio/RegistrationAdd" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
+            <br></br>
                 <table className="table table-striped Mytable">
                   <thead>
                     <tr>
@@ -103,7 +107,7 @@ const deleteregister = async (e,id) =>{
                   {         
                     register && register.map(item => (
                       <tr key={item.id}>
-                          <td>{item.Congregation}</td>
+                          <td>{item.CongregationName}</td>
                           <td>{item.Province}</td>
                           <td>{item.Name}</td>
                           <td>{item.Place}</td>

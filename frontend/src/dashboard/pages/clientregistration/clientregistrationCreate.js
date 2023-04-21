@@ -7,57 +7,67 @@ import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import Navbar from "../../includes/Navbar";
 
 function ClientRegistrationCreate() {
-  const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });  
-  const navigate = useNavigate();
-  useEffect(() => {
-    fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
-        return res.json();
-    }).then((resp) => {
-      Congregation(resp.data);
-    }).catch((err) => {
-        console.log(err.message);
-    })
-  }, [])
+      
+  
+      const country = require('country-state-city').Country
+      const value = country.getAllCountries()
+      const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });  
+      const navigate = useNavigate();
+      useEffect(() => {
+        fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
+            return res.json();
+        }).then((resp) => {
+          Congregation(resp.data);
+        }).catch((err) => {
+            console.log(err.message);
+        })
+      }, [])
 
   const [ congre, Congregation ] = useState([]);
 
-useEffect(() => {
-  fetch(`${ApiUrl}/Religio/Province`).then((res) => {
-      return res.json();
-  }).then((resp) => {
-    SetProvince(resp.data);
-  }).catch((err) => {
-      console.log(err.message);
-  })
-}, [])
 
+          function onSubmitformregister(data,e){
+              console.log(data);
+                axios.post(`${ApiUrl}/Religio/Clientregistration/store`,data)
+                .then((response) => {
+                  if (response.status === 200) {
+                    Swal.fire(
+                        'registrated Successfully..!',
+                        'Client Added ..',
+                        'success'
+                      );
+                      navigate('/Religio/ClientRegistration');
+                      e.target.reset();  
+                  }
+                }).catch((err)=>{
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: err.message
+                  })
+                })
+          }
+          function countrySelect(event ) {
+            var value =event.target.value
+            const State = require('country-state-city').State
+            var getValue = State.getStatesOfCountry(value) 
+            data(getValue);
+          }
+         const [ selectState, data ] = useState([]);
+       
+         function CongregationSelect(event ) {
+          var id =event.target.value
+         axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
+         .then((response) => {
+          SetProvince(response.data.data)
+          console.log(response.data.data);
+        }).catch((err)=>{
+          console.log(err);
+        })
+     }
+    const [ Pro, SetProvince ] = useState([]);
 
-const [ Pro, SetProvince ] = useState([]);
-
-  function onSubmitformregister(data,e){
-   console.log(data);
-    axios.post(`${ApiUrl}/Religio/Clientregistration/store`,data)
-    .then((response) => {
-      if (response.status === 200) {
-        Swal.fire(
-            'registrated Successfully..!',
-            'Client Added ..',
-            'success'
-          );
-          navigate('/Religio/ClientRegistration');
-          e.target.reset();  
-      }
-    }).catch((err)=>{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: err.message
-      })
-    })
-    
-  }
- 
   return (  
     
       <div className="content-wrapper">
@@ -82,74 +92,53 @@ const [ Pro, SetProvince ] = useState([]);
                     <h4 className="card-title"> Client Registration</h4>
                     <form className="form-sample" onSubmit={handleSubmit(onSubmitformregister)}>
                       <br></br>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Congregation</label>
-                            <div className="col-sm-9">
-                            <select className="form-control" name="Congregation"
-                             {...register("Congregation", { required: true })}
-                             aria-invalid={errors?.Congregation ? "true" : "false"}>
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label for="Congregation">Congregation &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                          <select className="form-control" name="Congregation"
+                            {...register("Congregation", { required: true,onChange: CongregationSelect })}
+                            aria-invalid={errors?.Congregation ? "true" : "false"}>
                             <option value="">Select Congregation</option>
-                            {         
-                           congre && congre.map(item => (
-                          <option>{item.CongregationName  }</option>))
-                             }
+                            {  congre && congre.map(item => (
+                          <option value={item.id}>{item.CongregationName  }</option>)) }
                               </select>
-                              {errors?.Congregation?.type === 'required' && <div className='text-danger text_error'>Please Choose One Congregation</div>}
-                            </div>
+                              {errors?.Congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Congregation</label></div>}
                           </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Province</label>
-                            <div className="col-sm-9">
-                            <select className="form-control"  name="Province"
+
+                        <div className="form-group col-md-6">
+                          <label for="province">Province &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                          <select className="form-control"  name="Province"
                             {...register("Province", { required: true })}
                             aria-invalid={errors?.Province ? "true" : "false"}>
                                 <option value="">Select Province</option>
                                 {         
-                           Pro && Pro.map(item => (
-                          <option>{item.Province  }</option>))
-                             }
+                          Pro && Pro.map(item => (
+                          <option value={item.id}>{item.Province  }</option>))
+                            }
                               </select>
                               {errors?.Province?.type === 'required' && <div className='text-danger text_error'>Please Choose One Province</div>}
 
-                            </div>
-                          </div>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Name</label>
-                            <div className="col-sm-9">
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label>Name&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <input type="text" className="form-control" name="Name"
-                            {...register("Name", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                            {...register("Name", { required: true })}
                              aria-invalid={errors?.Name ? "true" : "false"}  />
                              {errors?.Name?.type === 'required' && <div className='text-danger text_error'>Name is required</div>}
-                             {errors?.Name?.type === "pattern" && <div className='text-danger text_error '>Name can contain only alphabets</div>}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Place</label>
-                            <div className="col-sm-9">
+                         </div>
+                        <div className="form-group col-md-6">
+                            <label>Place&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <input type="text" className="form-control" name="Place" 
-                            {...register("Place", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                            {...register("Place", { required: true})}
                             aria-invalid={errors?.Place ? "true" : "false"}  />
                             {errors?.Place?.type === 'required' && <div className='text-danger text_error'>Place is required</div>}
-                            {errors?.Place?.type === "pattern" && <div className='text-danger text_error '>Place can contain only alphabets</div>}
-                            </div>
-                          </div>
-                        </div>
+                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Client Type</label>
-                            <div className="col-sm-9">
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                             <label>Client Type&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <select className="form-control" name="ClientType"
                             {...register("ClientType", { required: true })}
                             aria-invalid={errors?.ClientType ? "true" : "false"}>
@@ -159,102 +148,69 @@ const [ Pro, SetProvince ] = useState([]);
                                 <option value="LayBrothers">Lay Brothers</option>
                               </select>
                               {errors?.ClientType?.type === 'required' && <div className='text-danger text_error'>Please Choose One ClientType</div>}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Financial Year</label>
-                            <div className="col-sm-9">
-                            <input type="date" className="form-control" placeholder="YYYY" name="FinancialYear"
+                         </div>
+                        <div className="form-group col-md-6">
+                          <label>Financial Year&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                           <input type="date" className="form-control" placeholder="YYYY" name="FinancialYear"
                              {...register("FinancialYear", { required: true })}
                              aria-invalid={errors?.FinancialYear ? "true" : "false"}  />
                              {errors?.FinancialYear?.type === 'required' && <div className='text-danger text_error'>Financial Year is required</div>}
                             </div>
-                          </div>
-                        </div>
                       </div>
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Client Code</label>
-                            <div className="col-sm-9">
-                            <input type="text" className="form-control" name="ClientCode" 
-                            {...register("ClientCode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                           <label>Client Code&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                             <input type="text" className="form-control" name="ClientCode" 
+                            {...register("ClientCode", { required: true })}
                             aria-invalid={errors?.ClientCode ? "true" : "false"}/>
                              {errors?.ClientCode?.type === 'required' && <div className='text-danger text_error'>Client Code is required</div>}
-                            {errors?.ClientCode?.type === "pattern" && <div className='text-danger text_error '>Client Code can contain only Numbers</div>}
-                           </div>
-                          </div>
-                        </div>
-                        <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Date of Joining</label>
-                            <div className="col-sm-9">
-                              <input type="Date" className="form-control" name="DateofJoining" 
+                       </div>
+                        <div className="form-group col-md-6">
+                          <label>Date of Joining&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                             <input type="Date" className="form-control" name="DateofJoining" 
                               {...register("DateofJoining", { required: true })}
                               aria-invalid={errors?.DateofJoining ? "true" : "false"}  />
                               {errors?.DateofJoining?.type === 'required' && <div className='text-danger text_error'>Date of Joining is required</div>}
-                            </div>
-                          </div>
                         </div> 
                       </div>
-                      <div className="row">
-                      <div className="col-md-6">
-                           <div className="form-group row">
-                             <label className="col-sm-3 col-form-label">Contract Signed Date</label>
-                             <div className="col-sm-9">
-                               <input type="Date" className="form-control" name="DateofContractSigning" 
-                               {...register("DateofContractSigning", { required: true })}
-                               aria-invalid={errors?.DateofContractSigning ? "true" : "false"}  />
-                               {errors?.DateofContractSigning?.type === 'required' && <div className='text-danger text_error'>Date of Contract Signing is required</div>}
-                             </div>
-                           </div>
-                         </div>
-                         <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">AMC Start Date</label>
-                            <div className="col-sm-9">
-                              <input type="Date" className="form-control" name="AMCDate"
-                              {...register("AMCDate", { required: true })}
-                              aria-invalid={errors?.AMCDate ? "true" : "false"}  />
-                              {errors?.AMCDate?.type === 'required' && <div className='text-danger text_error'>AMC Date is required</div>}
-                           </div>
-                          </div>
+                      <div className="form-row">
+                      <div className="form-group col-md-6">
+                            <label>Contract Signed Date&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                            <input type="Date" className="form-control" name="DateofContractSigning" 
+                            {...register("DateofContractSigning", { required: true })}
+                            aria-invalid={errors?.DateofContractSigning ? "true" : "false"}  />
+                            {errors?.DateofContractSigning?.type === 'required' && <div className='text-danger text_error'>Date of Contract Signing is required</div>}
+                       </div>
+                         <div className="form-group col-md-6">
+                           <label >AMC Start Date&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                           <input type="Date" className="form-control" name="AMCDate"
+                            {...register("AMCDate", { required: true })}
+                            aria-invalid={errors?.AMCDate ? "true" : "false"}  />
+                            {errors?.AMCDate?.type === 'required' && <div className='text-danger text_error'>AMC Date is required</div>}
                         </div>
                       </div>
-                      <div className="row">
-                      <div className="col-md-6">
-                           <div className="form-group row">
-                             <label className="col-sm-3 col-form-label">Project Value</label>
-                             <div className="col-sm-9">
+                      <div className="form-row">
+                      <div className="form-group col-md-6">
+                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="text" className="form-control" name="ProjectValue" 
                              {...register("ProjectValue", { required: true ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.ProjectValue ? "true" : "false"}  />
                              {errors?.ProjectValue?.type === 'required' && <div className='text-danger text_error'>Project Value is required</div>}
                              {errors?.ProjectValue?.type === "pattern" && <div className='text-danger text_error '>Project Value can contain only Numbers</div>}
                           </div>
-                           </div>
-                         </div>
-                         <div className="col-md-6">
-                          <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">AMC value</label>
-                            <div className="col-sm-9">
-                              <input type="text" className="form-control"  name="AMCvalue"
+                         <div className=" form-group col-md-6">
+                          <label>AMC value&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                           <input type="text" className="form-control"  name="AMCvalue"
                                 {...register("AMCvalue", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
                                 aria-invalid={errors?.AMCvalue ? "true" : "false"}  />
                                 {errors?.AMCvalue?.type === 'required' && <div className='text-danger text_error'>AMC value is required</div>}
                                 {errors?.AMCvalue?.type === "pattern" && <div className='text-danger text_error '>AMC value can contain only Numbers</div>}
-                            </div>
-                          </div>
-                        </div>
+                         </div>
                       </div>
-                      <div className="row">
-                      <div className="col-md-6">
-                           <div className="form-group row">
-                             <label className="col-sm-3 col-form-label">Project Status</label>
-                             <div className="col-sm-9">
-                            <select className="form-control" name="ProjectStatus"
+                      <div className="form-row">
+                      <div className="form-group col-md-6">
+                            <label>Project Status&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                             <select className="form-control" name="ProjectStatus"
                             {...register("ProjectStatus", { required: true })}
                             aria-invalid={errors?.ProjectStatus ? "true" : "false"}>
                                 <option value="" selected disabled>Select Project Status</option>
@@ -264,105 +220,95 @@ const [ Pro, SetProvince ] = useState([]);
                               </select>
                               {errors?.ProjectStatus?.type === 'required' && <div className='text-danger text_error'>Please Choose One ClientType</div>}
                             </div>
-                           </div>
-                         </div>
-                        {/* <div className="col-md-6">
-                           <div className="form-group row">
-                             <label className="col-sm-3 col-form-label">File Attachment</label>
-                             <div className="col-sm-9">
+                        {/* <div className=" form-group col-md-6">
+                            <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="FileAttachment"
                               {...register("FileAttachment", { required: true})}
                               aria-invalid={errors?.FileAttachment ? "true" : "false"}/>
                                {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'>Choose a File</div>}
-                              </div>
-                           </div>
-                         </div> */}
+                            </div> */}
                       </div>   
                       <div className="row"><b className="card-description"> Address </b></div>
-                      <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Address 1</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Address1"
-                        {...register("Address1", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.Address1 ? "true" : "false"}  />
-                        {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
-                        {errors?.Address1?.type === "pattern" && <div className='text-danger text_error '>Address 1 can contain only alphabets</div>}
+                      <div className="form-row">
+                      <div className="form-group col-md-6">
+                        <label>Mobile No&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                           <input type="text" className="form-control" name="Mobile"
+                            {...register("Mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
+                            aria-invalid={errors?.Mobile ? "true" : "false"}  />
+                            {errors?.Mobile?.type === 'required' && <div className='text-danger text_error'>Mobile Number is required</div>}
+                            {errors?.Mobile?.type === "minLength" && <div className='text-danger text_error '>Mobile Number shoul be minimum Numbers 10</div>}
+                            {errors?.Mobile?.type === "maxLength" && <div className='text-danger text_error '>Mobile Number shoul be  maximum Numbers12</div>}
+                            {errors?.Mobile?.type === "pattern" && <div className='text-danger text_error '>Mobile Number can contain only Numbers</div>}
+                           </div>
+                      <div className="form-group col-md-6">
+                         <label>Email&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                           <input type="text" className="form-control" name="Email"
+                            {...register("Email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
+                            aria-invalid={errors?.Email ? "true" : "false"}  />
+                            {errors?.Email?.type === 'required' && <div className='text-danger text_error'>Email is required</div>}
+                            {errors?.Email?.type === "pattern" && <div className='text-danger text_error '>Invalid email address</div>}
+                       </div>
+                    </div> 
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label>Address 1&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                              <input type="text" className="form-control" name="Address1"
+                              {...register("Address1", { required: true })}
+                              aria-invalid={errors?.Address1 ? "true" : "false"}  />
+                              {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
                         </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">State</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="state"
-                        {...register("state", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.state ? "true" : "false"}  />
-                        {errors?.state?.type === 'required' && <div className='text-danger text_error'>State is required</div>}
-                        {errors?.state?.type === "pattern" && <div className='text-danger text_error '>State can contain only alphabets</div>}
+                        <div className="form-group col-md-6">
+                          <label>Postcode&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                          <input type="text" className="form-control" name="Postcode"
+                              {...register("Postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                              aria-invalid={errors?.Postcode ? "true" : "false"}  />
+                              {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'>Postcode is required</div>}
+                              {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '>Postcode can contain only Numbers</div>}
+                          </div>
                        </div>
-                    </div>
+                        <div className="form-row">
+                          <div className="form-group col-md-6">
+                           <label >Address 2</label>
+                               <input type="text" className="form-control" name="Address2"
+                                {...register("Address2")}
+                                />
+                               </div>
+                          <div className="form-group col-md-6">
+                              <label>Country&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                                <select className="form-control Countryvalue" name="country" 
+                                  {...register("country", { required: true,onChange: countrySelect })}
+                                  aria-invalid={errors?.country ? "true" : "false"}>
+                                    <option value="">Select Country</option>
+                                        {         
+                                    value && value.map(item => (
+                                    <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
+                                      }
+                                  </select> 
+                                  {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
+                             </div>
+                        </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label>City&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <input type="text" className="form-control" name="City"
+                    {...register("City", { required: true })}
+                    aria-invalid={errors?.City ? "true" : "false"}  />
+                    {errors?.City?.type === 'required' && <div className='text-danger text_error'>City is required</div>}
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Address 2</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Address2"
-                        {...register("Address2", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.Address2 ? "true" : "false"}  />
-                        {errors?.Address2?.type === 'required' && <div className='text-danger text_error'>Address 2 is required</div>}
-                        {errors?.Address2?.type === "pattern" && <div className='text-danger text_error '>Address 2 can contain only alphabets</div>}
-                       </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Postcode</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Postcode"
-                        {...register("Postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
-                        aria-invalid={errors?.Postcode ? "true" : "false"}  />
-                        {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'>Postcode is required</div>}
-                        {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '>Postcode can contain only Numbers</div>}
-                     </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">City</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="City"
-                        {...register("City", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.City ? "true" : "false"}  />
-                        {errors?.City?.type === 'required' && <div className='text-danger text_error'>City is required</div>}
-                        {errors?.City?.type === "pattern" && <div className='text-danger text_error '>City can contain only alphabets</div>}
-                       </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Country</label>
-                      <div className="col-sm-9">
-                        <select className="form-control" name="country"
-                         {...register("country", { required: true })}
-                         aria-invalid={errors?.country ? "true" : "false"}>
-                          <option value="">Select Country</option>
-                          <option value="India">India</option>
-                          <option value="America">America</option>
-                          <option value="Italy">Italy</option>
-                          <option value="Russia">Russia</option>
-                          <option value="Britain">Britain</option>
-                        </select>
-                        {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                 <div className="form-group col-md-6">
+                    <label>State&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <select className="form-control Countryindia" name="state"
+                    {...register("state", { required: true })}
+                    aria-invalid={errors?.state ? "true" : "false"}>
+                    <option value="">Select State</option>
+                    {         
+                    selectState && selectState.map(item => (
+                    <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
+                    }
+                    </select>
+                    {errors?.state?.type === 'required' && <div className='text-danger text_error'>Please Choose One State</div>}
+                 </div>
+                   </div>
                       <div className="text-center">
                       <button class="btn btn-gradient-primary font-weight-bold " type="submit">Register</button>
                       &nbsp; &nbsp; &nbsp; 

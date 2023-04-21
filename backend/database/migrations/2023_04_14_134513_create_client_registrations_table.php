@@ -33,6 +33,8 @@ return new class extends Migration
             $table->string('Postcode')->nullable();
             $table->string('City')->nullable(); 
             $table->string('country')->nullable();
+            $table->string('Mobile')->nullable();
+            $table->string('Email')->nullable();
             $table->timestamps();
         });
     }
