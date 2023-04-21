@@ -116,7 +116,7 @@ function ClientRegistrationCreate() {
                           <option value={item.id}>{item.Province  }</option>))
                             }
                               </select>
-                              {errors?.Province?.type === 'required' && <div className='text-danger text_error'>Please Choose One Province</div>}
+                              {errors?.Province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Province</label></div>}
 
                         </div>
                       </div>
@@ -126,14 +126,14 @@ function ClientRegistrationCreate() {
                             <input type="text" className="form-control" name="Name"
                             {...register("Name", { required: true })}
                              aria-invalid={errors?.Name ? "true" : "false"}  />
-                             {errors?.Name?.type === 'required' && <div className='text-danger text_error'>Name is required</div>}
+                             {errors?.Name?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Name is required</label></div>}
                          </div>
                         <div className="form-group col-md-6">
                             <label>Place&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <input type="text" className="form-control" name="Place" 
                             {...register("Place", { required: true})}
                             aria-invalid={errors?.Place ? "true" : "false"}  />
-                            {errors?.Place?.type === 'required' && <div className='text-danger text_error'>Place is required</div>}
+                            {errors?.Place?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Place is required</label></div>}
                          </div>
                       </div>
                       <div className="form-row">
@@ -147,14 +147,14 @@ function ClientRegistrationCreate() {
                                 <option value="Sisters">Sisters</option>
                                 <option value="LayBrothers">Lay Brothers</option>
                               </select>
-                              {errors?.ClientType?.type === 'required' && <div className='text-danger text_error'>Please Choose One ClientType</div>}
+                              {errors?.ClientType?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One ClientType</label></div>}
                          </div>
                         <div className="form-group col-md-6">
                           <label>Financial Year&nbsp;<span style={{ color: 'red' }}>*</span></label>
                            <input type="date" className="form-control" placeholder="YYYY" name="FinancialYear"
                              {...register("FinancialYear", { required: true })}
                              aria-invalid={errors?.FinancialYear ? "true" : "false"}  />
-                             {errors?.FinancialYear?.type === 'required' && <div className='text-danger text_error'>Financial Year is required</div>}
+                             {errors?.FinancialYear?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Financial Year is required</label></div>}
                             </div>
                       </div>
                       <div className="form-row">
@@ -163,14 +163,14 @@ function ClientRegistrationCreate() {
                              <input type="text" className="form-control" name="ClientCode" 
                             {...register("ClientCode", { required: true })}
                             aria-invalid={errors?.ClientCode ? "true" : "false"}/>
-                             {errors?.ClientCode?.type === 'required' && <div className='text-danger text_error'>Client Code is required</div>}
+                             {errors?.ClientCode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Client Code is required</label></div>}
                        </div>
                         <div className="form-group col-md-6">
                           <label>Date of Joining&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="Date" className="form-control" name="DateofJoining" 
                               {...register("DateofJoining", { required: true })}
                               aria-invalid={errors?.DateofJoining ? "true" : "false"}  />
-                              {errors?.DateofJoining?.type === 'required' && <div className='text-danger text_error'>Date of Joining is required</div>}
+                              {errors?.DateofJoining?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Date of Joining is required</label></div>}
                         </div> 
                       </div>
                       <div className="form-row">
@@ -179,14 +179,14 @@ function ClientRegistrationCreate() {
                             <input type="Date" className="form-control" name="DateofContractSigning" 
                             {...register("DateofContractSigning", { required: true })}
                             aria-invalid={errors?.DateofContractSigning ? "true" : "false"}  />
-                            {errors?.DateofContractSigning?.type === 'required' && <div className='text-danger text_error'>Date of Contract Signing is required</div>}
+                            {errors?.DateofContractSigning?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Date of Contract Signing is required</label></div>}
                        </div>
                          <div className="form-group col-md-6">
                            <label >AMC Start Date&nbsp;<span style={{ color: 'red' }}>*</span></label>
                            <input type="Date" className="form-control" name="AMCDate"
                             {...register("AMCDate", { required: true })}
                             aria-invalid={errors?.AMCDate ? "true" : "false"}  />
-                            {errors?.AMCDate?.type === 'required' && <div className='text-danger text_error'>AMC Date is required</div>}
+                            {errors?.AMCDate?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC Date is required</label></div>}
                         </div>
                       </div>
                       <div className="form-row">
@@ -195,16 +195,16 @@ function ClientRegistrationCreate() {
                              <input type="text" className="form-control" name="ProjectValue" 
                              {...register("ProjectValue", { required: true ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.ProjectValue ? "true" : "false"}  />
-                             {errors?.ProjectValue?.type === 'required' && <div className='text-danger text_error'>Project Value is required</div>}
-                             {errors?.ProjectValue?.type === "pattern" && <div className='text-danger text_error '>Project Value can contain only Numbers</div>}
+                             {errors?.ProjectValue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
+                             {errors?.ProjectValue?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Project Value can contain only Numbers</label></div>}
                           </div>
                          <div className=" form-group col-md-6">
                           <label>AMC value&nbsp;<span style={{ color: 'red' }}>*</span></label>
                            <input type="text" className="form-control"  name="AMCvalue"
                                 {...register("AMCvalue", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
                                 aria-invalid={errors?.AMCvalue ? "true" : "false"}  />
-                                {errors?.AMCvalue?.type === 'required' && <div className='text-danger text_error'>AMC value is required</div>}
-                                {errors?.AMCvalue?.type === "pattern" && <div className='text-danger text_error '>AMC value can contain only Numbers</div>}
+                                {errors?.AMCvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC value is required</label></div>}
+                                {errors?.AMCvalue?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">AMC value can contain only Numbers</label></div>}
                          </div>
                       </div>
                       <div className="form-row">
@@ -213,19 +213,19 @@ function ClientRegistrationCreate() {
                              <select className="form-control" name="ProjectStatus"
                             {...register("ProjectStatus", { required: true })}
                             aria-invalid={errors?.ProjectStatus ? "true" : "false"}>
-                                <option value="" selected disabled>Select Project Status</option>
+                                <option value="" >Select Project Status</option>
                                 <option value="Completed">Completed</option>
                                 <option value="InProgress">InProgress</option>
                                 <option value="Notstrated">Not Started</option>
                               </select>
-                              {errors?.ProjectStatus?.type === 'required' && <div className='text-danger text_error'>Please Choose One ClientType</div>}
+                              {errors?.ProjectStatus?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One ClientType</label></div>}
                             </div>
                         {/* <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="FileAttachment"
                               {...register("FileAttachment", { required: true})}
                               aria-invalid={errors?.FileAttachment ? "true" : "false"}/>
-                               {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'>Choose a File</div>}
+                               {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
                             </div> */}
                       </div>   
                       <div className="row"><b className="card-description"> Address </b></div>
@@ -235,18 +235,18 @@ function ClientRegistrationCreate() {
                            <input type="text" className="form-control" name="Mobile"
                             {...register("Mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
                             aria-invalid={errors?.Mobile ? "true" : "false"}  />
-                            {errors?.Mobile?.type === 'required' && <div className='text-danger text_error'>Mobile Number is required</div>}
-                            {errors?.Mobile?.type === "minLength" && <div className='text-danger text_error '>Mobile Number shoul be minimum Numbers 10</div>}
-                            {errors?.Mobile?.type === "maxLength" && <div className='text-danger text_error '>Mobile Number shoul be  maximum Numbers12</div>}
-                            {errors?.Mobile?.type === "pattern" && <div className='text-danger text_error '>Mobile Number can contain only Numbers</div>}
+                            {errors?.Mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required</label></div>}
+                            {errors?.Mobile?.type === "minLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number shoul be minimum Numbers 10</label></div>}
+                            {errors?.Mobile?.type === "maxLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number shoul be  maximum Numbers12</label></div>}
+                            {errors?.Mobile?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Mobile Number can contain only Numbers</label></div>}
                            </div>
                       <div className="form-group col-md-6">
                          <label>Email&nbsp;<span style={{ color: 'red' }}>*</span></label>
                            <input type="text" className="form-control" name="Email"
                             {...register("Email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
                             aria-invalid={errors?.Email ? "true" : "false"}  />
-                            {errors?.Email?.type === 'required' && <div className='text-danger text_error'>Email is required</div>}
-                            {errors?.Email?.type === "pattern" && <div className='text-danger text_error '>Invalid email address</div>}
+                            {errors?.Email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required</label></div>}
+                            {errors?.Email?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Invalid email address</label></div>}
                        </div>
                     </div> 
                       <div className="form-row">
@@ -255,15 +255,15 @@ function ClientRegistrationCreate() {
                               <input type="text" className="form-control" name="Address1"
                               {...register("Address1", { required: true })}
                               aria-invalid={errors?.Address1 ? "true" : "false"}  />
-                              {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
+                              {errors?.Address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
                         </div>
                         <div className="form-group col-md-6">
                           <label>Postcode&nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <input type="text" className="form-control" name="Postcode"
                               {...register("Postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
                               aria-invalid={errors?.Postcode ? "true" : "false"}  />
-                              {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'>Postcode is required</div>}
-                              {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '>Postcode can contain only Numbers</div>}
+                              {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
+                              {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Postcode can contain only Numbers</label></div>}
                           </div>
                        </div>
                         <div className="form-row">
@@ -284,7 +284,7 @@ function ClientRegistrationCreate() {
                                     <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                                       }
                                   </select> 
-                                  {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
+                                  {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Country</label></div>}
                              </div>
                         </div>
                 <div className="form-row">
@@ -293,7 +293,7 @@ function ClientRegistrationCreate() {
                     <input type="text" className="form-control" name="City"
                     {...register("City", { required: true })}
                     aria-invalid={errors?.City ? "true" : "false"}  />
-                    {errors?.City?.type === 'required' && <div className='text-danger text_error'>City is required</div>}
+                    {errors?.City?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
                   </div>
                  <div className="form-group col-md-6">
                     <label>State&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -306,7 +306,7 @@ function ClientRegistrationCreate() {
                     <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                     }
                     </select>
-                    {errors?.state?.type === 'required' && <div className='text-danger text_error'>Please Choose One State</div>}
+                    {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One State</label></div>}
                  </div>
                    </div>
                       <div className="text-center">
