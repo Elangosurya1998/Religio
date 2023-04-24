@@ -78,21 +78,21 @@ function Demo() {
               <div className="media contact-info">
                 <span className="contact-info__icon"><i className="ti-home" /></span>
                 <div className="media-body">
-                  <h3>Buttonwood, California.</h3>
-                  <p>Rosemead, CA 91770</p>
+                  <h3>Bosco Soft Technologies Pvt. Ltd.</h3>
+                  <p>No. 231/77, S.H.C Complex. Vaniyambadi Road, Tirupattur District, Tamil Nadu, INDIA – 635 601</p>
                 </div>
               </div>
               <div className="media contact-info">
                 <span className="contact-info__icon"><i className="ti-tablet" /></span>
                 <div className="media-body">
-                  <h3>+1 253 565 2365</h3>
+                  <h3>+91 97860 00436</h3>
                   <p>Mon to Fri 9am to 6pm</p>
                 </div>
               </div>
               <div className="media contact-info">
                 <span className="contact-info__icon"><i className="ti-email" /></span>
                 <div className="media-body">
-                  <h3>support@colorlib.com</h3>
+                  <h3>cristo@boscosofttech.com</h3>
                   <p>Send us your query anytime!</p>
                 </div>
               </div>
