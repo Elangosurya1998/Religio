@@ -15,6 +15,12 @@ import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
 import PrivateRoutes from "./login/forms/private";
 
+import ProjectstatusLayouts from './dashboard/projectstatuslayout';
+import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
+import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
+import PaymentlistFile from './dashboard/PaymentlistFile';
+import PaymentCreateFile from './dashboard/PaymentCreateFile';
+
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +40,12 @@ function App() {
           <Route exact path="/Religio/Province" element={<ProlistLayouts />}/>
           <Route exact path="/Religio/ProvinceEdit/:id" element={<ProeditLayouts />}/>
           <Route exact path="/Religio/ProvinceAdd" element={<ProaddLayouts/>}/>
+
+          <Route exact path="/Religio/ProjectstatusLayouts" element={<ProjectstatusLayouts/>}/>
+          <Route exact path="/Religio/ProjectstatusAdd" element={< ProjectstatusaddLayouts/>}/>
+          <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts/>}/>
+          <Route exact path="/Religio/PaymentStatus" element={<PaymentlistFile/>} />
+          <Route exact path="/Religio/PaymentCreate" element={<PaymentCreateFile/>} />
         </Route> 
       </Routes>
     </BrowserRouter>
