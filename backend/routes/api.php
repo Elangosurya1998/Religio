@@ -39,9 +39,13 @@ Route::get('/Religio/Province',[ProvinceController::class, 'ProvinceList']);
 Route::get('/Religio/Province/Congregation',[ProvinceController::class, 'ProvinceCongregation']);
 Route::get('/Religio/Provinceedit/{id}',[ProvinceController::class, 'ProvinceEdit']);
 Route::put('/Religio/Provinceupdate/{id}',[ProvinceController::class, 'Provinceupdate']);
+Route::get('/Religio/Province/get/{id}',[ProvinceController::class, 'Provinceget']);
+
 
 // ClientRegisteration
 Route::post('/Religio/Clientregistration/store',[ClientregistrationController::class, 'Clientregistrationstore']);
+Route::post('/Religio/Clientregistration/uploadfile',[ClientregistrationController::class, 'Clientregistrationuploadfile']);
+Route::post('/Religio/Clientregistration/uploadfile/{id}',[ClientregistrationController::class, 'Clientregistrationuploadfileid']);
 Route::get('/Religio/Clientregistration',[ClientregistrationController::class, 'ClientregistrationList']);
 Route::delete('/Religio/Clientregistration/{id}',[ClientregistrationController::class, 'ClientregistrationDelete']);
 Route::get('/Religio/Registeredit/{id}',[ClientregistrationController::class, 'ClientregistrationEdit']);

@@ -15,13 +15,15 @@ return new class extends Migration
     {
         Schema::create('congregation', function (Blueprint $table) {
             $table->id()->index();
-            $table->string('CongregationName')->nullable()->index();
-            $table->string('Address1')->nullable();
+            $table->string('congregation')->nullable()->index();
+            $table->string('address1')->nullable();
             $table->string('state')->nullable();
-            $table->string('Address2')->nullable();
-            $table->string('Postcode')->nullable();
-            $table->string('City')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('city')->nullable();
             $table->string('country')->nullable(); 
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

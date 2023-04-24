@@ -24,11 +24,6 @@ function Sidemenubar() {
                   <i className="mdi mdi-home menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-                <Link to="/Religio/ClientRegistration" className="nav-link" >
-                  <span className="menu-title">Client Registration</span>
-                  <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
-              </li>
-              <li className="nav-item ">
                 <Link to="/Religio/Congregation" className="nav-link" >
                   <span className="menu-title">Congregation</span>
                   <i className="mdi mdi-account-plus menu-icon" /></Link>
@@ -37,6 +32,11 @@ function Sidemenubar() {
                 <Link to="/Religio/Province" className="nav-link" >
                   <span className="menu-title">Province</span>
                   <i className="mdi mdi-account-plus menu-icon" /></Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/Religio/ClientRegistration" className="nav-link" >
+                  <span className="menu-title">Client Registration</span>
+                  <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
               </li>
               {/* <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
