@@ -41,12 +41,10 @@ function Header() {
                         {/* <li><a href="/login">Login</a></li> */}
                       </ul>
                     </nav>
-                  </div>
                 </div>
                 {/* Mobile Menu */}
                 <div className="col-12">
                   <div className="mobile_menu d-block d-lg-none" />
-
                 </div>
               </div>
               {/* Mobile Menu */}
