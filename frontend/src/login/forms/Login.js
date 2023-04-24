@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+
 function Login() {
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -23,10 +24,12 @@ function Login() {
   const { errors } = formState;
   const navigate = useNavigate();
 
+
   function onSubmitLoginform(data, e) {
     axios.post('http://127.0.0.1:8000/api/Login', data)
       .then(Response => {
         const Logindata = Response.data;
+        // console.log(Logindata.role);
         if (Logindata.loginVal == "true") {
           localStorage.setItem("userDetails", JSON.stringify(Logindata));
           Swal.fire({
@@ -34,11 +37,14 @@ function Login() {
             text: 'Logged in successfully',
             icon: 'success',
             confirmButtonColor: 'green'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate('/Religio/Dashboard');
-            }
-          })
+          }) 
+          if(Logindata.role == "admin")
+          {
+            navigate('/Religio/Dashboard');
+          }else{
+            navigate('/UserPage');
+          }
+         
         } else {
           Swal.fire({
             title: "Sign-in Failed",
@@ -61,25 +67,23 @@ return (
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left p-5">
               <div class="brand-logo">
-              <a href='/'> <img src="./logo.png"/></a>
+              <a href='/'><center><img src="./logo.png" style={{width:"185px"}}/></center></a>
               </div>
-              <h4>Hello! let's get started</h4>
-              <h6 class="font-weight-light">Sign in to continue.</h6>
               <form class="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
                 <div class="form-group">
-                  <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="email" />
+                  <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Email" autoComplete='off'  />
                     <div className="invalid-feedback">{errors.email?.message}</div>
                 </div>
                 <div class="form-group">
-                  <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" />
+                  <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" autoComplete='off' />
                   <div className="invalid-feedback">{errors.password?.message}</div>
                 </div>
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
-                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" class="text-primary" style={{textDecoration:"none"}}>Create</a>
-                </div>
-                <div class="text-center mt-4 font-weight-light"><a href="/" class="text-primary" style={{textDecoration:"none"}}>Home</a>
+                {/* <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" class="text-primary" style={{textDecoration:"none"}}> Register Here</a>
+                </div> */}
+                <div class="text-center mt-4 font-weight-light"><a href="/" class="text-primary" style={{textDecoration:"none"}}><i class="fa fa-home"> Home</i></a>
                 </div>
               </form>
             </div>
