@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('provinces', function (Blueprint $table) {
             $table->id();
-            $table->string('Congregation')->nullable();
-            $table->string('Province')->nullable();
-            $table->string('Address1')->nullable();
+            $table->string('congregation')->nullable();
+            $table->string('province')->nullable();
+            $table->string('address1')->nullable();
             $table->string('state')->nullable();
-            $table->string('Address2')->nullable();
-            $table->string('Postcode')->nullable();
-            $table->string('City')->nullable(); 
+            $table->string('address2')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('city')->nullable(); 
             $table->string('country')->nullable();
-            $table->string('Mobile')->nullable();
-            $table->string('Email')->nullable(); 
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable(); 
             $table->timestamps();
         });
     }

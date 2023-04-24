@@ -14,13 +14,13 @@ class ReligioController extends Controller
            
             $validator    =  Validator::make($request->all(), 
             [
-                "CongregationName" => 'required',
-                "Address1"  => "required",
+                "congregation" => 'required',
+                "address1"  => "required",
                 "state"  => "required",
-                "Postcode"=> "required",
+                "postcode"=> "required",
                 "country"  => "required",
-                "Mobile"  => "required",
-                "Email"  => "required",
+                "mobile"  => "required",
+                "email"  => "required",
             ]
            );
                 if($validator->fails()) {
@@ -28,15 +28,15 @@ class ReligioController extends Controller
                                     "validation_errors" => $validator->errors()]);
                 }
                  $projectArray['params'] = array(
-                                "CongregationName" => $request->CongregationName,
-                                "Address1" => $request->Address1,
+                                "congregation" => $request->congregation,
+                                "address1" => $request->address1,
                                 "state" => $request->state,
-                                "Address2" => $request->Address2,
-                                "Postcode" => $request->Postcode,
-                                "City"   => $request->City,
+                                "address2" => $request->address2,
+                                "postcode" => $request->postcode,
+                                "city"   => $request->city,
                                 "country" => $request->country,
-                                "Mobile"   => $request->Mobile, 
-                                "Email"   => $request->Email,  
+                                "mobile"   => $request->mobile, 
+                                "email"   => $request->email,  
                          );
     
                 $project  = Congregation::create($projectArray['params']);
@@ -90,15 +90,15 @@ class ReligioController extends Controller
            
             $Congregationupdate = Congregation::where('id',$id)
             ->update([
-                "CongregationName" => $request->CongregationName,
-                "Address1" => $request->Address1,
+                "congregation" => $request->congregation,
+                "address1" => $request->address1,
                 "state" => $request->state,
-                "Address2" => $request->Address2,
-                "Postcode" => $request->Postcode,
-                "City"   => $request->City,
-                "country"   => $request->country,
-                "Mobile"   => $request->Mobile, 
-                "Email"   => $request->Email, 
+                "address2" => $request->address2,
+                "postcode" => $request->postcode,
+                "city"   => $request->city,
+                "country" => $request->country,
+                "mobile"   => $request->mobile, 
+                "email"   => $request->email,  
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 

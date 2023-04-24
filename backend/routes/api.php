@@ -44,6 +44,8 @@ Route::get('/Religio/Province/get/{id}',[ProvinceController::class, 'Provinceget
 
 // ClientRegisteration
 Route::post('/Religio/Clientregistration/store',[ClientregistrationController::class, 'Clientregistrationstore']);
+Route::post('/Religio/Clientregistration/uploadfile',[ClientregistrationController::class, 'Clientregistrationuploadfile']);
+Route::post('/Religio/Clientregistration/uploadfile/{id}',[ClientregistrationController::class, 'Clientregistrationuploadfileid']);
 Route::get('/Religio/Clientregistration',[ClientregistrationController::class, 'ClientregistrationList']);
 Route::delete('/Religio/Clientregistration/{id}',[ClientregistrationController::class, 'ClientregistrationDelete']);
 Route::get('/Religio/Registeredit/{id}',[ClientregistrationController::class, 'ClientregistrationEdit']);

@@ -78,60 +78,31 @@ import { Link, useNavigate, useParams } from "react-router-dom";
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <div className="row"><b className="card-description"> Congregation </b></div>
+              {/* <div className="row"><b className="card-description"> Congregation </b></div> */}
               <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
                   <div className="col-md-12">
                     <div className="form-group row">
                       <label className="col-form-label">Congregation Name</label>
                       <div className="col-sm-12">
-                        <input type="text" className="form-control" name="CongregationName"
-                        {...register("CongregationName", { required: true})}
-                        aria-invalid={errors?.CongregationName ? "true" : "false"}  />
-                        {errors?.CongregationName?.type === 'required' && <div className='text-danger text_error'>Congregation Name is required</div>}
-                        
-                      </div>
+                        <input type="text" className="form-control" name="congregation"
+                        {...register("congregation", { required: true})}
+                        aria-invalid={errors?.congregation ? "true" : "false"}  />
+                        {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Congregation Name is required</label></div>}
+                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="row"><b className="card-description"> Address </b></div>
                 <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Mobile No</label>
-                          <div className="col-sm-9">
-                            <input type="text" className="form-control" name="Mobile"
-                            {...register("Mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
-                            aria-invalid={errors?.Mobile ? "true" : "false"}  />
-                            {errors?.Mobile?.type === 'required' && <div className='text-danger text_error'>Mobile Number is required</div>}
-                            {errors?.Mobile?.type === "minLength" && <div className='text-danger text_error '>Mobile Number shoul be minimum Numbers 10</div>}
-                            {errors?.Mobile?.type === "maxLength" && <div className='text-danger text_error '>Mobile Number shoul be  maximum Numbers12</div>}
-                            {errors?.Mobile?.type === "pattern" && <div className='text-danger text_error '>Mobile Number can contain only Numbers</div>}
-                            </div>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Email</label>
-                          <div className="col-sm-9">
-                            <input type="text" className="form-control" name="Email"
-                            {...register("Email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
-                            aria-invalid={errors?.Email ? "true" : "false"}  />
-                            {errors?.Email?.type === 'required' && <div className='text-danger text_error'>Email is required</div>}
-                            {errors?.Email?.type === "pattern" && <div className='text-danger text_error '>Invalid email address</div>}
-                        </div>
-                        </div>
-                      </div>
-                    </div> 
-                <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 1</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Address1"
-                        {...register("Address1", { required: true })}
-                        aria-invalid={errors?.Address1 ? "true" : "false"}  />
-                        {errors?.Address1?.type === 'required' && <div className='text-danger text_error'>Address 1 is required</div>}
+                        <input type="text" className="form-control" name="address1"
+                        {...register("address1", { required: true })}
+                        aria-invalid={errors?.address1 ? "true" : "false"}  />
+                        {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
                         </div>
                     </div>
                   </div>
@@ -139,11 +110,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Postcode</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Postcode"
-                        {...register("Postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
-                        aria-invalid={errors?.Postcode ? "true" : "false"}  />
-                        {errors?.Postcode?.type === 'required' && <div className='text-danger text_error'>Postcode is required</div>}
-                        {errors?.Postcode?.type === "pattern" && <div className='text-danger text_error '>Postcode can contain only Numbers</div>}
+                        <input type="text" className="form-control" name="postcode"
+                        {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                        aria-invalid={errors?.postcode ? "true" : "false"}  />
+                        {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
+                        {errors?.postcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Postcode can contain only Numbers</label></div>}
                      </div>
                     </div>
                   </div>
@@ -153,8 +124,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 2</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="Address2"
-                        {...register("Address2")}/>
+                        <input type="text" className="form-control" name="address2"
+                        {...register("address2")}/>
                        </div>
                     </div>
                   </div>
@@ -171,7 +142,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                           <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                              }
                         </select> 
-                        {errors?.country?.type === 'required' && <div className='text-danger text_error'>Please Choose One Country</div>}
+                        {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Country</label></div>}
                       </div>
                     </div>
                   </div>
@@ -181,12 +152,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">City</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="City"
-                        {...register("City", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-                        aria-invalid={errors?.City ? "true" : "false"}  />
-                        {errors?.City?.type === 'required' && <div className='text-danger text_error'>City is required</div>}
-                        {errors?.City?.type === "pattern" && <div className='text-danger text_error '>City can contain only alphabets</div>}
-                       </div>
+                        <input type="text" className="form-control" name="city"
+                        {...register("city", { required: true })}
+                        aria-invalid={errors?.city ? "true" : "false"}  />
+                        {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
+                         </div>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -202,10 +172,39 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                           <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                              }
                             </select>
+                        {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One State</label></div>}
                        </div>
                     </div>
                   </div>
                 </div>
+                <div className="row">
+                <div className="col-md-6">
+                        <div className="form-group row">
+                          <label className="col-sm-3 col-form-label">Email</label>
+                          <div className="col-sm-9">
+                            <input type="text" className="form-control" name="email"
+                            {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
+                            aria-invalid={errors?.email ? "true" : "false"}  />
+                            {errors?.email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required</label></div>}
+                            {errors?.email?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Invalid email address</label></div>}
+                        </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-group row">
+                          <label className="col-sm-3 col-form-label">Mobile No</label>
+                          <div className="col-sm-9">
+                            <input type="text" className="form-control" name="mobile"
+                            {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
+                            aria-invalid={errors?.mobile ? "true" : "false"}  />
+                            {errors?.mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required</label></div>}
+                            {errors?.mobile?.type === "minLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number shoul be minimum Numbers 10</label></div>}
+                            {errors?.mobile?.type === "maxLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number shoul be  maximum Numbers12</label></div>}
+                            {errors?.mobile?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Mobile Number can contain only Numbers</label></div>}
+                            </div>
+                        </div>
+                      </div>
+                    </div> 
                 <div className="text-center">
                 <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
                 &nbsp; &nbsp; &nbsp; 

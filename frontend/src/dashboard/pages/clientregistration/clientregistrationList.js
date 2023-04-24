@@ -22,6 +22,7 @@ $(document).ready(function () {
         fetch(`${ApiUrl}/Religio/Clientregistration`).then((res) => {
           return res.json();
       }).then((resp) => {
+        console.log(resp);
         SetClientregister(resp.data);
       }).catch((err) => {
           console.log(err.message);
@@ -81,7 +82,7 @@ const deleteregister = async (e,id) =>{
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              <h4 className="card-title">Client Registration List</h4>
+              {/* <h4 className="card-title">Client Registration List</h4> */}
               <div className="row">
               <div className="col-lg-4">
               <input id="myInput" type="text" className="form-control myInput" placeholder="Search.." />
@@ -95,11 +96,11 @@ const deleteregister = async (e,id) =>{
                 <table className="table table-striped Mytable">
                   <thead>
                     <tr>
-                      <th>Congregation Name </th>
-                      <th>Province Name</th>
+                      <th>Congregation</th>
+                      <th>Province</th>
                       <th>Name</th>
                       <th>Place</th>
-                      <th>FinancialYear</th>
+                      <th>Financial Year</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -107,11 +108,11 @@ const deleteregister = async (e,id) =>{
                   {         
                     register && register.map(item => (
                       <tr key={item.id}>
-                          <td>{item.CongregationName}</td>
-                          <td>{item.Province}</td>
-                          <td>{item.Name}</td>
-                          <td>{item.Place}</td>
-                          <td>{item.FinancialYear }</td>
+                          <td>{item.congregation}</td>
+                          <td>{item.province}</td>
+                          <td>{item.name}</td>
+                          <td>{item.place}</td>
+                          <td>{item.financialyear }</td>
                           <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
                               &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-delete" id="print">Delete</a>
                           </td>

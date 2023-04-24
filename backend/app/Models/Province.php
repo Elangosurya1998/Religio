@@ -13,15 +13,15 @@ class Province extends Model
 
     protected $fillable = [
         'id',
-        'Congregation',
-        'Province',
-        'Address1',
+        'congregation',
+        'province',
+        'address1',
         'state',
-        'Address2',
-        'Postcode',
-        'City',
+        'address2',
+        'postcode',
+        'city',
         'country',
-        'Mobile',
-        'Email'
+        'mobile',
+        'email'
     ];
 }

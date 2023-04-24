@@ -17,15 +17,15 @@ class ProvinceController extends Controller
            
             $validator    =  Validator::make($request->all(), 
             [
-                "Congregation" => 'required',
-                "Province"   => "required",
-                "Address1"  => "required",
+                "congregation" => 'required',
+                "province"   => "required",
+                "address1"  => "required",
                 "state"  => "required",
-                "Postcode"=> "required",
-                "City"  => "required",
+                "postcode"=> "required",
+                "city"  => "required",
                 "country"  => "required",
-                "Mobile"  => "required",
-                "Email"  => "required",
+                "mobile"  => "required",
+                "email"  => "required",
             ]
            );
                 if($validator->fails()) {
@@ -33,16 +33,16 @@ class ProvinceController extends Controller
                                     "validation_errors" => $validator->errors()]);
                 }
                  $ProvinceArray['params'] = array(
-                                "Congregation" => $request->Congregation,
-                                "Province" => $request->Province,
-                                "Address1" => $request->Address1,
+                                "congregation" => $request->congregation,
+                                "province" => $request->province,
+                                "address1" => $request->address1,
                                 "state" => $request->state,
-                                "Address2" => $request->Address2,
-                                "Postcode"   => $request->Postcode, 
-                                "City"   => $request->City, 
+                                "address2" => $request->address2,
+                                "postcode"   => $request->postcode, 
+                                "city"   => $request->city, 
                                 "country"   => $request->country, 
-                                "Mobile"   => $request->Mobile, 
-                                "Email"   => $request->Email, 
+                                "mobile"   => $request->mobile, 
+                                "email"   => $request->email, 
                          );
     
                 $Province  = Province::create($ProvinceArray['params']);
@@ -63,8 +63,8 @@ class ProvinceController extends Controller
         public function ProvinceList() {
     
             $ProvinceAll = DB::table('provinces as pr')
-            ->select('pr.*','co.CongregationName')
-            ->leftjoin('congregation as co','co.id','pr.Congregation')
+            ->select('pr.*','co.congregation')
+            ->leftjoin('congregation as co','co.id','pr.congregation')
             ->get();
     
             if(count($ProvinceAll) > 0) {
@@ -117,11 +117,11 @@ class ProvinceController extends Controller
             // $Provinceget = Province::where('id',$id)->get();
             
             $Provinceget = DB::table('provinces as pr')
-            ->select('pr.*','co.CongregationName')
-            ->leftjoin('congregation as co','co.id','pr.Congregation')
+            ->select('pr.*','co.congregation')
+            ->leftjoin('congregation as co','co.id','pr.congregation')
             ->where('co.id',$id)
             ->get();
-           
+          
             if(count($Provinceget) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Provinceget), "data" => $Provinceget]);
@@ -136,16 +136,16 @@ class ProvinceController extends Controller
            
             $Congregationupdate = Province::where('id',$id)
             ->update([
-                "Congregation" => $request->Congregation,
-                "Province" => $request->Province,
-                "Address1" => $request->Address1,
+                "congregation" => $request->congregation,
+                "province" => $request->province,
+                "address1" => $request->address1,
                 "state" => $request->state,
-                "Address2" => $request->Address2,
-                "Postcode"   => $request->Postcode, 
-                "City"   => $request->City, 
-                "country"   => $request->country,
-                "Mobile"   => $request->Mobile, 
-                "Email"   => $request->Email,  
+                "address2" => $request->address2,
+                "postcode"   => $request->postcode, 
+                "city"   => $request->city, 
+                "country"   => $request->country, 
+                "mobile"   => $request->mobile, 
+                "email"   => $request->email, 
             ]);
 
             return response()->json(

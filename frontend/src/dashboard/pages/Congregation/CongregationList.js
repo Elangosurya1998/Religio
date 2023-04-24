@@ -82,7 +82,7 @@ function CongregationList(){
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              <h4 className="card-title">Congregation List</h4>  
+              {/* <h4 className="card-title">Congregation List</h4>   */}
             <div className="row">
               <div className="col-lg-4">
               <input id="myInput" type="text" className="form-control Congregation" placeholder="Search.." />
@@ -108,11 +108,11 @@ function CongregationList(){
                   {         
                     Cong && Cong.map(item => (
                       <tr key={item.id}>
-                          <td>{item.CongregationName}</td>
-                          <td>{item.Mobile}</td>
-                          <td>{item.Email}</td>
-                          <td>{item.Address1}</td>
-                          <td>{item.Postcode }</td>
+                          <td>{item.congregation}</td>
+                          <td>{item.mobile}</td>
+                          <td>{item.email}</td>
+                          <td>{item.address1}</td>
+                          <td>{item.postcode }</td>
                           <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
                             &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
                           </td>

@@ -85,7 +85,7 @@ const deleteProvince = async (e,id) =>{
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              <h4 className="card-title">Province List</h4>
+              {/* <h4 className="card-title">Province List</h4> */}
               <div className="row">
               <div className="col-lg-4">
               <input id="myInput" type="text" className="form-control Province" placeholder="Search.."  />
@@ -107,8 +107,8 @@ const deleteProvince = async (e,id) =>{
                 <table className="table table-striped ProvinceList">
                   <thead>
                     <tr>
-                      <th>Province Name </th>
-                      <th>Congregation Name </th>
+                      <th>Province</th>
+                      <th>Congregation</th>
                       <th>Email</th>
                       <th>Mobile</th>
                       <th>Address1</th>
@@ -122,11 +122,11 @@ const deleteProvince = async (e,id) =>{
                   {         
                     Pro && Pro.map(item => (
                       <tr key={item.id}>
-                          <td>{item.Province}</td>
-                          <td>{item.CongregationName}</td>
-                          <td>{item.Email}</td>
-                          <td>{item.Mobile}</td>
-                          <td>{item.Address1}</td>
+                          <td>{item.province}</td>
+                          <td>{item.congregation}</td>
+                          <td>{item.email}</td>
+                          <td>{item.mobile}</td>
+                          <td>{item.address1}</td>
                           {/* <td>{item.Postcode }</td> */}
                           {/* <td>{item.City }</td> */}
                           {/* <td>{item.country }</td> */}

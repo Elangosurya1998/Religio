@@ -13,28 +13,28 @@ return new class extends Migration
     {
         Schema::create('client_registrations', function (Blueprint $table) {
             $table->id();
-            $table->string('Congregation')->nullable();
-            $table->string('Province')->nullable();
-            $table->string('Name')->nullable();
-            $table->string('Place')->nullable();
-            $table->string('ClientType')->nullable();
-            $table->date('FinancialYear')->format('d/m/Y')->nullable();
-            $table->integer('ClientCode')->nullable(); 
-            $table->date('DateofJoining')->nullable(); 
-            $table->date('DateofContractSigning')->nullable();
-            $table->date('AMCDate')->nullable();
-            $table->string('ProjectValue')->nullable();
-            $table->string('AMCvalue')->nullable();
-            $table->string('ProjectStatus')->nullable();
-            $table->string('FileAttachment')->nullable();
-            $table->string('Address1')->nullable();
+            $table->string('congregation')->nullable();
+            $table->string('province')->nullable();
+            $table->string('name')->nullable();
+            $table->string('place')->nullable();
+            $table->string('clientType')->nullable();
+            $table->date('financialyear')->format('d/m/Y')->nullable();
+            $table->string('clientcode')->nullable(); 
+            $table->date('dateofjoining')->nullable(); 
+            $table->date('dateofcontractsigning')->nullable();
+            $table->date('amcDate')->nullable();
+            $table->string('projectValue')->nullable();
+            $table->string('amcvalue')->nullable();
+            $table->string('projectStatus')->nullable();
+            $table->string('fileAttachment')->nullable();
+            $table->string('address1')->nullable();
             $table->string('state')->nullable();
-            $table->string('Address2')->nullable();
-            $table->string('Postcode')->nullable();
-            $table->string('City')->nullable(); 
+            $table->string('address2')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('city')->nullable(); 
             $table->string('country')->nullable();
-            $table->string('Mobile')->nullable();
-            $table->string('Email')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
