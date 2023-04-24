@@ -21,14 +21,11 @@ function Header() {
                     <ul id="navigation">
 
                       <li><Link to="/">Home</Link></li>
-                      {/* <li className="active"><a href="index.html"> Home</a></li> */}
-                      <li><a href="#Feature">Feature</a></li>
-                      <li><a href="#Services">Services</a></li>
-                      {/* <li><a href="#Gallery">Gallery</a></li> */}
-                      <li><a href="#Blog">Blog</a></li>
+                      <li><Link to="/">Feature</Link></li>
+                      <li><Link to="/">Services</Link></li>
+                      <li><Link to="/">Blog</Link></li>
                       <li>
                         <Link to="/Religio/Demo">Demo</Link>
-
                       </li>
                       {/* <li><a href="#">Pages</a>
                           <ul className="submenu">
@@ -37,8 +34,8 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      <li><a href="">Contact</a></li>
-                      <li><a href="/login">Login</a></li>
+                      <li><Link to="/">Contact</Link></li>
+                      <li><Link to="/login">Login</Link></li>
                     </ul>
                   </nav>
                 </div>

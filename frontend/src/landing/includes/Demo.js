@@ -1,5 +1,18 @@
+import emailjs from "emailjs-com";
 
 function Demo() {
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm("service_6qer626", "template_ryb99tm", e.target, "JiVZwOP-Lb26XJ-_f").then(res => {
+      alert("email sent sucess");
+      e.target.reset();
+    }).catch(err => console.log(err));
+
+
+  }
+
   return (
     <main>
       {/* Slider Area Start*/}
@@ -46,7 +59,7 @@ function Demo() {
           </div>
           <div className="row">
             <div className="col-lg-8">
-              <form className="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" noValidate="novalidate">
+              <form className="form-contact contact_form" onSubmit={sendEmail}>
                 <div className="row">
                   <div className="col-12">
                     <div className="form-group">
@@ -79,7 +92,7 @@ function Demo() {
                 <span className="contact-info__icon"><i className="ti-home" /></span>
                 <div className="media-body">
                   <h3>Bosco Soft Technologies Pvt. Ltd.</h3>
-                  <p>No. 231/77, S.H.C Complex. Vaniyambadi Road, Tirupattur District, Tamil Nadu, INDIA – 635 601</p>
+                  <p>No. 231/77, S.H.C Complex. Vaniyambadi Road, Tirupattur District, Tamilnadu, INDIA – 635 601</p>
                 </div>
               </div>
               <div className="media contact-info">
