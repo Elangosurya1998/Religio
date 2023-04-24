@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Congregation;
 use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
+use DB;
+
 class ProvinceController extends Controller
 { 
         Private $status = 200;
@@ -15,14 +17,15 @@ class ProvinceController extends Controller
            
             $validator    =  Validator::make($request->all(), 
             [
-                "Congregation" => 'required',
-                "Province"   => "required",
-                "Address1"  => "required",
+                "congregation" => 'required',
+                "province"   => "required",
+                "address1"  => "required",
                 "state"  => "required",
-                "Address2"   => "required",
-                "Postcode"=> "required",
-                "City"  => "required",
+                "postcode"=> "required",
+                "city"  => "required",
                 "country"  => "required",
+                "mobile"  => "required",
+                "email"  => "required",
             ]
            );
                 if($validator->fails()) {
@@ -30,14 +33,16 @@ class ProvinceController extends Controller
                                     "validation_errors" => $validator->errors()]);
                 }
                  $ProvinceArray['params'] = array(
-                                "Congregation" => $request->Congregation,
-                                "Province" => $request->Province,
-                                "Address1" => $request->Address1,
+                                "congregation" => $request->congregation,
+                                "province" => $request->province,
+                                "address1" => $request->address1,
                                 "state" => $request->state,
-                                "Address2" => $request->Address2,
-                                "Postcode"   => $request->Postcode, 
-                                "City"   => $request->City, 
+                                "address2" => $request->address2,
+                                "postcode"   => $request->postcode, 
+                                "city"   => $request->city, 
                                 "country"   => $request->country, 
+                                "mobile"   => $request->mobile, 
+                                "email"   => $request->email, 
                          );
     
                 $Province  = Province::create($ProvinceArray['params']);
@@ -57,7 +62,11 @@ class ProvinceController extends Controller
     
         public function ProvinceList() {
     
-        $ProvinceAll = Province::all();
+            $ProvinceAll = DB::table('provinces as pr')
+            ->select('pr.*','co.congregation')
+            ->leftjoin('congregation as co','co.id','pr.congregation')
+            ->get();
+    
             if(count($ProvinceAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ProvinceAll), "data" => $ProvinceAll]);
@@ -76,7 +85,6 @@ class ProvinceController extends Controller
                 ["status" => $this->status, "success" => true, 
                 "message" => " Province deleted  successfully"]);
         }
-
         public function ProvinceCongregation(){
 
             $Congregation =Congregation::all();
@@ -89,6 +97,7 @@ class ProvinceController extends Controller
                 "success" => false, "message" => "Whoops! no record found"]);
             }
         }
+
         public function ProvinceEdit($id){
            
             $Congregationedit = Province::where('id',$id)->get();
@@ -100,19 +109,45 @@ class ProvinceController extends Controller
                 return response()->json(["status" => "failed",
                 "success" => false, "message" => "Whoops! no record found"]);
             }
-        }public function Provinceupdate($id,Request $request){
+
+        }
+
+        public function Provinceget($id){
+         
+            // $Provinceget = Province::where('id',$id)->get();
+            
+            $Provinceget = DB::table('provinces as pr')
+            ->select('pr.*','co.congregation')
+            ->leftjoin('congregation as co','co.id','pr.congregation')
+            ->where('co.id',$id)
+            ->get();
+          
+            if(count($Provinceget) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Provinceget), "data" => $Provinceget]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+
+        }
+        public function Provinceupdate($id,Request $request){
            
             $Congregationupdate = Province::where('id',$id)
             ->update([
-                "Congregation" => $request->Congregation,
-                "Province" => $request->Province,
-                "Address1" => $request->Address1,
+                "congregation" => $request->congregation,
+                "province" => $request->province,
+                "address1" => $request->address1,
                 "state" => $request->state,
-                "Address2" => $request->Address2,
-                "Postcode"   => $request->Postcode, 
-                "City"   => $request->City, 
+                "address2" => $request->address2,
+                "postcode"   => $request->postcode, 
+                "city"   => $request->city, 
                 "country"   => $request->country, 
+                "mobile"   => $request->mobile, 
+                "email"   => $request->email, 
             ]);
+
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);

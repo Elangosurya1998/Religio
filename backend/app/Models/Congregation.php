@@ -13,12 +13,14 @@ class Congregation extends Model
 
     protected $fillable = [
         'id',
-        'CongregationName',
-        'Address1',
+        'congregation',
+        'address1',
         'state',
-        'Address2',
-        'Postcode',
-        'City',
-        'country'
+        'address2',
+        'postcode',
+        'city',
+        'country' ,
+        'mobile',
+        'email' 
     ];
 }
