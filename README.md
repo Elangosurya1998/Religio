@@ -3,7 +3,7 @@
 ### Installing and running the Following commands
 
 ```
-git clone https://github.com/Elangosurya1998/reactlaravel.git
+git clone https://github.com/Elangosurya1998/Religio.git
 ```
 ```
 cd reactlaravel
