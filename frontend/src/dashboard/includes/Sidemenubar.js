@@ -41,12 +41,16 @@ function Sidemenubar() {
                   <i className="mdi mdi-account-plus menu-icon" /></Link>
               </li>
               <li className="nav-item ">
-
+                <Link to="/register" className="nav-link" >
+                  <span className="menu-title">New User Registration</span>
+                  <i className="mdi mdi-account-plus menu-icon" /></Link>
+              </li>
+              <li className="nav-item ">
                 <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >
                   <span className="menu-title">Project Status</span>
                   <i className="mdi mdi-file-document menu-icon" /></Link>
-                  
-
+              </li>
+              <li className="nav-item ">
                 <Link to="/Religio/ClientRegistration" className="nav-link" >
                   <span className="menu-title">Client Registration</span>
                   <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
