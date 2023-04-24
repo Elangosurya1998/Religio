@@ -75,10 +75,10 @@ function Main() {
                 <div className="col-xl-6 col-lg-6 col-md-6">
                   <div className="single-features mb-70">
                     <div className="features-icon">
-                      <span className="flaticon-member" />
+                      <span><i className="fas fa-recycle"></i></span>
                     </div>
                     <div className="features-caption">
-                      <h3>Easy Member Update</h3>
+                      <h3>Circular Management</h3>
                       <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                     </div>
                   </div>
@@ -86,10 +86,10 @@ function Main() {
                 <div className="col-xl-6 col-lg-6 col-md-6">
                   <div className="single-features mb-70">
                     <div className="features-icon">
-                      <span className="flaticon-support" />
+                      <span><i className="fas fa-calendar"></i></span>
                     </div>
                     <div className="features-caption">
-                      <h3>Customer Support</h3>
+                      <h3>Calendar / Events</h3>
                       <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
                     </div>
                   </div>
@@ -197,13 +197,13 @@ function Main() {
                 <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra maecenasan lacus vel facilisis. </p>
               </div>
             </div>
-            {/* <div className="col-xl-6 col-lg-6">
+            <div className="col-xl-6 col-lg-6">
               <div className="row d-flex justify-content-between">
                 <div className="app-img">
                   <img src="./landing/assets/img/shape/available-app.png" alt="" />
                 </div>
               </div>
-            </div> */}
+            </div>
             {/* OwL */}
             <div className="col-xl-8 col-lg-8 col-md-7">
               <div className="app-active owl-carousel">
