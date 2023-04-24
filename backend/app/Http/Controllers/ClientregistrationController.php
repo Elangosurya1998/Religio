@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use DB;
+
 class ClientregistrationController extends Controller
 { 
         Private $status = 200;
@@ -14,67 +16,59 @@ class ClientregistrationController extends Controller
         {
             $validator    =  Validator::make($request->all(), 
             [
-                 "Congregation" => 'required',
-                "Province"   => "required",
-                "Name"  => "required",
-                "Place" => "required",
-                "ClientType"  => "required",
-                "FinancialYear"   => "required",
-                "ClientCode"=> "required",
-                "DateofJoining"  => "required",
-                "DateofContractSigning"  => "required",
-                "AMCDate"  => "required",
-                "ProjectValue"  => "required",
-                "AMCvalue"  => "required",
-                "ProjectStatus"  => "required",
-                // "FileAttachment"  => "required",
-                "Address1"  => "required",
-                "state"  => "required",
-                "Address2"   => "required",
-                "Postcode"=> "required",
-                "City"  => "required",
-                "country"  => "required"
+            "congregation"   => 'required',
+                "province"   => "required",
+                "name"       => "required",
+                "place"      => "required",
+                "clientType" => "required",
+            "financialyear"  => "required",
+                "clientcode" => "required",
+            "dateofjoining"  => "required",
+    "dateofcontractsigning"  => "required",
+                "amcDate"    => "required",
+             "projectValue"  => "required",
+                "amcvalue"   => "required",
+            "projectStatus"  => "required",
+                "address1"   => "required",
+                "state"      => "required",
+                "address2"   => "required",
+                "postcode"   => "required",
+                "city"       => "required",
+                "country"    => "required",
+                "mobile"     => "required",
+                "email"      => "required",
             ]
            );
            
                 if($validator->fails()) {
                 return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
                 }
-               
-        //      $file = $request->file('FileAttachment'); 
-        //    $filename = $file->getClientOriginalName();
-        //    $extension = $file->getClientOriginalExtension();
-        //    $location = 'resourcefiles';
-
+            
                  $RegisterArray['params'] = array(
-                                "Congregation" => $request->Congregation,
-                                "Province" => $request->Province,
-                                "Name" => $request->Name,
-                                "Place" => $request->Place,
-                                "ClientType" => $request->ClientType,
-                                "FinancialYear" => $request->FinancialYear,
-                                "ClientCode"   => $request->ClientCode, 
-                                "DateofJoining"   => $request->DateofJoining, 
-                                "DateofContractSigning" => $request->DateofContractSigning, 
-                                "AMCDate"   => $request->AMCDate, 
-                                "ProjectValue"   => $request->ProjectValue, 
-                                "AMCvalue"   => $request->AMCvalue, 
-                                "ProjectStatus"   => $request->ProjectStatus,
-                                // "FileAttachment"   =>file->getClientOriginalName()
-                                "Address1" => $request->Address1,
-                                "state" => $request->state,
-                                "Address2" => $request->Address2,
-                                "Postcode" => $request->Postcode,
-                                "City"   => $request->City,
-                                "country"   => $request->country 
-                         );
-
-                      
-    
+                             "congregation"   => $request->congregation,
+                                 "province"   => $request->province,
+                                 "name"       => $request->name,
+                                 "place"      => $request->place,
+                                 "clientType" => $request->clientType,
+                             "financialyear"  => $request->financialyear,
+                                 "clientcode" => $request->clientcode, 
+                             "dateofjoining"  => $request->dateofjoining, 
+                     "dateofcontractsigning"  => $request->dateofcontractsigning, 
+                                 "amcDate"    => $request->amcDate, 
+                              "projectValue"  => $request->projectValue, 
+                                 "amcvalue"   => $request->amcvalue, 
+                             "projectStatus"  => $request->projectStatus,
+                                 "address1"   => $request->address1,
+                                 "state"      => $request->state,
+                                 "address2"   => $request->address2,
+                                 "postcode"   => $request->postcode,
+                                 "city"       => $request->city,
+                                 "country"    => $request->country,
+                                 "mobile"     => $request->mobile, 
+                                 "email"      => $request->email, 
+                         ); 
                  $Register  = Clientregistration::create($RegisterArray['params']);
-                //  $file->move($location,$filename);
-                //  $filepath = url('resourcefiles/'.$filename);
-    
+                
                 if(!is_null($Register)){ 
     
                     return response()->json(["status" => $this->status, "success" => true, 
@@ -86,11 +80,89 @@ class ClientregistrationController extends Controller
             }      
         }
     
+
+        public function Clientregistrationuploadfile(Request $request){
+          
+        $getid = Clientregistration::latest('id')->first(); 
+        $id = $getid->id;
+        $validator    =  Validator::make($request->all(), 
+            [     
+             "File"  => "required", 
+            ]
+         
+        );
+           if($validator->fails()) {
+            return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
+            }
+           $file = $request->file('File'); 
+           $filename = $file->getClientOriginalName();
+           $extension = $file->getClientOriginalExtension();
+           $location = 'resourcefiles';
+
+            $Registerfile = Clientregistration::where('id',$id)
+            ->update([
+                "fileAttachment"   =>$file->getClientOriginalName()
+            ]);;
+            $file->move($location,$filename);
+            $filepath = url('resourcefiles/'.$filename);
+
+                if(!is_null($Registerfile)){ 
+
+                    return response()->json(["status" => $this->status, "success" => true, 
+                            "message" => "Registered  successfully", "data" => $Registerfile]);
+                }    
+                else {
+                    return response()->json(["status" => "failed", "success" => false,
+                                "message" => "Whoops! failed to create."]);
+                }   
+          
+        }
+        public function Clientregistrationuploadfileid($id,Request $request){
+          
+            // $getid = Clientregistration::latest('id')->first(); 
+            // $id = $getid->id;
+            $validator    =  Validator::make($request->all(), 
+                [     
+                 "File"  => "required", 
+                ]
+             
+            );
+               if($validator->fails()) {
+                return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
+                }
+               $file = $request->file('File'); 
+               $filename = $file->getClientOriginalName();
+               $extension = $file->getClientOriginalExtension();
+               $location = 'resourcefiles';
+               
+                $Registerfile = Clientregistration::where('id',$id)
+                ->update([
+                    "fileAttachment"   =>$file->getClientOriginalName()
+                ]);;
+                $file->move($location,$filename);
+                $filepath = url('resourcefiles/'.$filename);
+    
+                    if(!is_null($Registerfile)){ 
+    
+                        return response()->json(["status" => $this->status, "success" => true, 
+                                "message" => "Registered  successfully", "data" => $Registerfile]);
+                    }    
+                    else {
+                        return response()->json(["status" => "failed", "success" => false,
+                                    "message" => "Whoops! failed to create."]);
+                    }   
+              
+            }
         // list value
     
         public function ClientregistrationList() {
     
-        $ClientregistrationAll = Clientregistration::all();
+            $ClientregistrationAll = DB::table('client_registrations as cr')
+            ->select('cr.*','co.congregation','pr.province')
+            ->leftjoin('congregation as co','co.id','cr.congregation')
+            ->leftjoin('provinces as pr','pr.id','cr.province')
+            ->get();
+
             if(count($ClientregistrationAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ClientregistrationAll), "data" => $ClientregistrationAll]);
@@ -108,6 +180,7 @@ class ClientregistrationController extends Controller
                 ["status" => $this->status, "success" => true, 
                 "message" => " Province deleted  successfully"]);
         }
+
         public function ClientregistrationEdit($id){
            
             $Congregationedit = Clientregistration::where('id',$id)->get();
@@ -119,29 +192,34 @@ class ClientregistrationController extends Controller
                 return response()->json(["status" => "failed",
                 "success" => false, "message" => "Whoops! no record found"]);
             }
-        }public function Clientregistrationupdate($id,Request $request){
+
+        }
+        
+        public function Clientregistrationupdate($id,Request $request){
            
             $Congregationupdate = Clientregistration::where('id',$id)
             ->update([
-                "Congregation" => $request->Congregation,
-                "Province" => $request->Province,
-                "Name" => $request->Name,
-                "Place" => $request->Place,
-                "ClientType" => $request->ClientType,
-                "FinancialYear" => $request->FinancialYear,
-                "ClientCode"   => $request->ClientCode, 
-                "DateofJoining"   => $request->DateofJoining, 
-                "DateofContractSigning" => $request->DateofContractSigning, 
-                "AMCDate"   => $request->AMCDate, 
-                "ProjectValue"   => $request->ProjectValue, 
-                "AMCvalue"   => $request->AMCvalue, 
-                "ProjectStatus"   => $request->ProjectStatus,
-                "Address1" => $request->Address1,
-                "state" => $request->state,
-                "Address2" => $request->Address2,
-                "Postcode" => $request->Postcode,
-                "City"   => $request->City,
-                "country"   => $request->country 
+                "congregation"   => $request->congregation,
+                    "province"   => $request->province,
+                    "name"       => $request->name,
+                    "place"      => $request->place,
+                    "clientType" => $request->clientType,
+                "financialyear"  => $request->financialyear,
+                    "clientcode" => $request->clientcode, 
+                "dateofjoining"  => $request->dateofjoining, 
+        "dateofcontractsigning"  => $request->dateofcontractsigning, 
+                    "amcDate"    => $request->amcDate, 
+                "projectValue"  => $request->projectValue, 
+                    "amcvalue"   => $request->amcvalue, 
+                "projectStatus"  => $request->projectStatus,
+                    "address1"   => $request->address1,
+                    "state"      => $request->state,
+                    "address2"   => $request->address2,
+                    "postcode"   => $request->postcode,
+                    "city"       => $request->city,
+                    "country"    => $request->country,
+                    "mobile"     => $request->mobile, 
+                    "email"      => $request->email, 
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 

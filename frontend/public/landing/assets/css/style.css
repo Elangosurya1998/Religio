@@ -21,7 +21,7 @@
 }
 
 .theme-bg {
-	background: #8f1bdc
+	background: #20a3e7
 }
 
 .brand-bg {
@@ -41,7 +41,7 @@
 }
 
 .theme-color {
-	color: #8f1bdc
+	color: #20a3e7
 }
 
 .boxed-btn {
@@ -53,18 +53,18 @@
 	font-size: 14px;
 	font-weight: 400;
 	border: 0;
-	border: 1px solid #8f1bdc;
+	border: 1px solid #20a3e7;
 	letter-spacing: 3px;
 	text-align: center;
-	color: #8f1bdc;
+	color: #20a3e7;
 	text-transform: uppercase;
 	cursor: pointer
 }
 
 .boxed-btn:hover {
-	background: #8f1bdc;
+	background: #20a3e7;
 	color: #fff !important;
-	border: 1px solid #8f1bdc
+	border: 1px solid #20a3e7
 }
 
 .boxed-btn:focus {
@@ -440,7 +440,7 @@ hr {
 }
 
 .header-btn {
-	background: #4043bc;
+	background: #20a3e7;
 	padding: 20px 11px;
 	min-width: 120px;
 	position: relative
@@ -451,7 +451,7 @@ hr {
 }
 
 .card-btn1 {
-	background: #712fda;
+	background: #20a3e7;
 	border-radius: 6px;
 	padding: 30px 40px;
 	text-transform: uppercase
@@ -475,11 +475,11 @@ hr {
 .border-btn {
 	background: none;
 	-moz-user-select: none;
-	border: 2px solid #8f1bdc;
+	border: 2px solid #20a3e7;
 	padding: 18px 38px;
 	margin: 10px;
 	text-transform: capitalize;
-	color: #8f1bdc;
+	color: #20a3e7;
 	cursor: pointer;
 	display: inline-block;
 	font-size: 14px;
@@ -502,7 +502,7 @@ hr {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: #8f1bdc;
+	background: #20a3e7;
 	z-index: -1;
 	transition: transform 0.5s;
 	transition-timing-function: ease;
@@ -521,7 +521,7 @@ hr {
 }
 
 .send-btn {
-	background: #8f1bdc;
+	background: #20a3e7;
 	color: #fff;
 	font-size: 14px;
 	width: 100%;
@@ -544,7 +544,7 @@ hr {
 	width: 100%;
 	height: 100%;
 	background: #e6373d;
-	color: #8f1bdc;
+	color: #20a3e7;
 	z-index: -1;
 	transition: transform 0.5s;
 	transition-timing-function: ease;
@@ -564,7 +564,7 @@ hr {
 }
 
 #scrollUp {
-	background: #8f1bdc;
+	background: #20a3e7;
 	height: 50px;
 	width: 50px;
 	right: 31px;
@@ -1987,7 +1987,7 @@ hr {
 	position: relative;
 	border-style: solid;
 	border-width: 3px;
-	border-top-color: #8f1bdc;
+	border-top-color: #20a3e7;
 	border-bottom-color: transparent;
 	border-left-color: transparent;
 	border-right-color: transparent;
@@ -2072,28 +2072,28 @@ hr {
 }
 
 .section-padding2 {
-	padding-top: 150px;
-	padding-bottom: 150px
+	padding-top: 100px;
+	padding-bottom: 100px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.section-padding2 {
-		padding-top: 150px;
-		padding-bottom: 150px
+		padding-top: 100px;
+		padding-bottom: 100px
 	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.section-padding2 {
-		padding-top: 150px;
-		padding-bottom: 150px
+		padding-top: 100px;
+		padding-bottom: 100px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.section-padding2 {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 80px;
+		padding-bottom: 80px
 	}
 }
 
@@ -2266,14 +2266,14 @@ hr {
 }
 
 .section-padd4 {
-	padding-top: 200px;
-	padding-bottom: 110px
+	padding-top: 100px;
+	padding-bottom: 100px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.section-padd4 {
-		padding-top: 200px;
-		padding-bottom: 110px
+		padding-top: 100px;
+		padding-bottom: 100px
 	}
 }
 
@@ -2386,28 +2386,28 @@ hr {
 }
 
 .footer-padding {
-	padding-top: 200px;
-	padding-bottom: 100px
+	padding-top: 100px;
+	padding-bottom: 40px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.footer-padding {
-		padding-top: 200px;
-		padding-bottom: 100px
+		padding-top: 100px;
+		padding-bottom: 40px
 	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.footer-padding {
 		padding-top: 70px;
-		padding-bottom: 50px
+		padding-bottom: 30px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.footer-padding {
 		padding-top: 70px;
-		padding-bottom: 50px
+		padding-bottom: 30px
 	}
 }
 
@@ -2555,7 +2555,7 @@ hr {
 
 .blog_area a:hover,
 .blog_area a :hover {
-	background: -webkit-linear-gradient(131deg, #8f1bdc 0%, #8f1bdc 99%);
+	background: -webkit-linear-gradient(131deg, #20a3e7 0%, #20a3e7 99%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	text-decoration: none;
@@ -4137,15 +4137,15 @@ hr {
 }
 
 .best-pricing::before {
-	background-image: -moz-linear-gradient(0deg, #f9218d 0%, #6c19f6 100%);
-	background-image: -webkit-linear-gradient(0deg, #f9218d 0%, #6c19f6 100%);
-	background-image: -ms-linear-gradient(0deg, #f9218d 0%, #6c19f6 100%)
+	background-image: -moz-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%);
+	background-image: -webkit-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%);
+	background-image: -ms-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%)
 }
 
 .available-app-area {
-	background-image: -moz-linear-gradient(0deg, #6c19f6 0%, #f9218d 100%);
-	background-image: -webkit-linear-gradient(0deg, #6c19f6 0%, #f9218d 100%);
-	background-image: -ms-linear-gradient(0deg, #6c19f6 0%, #f9218d 100%)
+	background-image: -moz-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%);
+	background-image: -webkit-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%);
+	background-image: -ms-linear-gradient(0deg, #20a3e7 0%, #20a3e7 100%)
 }
 
 .sample-text-area {
@@ -5302,7 +5302,7 @@ del {
 }
 
 .main-header .main-menu ul li>a {
-	color: #450b78;
+	color: #0483d0;
 	font-weight: 600 !important;
 	padding: 39px 16px;
 	display: block;
@@ -5325,7 +5325,7 @@ del {
 	content: "";
 	left: 0;
 	bottom: 20px;
-	background: #a60dcf;
+	background: #ff8001;
 	height: 2px;
 	width: 0;
 	transition: .3s
@@ -5489,7 +5489,7 @@ del {
 }
 
 .slider-padding {
-	padding-top: 130px
+	padding-top: 100px
 }
 
 @media (max-width: 767px) {
@@ -5705,9 +5705,9 @@ z .slider-area .hero-cap h2 {
 	line-height: 67px;
 	border-radius: 50%;
 	text-align: center;
-	background-image: -moz-linear-gradient(90deg, #e78ae9 0%, #926ef8 100%);
-	background-image: -webkit-linear-gradient(90deg, #e78ae9 0%, #926ef8 100%);
-	background-image: -ms-linear-gradient(90deg, #e78ae9 0%, #926ef8 100%)
+	background-image: -moz-linear-gradient(90deg, #fbae9b 0%, #ff8b1d 100%);
+	background-image: -webkit-linear-gradient(90deg, #fbae9b 0%, #ff8b1d 100%);
+	background-image: -ms-linear-gradient(90deg, #fbae9b 0%, #ff8b1d 100%);
 }
 
 .best-features-area .single-features .features-caption {
@@ -5873,7 +5873,7 @@ z .slider-area .hero-cap h2 {
 	line-height: 105px;
 	border-radius: 50%;
 	text-align: center;
-	background: #e88cea;
+	background: #ff8b1d;
 	margin-bottom: 42px;
 	-webkit-transition: .5s;
 	-moz-transition: .5s;
@@ -5890,11 +5890,11 @@ z .slider-area .hero-cap h2 {
 }
 
 .service-area .services-caption .service-cap h4 a:hover {
-	color: #835ef8
+	color: #2b044d
 }
 
 .services-caption:hover {
-	border: 1px solid #b8a2ff
+	border: 1px solid #ff8b1d
 }
 
 .services-caption:hover .service-icon::before {
@@ -5902,7 +5902,7 @@ z .slider-area .hero-cap h2 {
 }
 
 .services-caption:hover .service-icon span {
-	background: #835ef8
+	background: #20a3e7
 }
 
 .services-caption.active {
@@ -6792,7 +6792,9 @@ z .slider-area .hero-cap h2 {
 
 .footer-area .footer-pera .info1 {
 	margin-bottom: 10px;
-	line-height: 1.8
+    line-height: 1.8;
+    text-align: justify;
+	font-size: 0.8375rem !important;
 }
 
 .footer-area .footer-pera .info2 {
@@ -6807,7 +6809,8 @@ z .slider-area .hero-cap h2 {
 .footer-area .footer-tittle h4 {
 	color: #000;
 	font-size: 18px;
-	margin-bottom: 48px;
+	margin-bottom: 25px;
+	margin-top: 37px;
 	font-weight: 700
 }
 
@@ -6822,7 +6825,7 @@ z .slider-area .hero-cap h2 {
 }
 
 .footer-area .footer-tittle ul li a:hover {
-	color: #8f1bdc;
+	color: #20a3e7;
 	padding-left: 5px
 }
 
@@ -6902,11 +6905,11 @@ z .slider-area .hero-cap h2 {
 }
 
 .footer-area .footer-copy-right p a:hover {
-	color: #8f1bdc
+	color: #20a3e7
 }
 
 .footer-social a:hover {
-	background: #8f1bdc
+	background: #20a3e7
 }
 
 .footer-social a:hover i {
@@ -6986,6 +6989,18 @@ ul {
 	background: linear-gradient(to right, #da8cff, #9a55ff);
 	color: #ffffff;
 }
+.section-tittle h2.ourvision{
+	font-size: 39px !important;
+}
+
+.section-tittle h2{
+	color: #20a3e7;
+}
+
+h2.sectiontitle{
+	color: #000 !important;
+}
+
 
 
 @keyframes animatedImage {

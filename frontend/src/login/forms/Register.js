@@ -36,16 +36,25 @@ function Register() {
 
   function onSubmitRegisterform(data) {
     axios.post('http://127.0.0.1:8000/api/Register', data)
-      .then(Response => console.log(Response))
-    Swal.fire({
-      text: 'Registered successfully',
-      icon: 'success',
-      confirmButtonColor: 'green'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate('/Religio/Dashboard');
-      }
-    })
+
+      .then((Response) =>{
+        Swal.fire({
+          text: 'Registered successfully',
+          icon: 'success',
+          confirmButtonColor: 'green'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate('/login');
+          }
+        })
+      }).catch((err)=>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err.message
+        })
+      })
   }
 
   return (
