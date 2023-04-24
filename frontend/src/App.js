@@ -14,7 +14,8 @@ import CongaddLayouts from './dashboard/Congregationaddlayout';
 import ProlistLayouts from './dashboard/Provincelistlayout';
 import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
-import PrivateRoutes from "./login/forms/private";
+import PrivateRoutes, { UserPrivate } from "./login/forms/private";
+import User from './login/forms/User';
 
 import ProjectstatusLayouts from './dashboard/projectstatuslayout';
 import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
@@ -29,9 +30,11 @@ function App() {
         <Route exact path="/" element={<Layoutsland />} />
         <Route exact path="/Religio/Demo" element={<Layoutsdemo />} />
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
+        <Route element={<UserPrivate />}>
+          <Route path='/UserPage' element={<User />}></Route>
+        </Route>
         <Route element={<PrivateRoutes />}>
-
+          <Route path='/register' element={<Register />}></Route>
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />}></Route>
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />} />
           <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
@@ -43,13 +46,11 @@ function App() {
           <Route exact path="/Religio/Province" element={<ProlistLayouts />} />
           <Route exact path="/Religio/ProvinceEdit/:id" element={<ProeditLayouts />} />
           <Route exact path="/Religio/ProvinceAdd" element={<ProaddLayouts />} />
-
           <Route exact path="/Religio/ProjectstatusLayouts" element={<ProjectstatusLayouts />} />
           <Route exact path="/Religio/ProjectstatusAdd" element={< ProjectstatusaddLayouts />} />
           <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts />} />
           <Route exact path="/Religio/PaymentStatus" element={<PaymentlistFile />} />
           <Route exact path="/Religio/PaymentCreate" element={<PaymentCreateFile />} />
-
         </Route>
       </Routes>
     </BrowserRouter>

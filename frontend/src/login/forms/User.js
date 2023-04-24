@@ -1,14 +1,12 @@
-import Navbar from "./includes/Navbar";
-import Sidemenubar from "./includes/Sidemenubar";
-import Main from "./includes/Main";
-import Footer from "./includes/Footer";
 import $ from 'jquery';
-import "./scss/style.scss";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../../dashboard/includes/Navbar';
+import Sidemenubar from '../../dashboard/includes/Sidemenubar';
+import Footer from '../../dashboard/includes/Footer';
 
 
 
-function DashLayouts() {
+function User() {
     var autoLogoutTimer;
     resetTimer();
     $(document).on('mouseover mousedown touchstart click keydown mousewheel DDMouseScroll wheel scroll',document,function(e){
@@ -35,7 +33,7 @@ function DashLayouts() {
             <div className="container-fluid page-body-wrapper">
             <Sidemenubar />
                 <div className="main-panel">
-                    <Main />
+                   
                     <Footer/>
                 </div>
             </div>
@@ -43,4 +41,4 @@ function DashLayouts() {
     );
 }
 
-export default DashLayouts;
+export default User;
