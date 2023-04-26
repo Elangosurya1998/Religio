@@ -1,9 +1,10 @@
 import { Route } from 'react-router'
-import { BrowserRouter,Routes } from "react-router-dom";
+import { BrowserRouter, Routes } from "react-router-dom";
 import Login from "./login/forms/Login";
 import Register from "./login/forms/Register";
 import DashLayouts from "./dashboard/Layoutsdash";
 import Layoutsland from "./landing/Layoutsland";
+import Layoutsdemo from "./landing/Demolayout";
 import RegLayouts from './dashboard/registerationlayout';
 import RegeditLayouts from './dashboard/ClientregistrationEdit';
 import RegaddLayouts from './dashboard/ClientregistrationAdd';
@@ -13,7 +14,8 @@ import CongaddLayouts from './dashboard/Congregationaddlayout';
 import ProlistLayouts from './dashboard/Provincelistlayout';
 import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
-import PrivateRoutes from "./login/forms/private";
+import PrivateRoutes, { UserPrivate } from "./login/forms/private";
+import User from './login/forms/User';
 
 import ProjectstatusLayouts from './dashboard/projectstatuslayout';
 import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
@@ -26,10 +28,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Layoutsland/>}/>
+        <Route exact path="/" element={<Layoutsland />} />
+        <Route exact path="/Religio/Demo" element={<Layoutsdemo />} />
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
+        <Route element={<UserPrivate />}>
+          <Route path='/UserPage' element={<User />}></Route>
+        </Route>
         <Route element={<PrivateRoutes />}>
+
           <Route exact path="/Religio/Dashboard" element={<DashLayouts/>}></Route>
           <Route exact path="/Religio/Dashboard" element={<DashLayouts/>}/>
           <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />}/>

@@ -3,7 +3,7 @@ function Footer() {
   return (
     <footer>
       {/* Footer Start*/}
-      <div className="footer-main sky-blue">
+      <div className="footer-main ">
         <div className="footer-area footer-padding">
           <div className="container">
             <div className="row  justify-content-between">
@@ -11,7 +11,7 @@ function Footer() {
                 <div className="single-footer-caption mb-30">
                   {/* logo */}
                   <div className="footer-logo">
-                    <a href=""><img src="./logo.png" alt="" /></a>
+                    <a href=""><img src="/logo.png" alt="" /></a>
                   </div>
                   <div className="footer-tittle">
                     <div className="footer-pera">

@@ -21,6 +21,7 @@ class RegisterController extends Controller
              $user->email=$req->input('email');
              $user->password=Hash::make($req->input('password'));
              $user->confirmpassword=Hash::make($req->input('confirmpassword'));
+             $user->role=$req->input('role');
              $user->save();
        }  
                
@@ -29,16 +30,20 @@ class RegisterController extends Controller
     public function Login(Request $req)
     {
        $user = User::where('email',$req->email)->first();
-
+ 
+       $role = $user->role;
        if(!$user || !Hash::check($req->password,$user->password))
        {
             return["loginVal"=>"error"];
        }else{
-            return ["loginVal"=>"true"]; 
+            return ["loginVal"=> "true",
+               "role"=>$role
+          ]; 
        }
 
        return $user; 
     }
+
 
 }  
 
