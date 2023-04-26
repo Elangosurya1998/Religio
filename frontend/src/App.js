@@ -42,14 +42,14 @@ function App() {
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />}></Route>
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />} />
           <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
-          <Route exact path="/Religio/ClientregistrationEdit/:id" element={<RegeditLayouts />} />
-          <Route exact path="/Religio/RegistrationAdd" element={<RegaddLayouts />} />
+          <Route exact path="/Religio/Clientregistration/Edit/:id" element={<RegeditLayouts />} />
+          <Route exact path="/Religio/Clientregistration/Add" element={<RegaddLayouts />} />
           <Route exact path="/Religio/Congregation" element={<ConglistLayouts />} />
-          <Route exact path="/Religio/CongregationEdit/:id" element={<CongeditLayouts />} />
-          <Route exact path="/Religio/CongregationAdd" element={<CongaddLayouts />} />
+          <Route exact path="/Religio/Congregation/Edit/:id" element={<CongeditLayouts />} />
+          <Route exact path="/Religio/Congregation/Add" element={<CongaddLayouts />} />
           <Route exact path="/Religio/Province" element={<ProlistLayouts />} />
-          <Route exact path="/Religio/ProvinceEdit/:id" element={<ProeditLayouts />} />
-          <Route exact path="/Religio/ProvinceAdd" element={<ProaddLayouts />} />
+          <Route exact path="/Religio/Province/Edit/:id" element={<ProeditLayouts />} />
+          <Route exact path="/Religio/Province/Add" element={<ProaddLayouts />} />
           <Route exact path="/Religio/ProjectstatusLayouts" element={<ProjectstatusLayouts />} />
           <Route exact path="/Religio/ProjectstatusAdd" element={< ProjectstatusaddLayouts />} />
           <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts />} />
