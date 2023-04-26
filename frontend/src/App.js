@@ -1,12 +1,11 @@
 import { Route } from 'react-router'
 import { BrowserRouter, Routes } from "react-router-dom";
-import ScrollToTop from "./landing/ScrollToTop";
 import Login from "./login/forms/Login";
 import Register from "./login/forms/Register";
 import DashLayouts from "./dashboard/Layoutsdash";
 import Layoutsland from "./landing/Layoutsland";
+import Layoutsblog from "./landing/Bloglayout";
 import Layoutsdemo from "./landing/Demolayout";
-import Layoutblog from "./landing/Bloglayout";
 import RegLayouts from './dashboard/registerationlayout';
 import RegeditLayouts from './dashboard/ClientregistrationEdit';
 import RegaddLayouts from './dashboard/ClientregistrationAdd';
@@ -24,24 +23,23 @@ import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
 import PaymentlistFile from './dashboard/PaymentlistFile';
 import PaymentCreateFile from './dashboard/PaymentCreateFile';
-import PaymentEditFile from './dashboard/PaymentEditFile';
 
 function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <Routes>
+
         <Route exact path="/" element={<Layoutsland />} />
         <Route exact path="/Religio/Demo" element={<Layoutsdemo />} />
-        <Route exact path="/Religio/Blog" element={<Layoutblog />} />
+        <Route exact path="/Religio/Blog" element={<Layoutsblog />} />
 
         <Route path='/login' element={<Login />}></Route>
         <Route element={<UserPrivate />}>
           <Route path='/UserPage' element={<User />}></Route>
         </Route>
         <Route element={<PrivateRoutes />}>
-          <Route path='/register' element={<Register />} />
-          <Route exact path="/Religio/Dashboard" element={<DashLayouts />} />
+          <Route path='/register' element={<Register />}></Route>
+          <Route exact path="/Religio/Dashboard" element={<DashLayouts />}></Route>
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />} />
           <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
           <Route exact path="/Religio/ClientregistrationEdit/:id" element={<RegeditLayouts />} />
