@@ -20,6 +20,7 @@ import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
 import PaymentlistFile from './dashboard/PaymentlistFile';
 import PaymentCreateFile from './dashboard/PaymentCreateFile';
+import PaymentEditFile from './dashboard/PaymentEditFile';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts/>}/>
           <Route exact path="/Religio/PaymentStatus" element={<PaymentlistFile/>} />
           <Route exact path="/Religio/PaymentCreate" element={<PaymentCreateFile/>} />
+          <Route exact path="/Religio/PaymentEdit/:id" element={<PaymentEditFile />} />
         </Route> 
       </Routes>
     </BrowserRouter>
