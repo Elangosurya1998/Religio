@@ -35,7 +35,7 @@ useEffect(() => {
 const [ register, SetClientregister ] = useState([]);
 const navigate = useNavigate();
  const EditClientregistration =async (e,id)=>{
-  navigate("/Religio/ClientregistrationEdit/" + id);
+  navigate("/Religio/Clientregistration/Edit/" + id);
  }
 const deleteregister = async (e,id) =>{
  
@@ -89,7 +89,7 @@ const deleteregister = async (e,id) =>{
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/RegistrationAdd" className="btn btn-gradient-light">Add</Link>
+              <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
             <br></br>

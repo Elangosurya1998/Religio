@@ -55,6 +55,9 @@ class ClientregistrationController extends Controller
                              "dateofjoining"  => $request->dateofjoining, 
                      "dateofcontractsigning"  => $request->dateofcontractsigning, 
                                  "amcDate"    => $request->amcDate, 
+                                 "website"    => $request->website, 
+                                 "app"        => $request->app, 
+                          "webapplication"    => $request->webapplication, 
                               "projectValue"  => $request->projectValue, 
                                  "amcvalue"   => $request->amcvalue, 
                              "projectStatus"  => $request->projectStatus,
@@ -197,6 +200,29 @@ class ClientregistrationController extends Controller
         
         public function Clientregistrationupdate($id,Request $request){
            
+
+            
+     $Website = $request->website;
+    $WebApplication = $request->webapplication;
+    $WebApp = $request->app;
+             if($Website != 1){
+                $websitedata = null;
+             }else{
+                $websitedata =$Website;
+             }
+            
+             if($WebApplication != 1){
+                $WebApplicationdata = null;
+             }else{
+                $WebApplicationdata =$WebApplication;
+             }  
+             
+             if($WebApp != 1){
+                $WebAppdata = null;
+             }else{
+                $WebAppdata =$WebApp;
+             }
+            //  dd($websitedata);
             $Congregationupdate = Clientregistration::where('id',$id)
             ->update([
                 "congregation"   => $request->congregation,
@@ -220,7 +246,11 @@ class ClientregistrationController extends Controller
                     "country"    => $request->country,
                     "mobile"     => $request->mobile, 
                     "email"      => $request->email, 
+                    "website"    => $websitedata, 
+                    "app"        => $WebAppdata, 
+             "webapplication"    => $WebApplicationdata, 
             ]);
+
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);

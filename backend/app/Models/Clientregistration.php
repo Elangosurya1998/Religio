@@ -23,11 +23,18 @@ class Clientregistration extends Model
         'pi',
         'projectvalue',
         'amcvalue',
-        'gst',
-        'amcvalue',
-        'total',
-        'paid',
-        'balance',
-        'status'
+        'projectStatus',
+        'fileAttachment',
+        'address1',
+        'state',
+        'address2',
+        'postcode',
+        'city',
+        'country',
+        'mobile',
+        'email',
+        'website', 
+        'app',      
+    'webapplication'  
     ];
 }
