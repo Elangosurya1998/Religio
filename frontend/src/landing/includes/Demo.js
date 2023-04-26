@@ -31,6 +31,11 @@ function Demo() {
                   </div>
                 </div>
               </div>
+              {/* Shape */}
+              <div className="app-shape say-shape">
+                <img src="/landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
+                <img src="/landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
+              </div>
               {/* Section caption */}
               <div className="row d-flex justify-content-between">
                 <div className="col-xl-12 col-lg-12">
@@ -43,11 +48,6 @@ function Demo() {
                   </div>
                 </div>
               </div>
-            </div>
-            {/* Shape */}
-            <div className="app-shape say-shape">
-              <img src="/landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
-              <img src="/landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
             </div>
           </div>
           {/* Available App End*/}
@@ -63,22 +63,22 @@ function Demo() {
                 <div className="row">
                   <div className="col-12">
                     <div className="form-group">
-                      <textarea className="form-control w-100" name="message" id="message" cols={30} rows={9} onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message" defaultValue={""} />
+                      <textarea className="form-control w-100" name="message" id="message" cols={30} rows={9} placeholder=" Enter Message" defaultValue={""} />
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <input className="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" placeholder="Enter your name" />
+                      <input className="form-control valid" name="name" id="name" type="text" placeholder="Enter your name" />
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <input className="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email" />
+                      <input className="form-control valid" name="email" id="email" type="email" placeholder="Email" />
                     </div>
                   </div>
                   <div className="col-12">
                     <div className="form-group">
-                      <input className="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject" />
+                      <input className="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject" />
                     </div>
                   </div>
                 </div>

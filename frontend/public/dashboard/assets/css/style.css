@@ -5724,6 +5724,10 @@ textarea.form-control-lg {
 .card-text:last-child {
   margin-bottom: 0; }
 
+h6.card-text {
+  color: #fff;
+}
+
 .card-link + .card-link {
   margin-left: 1rem; }
 
@@ -8237,7 +8241,9 @@ textarea.form-control-lg {
   margin-bottom: 1.5rem !important; }
 
 .mb-5 {
-  margin-bottom: 3rem !important; }
+  margin-bottom: 3rem !important;
+  color: #fff;
+ }
 
 .mb-auto {
   margin-bottom: auto !important; }
@@ -11417,7 +11423,9 @@ code {
   font-family: "ubuntu-bold", sans-serif; }
 
 .font-weight-normal {
-  font-family: "ubuntu-regular", sans-serif; }
+  font-family: "ubuntu-regular", sans-serif; 
+  color: #fff !important;
+}
 
 .image-grouped {
   display: -webkit-box;
@@ -14451,6 +14459,8 @@ dl {
     background: linear-gradient(to right, #da8cff, #9a55ff) !important;
     color: #ffffff !important;
   }
+
+  
   
 
 /*# sourceMappingURL=style.css.map */

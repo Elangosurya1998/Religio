@@ -2,6 +2,7 @@
 import Dashboard from "../pages/Dashboard";
 
 function Main() {
+
     return (
       <>
 
