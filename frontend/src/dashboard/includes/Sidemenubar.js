@@ -1,13 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
 import React from 'react';
 
+function Capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+
 function Sidemenubar() {
 
   const { pathname } = useLocation();
 
-  const navitem = "nav-item";
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 
-  console.log(pathname);
+  const navitem = "nav-item";
 
   return (
     < nav className="sidebar sidebar-offcanvas" id="sidebar" >
@@ -20,8 +25,8 @@ function Sidemenubar() {
               {/*change to offline or busy as needed*/}
             </div>
             <div className="nav-profile-text d-flex flex-column">
-              <span className="font-weight-bold mb-2">David Grey. H</span>
-              <span className="text-secondary text-small">Project Manager</span>
+              <span className="font-weight-bold mb-2">{Capitalize(isLogedIn?.username)}</span>
+              <span className="text-secondary text-small">{Capitalize(isLogedIn?.role)}</span>
             </div>
             <i className="mdi mdi-bookmark-check text-success nav-profile-badge" />
           </a>
@@ -49,11 +54,6 @@ function Sidemenubar() {
             <span className="menu-title">Province</span>
             <i className="mdi mdi-account-plus menu-icon" /></Link>
         </li>
-        <li className={`${navitem} ${pathname == '/register' && 'active'}`}>
-          <Link to="/register" className="nav-link" >
-            <span className="menu-title">New User Registration</span>
-            <i className="mdi mdi-account-plus menu-icon" /></Link>
-        </li>
         <li className={`${navitem} ${pathname == '/Religio/ProjectstatusLayouts' && 'active'}`}>
           <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >
             <span className="menu-title">Project Status</span>
@@ -63,6 +63,11 @@ function Sidemenubar() {
           <Link to="/Religio/ClientRegistration" className="nav-link" >
             <span className="menu-title">Client Registration</span>
             <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
+        </li>
+        <li className="nav-item ">
+          <Link to="/Religio/UsersList" className="nav-link" >
+            <span className="menu-title">Manage Users</span>
+            <i className="mdi mdi-account-circle menu-icon" /></Link>
         </li>
         {/* <li className="nav-item">
           <a className="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">

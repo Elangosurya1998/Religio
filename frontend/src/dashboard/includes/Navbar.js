@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router";
 
+function Capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 function Navbar() {
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.removeItem("userDetails");
@@ -38,15 +41,17 @@ function Navbar() {
                 <span className="availability-status online" />
               </div>
               <div className="nav-profile-text">
-                <p className="mb-1 text-black">David Greymaax</p>
+                <p className="mb-1 text-black">{Capitalize(isLogedIn?.username)}</p>
               </div>
             </a>
             <div className="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
               <a className="dropdown-item" href="#">
                 <i className="mdi mdi-cached me-2 text-success" /> Activity Log </a>
               <div className="dropdown-divider" />
-              <a className="dropdown-item" href="#">
-                <i className="mdi mdi-logout me-2 text-primary" /> Signout </a>
+              <a className="dropdown-item" onClick={() => handleSignOut()} style={{ cursor: "pointer" }}>
+                <i className="mdi mdi-logout me-2 text-primary" />
+                Signout
+              </a>
             </div>
           </li>
           <li className="nav-item d-none d-lg-block full-screen-link">
@@ -142,11 +147,11 @@ function Navbar() {
               <h6 className="p-3 mb-0 text-center">See all notifications</h6>
             </div>
           </li>
-          <li className="nav-item nav-logout d-none d-lg-block">
+          {/* <li className="nav-item nav-logout d-none d-lg-block">
             <a className="nav-link" onClick={() => handleSignOut()} style={{ cursor: "pointer" }}>
               <i className="mdi mdi-power" />
             </a>
-          </li>
+          </li> */}
           <li className="nav-item nav-settings d-none d-lg-block">
             <a className="nav-link" href="#">
               <i className="mdi mdi-format-line-spacing" />
