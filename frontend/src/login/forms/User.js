@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from '../../dashboard/includes/Navbar';
 import Sidemenubar from '../../dashboard/includes/Sidemenubar';
 import Footer from '../../dashboard/includes/Footer';
+import Main from '../../dashboard/includes/Main';
 
 
 
@@ -26,14 +27,14 @@ function User() {
         window.location.href = '/login'; // Here goes to your logout url 
     }
 
-
+    const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
     return (
         <div className="container-scroller">
             <Navbar />
             <div className="container-fluid page-body-wrapper">
-            <Sidemenubar />
+            {isLogedIn?.role == "user" ? <Sidemenubar /> : ''}
                 <div className="main-panel">
-                   
+                <Main/>
                     <Footer/>
                 </div>
             </div>

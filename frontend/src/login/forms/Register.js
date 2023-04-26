@@ -34,9 +34,8 @@ function Register() {
   const { errors } = formState;
   const navigate = useNavigate();
 
-  function onSubmitRegisterform(data) {
+  function onSubmitform(data) {
     axios.post('http://127.0.0.1:8000/api/Register', data)
-
       .then((Response) =>{
         Swal.fire({
           text: 'Registered successfully',
@@ -44,7 +43,7 @@ function Register() {
           confirmButtonColor: 'green'
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate('/login');
+            navigate('/Religio/UsersList');
           }
         })
       }).catch((err)=>{
@@ -67,7 +66,7 @@ function Register() {
                 <div class="brand-logo">
                   <a href='/'><center><img src="./logo.png" style={{ width: "185px" }} /></center></a>
                 </div>
-                <form class="pt-3" onSubmit={handleSubmit(onSubmitRegisterform)} >
+                <form class="pt-3" onSubmit={handleSubmit(onSubmitform)} >
                   <div class="form-group">
                     <input name="username" placeholder='Enter Username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} />
                     <div className="invalid-feedback">{errors.username?.message}</div>

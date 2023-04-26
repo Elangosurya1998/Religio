@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 function Sidemenubar() {
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
     return (
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
             <ul className="nav">
@@ -12,8 +14,7 @@ function Sidemenubar() {
                     {/*change to offline or busy as needed*/}
                   </div>
                   <div className="nav-profile-text d-flex flex-column">
-                    <span className="font-weight-bold mb-2">David Grey. H</span>
-                    <span className="text-secondary text-small">Project Manager</span>
+                    <span className="font-weight-bold mb-2">{isLogedIn?.role == "admin" ? 'Admin' : 'User'}</span>
                   </div>
                   <i className="mdi mdi-bookmark-check text-success nav-profile-badge" />
                 </a>
@@ -23,13 +24,11 @@ function Sidemenubar() {
                    <span className="menu-title">Dashboard</span>
                   <i className="mdi mdi-home menu-icon" /></Link>
               </li>
-
               <li className="nav-item ">
                 <Link to="/Religio/PaymentStatus" className="nav-link" >
                   <span className="menu-title">Payment Status</span>
                   <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
-              </li>
-              
+              </li>            
               <li className="nav-item ">
                 <Link to="/Religio/Congregation" className="nav-link" >
                   <span className="menu-title">Congregation</span>
@@ -40,11 +39,11 @@ function Sidemenubar() {
                   <span className="menu-title">Province</span>
                   <i className="mdi mdi-account-plus menu-icon" /></Link>
               </li>
-              <li className="nav-item ">
+              {/* <li className="nav-item ">
                 <Link to="/register" className="nav-link" >
                   <span className="menu-title">New User Registration</span>
                   <i className="mdi mdi-account-plus menu-icon" /></Link>
-              </li>
+              </li> */}
               <li className="nav-item ">
                 <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >
                   <span className="menu-title">Project Status</span>
@@ -54,6 +53,11 @@ function Sidemenubar() {
                 <Link to="/Religio/ClientRegistration" className="nav-link" >
                   <span className="menu-title">Client Registration</span>
                   <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
+              </li>
+              <li className="nav-item ">
+                <Link to="/Religio/UsersList" className="nav-link" >
+                  <span className="menu-title">Manage Users</span>
+                  <i className="mdi mdi-account-circle menu-icon" /></Link>
               </li>
               {/* <li className="nav-item">
                 <a className="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">

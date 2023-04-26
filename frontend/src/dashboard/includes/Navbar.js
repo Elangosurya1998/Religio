@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 
+
 function Navbar() {
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
   const navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.removeItem("userDetails");
@@ -36,7 +38,7 @@ function Navbar() {
                     <span className="availability-status online" />
                   </div>
                   <div className="nav-profile-text">
-                    <p className="mb-1 text-black">David Greymaax</p>
+                 <p className="mb-1 text-black">{isLogedIn?.role == "admin" ? 'Admin' : 'User'}</p>
                   </div>
                 </a>
                 <div className="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
