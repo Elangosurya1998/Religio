@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 function Main() {
   return (
@@ -51,46 +52,46 @@ function Main() {
               {/* Section caption */}
               <div className="row">
                 <div className="col-xl-6 col-lg-6 col-md-6">
-                  <div className="single-features mb-70">
+                  <div className="single-features mb-30">
                     <div className="features-icon">
                       <span className="flaticon-costomize" />
                     </div>
                     <div className="features-caption">
                       <h3>Easy Member Update</h3>
-                      <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                      <p>Create & Maintain Member Profile (Education, Sacraments, Profession, Formation, Holy Order etc…).</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6 col-md-6">
-                  <div className="single-features mb-70">
+                  <div className="single-features mb-30">
                     <div className="features-icon">
-                      <span className="flaticon-transfer" />
+                      <span><i class="fas fa-exchange-alt"></i></span>
                     </div>
                     <div className="features-caption">
                       <h3>Transfers Made Easy</h3>
-                      <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                      <p>Transfer can be done in a single click.</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6 col-md-6">
-                  <div className="single-features mb-70">
+                  <div className="single-features mb-30">
                     <div className="features-icon">
                       <span><i className="fas fa-recycle"></i></span>
                     </div>
                     <div className="features-caption">
                       <h3>Circular Management</h3>
-                      <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                      <p>Circular’s sending them through our application.</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-6 col-lg-6 col-md-6">
-                  <div className="single-features mb-70">
+                  <div className="single-features mb-30">
                     <div className="features-icon">
                       <span><i className="fas fa-calendar"></i></span>
                     </div>
                     <div className="features-caption">
                       <h3>Calendar / Events</h3>
-                      <p>Aorem psum olorsit amet ectetur adipiscing elit, sed dov.</p>
+                      <p>Publishing Calendar Events sending them through our application.</p>
                     </div>
                   </div>
                 </div>
@@ -155,7 +156,7 @@ function Main() {
                 </div>
                 <div className="service-cap">
                   <h4><a href="#">Members Info Online</a></h4>
-                  <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                  <p>Maintain Member Profile (Education, Sacraments, Profession, Formation, Holy Order etc…). Member profile with more than 200 data points that can be viewed online or downloaded in PDF/Excel </p>
                 </div>
               </div>
             </div>
@@ -187,10 +188,9 @@ function Main() {
       {/* Services Area End */}
 
       {/* Applic App Start */}
-      <div className="applic-apps section-padding2" id="Gallery">
+      {/* <div className="applic-apps section-padding2" id="Gallery">
         <div className="container-fluid">
           <div className="row">
-            {/* slider Heading */}
             <div className="col-xl-4 col-lg-4 col-md-8">
               <div className="single-cases-info mb-30">
                 <h3>Application Apps<br /> Screenshot</h3>
@@ -204,7 +204,6 @@ function Main() {
                 </div>
               </div>
             </div>
-            {/* OwL */}
             <div className="col-xl-8 col-lg-8 col-md-7">
               <div className="app-active owl-carousel">
                 <div className="single-cases-img">
@@ -226,12 +225,12 @@ function Main() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Applic App End */}
 
 
       {/* Our Customer Start */}
-      <div className="our-customer sky-blue section-padd-top30">
+      <div className="our-customer  section-padd-top30">
         <div className="container-fluid">
           <div className="our-customer-wrapper">
             {/* Section Tittle */}
@@ -281,7 +280,7 @@ function Main() {
       {/* Our Customer End */}
 
       {/* Our Customer Start */}
-      <div className="our-customer section-padd-top30">
+      <div className="our-customer sky-blue section-padd-top30">
         <div className="container-fluid">
           <div className="our-customer-wrapper">
             {/* Section Tittle */}
@@ -373,147 +372,6 @@ function Main() {
                             <img src="./landing/assets/img/shape/man2.png" alt="" />
                           </div>
                         </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
                       </ul>
                     </div>
                   </div>
@@ -539,6 +397,49 @@ function Main() {
         </div>
       </div>
       {/* Our Customer End */}
+
+      {/* Available App  Start*/}
+      <div className="available-app-area" id="Demo">
+        <div className="container">
+          {/* Section Tittle */}
+          <div className="row d-flex justify-content-center">
+            <div className="col-lg-6">
+              <div className="section-tittle text-center">
+                <h2 className="sectiontitle">Get Connected!</h2>
+              </div>
+            </div>
+          </div>
+          {/* Section caption */}
+          <div className="row d-flex justify-content-between">
+            <div className="col-xl-12 col-lg-12">
+              <div className="app-caption">
+                <div className="section-tittle section-tittle3">
+                  <center>
+                    <h2 className="ourvision">Get started with Religio today</h2>
+                  </center>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Shape */}
+        <div className="app-shape say-shape">
+          <img src="./landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
+          <img src="./landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
+        </div>
+        <div className="row d-flex justify-content-between">
+          <div className="col-xl-12 col-lg-12">
+            <div className="app-caption">
+              <center>
+                <div class="button-group-area">
+                  <Link to="/Religio/Demo" class="genric-btn success radius"><i className="fas fa-shopping-cart"></i>&nbsp; Demo</Link>
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Available App End*/}
 
 
     </main>
