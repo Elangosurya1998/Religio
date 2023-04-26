@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 
+
 function Navbar() {
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
   const navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.removeItem("userDetails");

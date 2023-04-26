@@ -156,6 +156,8 @@ class ClientregistrationController extends Controller
                     }   
               
             }
+
+            
         // list value
     
         public function ClientregistrationList() {
@@ -175,6 +177,7 @@ class ClientregistrationController extends Controller
                 "success" => false, "message" => "Whoops! no record found"]);
             }
         }
+
 
         public function ClientregistrationDelete($id){
             $Congregationdel = Clientregistration::find($id);

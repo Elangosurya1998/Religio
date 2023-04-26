@@ -24,8 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Login & Registration
+
 Route::post('/Register',[RegisterController::class,'Register']);
 Route::post('/Login',[RegisterController::class,'Login']);
+
 
 // Congregation
 Route::post('/Religio/Congregation/store',[ReligioController::class, 'Congregation']);
@@ -60,8 +63,15 @@ Route::get('/projectstatusedit/{id}',[ProjectsController::class, 'projectEdit'])
 Route::put('/projectstatusupdate/{id}',[ProjectsController::class, 'projectupdate']);
 Route::delete('/projectstatusdelete/{id}',[ProjectsController::class, 'projectDelete']);
 
+// RegUsers
+Route::get('/Religio/UsersList',[RegisterController::class, 'UsersList']);
+Route::get('/Religio/UsersList/{id}',[RegisterController::class, 'UserEdit']);
+Route::put('/Religio/Userupdate/{id}',[RegisterController::class, 'Userupdate']);
+Route::delete('/Religio/UsersList/{id}',[RegisterController::class, 'UsersListDelete']);
+
 //Payment status
 
 Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentstore']);
 Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
+
