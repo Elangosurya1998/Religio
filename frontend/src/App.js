@@ -4,8 +4,6 @@ import Login from "./login/forms/Login";
 import Register from "./login/forms/Register";
 import DashLayouts from "./dashboard/Layoutsdash";
 import Layoutsland from "./landing/Layoutsland";
-import Layoutsblog from "./landing/Bloglayout";
-import Layoutsdemo from "./landing/Demolayout";
 import RegLayouts from './dashboard/registerationlayout';
 import RegeditLayouts from './dashboard/ClientregistrationEdit';
 import RegaddLayouts from './dashboard/ClientregistrationAdd';
@@ -22,6 +20,7 @@ import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
 import PaymentlistFile from './dashboard/PaymentlistFile';
 import PaymentCreateFile from './dashboard/PaymentCreateFile';
+import ScrolltoTop from "./landing/ScrollToTop";
 import UsersList from './dashboard/UsersList';
 import UsersListedit from './dashboard/UserListedit';
 import UserCreate from './dashboard/UserCreate';
@@ -29,11 +28,11 @@ import UserCreate from './dashboard/UserCreate';
 function App() {
   return (
     <BrowserRouter>
+      <ScrolltoTop />
       <Routes>
-
         <Route exact path="/" element={<Layoutsland />} />
-        <Route exact path="/Religio/Demo" element={<Layoutsdemo />} />
-        <Route exact path="/Religio/Blog" element={<Layoutsblog />} />
+        <Route exact path="/Religio/Demo" element={<Layoutsland />} />
+        <Route exact path="/Religio/Blog" element={<Layoutsland />} />
 
         <Route path='/login' element={<Login />}></Route>
         <Route element={<UserPrivate />}>
@@ -53,7 +52,7 @@ function App() {
           <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts />} />
         </Route>
         <Route element={<PrivateRoutes />}>
-          <Route path='/register' element={<Register />}></Route>
+          <Route path='/register' element={<Register />} />
           <Route exact path="/Religio/UserCreate" element={<UserCreate />} />
           <Route exact path="/Religio/UsersList" element={<UsersList />} />
           <Route exact path="/Religio/UserListEdit/:id" element={<UsersListedit />} />
