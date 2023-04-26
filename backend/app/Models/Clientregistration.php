@@ -34,7 +34,10 @@ class Clientregistration extends Model
         'city',
         'country',
         'mobile',
-        'email'
+        'email',
+        'website', 
+        'app',      
+    'webapplication'  
         
     ];
 }

@@ -60,7 +60,7 @@ function CongregationList(){
 
     const navigate = useNavigate();
     const EditCongregation =async (e,id)=>{
-      navigate("/Religio/CongregationEdit/" + id);
+      navigate("/Religio/Congregation/Edit/" + id);
     }
     return (
         <div className="content-wrapper">
@@ -89,7 +89,7 @@ function CongregationList(){
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/CongregationAdd" className="btn btn-gradient-light">Add</Link>
+              <Link to="/Religio/Congregation/Add" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
             <br></br>
