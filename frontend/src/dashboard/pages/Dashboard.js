@@ -1,4 +1,22 @@
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import ApiUrl from "./Api/Api";
+
 function Dashboard() {
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' }); 
+ 
+  function clienttype(event ) {
+    var id =event.target.value
+    alert(id);
+  //  axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
+  //  .then((response) => {
+    // SetProvince(response.data.data)
+  // }).catch((err)=>{
+    // console.log(err);
+  // })
+
+}
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -9,8 +27,17 @@ function Dashboard() {
         </h3>
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
+            
             <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
+            {/* <div className="form-group"> */}
+            <select className="form-control" id="clienttype" name="clienttype"{...register("clienttype",{onChange: clienttype })}>
+              <option value="">Select Client</option>
+                <option value="New Sales">New Sales</option>
+                <option value="AMC">AMC</option>
+                <option value="Outstanding">Outstanding</option>
+              
+            </select>
+            {/* </div> */}
             </li>
           </ul>
         </nav>
@@ -50,7 +77,42 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
+        <div className="col-md-4 stretch-card grid-margin">
+          <div className="card bg-gradient-danger card-img-holder text-white">
+            <div className="card-body">
+              <img src="/dashboard/assets/images/dashboard/circle.svg" className="card-img-absolute" alt="circle-image" />
+              <h4 className="font-weight-normal mb-3">Weekly Sales <i className="mdi mdi-chart-line mdi-24px float-right" />
+              </h4>
+              <h2 className="mb-5">$ 15,0000</h2>
+              <h6 className="card-text">Increased by 60%</h6>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4 stretch-card grid-margin">
+          <div className="card bg-gradient-info card-img-holder text-white">
+            <div className="card-body">
+              <img src="/dashboard/assets/images/dashboard/circle.svg" className="card-img-absolute" alt="circle-image" />
+              <h4 className="font-weight-normal mb-3">Weekly Orders <i className="mdi mdi-bookmark-outline mdi-24px float-right" />
+              </h4>
+              <h2 className="mb-5">45,6334</h2>
+              <h6 className="card-text">Decreased by 10%</h6>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4 stretch-card grid-margin">
+          <div className="card bg-gradient-success card-img-holder text-white">
+            <div className="card-body">
+              <img src="/dashboard/assets/images/dashboard/circle.svg" className="card-img-absolute" alt="circle-image" />
+              <h4 className="font-weight-normal mb-3">Visitors Online <i className="mdi mdi-diamond mdi-24px float-right" />
+              </h4>
+              <h2 className="mb-5">95,5741</h2>
+              <h6 className="card-text">Increased by 5%</h6>
+            </div>
+          </div>
+        </div>
+      </div> */}
+      {/* <div className="row">
         <div className="col-md-7 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
@@ -71,7 +133,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="row">
         <div className="col-12 grid-margin">
           <div className="card">
@@ -140,7 +202,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="col-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
@@ -178,8 +240,8 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
+      </div> */}
+      {/* <div className="row">
         <div className="col-md-7 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
@@ -318,7 +380,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

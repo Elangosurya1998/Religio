@@ -24,6 +24,7 @@ import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
 import PaymentlistFile from './dashboard/PaymentlistFile';
 import PaymentCreateFile from './dashboard/PaymentCreateFile';
+import PaymentEditFile from './dashboard/PaymentEditFile';
 
 function App() {
   return (

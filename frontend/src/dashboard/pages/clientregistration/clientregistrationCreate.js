@@ -118,7 +118,7 @@ function ClientRegistrationCreate() {
                             {  congre && congre.map(item => (
                           <option value={item.id}>{item.congregation  }</option>)) }
                               </select>
-                              {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Congregation</label></div>}
+                              {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Congregation</label></div>}
                           </div>
 
                         <div className="form-group col-md-6">
@@ -132,7 +132,7 @@ function ClientRegistrationCreate() {
                           <option value={item.id}>{item.province  }</option>))
                             }
                               </select>
-                              {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Province</label></div>}
+                              {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Province</label></div>}
 
                         </div>
                       </div>
@@ -154,7 +154,7 @@ function ClientRegistrationCreate() {
                                 <option value="Sisters">Sisters</option>
                                 <option value="LayBrothers">Lay Brothers</option>
                               </select>
-                              {errors?.clientType?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One ClientType</label></div>}
+                              {errors?.clientType?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select ClientType</label></div>}
                          </div>
                                <div className="form-group col-md-6">
                             <label>Place&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -175,11 +175,12 @@ function ClientRegistrationCreate() {
                       <div className="form-row">
                         <div className="form-group col-md-6">
                           <label>Financial Year&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="date" className="form-control" placeholder="YYYY" name="financialyear"
-                             {...register("financialyear", { required: true })}
+                           <input type="text" className="form-control" placeholder="YYYY-YYYY" name="financialyear"
+                             {...register("financialyear", { required: true,pattern:/^\d{4}-\d{4}$/ })}
                              aria-invalid={errors?.financialyear ? "true" : "false"}  />
-                             {errors?.financialyear?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Financial Year is required</label></div>}
-                            </div>
+                             {errors?.financialyear?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Place is required</label></div>}
+                            {errors?.financialyear?.type === 'pattern' && <div className='text-danger text_error'><label className="errlabel">Please enter following format YYYY-YYYY </label></div>}
+                        </div>
                         <div className="form-group col-md-6">
                           <label>Date of Joining&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="Date" className="form-control" name="dateofjoining" 
@@ -233,7 +234,7 @@ function ClientRegistrationCreate() {
                                 <option value="InProgress">InProgress</option>
                                 <option value="Notstrated">Not Started</option>
                               </select>
-                              {errors?.projectStatus?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One ClientType</label></div>}
+                              {errors?.projectStatus?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select ClientType</label></div>}
                             </div>
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -243,6 +244,24 @@ function ClientRegistrationCreate() {
                                {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
                             </div>
                       </div>   
+                      
+                      <div className="form-row">
+                      <div className="form-group col-md-3">
+                      <label className="form-group">Solutions :</label>
+                      </div>
+                      <div className="form-group col-md-3">
+                      <label>
+                      <input type="checkbox" className="form-check-input" name="webapplication" {...register("webapplication")}/> Web Application <i className="input-helper" /></label>
+                      </div>
+                      <div className="form-group col-md-3">
+                      <label>
+                      <input type="checkbox" className="form-check-input" name="app"  {...register("app")}/> Mobile Application <i className="input-helper" /></label>
+                      </div>
+                      <div className="form-group col-md-3">
+                      <label className="form-check-label">
+                      <input type="checkbox" className="form-check-input" name="website" {...register("website")}/> Website <i className="input-helper" /></label>
+                      </div>
+                      </div>
                       <div className="row"><b className="card-description"> Address </b></div>
                       <div className="form-row">
                         <div className="form-group col-md-6">
@@ -279,7 +298,7 @@ function ClientRegistrationCreate() {
                                     <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                                       }
                                   </select> 
-                                  {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Country</label></div>}
+                                  {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Country</label></div>}
                              </div>
                         </div>
                 <div className="form-row">
@@ -301,7 +320,7 @@ function ClientRegistrationCreate() {
                     <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                     }
                     </select>
-                    {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One State</label></div>}
+                    {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please select State</label></div>}
                  </div>
                    </div>
                    <div className="form-row">
