@@ -4,8 +4,6 @@ import Login from "./login/forms/Login";
 import Register from "./login/forms/Register";
 import DashLayouts from "./dashboard/Layoutsdash";
 import Layoutsland from "./landing/Layoutsland";
-import Layoutsblog from "./landing/Bloglayout";
-import Layoutsdemo from "./landing/Demolayout";
 import RegLayouts from './dashboard/registerationlayout';
 import RegeditLayouts from './dashboard/ClientregistrationEdit';
 import RegaddLayouts from './dashboard/ClientregistrationAdd';
@@ -23,23 +21,23 @@ import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';
 import PaymentlistFile from './dashboard/PaymentlistFile';
 import PaymentCreateFile from './dashboard/PaymentCreateFile';
+import ScrolltoTop from "./landing/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrolltoTop />
       <Routes>
-
         <Route exact path="/" element={<Layoutsland />} />
-        <Route exact path="/Religio/Demo" element={<Layoutsdemo />} />
-        <Route exact path="/Religio/Blog" element={<Layoutsblog />} />
+        <Route exact path="/Religio/Demo" element={<Layoutsland />} />
+        <Route exact path="/Religio/Blog" element={<Layoutsland />} />
 
         <Route path='/login' element={<Login />}></Route>
         <Route element={<UserPrivate />}>
           <Route path='/UserPage' element={<User />}></Route>
         </Route>
         <Route element={<PrivateRoutes />}>
-          <Route path='/register' element={<Register />}></Route>
-          <Route exact path="/Religio/Dashboard" element={<DashLayouts />}></Route>
+          <Route path='/register' element={<Register />} />
           <Route exact path="/Religio/Dashboard" element={<DashLayouts />} />
           <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
           <Route exact path="/Religio/Clientregistration/Edit/:id" element={<RegeditLayouts />} />

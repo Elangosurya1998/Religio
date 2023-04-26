@@ -24,8 +24,8 @@ function Header() {
                     <ul id="navigation">
 
                       <li ><Link to="/">Home</Link></li>
-                      <li ><Link to="#Feature">Feature</Link></li>
-                      <li ><Link to="#Services">Services</Link></li>
+                      <li ><Link to="/#Feature">Feature</Link></li>
+                      <li ><Link to="/#Services">Services</Link></li>
                       <li className={`${pathname == '/Religio/Blog' && 'active'}`}><Link to="/Religio/Blog">Blog</Link></li>
                       <li className={`${pathname == '/Religio/Demo' && 'active'}`}><Link to="/Religio/Demo">Demo</Link></li>
                       {/* <li><a href="#">Pages</a>
@@ -35,7 +35,7 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      <li><Link to="#Contact">Contact</Link></li>
+                      <li><Link to="/">Contact</Link></li>
                       {/* <li><Link to="/login">Login</Link></li> */}
                     </ul>
                   </nav>
