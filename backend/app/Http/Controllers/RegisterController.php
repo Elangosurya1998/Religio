@@ -31,18 +31,16 @@ class RegisterController extends Controller
     public function Login(Request $req)
     {
        $user = User::where('email',$req->email)->first();
- 
-       $role = $user->role;
+       
        if(!$user || !Hash::check($req->password,$user->password))
        {
             return["loginVal"=>"error"];
        }else{
-            return ["loginVal"=> "true",
-               "role"=>$role,
-          ]; 
+            return [ 
+                "loginVal" => "true",
+                "user" => $user,
+            ]; 
        }
-
-       return $user; 
     }
 
     public function UsersList() {

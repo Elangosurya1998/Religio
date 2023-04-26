@@ -28,20 +28,30 @@ function Login() {
   function onSubmitLoginform(data, e) {
     axios.post('http://127.0.0.1:8000/api/Login', data)
       .then(Response => {
+
         const Logindata = Response.data;
-        // console.log(Logindata.role);
+
         if (Logindata.loginVal == "true") {
-          localStorage.setItem("userDetails", JSON.stringify(Logindata));
+
+          localStorage.setItem("userDetails", JSON.stringify(Logindata.user));
+
           Swal.fire({
             title: 'Sign-in success',
             text: 'Logged in successfully',
             icon: 'success',
             confirmButtonColor: 'green'
           })
-          if (Logindata.role == "admin") {
+
+          const userData = Logindata.user;
+
+          if (userData.role == "admin") {
+
             navigate('/Religio/Dashboard');
+
           } else {
+
             navigate('/UserPage');
+
           }
 
         } else {
