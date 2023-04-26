@@ -1,6 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import React from 'react';
 
 function Header() {
+  const { pathname } = useLocation();
+
   return (
     <header>
       {/* Header Start */}
@@ -11,7 +14,7 @@ function Header() {
               {/* Logo */}
               <div className="col-xl-2 col-lg-2 col-md-2">
                 <div className="logo">
-                  <a href="/Religio/Dashboard"><img src="/logo.png" alt="" /></a>
+                  <a href="/login"><img src="/logo.png" alt="" /></a>
                 </div>
               </div>
               <div className="col-xl-10 col-lg-10 col-md-10">
@@ -20,13 +23,11 @@ function Header() {
                   <nav>
                     <ul id="navigation">
 
-                      <li><Link to="/">Home</Link></li>
-                      <li><Link to="/">Feature</Link></li>
-                      <li><Link to="/">Services</Link></li>
-                      <li><Link to="/">Blog</Link></li>
-                      <li>
-                        <Link to="/Religio/Demo">Demo</Link>
-                      </li>
+                      <li ><Link to="/">Home</Link></li>
+                      <li ><Link to="#Feature">Feature</Link></li>
+                      <li ><Link to="#Services">Services</Link></li>
+                      <li className={`${pathname == '/Religio/Blog' && 'active'}`}><Link to="/Religio/Blog">Blog</Link></li>
+                      <li className={`${pathname == '/Religio/Demo' && 'active'}`}><Link to="/Religio/Demo">Demo</Link></li>
                       {/* <li><a href="#">Pages</a>
                           <ul className="submenu">
                             <li><a href="">Blog</a></li>
@@ -34,17 +35,16 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      <li><Link to="/">Contact</Link></li>
-                      <li><Link to="/login">Login</Link></li>
+                      <li><Link to="#Contact">Contact</Link></li>
+                      {/* <li><Link to="/login">Login</Link></li> */}
                     </ul>
                   </nav>
                 </div>
-                {/* Mobile Menu */}
                 <div className="col-12">
-                  <div className="mobile_menu d-block d-lg-none" />
+                  <div className="mobile_menu d-block d-lg-none" >
+                  </div>
                 </div>
               </div>
-              {/* Mobile Menu */}
               <div className="col-12">
                 <div className="mobile_menu d-block d-lg-none" />
               </div>
@@ -53,7 +53,7 @@ function Header() {
         </div>
       </div>
       {/* Header End */}
-    </header>
+    </header >
   );
 }
 

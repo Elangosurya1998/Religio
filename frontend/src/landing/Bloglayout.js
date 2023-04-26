@@ -1,17 +1,15 @@
 import Header from "./includes/Header";
-import Main from "./includes/Main";
+import Blog from "./includes/Blog";
 import Footer from "./includes/Footer";
 
-function Layoutsland() {
-
-
+function Layoutsdemo() {
     return (
         <>
             <Header />
-            <Main />
+            <Blog />
             <Footer />
         </>
     );
 }
 
-export default Layoutsland;
+export default Layoutsdemo;

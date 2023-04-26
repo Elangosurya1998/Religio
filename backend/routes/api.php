@@ -7,6 +7,7 @@ use App\Http\Controllers\ReligioController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\ClientregistrationController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,4 +68,10 @@ Route::get('/Religio/UsersList',[RegisterController::class, 'UsersList']);
 Route::get('/Religio/UsersList/{id}',[RegisterController::class, 'UserEdit']);
 Route::put('/Religio/Userupdate/{id}',[RegisterController::class, 'Userupdate']);
 Route::delete('/Religio/UsersList/{id}',[RegisterController::class, 'UsersListDelete']);
+
+//Payment status
+
+Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentstore']);
+Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
+Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
 

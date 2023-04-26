@@ -41,7 +41,7 @@ useEffect(() => {
 const [ Pro, SetProvince ] = useState([]);
 const navigate = useNavigate();
  const EditProvince =async (e,id)=>{
-  navigate("/Religio/ProvinceEdit/" + id);
+  navigate("/Religio/Province/Edit/" + id);
  }
 const deleteProvince = async (e,id) =>{
   Swal.fire({
@@ -100,7 +100,7 @@ const deleteProvince = async (e,id) =>{
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/ProvinceAdd" className="btn btn-gradient-light">Add</Link>
+              <Link to="/Religio/Province/Add" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
             <br></br>

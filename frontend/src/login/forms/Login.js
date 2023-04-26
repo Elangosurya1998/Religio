@@ -37,14 +37,13 @@ function Login() {
             text: 'Logged in successfully',
             icon: 'success',
             confirmButtonColor: 'green'
-          }) 
-          if(Logindata.role == "admin")
-          {
+          })
+          if (Logindata.role == "admin") {
             navigate('/Religio/Dashboard');
-          }else{
+          } else {
             navigate('/UserPage');
           }
-         
+
         } else {
           Swal.fire({
             title: "Sign-in Failed",
@@ -59,39 +58,39 @@ function Login() {
       );
 
   }
-return (
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-      <div class="content-wrapper d-flex align-items-center auth">
-        <div class="row flex-grow">
-          <div class="col-lg-4 mx-auto">
-            <div class="auth-form-light text-left p-5">
-              <div class="brand-logo">
-              <a href='/'><center><img src="./logo.png" style={{width:"185px"}}/></center></a>
-              </div>
-              <form class="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
-                <div class="form-group">
-                  <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Email" autoComplete='off'  />
+  return (
+    <div className="container-scroller">
+      <div className="container-fluid page-body-wrapper full-page-wrapper">
+        <div className="content-wrapper d-flex align-items-center auth">
+          <div className="row flex-grow">
+            <div className="col-lg-4 mx-auto">
+              <div className="auth-form-light text-left p-5">
+                <div className="brand-logo">
+                  <a href='/'><center><img src="./logo.png" style={{ width: "185px" }} /></center></a>
+                </div>
+                <form className="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
+                  <div className="form-group">
+                    <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Email" autoComplete='off' />
                     <div className="invalid-feedback">{errors.email?.message}</div>
-                </div>
-                <div class="form-group">
-                  <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" autoComplete='off' />
-                  <div className="invalid-feedback">{errors.password?.message}</div>
-                </div>
-                <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
-                </div>
-                {/* <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" class="text-primary" style={{textDecoration:"none"}}> Register Here</a>
+                  </div>
+                  <div className="form-group">
+                    <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" autoComplete='off' />
+                    <div className="invalid-feedback">{errors.password?.message}</div>
+                  </div>
+                  <div className="mt-3">
+                    <button type="submit" className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
+                  </div>
+                  {/* <div className="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" className="text-primary" style={{textDecoration:"none"}}> Register Here</a>
                 </div> */}
-                <div class="text-center mt-4 font-weight-light"><a href="/" class="text-primary" style={{textDecoration:"none"}}><i class="fa fa-home"> Home</i></a>
-                </div>
-              </form>
+                  <div className="text-center mt-4 font-weight-light"><a href="/" className="text-primary" style={{ textDecoration: "none" }}><i className="fa fa-home"> Home</i></a>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
- export default Login;
+export default Login;

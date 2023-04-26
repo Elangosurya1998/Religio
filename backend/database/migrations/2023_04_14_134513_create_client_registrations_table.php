@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('place')->nullable();
             $table->string('clientType')->nullable();
-            $table->date('financialyear')->format('d/m/Y')->nullable();
+            $table->string('financialyear')->format('d/m/Y')->nullable();
             $table->string('clientcode')->nullable(); 
             $table->date('dateofjoining')->nullable(); 
             $table->date('dateofcontractsigning')->nullable();
@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('amcvalue')->nullable();
             $table->string('projectStatus')->nullable();
             $table->string('fileAttachment')->nullable();
+            $table->string('webapplication')->nullable();
+            $table->string('app')->nullable();
+            $table->string('website')->nullable();
             $table->string('address1')->nullable();
             $table->string('state')->nullable();
             $table->string('address2')->nullable();

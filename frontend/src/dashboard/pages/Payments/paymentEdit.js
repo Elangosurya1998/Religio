@@ -3,13 +3,25 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
-import {Link, Routes, Route, useNavigate} from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
+import $ from 'jquery'
 
-
-
-function PaymentCreate() {
+function PaymentEdit() {
       const { register, handleSubmit,reset, formState: { errors } } = useForm({ mode: 'onChange' });  
+      const {id} = useParams();
+      useEffect(() => {
+        fetch(`${ApiUrl}/Religio/Paymentedit/${id}`).then((res) => {
+            return res.json();
+        }).then((resp) => {
+          console.log(resp);
+          reset(resp.data[0])
+           }).catch((err) => {
+            console.log(err.message);
+        })
+      }, [])
+
       const navigate = useNavigate();
+
       useEffect(() => {
         fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
             return res.json();
@@ -25,11 +37,11 @@ function PaymentCreate() {
           function onSubmitformregister(data,e){
               
                 data['balance'] = balanceAmount;
-                data['gst'] = GSTAmount;
+                data['gst'] = GSTAmount; 
                 data['status'] = paymentStatus;
                 data['total'] = totalAmount;
                 data['balancepaid'] = balpaid;
-console.log(data['balancepaid']);
+
                 axios.post(`${ApiUrl}/Religio/Paymentstatus/store`,data)
                 .then((response) => {
                   if (response.status === 200) {
@@ -62,6 +74,17 @@ console.log(data['balancepaid']);
           console.log(err);
         })
      }
+
+     useEffect(() => {
+      fetch(`${ApiUrl}/Religio/Province`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        SetProvince(resp.data);
+      }).catch((err) => {
+          console.log(err.message);
+      })
+    }, []) 
+
     const [ Pro, SetProvince ] = useState([]);
 
   // Hide/Show Fields Based on Client Type
@@ -325,4 +348,4 @@ console.log(data['balancepaid']);
          );
     }
 
-  export default PaymentCreate;
+  export default PaymentEdit;

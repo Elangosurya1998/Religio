@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import $ from 'jquery'
+
  
  
  function CongregationCreate() {
@@ -133,7 +133,7 @@ import $ from 'jquery'
                           <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                              }
                         </select> 
-                        {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Country</label></div>}
+                        {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Country</label></div>}
                       </div>
                     </div>
                   </div>
@@ -163,7 +163,7 @@ import $ from 'jquery'
                           <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                              }
                             </select>
-                        {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One State</label></div>}
+                        {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select State</label></div>}
                        </div>
                     </div>
                   </div>
