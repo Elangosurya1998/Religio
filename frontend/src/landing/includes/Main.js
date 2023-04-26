@@ -14,7 +14,7 @@ function Main() {
                     <div className="section-tittle">
                       <h2>Religio</h2>
                     </div>
-                    <h1 data-animation="fadeInUp" data-delay=".6s">Integrated Software Solution For Managing & Administration Of Congregation, Province & Diocese</h1>
+                    <h1 data-animation="fadeInUp" data-delay=".6s">Integrated Software Solution For Managing & Administration Of Congregation & Province</h1>
                     <p data-animation="fadeInUp" data-delay=".8s">User-friendly software tool for the religious head of a religious institute, province secretary, institute/community heads and for all province members - to manage all communications (circular, email, meetings), create records (chronicles, concerns), maintain member critical and personal information, assignments, history, institution/community information, planning, reporting and archiving. </p>
                     {/* Slider btn */}
                     <div className="slider-btns">
@@ -65,7 +65,7 @@ function Main() {
                 <div className="col-xl-6 col-lg-6 col-md-6">
                   <div className="single-features mb-30">
                     <div className="features-icon">
-                      <span><i class="fas fa-exchange-alt"></i></span>
+                      <span><i className="fas fa-exchange-alt"></i></span>
                     </div>
                     <div className="features-caption">
                       <h3>Transfers Made Easy</h3>
@@ -117,6 +117,11 @@ function Main() {
               </div>
             </div>
           </div>
+          {/* Shape */}
+          <div className="app-shape say-shape">
+            <img src="./landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
+            <img src="./landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
+          </div>
           {/* Section caption */}
           <div className="row d-flex justify-content-between">
             <div className="col-xl-12 col-lg-12">
@@ -127,11 +132,6 @@ function Main() {
               </div>
             </div>
           </div>
-        </div>
-        {/* Shape */}
-        <div className="app-shape say-shape">
-          <img src="./landing/assets/img/shape/app-shape-left.png" alt="" className="app-shape-left d-none d-xl-block" />
-          <img src="./landing/assets/img/shape/say-shape-right.png" alt="" className="app-shape-left-imp d-none d-lg-block" />
         </div>
       </div>
       {/* Available App End*/}
@@ -244,31 +244,39 @@ function Main() {
             <div className="row">
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
-                  <div className="single-customer ">
-                    <div className="what-img">
-                      <img src="./landing/assets/img/shape/man2.png" alt="" />
+                  <div className="row">
+                    <div className="col-md-4 col-lg-4 col-sm-12">
+                      <div className="single-customer ">
+                        <div className="what-img">
+                          <img src="./landing/assets/img/shape/man2.png" alt="" />
+                        </div>
+                        <div className="what-cap">
+                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="what-cap">
-                      <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                      <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                    <div className="col-md-6 col-lg-4 col-sm-12">
+                      <div className="single-customer">
+                        <div className="what-img">
+                          <img src="./landing/assets/img/shape/man3.png" alt="" />
+                        </div>
+                        <div className="what-cap">
+                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="single-customer">
-                    <div className="what-img">
-                      <img src="./landing/assets/img/shape/man3.png" alt="" />
-                    </div>
-                    <div className="what-cap">
-                      <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                      <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                    </div>
-                  </div>
-                  <div className="single-customer">
-                    <div className="what-img">
-                      <img src="./landing/assets/img/shape/man2.png" alt="" />
-                    </div>
-                    <div className="what-cap">
-                      <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                      <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                    <div className="col-md-6 col-lg-4 col-sm-12">
+                      <div className="single-customer">
+                        <div className="what-img">
+                          <img src="./landing/assets/img/shape/man2.png" alt="" />
+                        </div>
+                        <div className="what-cap">
+                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
+                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -397,6 +405,68 @@ function Main() {
         </div>
       </div>
       {/* Our Customer End */}
+      {/* Our Customer Start */}
+      <div className="our-customer section-padd-top30">
+        <div className="container-fluid">
+          <div className="our-customer-wrapper">
+            {/* Section Tittle */}
+            <div className="d-flex justify-content-center">
+              <div className="col-xl-8">
+                <div className="section-tittle text-center">
+                  <h2>Blog</h2>
+                </div>
+              </div>
+            </div>
+            <div className="row justify-content-center">
+              <div className="accordion accordion-flush" id="accordionFlushExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="flush-headingOne">
+                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      Accordion Item #1
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                  </div>
+                </div>
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="flush-headingTwo">
+                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                      Accordion Item #2
+                    </button>
+                  </h2>
+                  <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                  </div>
+                </div>
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="flush-headingThree">
+                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                      Accordion Item #3
+                    </button>
+                  </h2>
+                  <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br></br>
+        <div className="row d-flex justify-content-between">
+          <div className="col-xl-12 col-lg-12">
+            <div className="app-caption">
+              <center>
+                <div className="button-group-area">
+                  <Link to="/Religio/Blog" className="genric-btn success radius"><i className="fas fa-blog"></i>&nbsp; More</Link>
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Our Customer End */}
 
       {/* Available App  Start*/}
       <div className="available-app-area" id="Demo">
@@ -431,8 +501,8 @@ function Main() {
           <div className="col-xl-12 col-lg-12">
             <div className="app-caption">
               <center>
-                <div class="button-group-area">
-                  <Link to="/Religio/Demo" class="genric-btn success radius"><i className="fas fa-shopping-cart"></i>&nbsp; Demo</Link>
+                <div className="button-group-area">
+                  <Link to="/Religio/Demo" className="genric-btn success radius"><i className="fas fa-shopping-cart"></i>&nbsp; Demo</Link>
                 </div>
               </center>
             </div>
