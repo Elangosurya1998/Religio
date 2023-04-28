@@ -23,7 +23,7 @@ export const UserPrivate = () => {
     if (isLogedIn?.role == "user" || isLogedIn?.role == "admin") {
         return <Outlet />
     } else {
-        return <Navigate to={"/"} />
+        return <Navigate to={"/login"} />
     }
 }
 

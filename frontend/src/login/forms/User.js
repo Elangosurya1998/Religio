@@ -26,13 +26,11 @@ function User() {
         localStorage.removeItem("userDetails");
         window.location.href = '/login'; // Here goes to your logout url 
     }
-
-    const isLogedIn = JSON.parse(localStorage.getItem("userDetails")); 
     return (
         <div className="container-scroller">
             <Navbar />
             <div className="container-fluid page-body-wrapper">
-            {isLogedIn?.role == "user" ? <Sidemenubar /> : ''}
+            <Sidemenubar />
                 <div className="main-panel">
                 <Main/>
                     <Footer/>
