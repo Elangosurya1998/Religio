@@ -6,8 +6,12 @@ import ApiUrl from "../Api/Api";
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 
 
-
 function PaymentCreate() {
+
+  const styles = {
+    color: '#000000'
+  };
+  
       const { register, handleSubmit,reset, formState: { errors } } = useForm({ mode: 'onChange' });  
       const navigate = useNavigate();
       useEffect(() => {
@@ -26,10 +30,10 @@ function PaymentCreate() {
               
                 data['balance'] = balanceAmount;
                 data['gst'] = GSTAmount;
-                data['status'] = paymentStatus;
+                //data['status'] = paymentStatus;
                 data['total'] = totalAmount;
                 data['balancepaid'] = balpaid;
-console.log(data['balancepaid']);
+
                 axios.post(`${ApiUrl}/Religio/Paymentstatus/store`,data)
                 .then((response) => {
                   if (response.status === 200) {
@@ -71,7 +75,7 @@ console.log(data['balancepaid']);
   };
 
   // Auto Calculate Balance
-  const [provalue, setProvalue] = useState("");
+  //const [provalue, setProvalue] = useState("");
   const [paidvalue, setPaidvalue] = useState("");
   const [amcvalue, setAmcvalue] = useState("");
   const [orgvalue, setOrgvalue] = useState("");
@@ -79,7 +83,7 @@ console.log(data['balancepaid']);
   const [paidbalvalue, setPaidbalvalue] = useState("");
 
   const projectvalueChange = (event,e) => {
-    setProvalue(event.target.value);
+    //setProvalue(event.target.value);
     setOrgvalue(event.target.value);
     
   };
@@ -110,8 +114,12 @@ console.log(data['balancepaid']);
   const balanceAmount = paidbalvalue === '' ? totalAmount - paidvalue : totalAmount - paidvalue - paidbalvalue;
 
   const balpaid = paidbalvalue;
+
+  const now = new Date();
+  const currentYear = now.getFullYear();
+
   
-  const paymentStatus = totalAmount !== paidvalue ? "Pending" : "Completed";
+  //const paymentStatus = totalAmount !== paidvalue ? "Pending" : "Completed";
 
   return (  
       <div className="content-wrapper">
@@ -121,13 +129,6 @@ console.log(data['balancepaid']);
               <i className="mdi mdi-account-multiple-plus menu-icon" />
             </span> Payment Status
           </h3>
-          <nav aria-label="breadcrumb">
-            <ul className="breadcrumb">
-              <li className="breadcrumb-item active" aria-current="page">
-                <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-              </li>
-            </ul>
-          </nav>
         </div>
             <div className="row"> 
               <div className="col-12">
@@ -139,7 +140,7 @@ console.log(data['balancepaid']);
                         <label>Client Type &nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <select className="form-control" id="clienttype" value={selectedValue} name="clienttype" {...register("clienttype", { required: true,onChange:handleDropdownChange })} aria-invalid={errors?.clienttype ? "true" : "false"}>
                           <option value="">Select Client</option>
-                            <option value="New Sales">New Sales</option>
+                            <option value="NewSales">New Sales</option>
                             <option value="AMC">AMC</option>
                             <option value="Outstanding">Outstanding</option>
                           </select>
@@ -157,7 +158,7 @@ console.log(data['balancepaid']);
                                 <option value={item.id}>{item.congregation  }</option>)) 
                               }
                             </select>
-                            {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Congregation</label></div>}
+                            {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please select Congregation</label></div>}
                         </div>
 
                         <div className="form-group col-md-6">
@@ -172,7 +173,7 @@ console.log(data['balancepaid']);
                                   <option value={item.id}>{item.province  }</option>))
                                 }
                             </select>
-                            {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Choose One Province</label></div>}
+                            {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please select Province</label></div>}
                         </div>
                       </div>
                       
@@ -184,7 +185,7 @@ console.log(data['balancepaid']);
                               <option value="RELIGIO">RELIGIO</option>
                               <option value="AVOSA">AVOSA</option>
                             </select>
-                            {errors?.product?.type === 'required' &&  <div className='text-danger text_error'><label className="errlabel">Please Choose One Product</label> 
+                            {errors?.product?.type === 'required' &&  <div className='text-danger text_error'><label className="errlabel">Please select Product</label> 
                             </div>}
                         </div>
 
@@ -224,7 +225,7 @@ console.log(data['balancepaid']);
                               <option value="Sales Team">Sales Team</option>
                               <option value="Religio Team">Religio Team</option>
                             </select>
-                            {errors?.pi?.type === 'required' &&  <div className='text-danger text_error'><label className="errlabel">Please Choose One P/I</label>
+                            {errors?.pi?.type === 'required' &&  <div className='text-danger text_error'><label className="errlabel">Please select P/I</label>
                         </div>}
                         </div>
                         {/* AMC Extra Fields Start */}
@@ -235,7 +236,7 @@ console.log(data['balancepaid']);
                           <input type="month" className="form-control" name="renewelmonth"
                               {...register("renewelmonth", { required: true })}
                               aria-invalid={errors?.renewelmonth ? "true" : "false"}  />
-                              {errors?.renewelmonth?.type === 'required' && <div className='text-danger text_error'>AMC Date is required</div>}
+                              {errors?.renewelmonth?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC Date is required</label></div>}
                         </div>
                         )}
                         {selectedValue === 'AMC' && (
@@ -250,10 +251,10 @@ console.log(data['balancepaid']);
                         )}
                         
                       {/* AMC Extra Fields End */}
-                      {selectedValue === "New Sales" && (
+                      {selectedValue === "NewSales" && (
                         <div className="form-group">
                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="projectvalue" value={provalue}
+                            <input type="text" className="form-control" name="projectvalue"
                              {...register("projectvalue", { required: true,onChange:projectvalueChange ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectvalue ? "true" : "false"}  />
                              {errors?.projectvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -264,7 +265,7 @@ console.log(data['balancepaid']);
                       {selectedValue === "Outstanding" && (
                         <div className="form-group">
                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="projectvalue" value={provalue}
+                            <input type="text" className="form-control" name="projectvalue"
                              {...register("projectvalue", { required: true,onChange:projectvalueChange ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectvalue ? "true" : "false"}  />
                              {errors?.projectvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -274,12 +275,12 @@ console.log(data['balancepaid']);
 
                         <div className="form-group">
                           <label>GST</label>
-                          <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} readOnly {...register("gst")} />
+                          <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} disabled {...register("gst")} />
                         </div>
 
                         <div className="form-group">
                           <label>Total</label>
-                          <input type="text" className="form-control" id="total" name="total" value={totalAmount} readOnly {...register("total")} />
+                          <input type="text" className="form-control" id="total" name="total" value={totalAmount} disabled {...register("total")} />
                         </div>
 
                         <div className="form-group">
@@ -291,13 +292,13 @@ console.log(data['balancepaid']);
                         <div className="form-group">
                           <label>Balance</label>
                           <input type="text" className="form-control" id="balance" name="balance" value={balanceAmount}
-                           {...register("balance")} readOnly/>
+                           {...register("balance")} disabled/>
                         </div>
 
                       {/* Outstanding Extra Fields Start */}
                       {selectedValue === 'Outstanding' && (
                         <div className="form-group">
-                          <label>Balance Paid</label>
+                          <label>Balance Paid <b>{currentYear}-{currentYear + 1}</b></label>
                             <input type="text" className="form-control"id="balancepaid" name="balancepaid" value={paidbalvalue}
                              {...register("balancepaid", {onChange:paidBalanceChange, pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.balancepaid ? "true" : "false"}  />
@@ -306,15 +307,15 @@ console.log(data['balancepaid']);
                       )}
                       {/* Outstanding Extra Fields End */}
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                           <label>Status</label>
                           <input type="text" className="form-control" id="status" name="status" value={paymentStatus} readOnly {...register("status")} />
-                        </div>
+                        </div> */}
 
                       <div className="text-center">
                         <button className="btn btn-gradient-primary font-weight-bold " type="submit">Save</button>
                         &nbsp; &nbsp; &nbsp; 
-                        <Link to="/Religio/ClientRegistration" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                        <Link to="/Religio/PaymentStatus" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                       </div>  
                     </form>
                   </div>
