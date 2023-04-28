@@ -65,3 +65,5 @@ Route::delete('/projectstatusdelete/{id}',[ProjectsController::class, 'projectDe
 Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentstore']);
 Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
+Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);
+Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'PaymentDelete']);

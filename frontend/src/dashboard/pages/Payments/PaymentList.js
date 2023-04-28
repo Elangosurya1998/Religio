@@ -34,9 +34,15 @@ useEffect(() => {
 
 const [ register, SetClientregister ] = useState([]);
 const navigate = useNavigate();
- const EditClientregistration =async (e,id)=>{
-  navigate("/Religio/PaymentEdit/" + id);
+
+ const EditClientregistration = async (e,id)=>{
+  navigate("/Religio/Payment/Edit/" + id);
  }
+
+ const ViewPaymentStatus = async (e,id)=>{
+  navigate("/Religio/Payment/View/" + id);
+ }
+
 const deleteregister = async (e,id) =>{
  
   Swal.fire({
@@ -49,12 +55,12 @@ const deleteregister = async (e,id) =>{
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      axios.delete(`${ApiUrl}/Religio/Clientregistration/${id}`).then((res)=>{
+      axios.delete(`${ApiUrl}/Religio/Payment/delete/${id}`).then((res)=>{
         fetchData();
       })
       Swal.fire(
         'Deleted!',
-        'Your record has been deleted.',
+        'Payment Status has been deleted.',
         'success'
       );
       
@@ -119,7 +125,7 @@ const deleteregister = async (e,id) =>{
                           <td>{item.paid}</td>
                           
                           <td id="noprint">
-                          <a  style={{ cursor: 'pointer' }}  className="mdi mdi-eye" id="print"></a>
+                          <a  onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-eye" id="print"></a>
                           &nbsp;
                           <a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
                           &nbsp;
