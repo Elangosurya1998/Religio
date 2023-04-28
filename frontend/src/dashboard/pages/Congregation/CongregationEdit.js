@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import $ from 'jquery'
  
  
  function CongregationEdit() {
@@ -24,6 +25,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
            const State = require('country-state-city').State
            var getValue = State.getStatesOfCountry(value) 
            data(getValue);
+           $(".updatebut").hide();
+           $('.congdata').prop("disabled", true);
         }).catch((err) => {
             console.log(err.message);
         })
@@ -58,6 +61,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
   }
  const [ selectState, data ] = useState([]);
 
+
+
+ function editData(){
+  $(".updatebut").show();
+  $('.congdata').prop("disabled", false);
+ $(".editbut").hide();
+
+ }
       return (
  <div className="content-wrapper">
         <div className="page-header">
@@ -66,18 +77,26 @@ import { Link, useNavigate, useParams } from "react-router-dom";
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Congregation  Update
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
         <div className="row"> 
         <div className="col-12">
           <div className="card">
             <div className="card-body">
+            <div className="row">
+              <div className="col-lg-4">
+              </div>
+              <div className="col-lg-6"></div>
+              <div className="col-lg-2"> 
+              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+               </div>
+            </div>
               {/* <div className="row"><b className="card-description"> Congregation </b></div> */}
               <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
@@ -85,9 +104,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-form-label">Congregation Name</label>
                       <div className="col-sm-12">
-                        <input type="text" className="form-control" name="congregation"
+                        <input type="text" className="form-control congdata" name="congregation"
                         {...register("congregation", { required: true})}
-                        aria-invalid={errors?.congregation ? "true" : "false"}  />
+                        aria-invalid={errors?.congregation ? "true" : "false"} />
                         {errors?.congregation?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Congregation Name is required</label></div>}
                        </div>
                     </div>
@@ -99,7 +118,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 1</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="address1"
+                        <input type="text" className="form-control congdata" name="address1"
                         {...register("address1", { required: true })}
                         aria-invalid={errors?.address1 ? "true" : "false"}  />
                         {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
@@ -110,7 +129,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Postcode</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="postcode"
+                        <input type="text" className="form-control congdata" name="postcode"
                         {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
                         aria-invalid={errors?.postcode ? "true" : "false"}  />
                         {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
@@ -124,7 +143,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 2</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="address2"
+                        <input type="text" className="form-control congdata" name="address2"
                         {...register("address2")}/>
                        </div>
                     </div>
@@ -133,7 +152,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Country</label>
                       <div className="col-sm-9">
-                      <select className="form-control Countryvalue" name="country" 
+                      <select className="form-control Countryvalue congdata" name="country" 
                          {...register("country", { required: true,onChange: countrySelect })}
                          aria-invalid={errors?.country ? "true" : "false"}>
                            <option value="">Select Country</option>
@@ -152,7 +171,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">City</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="city"
+                        <input type="text" className="form-control congdata" name="city"
                         {...register("city", { required: true })}
                         aria-invalid={errors?.city ? "true" : "false"}  />
                         {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
@@ -163,7 +182,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">State</label>
                       <div className="col-sm-9">
-                        <select className="form-control Countryindia" name="state"
+                        <select className="form-control Countryindia congdata" name="state"
                              {...register("state", { required: true })}
                              aria-invalid={errors?.state ? "true" : "false"}>
                             <option value="">Select State</option>
@@ -182,7 +201,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Email</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="email"
+                            <input type="text" className="form-control congdata" name="email"
                             {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
                             aria-invalid={errors?.email ? "true" : "false"}  />
                             {errors?.email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required</label></div>}
@@ -194,7 +213,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Mobile No</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="mobile"
+                            <input type="text" className="form-control congdata" name="mobile"
                             {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
                             aria-invalid={errors?.mobile ? "true" : "false"}  />
                             {errors?.mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required</label></div>}
@@ -206,7 +225,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                       </div>
                     </div> 
                 <div className="text-center">
-                <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
+                <button class="btn btn-gradient-primary font-weight-bold updatebut" type="submit">Update</button>
                 &nbsp; &nbsp; &nbsp; 
                 <Link to="/Religio/Congregation" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                 </div>  

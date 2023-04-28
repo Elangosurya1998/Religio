@@ -70,13 +70,13 @@ const deleteregister = async (e,id) =>{
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Client Registration List
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
         <div className="row">
           <div className="col-lg-12 grid-margin stretch-card">
@@ -113,7 +113,7 @@ const deleteregister = async (e,id) =>{
                           <td>{item.name}</td>
                           <td>{item.place}</td>
                           <td>{item.financialyear }</td>
-                          <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                          <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">View</a> /
                               &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   

@@ -70,13 +70,13 @@ function CongregationList(){
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Congregation List
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
         <div className="row">
           <div className="col-lg-12 grid-margin stretch-card">
@@ -113,7 +113,7 @@ function CongregationList(){
                           <td>{item.email}</td>
                           <td>{item.address1}</td>
                           <td>{item.postcode }</td>
-                          <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                          <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">View</a> /
                             &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   

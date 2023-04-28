@@ -5,7 +5,8 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
- 
+import $ from 'jquery'
+
  function ProvinceEdit() {
 
     const { register, handleSubmit, reset,  formState: { errors } } = useForm({ mode: 'onChange' }); 
@@ -25,6 +26,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
            const State = require('country-state-city').State
            var getValue = State.getStatesOfCountry(value) 
            data(getValue);
+           $(".updatebut").hide();
+           $('.prodata').prop("disabled", true);
       }).catch((err) => {
           console.log(err.message);
       })
@@ -73,7 +76,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
     data(getValue);
   }
  const [ selectState, data ] = useState([]);
-
+ 
+ function editData(){
+  $(".updatebut").show();
+  $('.prodata').prop("disabled", false);
+ $(".editbut").hide();
+ }
       return (
  <div className="content-wrapper">
         <div className="page-header">
@@ -82,28 +90,37 @@ import { Link, useNavigate, useParams } from "react-router-dom";
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Province Update
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
+      
       <div className="row"> 
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              {/* <div className="row"><b className="card-description"> Province </b></div> */}
-              <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
+            <div className="row">
+              <div className="col-lg-4">
+              </div>
+              <div className="col-lg-6"></div>
+              <div className="col-lg-2"> 
+              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+               </div>
+            </div>
+            <br></br>
+             <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
                         <div className="col-md-6">
                           <div className="form-group row">
                             <label className="col-sm-4 col-form-label">Congregation</label>
                             <div className="col-sm-8">
-                            <select className="form-control" name="congregation"
+                            <select className="form-control prodata" name="congregation"
                              {...register("congregation", { required: true })}
-                             aria-invalid={errors?.congregation ? "true" : "false"}>
+                             aria-invalid={errors?.congregation ? "true" : "false"} >
                             <option value="">Select Congregation</option>
                             {         
                            congre && congre.map(item => (
@@ -118,7 +135,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                           <div className="form-group row">
                             <label className="col-sm-3 col-form-label">Province</label>
                             <div className="col-sm-9">
-                            <input type="text" className="form-control" name="province"
+                            <input type="text" className="form-control prodata" name="province"
                             {...register("province", { required: true})}
                             aria-invalid={errors?.province ? "true" : "false"}  />
                             {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Province Name is required</label></div>}
@@ -132,7 +149,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Address 1</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="address1"
+                            <input type="text" className="form-control prodata" name="address1"
                             {...register("address1", { required: true })}
                             aria-invalid={errors?.address1 ? "true" : "false"}  />
                             {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
@@ -143,7 +160,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Postcode</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="postcode"
+                            <input type="text" className="form-control prodata" name="postcode"
                             {...register("postcode", { required: true })}
                             aria-invalid={errors?.postcode ? "true" : "false"}  />
                             {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
@@ -156,7 +173,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 2</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="address2"
+                        <input type="text" className="form-control prodata" name="address2"
                         {...register("address2")}/>
                         </div>
                     </div>
@@ -165,7 +182,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                       <div className="form-group row">
                         <label className="col-sm-3 col-form-label">Country</label>
                         <div className="col-sm-9">
-                        <select className="form-control Countryvalue" name="country" 
+                        <select className="form-control Countryvalue prodata" name="country" 
                           {...register("country", { required: true,onChange: countrySelect })}
                           aria-invalid={errors?.country ? "true" : "false"}>
                             <option value="">Select Country</option>
@@ -184,7 +201,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">City</label>
                       <div className="col-sm-9">
-                        <input type="text" className="form-control" name="city"
+                        <input type="text" className="form-control prodata" name="city"
                         {...register("city", { required: true })}
                         aria-invalid={errors?.city ? "true" : "false"}  />
                         {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
@@ -195,7 +212,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">State</label>
                       <div className="col-sm-9">
-                        <select className="form-control Countryindia" name="state"
+                        <select className="form-control Countryindia prodata" name="state"
                              {...register("state", { required: true })}
                              aria-invalid={errors?.state ? "true" : "false"}>
                             <option value="">Select State</option>
@@ -214,7 +231,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Email</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="email"
+                            <input type="text" className="form-control prodata" name="email"
                             {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
                             aria-invalid={errors?.email ? "true" : "false"}  />
                             {errors?.email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required</label></div>}
@@ -226,7 +243,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                         <div className="form-group row">
                           <label className="col-sm-3 col-form-label">Mobile No</label>
                           <div className="col-sm-9">
-                            <input type="text" className="form-control" name="mobile"
+                            <input type="text" className="form-control prodata" name="mobile"
                             {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
                             aria-invalid={errors?.mobile ? "true" : "false"}  />
                             {errors?.mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required</label></div>}
@@ -238,7 +255,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
                       </div>
                     </div>  
                 <div className="text-center">
-                <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
+                <button class="btn btn-gradient-primary font-weight-bold updatebut" type="submit">Update</button>
                 &nbsp; &nbsp; &nbsp; 
                 <Link to="/Religio/Province" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
 

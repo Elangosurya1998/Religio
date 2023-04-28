@@ -15,14 +15,9 @@ function ProvinceList(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
-  //     $("#Emptysearch").click(function(){
-  //   // $(".Province").val();
-  //   //  fetchData();  
-  // });
+ 
   });
-
-
-  
+ 
   const fetchData = ()=>{
         fetch(`${ApiUrl}/Religio/Province`).then((res) => {
           return res.json();
@@ -73,30 +68,23 @@ const deleteProvince = async (e,id) =>{
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Province List
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
         <div className="row">
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              {/* <h4 className="card-title">Province List</h4> */}
+         
               <div className="row">
               <div className="col-lg-4">
               <input id="myInput" type="text" className="form-control Province" placeholder="Search.."  />
-              {/* <div className="form-group">
-        <div className="input-group">
-          <input type="text" className="form-control Province" aria-label="Amount (to the nearest dollar)" />
-          <div className="input-group-append">
-          <span style={{ cursor: 'pointer' }} id="Emptysearch" className="input-group-text bg-gradient-primary text-white" ><i className="mdi mdi-close"></i></span>
-          </div>
-        </div>
-      </div> */}
+         
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
@@ -130,7 +118,7 @@ const deleteProvince = async (e,id) =>{
                           {/* <td>{item.Postcode }</td> */}
                           {/* <td>{item.City }</td> */}
                           {/* <td>{item.country }</td> */}
-                          <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a>/
+                          <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">View</a>/
                               &nbsp;<a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
                           </td>
                       </tr>   
