@@ -7,61 +7,66 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from 'jquery'
 
 function PaymentEdit() {
-      const { register, handleSubmit,reset, formState: { errors } } = useForm({ mode: 'onChange' });  
-      const {id} = useParams();
-      useEffect(() => {
-        fetch(`${ApiUrl}/Religio/Paymentedit/${id}`).then((res) => {
-            return res.json();
-        }).then((resp) => {
-          console.log(resp);
-          reset(resp.data[0])
-           }).catch((err) => {
-            console.log(err.message);
-        })
-      }, [])
+  const { register, handleSubmit,reset, formState: { errors } } = useForm({ mode: 'onChange' });  
+  const {id} = useParams();
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/Paymentedit/${id}`).then((res) => {
+      return res.json();
+    }).then((resp) => {
+      reset(resp.data[0])
+      const event =resp.data[0].clienttype;
+      const proevent =resp.data[0].projectvalue;
+      const paid =resp.data[0].paid;
+      setSelectedValue(event);
+      setOrgvalue(proevent);
+      setPaidvalue(paid);
+    }).catch((err) => {
+        console.log(err.message);
+    })
+     }, [])
 
-      const navigate = useNavigate();
+    const navigate = useNavigate();
 
-      useEffect(() => {
-        fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
-            return res.json();
-        }).then((resp) => {
-          Congregation(resp.data);
-        }).catch((err) => {
-            console.log(err.message);
-        })
-      }, [])
+    useEffect(() => {
+      fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
+        return res.json();
+      }).then((resp) => {
+        Congregation(resp.data);
+      }).catch((err) => {
+        console.log(err.message);
+      })
+    }, [])
 
   const [ congre, Congregation ] = useState([]);
 
-          function onSubmitformregister(data,e){
+    function onSubmitformregister(data,e){
               
-                data['balance'] = balanceAmount;
-                data['gst'] = GSTAmount; 
-                data['status'] = paymentStatus;
-                data['total'] = totalAmount;
-                data['balancepaid'] = balpaid;
+        data['balance'] = balanceAmount;
+        data['gst'] = GSTAmount; 
+       // data['status'] = paymentStatus;
+        data['total'] = totalAmount;
+        data['balancepaid'] = balpaid;
 
-                axios.post(`${ApiUrl}/Religio/Paymentstatus/store`,data)
-                .then((response) => {
-                  if (response.status === 200) {
-                    Swal.fire(
-                        'Created Successfully..!',
-                        'Payment Status Added ..',
-                        'success'
-                      );
-                      navigate('/Religio/PaymentStatus');
-                      e.target.reset();  
-                  }
-                }).catch((err)=>{
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                    footer: err.message
-                  })
-                })
-          }
+          axios.put(`${ApiUrl}/Religio/Payment/update/${id}`,data)
+          .then((response) => {
+            if (response.status === 200) {
+              Swal.fire(
+                  'Updated Successfully..!',
+                  'Payment Status Updated ..',
+                  'success'
+                );
+                navigate('/Religio/PaymentStatus');
+                e.target.reset();  
+            }
+          }).catch((err)=>{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              footer: err.message
+            })
+          })
+      }
        
          function CongregationSelect(event ) {
           var id =event.target.value
@@ -134,7 +139,10 @@ function PaymentEdit() {
 
   const balpaid = paidbalvalue;
   
-  const paymentStatus = totalAmount !== paidvalue ? "Pending" : "Completed";
+  //const paymentStatus = balanceAmount !== 0 ? "Pending" : "Completed";
+
+  const now = new Date();
+  const currentYear = now.getFullYear();
 
   return (  
       <div className="content-wrapper">
@@ -144,19 +152,12 @@ function PaymentEdit() {
               <i className="mdi mdi-account-multiple-plus menu-icon" />
             </span> Payment Status
           </h3>
-          <nav aria-label="breadcrumb">
-            <ul className="breadcrumb">
-              <li className="breadcrumb-item active" aria-current="page">
-                <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-              </li>
-            </ul>
-          </nav>
         </div>
             <div className="row"> 
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    <form className="form-sample"  onSubmit={handleSubmit(onSubmitformregister)}>
+                    <form className="form-sample" onSubmit={handleSubmit(onSubmitformregister)}>
                     <br></br>
                       <div className="form-group">
                         <label>Client Type &nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -276,7 +277,7 @@ function PaymentEdit() {
                       {selectedValue === "New Sales" && (
                         <div className="form-group">
                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="projectvalue" value={provalue}
+                            <input type="text" className="form-control" name="projectvalue" 
                              {...register("projectvalue", { required: true,onChange:projectvalueChange ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectvalue ? "true" : "false"}  />
                              {errors?.projectvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -287,7 +288,7 @@ function PaymentEdit() {
                       {selectedValue === "Outstanding" && (
                         <div className="form-group">
                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="projectvalue" value={provalue}
+                            <input type="text" className="form-control" name="projectvalue"
                              {...register("projectvalue", { required: true,onChange:projectvalueChange ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectvalue ? "true" : "false"}  />
                              {errors?.projectvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -320,7 +321,7 @@ function PaymentEdit() {
                       {/* Outstanding Extra Fields Start */}
                       {selectedValue === 'Outstanding' && (
                         <div className="form-group">
-                          <label>Balance Paid</label>
+                          <label>Balance Paid <b>{currentYear}-{currentYear + 1}</b></label>
                             <input type="text" className="form-control"id="balancepaid" name="balancepaid" value={paidbalvalue}
                              {...register("balancepaid", {onChange:paidBalanceChange, pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.balancepaid ? "true" : "false"}  />
@@ -329,15 +330,15 @@ function PaymentEdit() {
                       )}
                       {/* Outstanding Extra Fields End */}
 
-                        <div className="form-group">
+                        {/* <div className="form-group">
                           <label>Status</label>
                           <input type="text" className="form-control" id="status" name="status" value={paymentStatus} readOnly {...register("status")} />
-                        </div>
+                        </div> */}
 
                       <div className="text-center">
                         <button className="btn btn-gradient-primary font-weight-bold " type="submit">Save</button>
                         &nbsp; &nbsp; &nbsp; 
-                        <Link to="/Religio/ClientRegistration" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                        <Link to="/Religio/PaymentStatus" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                       </div>  
                     </form>
                   </div>

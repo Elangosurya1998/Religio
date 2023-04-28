@@ -64,7 +64,7 @@ function Sidemenubar() {
             <span className="menu-title">Client Registration</span>
             <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
         </li>
-        <li className="nav-item ">
+        <li className={`${navitem} ${pathname == '/Religio/UsersList' && 'active'}`}>
           <Link to="/Religio/UsersList" className="nav-link" >
             <span className="menu-title">Manage Users</span>
             <i className="mdi mdi-account-circle menu-icon" /></Link>

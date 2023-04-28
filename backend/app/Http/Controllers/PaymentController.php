@@ -26,7 +26,6 @@ class PaymentController extends Controller
                     "paid" => $request->paid,
                     "balancepaid" => $request->balancepaid,
                     "balance"   => $request->balance,
-                    "status"   => $request->status,
                 );
                 $payment  = Payment::create($paymentArray['params']);
 
@@ -74,8 +73,37 @@ class PaymentController extends Controller
 
     }
 
+    public function PaymentUpdate($id, Request $request){
+        $payment = Payment::where('id',$id)
+            ->update([
+                "clienttype" => $request->clienttype,
+                "congregation" => $request->congregation,
+                "province" => $request->province,
+                "product" => $request->product,
+                "place" => $request->place,
+                "financialyear"   => $request->financialyear,
+                "clientcode" => $request->clientcode,
+                "pi"   => $request->pi,
+                "projectvalue"   => $request->projectvalue,
+                "amcvalue" => $request->amcvalue,
+                "gst" => $request->gst,
+                "total"   => $request->total,
+                "paid" => $request->paid,
+                "balancepaid" => $request->balancepaid,
+                "balance"   => $request->balance,
+               ]);
 
+               return response()->json(
+                   ["status" => $this->status, "success" => true,
+                   "message" => " Payment Status updated  successfully"]);
+           }
 
-
+     public function PaymentDelete($id){
+        $payment = Payment::find($id);
+        $payment->delete();
+            return response()->json(
+                ["status" => $this->status, "success" => true,
+                "message" => " Province deleted  successfully"]);
+        }
 
 }

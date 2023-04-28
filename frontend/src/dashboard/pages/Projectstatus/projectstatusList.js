@@ -23,7 +23,7 @@ function ProjectstatusList(){
 useEffect(() => {
   fetchData();
 }, [])
-
+const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 const [ register, Setprojectstatus ] = useState([]);
 
 const navigate = useNavigate();
@@ -81,7 +81,8 @@ const projectDelete = async (e,id) =>{
               <div className="col-lg-10">
               </div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link>
+              {/* <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link> */}
+              {isLogedIn?.role == "admin" ? <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link> : ""}
                </div>
             </div>
                 <table className="table table-striped Mytable">
@@ -94,7 +95,7 @@ const projectDelete = async (e,id) =>{
                       <th>Test URL</th>
                       <th>Username</th>
                       {/* <th>Text Password</th> */}
-                      <th>Action</th>
+                      {isLogedIn?.role == "admin" ? <th>Action</th> : "" }
                     </tr>
                   </thead>
                   <tbody>
@@ -109,10 +110,11 @@ const projectDelete = async (e,id) =>{
                           <td>{item.instance}</td>
                           <td>{item.textusername }</td>
                           {/* <td>{item.textpassword }</td> */}
-                          <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
+                          {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                           
                           &nbsp;<a onClick={(e) => projectDelete(e, item.id)} style={{ cursor: 'pointer' }} id className="mdi mdi-delete" >Delete</a>
-                      </td>
+                      </td> : "" }
+                          
                       </tr>   
                       ))
                     }

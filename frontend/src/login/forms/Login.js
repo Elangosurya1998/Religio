@@ -64,8 +64,14 @@ function Login() {
           navigate('/login');
           e.target.reset();
         }
-      }
-      );
+      }).catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err.message
+        })
+      })
 
   }
   return (
@@ -76,7 +82,7 @@ function Login() {
             <div className="col-lg-4 mx-auto">
               <div className="auth-form-light text-left p-5">
                 <div className="brand-logo">
-                  <a href='/'><center><img src="./logo.png" style={{ width: "185px" }} /></center></a>
+                  <Link to='/'><center><img src="./logo.png" style={{ width: "185px" }} /></center></Link>
                 </div>
                 <form className="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
                   <div className="form-group">
@@ -90,9 +96,9 @@ function Login() {
                   <div className="mt-3">
                     <button type="submit" className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                   </div>
-                  {/* <div className="text-center mt-4 font-weight-light"> Don't have an account? <a href="/register" className="text-primary" style={{textDecoration:"none"}}> Register Here</a>
-                </div> */}
-                  <div className="text-center mt-4 font-weight-light"><a href="/" className="text-primary" style={{ textDecoration: "none" }}><i className="fa fa-home"> Home</i></a>
+                  <div className="text-center mt-4 font-weight-light"><Link to="/forget" className="text-primary" style={{textDecoration:"none"}}>Forget Password</Link>
+                </div>
+                  <div className="text-center mt-4 font-weight-light"><Link to="/" className="text-primary" style={{ textDecoration: "none" }}><i className="fa fa-home"> Home</i></Link>
                   </div>
                 </form>
               </div>

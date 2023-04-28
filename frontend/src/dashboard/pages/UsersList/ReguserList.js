@@ -15,7 +15,41 @@ function ReguserList() {
             });
         });
     });
-
+    $(function () {
+        $('table')
+          .on('click', 'th', function () {
+            var index = $(this).index(),
+                rows = [],
+                thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
+      
+            $('#example th').removeClass('asc desc');
+            $(this).addClass(thClass);
+      
+            $('#example tbody tr').each(function (index, row) {
+              rows.push($(row).detach());
+            });
+      
+            rows.sort(function (a, b) {
+              var aValue = $(a).find('td').eq(index).text(),
+                  bValue = $(b).find('td').eq(index).text();
+      
+              return aValue > bValue
+                   ? 1
+                   : aValue < bValue
+                   ? -1
+                   : 0;
+            });
+      
+            if ($(this).hasClass('desc')) {
+              rows.reverse();
+            }
+      
+            $.each(rows, function (index, row) {
+              $('#example tbody').append(row);
+            });
+          });
+      });
+    const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 
     const [User, Setuser] = useState([]);
 
@@ -85,18 +119,20 @@ function ReguserList() {
                                 </div>
                                 <div className="col-lg-6"></div>
                                 <div className="col-lg-2">
-                                    <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link>
+                                    {/* <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> */}
+                                    {isLogedIn?.role == "admin" ?  <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> : ""}
                                 </div>
                             </div>
                             <br></br>
-                            <table className="table table-striped UserList">
+                            <table className="table table-striped UserList"  id="example" style={{cursor:"pointer"}}>
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>User Name </th>
                                         <th>Email</th>
                                         <th>Assigned Role</th>
-                                        <th>Actions</th>
+                                        {isLogedIn?.role == "admin" ? <th>Actions</th> : ""}
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,11 +143,12 @@ function ReguserList() {
                                                 <td>{item.username}</td>
                                                 <td>{item.email}</td>
                                                 <td>{item.role}</td>
-                                                <td id="noprint">
+                                                {isLogedIn?.role == "admin" ? <td id="noprint">
                                                     <a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
                                                     &nbsp;
                                                     <a onClick={(e) => deleteUser(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                                                </td>
+                                                </td> : "" }
+                                                
                                             </tr>
                                         ))
                                     }
