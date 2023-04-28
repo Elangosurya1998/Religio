@@ -28,39 +28,38 @@ function ClientregistrationList() {
       console.log(err.message);
     })
   }
+  useEffect(() => {
+    fetchData();
+  }, [])
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const [register, SetClientregister] = useState([]);
+  const navigate = useNavigate();
+  const EditClientregistration = async (e, id) => {
+    navigate("/Religio/Clientregistration/Edit/" + id);
+  }
+  const deleteregister = async (e, id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${ApiUrl}/Religio/Clientregistration/${id}`).then((res) => {
+          fetchData();
+        })
+        Swal.fire(
+          'Deleted!',
+          'Your record has been deleted.',
+          'success'
+        );
 
-useEffect(() => {
-  fetchData();
-}, [])
-const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
-const [ register, SetClientregister ] = useState([]);
-const navigate = useNavigate();
- const EditClientregistration =async (e,id)=>{
-  navigate("/Religio/Clientregistration/Edit/" + id);
- }
-const deleteregister = async (e,id) =>{
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      axios.delete(`${ApiUrl}/Religio/Clientregistration/${id}`).then((res)=>{
-        fetchData();
-      })
-      Swal.fire(
-        'Deleted!',
-        'Your record has been deleted.',
-        'success'
-      );
-      
-    }
-  })
-}
+      }
+    })
+  }
 
   return (
     <div className="content-wrapper">
@@ -82,57 +81,49 @@ const deleteregister = async (e,id) =>{
         <div className="col-lg-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
-              {/* <h4 className="card-title">Client Registration List</h4> */}
-              <div className="row">
+              < div className="row">
                 <div className="col-lg-4">
                   <input id="myInput" type="text" className="form-control myInput" placeholder="Search.." />
                 </div>
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                  <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link>
+                  {isLogedIn?.role == "admin" ? <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link> : ""}
                 </div>
               </div>
-              <div className="col-lg-6"></div>
-              <div className="col-lg-2">
-              {/* <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link> */}
-              {isLogedIn?.role == "admin" ?  <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link> : ""}
-               </div>
-            </div>
-            <br></br>
-                <table className="table table-striped Mytable">
-                  <thead>
-                    <tr>
-                      <th>Congregation</th>
-                      <th>Province</th>
-                      <th>Name</th>
-                      <th>Place</th>
-                      <th>Financial Year</th>
-                      {isLogedIn?.role == "admin" ? <th>Action</th> : "" }
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {         
+              <br></br>
+              <table className="table table-striped Mytable">
+                <thead>
+                  <tr>
+                    <th>Congregation</th>
+                    <th>Province</th>
+                    <th>Name</th>
+                    <th>Place</th>
+                    <th>Financial Year</th>
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                  </tr>
+                </thead>
+                <tbody>
+                  {
                     register && register.map(item => (
                       <tr key={item.id}>
-                          <td>{item.congregation}</td>
-                          <td>{item.province}</td>
-                          <td>{item.name}</td>
-                          <td>{item.place}</td>
-                          <td>{item.financialyear }</td>
-                          {isLogedIn?.role == "admin" ?  <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
-                              &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-delete" id="print">Delete</a>
-                          </td> : "" }
-                      </tr>   
-                      ))
-                    }
-                  </tbody>
-                </table>
-              </div>
+                        <td>{item.congregation}</td>
+                        <td>{item.province}</td>
+                        <td>{item.name}</td>
+                        <td>{item.place}</td>
+                        <td>{item.financialyear}</td>
+                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
+                          &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        </td> : ""}
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 export default ClientregistrationList;

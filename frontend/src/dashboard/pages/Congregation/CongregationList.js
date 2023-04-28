@@ -90,7 +90,7 @@ function CongregationList() {
                 </div>
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                {/* <Link to="/Religio/Congregation/Add" className="btn btn-gradient-light">Add</Link> */}
+                  {/* <Link to="/Religio/Congregation/Add" className="btn btn-gradient-light">Add</Link> */}
                   {isLogedIn?.role == "admin" ? <Link to="/Religio/Congregation/Add" className="btn btn-gradient-light">Add</Link> : ""}
                 </div>
               </div>
@@ -103,7 +103,7 @@ function CongregationList() {
                     <th>State</th>
                     <th>Address2</th>
                     <th>Postcode</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : "" }
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
                   </tr>
                 </thead>
                 <tbody>
@@ -116,10 +116,10 @@ function CongregationList() {
                         <td>{item.email}</td>
                         <td>{item.address1}</td>
                         <td>{item.postcode}</td>
-                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
                           &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                        </td> : "" }
-                        
+                        </td> : ""}
+
                       </tr>
                     ))
                   }

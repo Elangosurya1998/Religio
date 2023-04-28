@@ -6,143 +6,143 @@ import $ from 'jquery'
 
 function Dashboard() {
 
-  const value ='NewSales';
+  const value = 'NewSales';
 
-      useEffect(() => {
-      axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${value}`)
-        .then((response) => {
+  useEffect(() => {
+    axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${value}`)
+      .then((response) => {
         const resData = response.data;
-          SetBalance(resData.data);
-       FinancialYear(resData.data.year);
-      }).catch((err)=>{
+        SetBalance(resData.data);
+        FinancialYear(resData.data.year);
+      }).catch((err) => {
         console.log(err);
       })
-      }, [])
+  }, [])
 
 
 
 
 
-  function getData(event){
+  function getData(event) {
 
-    const values =event.target.text;
+    const values = event.target.text;
     if (values === "AMC") {
       $("#hdvalue").text("AMC Value")
-    }else{
+    } else {
       $("#hdvalue").text("Project Value")
 
     }
 
     if (values === "Select All") {
-        const get = $("#client").text();
-        
-        if (get === "AMC") {
-          $("#hdvalue").text("AMC Value")
-        }else{
-          $("#hdvalue").text("Project Value")
-    
-        }
-        if (get === "New Sales") {
-          const data = "NewSales";
-          $("#yearlabel").text(values)
-          axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+      const get = $("#client").text();
+
+      if (get === "AMC") {
+        $("#hdvalue").text("AMC Value")
+      } else {
+        $("#hdvalue").text("Project Value")
+
+      }
+      if (get === "New Sales") {
+        const data = "NewSales";
+        $("#yearlabel").text(values)
+        axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
           .then((response) => {
-          const resData = response.data;
+            const resData = response.data;
             SetBalance(resData.data)
+            FinancialYear(resData.data.year);
+
+          }).catch((err) => {
+            console.log(err);
+          })
+      } else {
+        const data = get;
+        $("#yearlabel").text(values)
+        axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+          .then((response) => {
+            const resData = response.data;
+            SetBalance(resData.data)
+            FinancialYear(resData.data.year);
+
+          }).catch((err) => {
+            console.log(err);
+          })
+
+      }
+
+    } else if (values === "New Sales") {
+
+      const data = "NewSales";
+      $("#client").text(values)
+      axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+        .then((response) => {
+          const resData = response.data;
+          SetBalance(resData.data)
           FinancialYear(resData.data.year);
-            
-        }).catch((err)=>{
+
+        }).catch((err) => {
           console.log(err);
         })
-        }else{
-             const data = get;
-          $("#yearlabel").text(values)
-            axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
-            .then((response) => {
-            const resData = response.data;
-              SetBalance(resData.data)
-            FinancialYear(resData.data.year);
-              
-          }).catch((err)=>{
-            console.log(err);
-          })
 
-        }
-
-    } else if(values === "New Sales" ){
-             
-      const data = "NewSales";
-          $("#client").text(values)
-            axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
-            .then((response) => {
-            const resData = response.data;
-              SetBalance(resData.data)
-            FinancialYear(resData.data.year);
-              
-          }).catch((err)=>{
-            console.log(err);
-          })
-      
     }
 
-    else{
+    else {
       const data = values;
       $("#client").text(values);
       $("#yearlabel").text('Select All');
       axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
-      .then((response) => {
-       const resData = response.data;
-        SetBalance(resData.data)
-       FinancialYear(resData.data.year);  
-       }).catch((err)=>{
-        console.log(err);
-       })
+        .then((response) => {
+          const resData = response.data;
+          SetBalance(resData.data)
+          FinancialYear(resData.data.year);
+        }).catch((err) => {
+          console.log(err);
+        })
     }
   }
 
-  const [balance, SetBalance ] = useState('');
+  const [balance, SetBalance] = useState('');
 
-      // useEffect(() => {
-      //   fetch(`${ApiUrl}/Religio/ClientType/Getfinancialyears`).then((res) => {
-      //       return res.json();
-      //   }).then((resp) => {
-      //     FinancialYear(resp.data);
-      //   }).catch((err) => {
-      //       console.log(err.message);
-      //   })
-      // }, [])
+  // useEffect(() => {
+  //   fetch(`${ApiUrl}/Religio/ClientType/Getfinancialyears`).then((res) => {
+  //       return res.json();
+  //   }).then((resp) => {
+  //     FinancialYear(resp.data);
+  //   }).catch((err) => {
+  //       console.log(err.message);
+  //   })
+  // }, [])
 
-  const [ year, FinancialYear ] = useState([]);
+  const [year, FinancialYear] = useState([]);
 
-  function GetbalanbeYeardata(event){
-        const year =event.target.text;
-        const ClientType = $("#client").text();
-      if(ClientType  === "New Sales"){
-        const data ="NewSales";
-        axios.post(`${ApiUrl}/Religio/financialyear/getBalance/?type=${data}&year=${year}`)
+  function GetbalanbeYeardata(event) {
+    const year = event.target.text;
+    const ClientType = $("#client").text();
+    if (ClientType === "New Sales") {
+      const data = "NewSales";
+      axios.post(`${ApiUrl}/Religio/financialyear/getBalance/?type=${data}&year=${year}`)
         .then((response) => {
-        const resData = response.data;
+          const resData = response.data;
           console.log(resData.data);
-        SetBalance(resData.data)
+          SetBalance(resData.data)
 
-          
-        }).catch((err)=>{
-        console.log(err);
+
+        }).catch((err) => {
+          console.log(err);
         })
       $("#yearlabel").text(year);
-      }else{
-        axios.post(`${ApiUrl}/Religio/financialyear/getBalance/?type=${ClientType}&year=${year}`)
+    } else {
+      axios.post(`${ApiUrl}/Religio/financialyear/getBalance/?type=${ClientType}&year=${year}`)
         .then((response) => {
-        const resData = response.data;
+          const resData = response.data;
           console.log(resData.data);
-        SetBalance(resData.data)
+          SetBalance(resData.data)
 
-          
-        }).catch((err)=>{
-        console.log(err);
+
+        }).catch((err) => {
+          console.log(err);
         })
       $("#yearlabel").text(year);
-      }
+    }
   }
 
   return (
@@ -155,56 +155,56 @@ function Dashboard() {
         </h3>
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
-            
-          <li className="nav-item nav-profile dropdown">
-            <a className="nav-link " id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <div className="nav-profile-img">
-                <span className="availability-status online" />
+
+            <li className="nav-item nav-profile dropdown">
+              <a className="nav-link " id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className="nav-profile-img">
+                  <span className="availability-status online" />
+                </div>
+                <div className="nav-profile-text">
+                  <p className="mb-1 text-black dropdown-toggle" id="client">New Sales</p>
+                </div>
+              </a>
+              <div className="dropdown-menu navbar-dropdown nav-profile-text" aria-labelledby="profileDropdown">
+                <a className="dropdown-item" onClick={getData}>
+                  <i className="mdi mdi-chevron-double-down me-2 text-success " />New Sales</a>
+                <a className="dropdown-item" onClick={getData}>
+                  <i className="mdi mdi-cached me-2 text-primary" />AMC</a>
+                <a className="dropdown-item" onClick={getData}>
+                  <i className="mdi mdi-checkbox-multiple-blank-circle-outline me-2 text-danger" />Outstanding</a>
               </div>
-              <div className="nav-profile-text">
-                <p className="mb-1 text-black dropdown-toggle" id="client">New Sales</p>
-              </div>
-            </a>
-            <div className="dropdown-menu navbar-dropdown nav-profile-text" aria-labelledby="profileDropdown">
-              <a className="dropdown-item"  onClick={getData}>
-                <i className="mdi mdi-chevron-double-down me-2 text-success " />New Sales</a>
-              <a className="dropdown-item" onClick={getData}>
-                <i className="mdi mdi-cached me-2 text-primary" />AMC</a>
-               <a className="dropdown-item" onClick={getData}>
-                <i className="mdi mdi-checkbox-multiple-blank-circle-outline me-2 text-danger" />Outstanding</a>
-            </div>
-          </li>
+            </li>
           </ul>
         </nav>
 
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
-            
-          <li className="nav-item nav-profile dropdown">
-            <a className="nav-link " id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <div className="nav-profile-img">
-                <span className="availability-status online" />
-              </div>
-              <div className="nav-profile-text">
-                <p className="mb-1 text-black dropdown-toggle" id="yearlabel">Select All</p>
-              </div>
-            </a>
-            <div className="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-            
 
-            <a className="dropdown-item" onClick={getData}>
-               <i className="mdi mdi-check-all me-2 text-primary" />Select All</a>
-             {         
-             year.map(item => (
-               <a className="dropdown-item" key={item} onClick={GetbalanbeYeardata}>
-               <i className="mdi mdi-calendar-check me-2 text-primary"/>{item}</a>)) }
-            </div>
-          </li>
+            <li className="nav-item nav-profile dropdown">
+              <a className="nav-link " id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                <div className="nav-profile-img">
+                  <span className="availability-status online" />
+                </div>
+                <div className="nav-profile-text">
+                  <p className="mb-1 text-black dropdown-toggle" id="yearlabel">Select All</p>
+                </div>
+              </a>
+              <div className="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+
+
+                <a className="dropdown-item" onClick={getData}>
+                  <i className="mdi mdi-check-all me-2 text-primary" />Select All</a>
+                {
+                  year.map(item => (
+                    <a className="dropdown-item" key={item} onClick={GetbalanbeYeardata}>
+                      <i className="mdi mdi-calendar-check me-2 text-primary" />{item}</a>))}
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
       <div className="row">
-      <div className="col-md-4 stretch-card grid-margin">
+        <div className="col-md-4 stretch-card grid-margin">
           <div className="card bg-gradient-success card-img-holder text-white">
             <div className="card-body">
               <img src="/dashboard/assets/images/dashboard/circle.svg" className="card-img-absolute" alt="circle-image" />
@@ -215,7 +215,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        
+
         <div className="col-md-4 stretch-card grid-margin">
           <div className="card bg-gradient-info card-img-holder text-white">
             <div className="card-body">
@@ -239,7 +239,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      
+
       <div className="row">
         <div className="col-12 grid-margin">
           <div className="card">
@@ -308,7 +308,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      
+
     </div>
   )
 }
