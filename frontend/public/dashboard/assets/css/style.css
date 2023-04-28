@@ -14460,6 +14460,10 @@ dl {
     color: #ffffff !important;
   }
 
+  .dropdown-item:focus, .dropdown-item:hover{
+    color:#000 !important;
+  }
+
   
   
 

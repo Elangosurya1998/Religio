@@ -32,7 +32,7 @@ useEffect(() => {
   fetchData();
 }, [])
 
-
+const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 const [ Pro, SetProvince ] = useState([]);
 const navigate = useNavigate();
  const EditProvince =async (e,id)=>{
@@ -88,7 +88,8 @@ const deleteProvince = async (e,id) =>{
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
-              <Link to="/Religio/Province/Add" className="btn btn-gradient-light">Add</Link>
+              {/* <Link to="/Religio/Province/Add" className="btn btn-gradient-light">Add</Link> */}
+              {isLogedIn?.role == "admin" ?   <Link to="/Religio/Province/Add" className="btn btn-gradient-light">Add</Link> : ""}
                </div>
             </div>
             <br></br>
@@ -103,7 +104,7 @@ const deleteProvince = async (e,id) =>{
                       {/* <th>Postcode</th> */}
                       {/* <th>City</th> */}
                       {/* <th>country</th> */}
-                      <th>Action</th>
+                      {isLogedIn?.role == "admin" ? <th>Action</th> : "" }
                     </tr>
                   </thead>
                   <tbody>
@@ -118,9 +119,10 @@ const deleteProvince = async (e,id) =>{
                           {/* <td>{item.Postcode }</td> */}
                           {/* <td>{item.City }</td> */}
                           {/* <td>{item.country }</td> */}
-                          <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">View</a>/
+                          {isLogedIn?.role == "admin" ? <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a>/
                               &nbsp;<a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                          </td>
+                          </td> : "" }
+                          
                       </tr>   
                       ))
                     }
