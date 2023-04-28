@@ -75,3 +75,9 @@ Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentst
 Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
 
+
+// dashboard
+Route::get('/Religio/ClientType/getBalance/{value}',[ProvinceController::class, 'GetBalance']);
+Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'financialyear']);
+Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
+

@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import React from 'react';
 
 function Header() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   return (
     <header>
@@ -23,10 +23,10 @@ function Header() {
                   <nav>
                     <ul id="navigation">
 
-                      <li ><Link to="/">Home</Link></li>
-                      <li ><Link to="/#Feature">Feature</Link></li>
-                      <li ><Link to="/#Services">Services</Link></li>
-                      <li className={`${pathname == '/Religio/Blog' && 'active'}`}><Link to="/Religio/Blog">Blog</Link></li>
+                      <li className={`${hash == "#Home" && 'active'}`}><Link to="/">Home</Link></li>
+                      <li className={`${hash == "#Feature" && 'active'}`}><Link to="/#Feature">Feature</Link></li>
+                      <li className={`${hash == "#Services" && 'active'}`}><Link to="/#Services">Services</Link></li>
+                      <li className={`${pathname == '/Religio/Blog' || hash == "#Blog" ? 'active' : ''}`}><Link to="/#Blog">Blog</Link></li>
                       <li className={`${pathname == '/Religio/Demo' && 'active'}`}><Link to="/Religio/Demo">Demo</Link></li>
                       {/* <li><a href="#">Pages</a>
                           <ul className="submenu">

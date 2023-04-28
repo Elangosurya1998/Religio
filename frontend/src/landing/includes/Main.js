@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import React from 'react';
 
 function Main() {
   return (
@@ -167,7 +168,8 @@ function Main() {
                 </div>
                 <div className="service-cap">
                   <h4><a href="#">Calendar / Events</a></h4>
-                  <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                  <p>Create & Maintain Calendar events.Can set Reminders via Emails and Application. Different types of calendars(Provincial, Institutional, personal)
+                    viewed as per permission granted</p>
                 </div>
               </div>
             </div>
@@ -178,7 +180,7 @@ function Main() {
                 </div>
                 <div className="service-cap">
                   <h4><a href="#">Circular Management</a></h4>
-                  <p>Sorem spsum dolor sit amsectetur adipisclit, seddo eiusmod tempor incididunt ut laborea.</p>
+                  <p>Create & Maintain Circular, Generate Circular Content (PDF),Upload Circular, Send Circular to members via Email, Store Circular into Documents, Preview Circular Content</p>
                 </div>
               </div>
             </div>
@@ -186,48 +188,6 @@ function Main() {
         </div>
       </section>
       {/* Services Area End */}
-
-      {/* Applic App Start */}
-      {/* <div className="applic-apps section-padding2" id="Gallery">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-xl-4 col-lg-4 col-md-8">
-              <div className="single-cases-info mb-30">
-                <h3>Application Apps<br /> Screenshot</h3>
-                <p>Lorem ipsum dolor sit amet, consecadipiscing elit, sed do eiusmod tempor incididunt ut ore et dolore magna aliqua. Quis ipsum suspendisse gravida. Risus commodo viverra maecenasan lacus vel facilisis. </p>
-              </div>
-            </div>
-            <div className="col-xl-6 col-lg-6">
-              <div className="row d-flex justify-content-between">
-                <div className="app-img">
-                  <img src="./landing/assets/img/shape/available-app.png" alt="" />
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-8 col-lg-8 col-md-7">
-              <div className="app-active owl-carousel">
-                <div className="single-cases-img">
-                  <img src="./landing/assets/img/gallery/App1.png" alt="" />
-                </div>
-                <div className="single-cases-img">
-
-                </div>
-                <div className="single-cases-img">
-                  <img src="./landing/assets/img/gallery/App3.png" alt="" />
-                </div>
-                <div className="single-cases-img">
-                  <img src="./landing/assets/img/gallery/App2.png" alt="" />
-                </div>
-                <div className="single-cases-img">
-                  <img src="./landing/assets/img/gallery/App1.png" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* Applic App End */}
-
 
       {/* Our Customer Start */}
       <div className="our-customer  section-padd-top30">
@@ -286,9 +246,44 @@ function Main() {
         </div>
       </div>
       {/* Our Customer End */}
-
+      <div className="section-padd-top30 sky-blue">
+        <div className="container">
+          <div className="row d-flex justify-content-between">
+            <div className="col-xl-5 col-lg-5">
+              <div className="app-caption">
+                <div className="section-tittle section-tittle3">
+                  <h2 className="congre-h2 sectiontitle">Digitalized Congregation</h2>
+                  <div className="app-btn">
+                    <ul className="li-col">
+                      <li><i className="fas fa-arrow-right"></i> Home</li>
+                      <li><i className="fas fa-arrow-right"></i> Member</li>
+                      <li><i className="fas fa-arrow-right"></i> Contacts</li>
+                      <li><i className="fas fa-arrow-right"></i> Meeting</li>
+                      <li><i className="fas fa-arrow-right"></i> Chronicler</li>
+                      <li><i className="fas fa-arrow-right"></i> Circular</li>
+                      <li><i className="fas fa-arrow-right"></i> Concern/Issue</li>
+                      <li><i className="fas fa-arrow-right"></i> Documents</li>
+                      <li><i className="fas fa-arrow-right"></i> Member Transfer</li>
+                      <li><i className="fas fa-arrow-right"></i> Directory</li>
+                      <li><i className="fas fa-arrow-right"></i> Planner</li>
+                      <li><i className="fas fa-arrow-right"></i> Mobile Application</li>
+                    </ul>
+                    {/* <a href="#" className="app-btn1"><img src="assets/img/shape/app_btn1.png" alt="" /></a>
+                    <a href="#" className="app-btn2"><img src="assets/img/shape/app_btn2.png" alt="" /></a> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-7 col-lg-7">
+              <div className="app-img">
+                <img src="/landing/assets/img/shape/available-app-religio.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Our Customer Start */}
-      <div className="our-customer sky-blue section-padd-top30">
+      <div className="section-padd-top30">
         <div className="container-fluid">
           <div className="our-customer-wrapper">
             {/* Section Tittle */}
@@ -299,6 +294,7 @@ function Main() {
                 </div>
               </div>
             </div>
+
             <div className="row">
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
@@ -405,68 +401,88 @@ function Main() {
         </div>
       </div>
       {/* Our Customer End */}
-      {/* Our Customer Start */}
-      <div className="our-customer section-padd-top30">
-        <div className="container-fluid">
-          <div className="our-customer-wrapper">
+
+      <section className="sky-blue section-padd-top30">
+        <div className="container">
+          <div className="row">
             {/* Section Tittle */}
             <div className="d-flex justify-content-center">
               <div className="col-xl-8">
                 <div className="section-tittle text-center">
-                  <h2>Blog</h2>
+                  <h2>Our Blog</h2>
                 </div>
               </div>
             </div>
-            <div className="row justify-content-center">
-              <div className="accordion accordion-flush" id="accordionFlushExample">
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingOne">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Accordion Item #1
-                    </button>
-                  </h2>
-                  <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12 col-md-6 col-lg-4 mb-4"><div className="card text-white card-has-bg click-col" style={{ backgroundImage: 'url("https://source.unsplash.com/600x900/?tech,street")' }}>
+              <div className="card-img-overlay d-flex flex-column">
+                <div className="card-body">
+                  <small className="card-meta mb-2">Thought Leadership</small>
+                  <h4 className="card-title mt-0 "><a className="text-white" herf="#">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a></h4>
+                  <small><i className="far fa-clock" /> October 15, 2020</small>
+                </div>
+                <div className="card-footer">
+                  <div className="media">
+                    <div className="media-body">
+                      <h6 className="my-0 text-white d-block">Oz Coruhlu</h6>
+                      <small>Director of UI/UX</small>
+                    </div>
                   </div>
                 </div>
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingTwo">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                      Accordion Item #2
-                    </button>
-                  </h2>
-                  <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+              </div>
+            </div></div>
+            <div className="col-sm-12 col-md-6 col-lg-4 mb-4"><div className="card text-white card-has-bg click-col" style={{ backgroundImage: 'url("https://source.unsplash.com/600x900/?tree,nature")' }}>
+              <div className="card-img-overlay d-flex flex-column">
+                <div className="card-body">
+                  <small className="card-meta mb-2">Thought Leadership</small>
+                  <h4 className="card-title mt-0 "><a className="text-white" herf="#">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a></h4>
+                  <small><i className="far fa-clock" /> October 15, 2020</small>
+                </div>
+                <div className="card-footer">
+                  <div className="media">
+                    <div className="media-body">
+                      <h6 className="my-0 text-white d-block">Oz Coruhlu</h6>
+                      <small>Director of UI/UX</small>
+                    </div>
                   </div>
                 </div>
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingThree">
-                    <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                      Accordion Item #3
-                    </button>
-                  </h2>
-                  <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                    <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              </div>
+            </div></div>
+            <div className="col-sm-12 col-md-6 col-lg-4 mb-4">
+              <div className="card text-white card-has-bg click-col" style={{ backgroundImage: 'url("https://source.unsplash.com/600x900/?computer,design")' }}>
+
+                <div className="card-img-overlay d-flex flex-column">
+                  <div className="card-body">
+                    <small className="card-meta mb-2">Thought Leadership</small>
+                    <h4 className="card-title mt-0 "><a className="text-white" herf="#">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a></h4>
+                    <small><i className="far fa-clock" /> October 15, 2020</small>
+                  </div>
+                  <div className="card-footer">
+                    <div className="media">
+                      <div className="media-body">
+                        <h6 className="my-0 text-white d-block">Oz Coruhlu</h6>
+                        <small>Director of UI/UX</small>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <br></br>
-        <div className="row d-flex justify-content-between">
-          <div className="col-xl-12 col-lg-12">
-            <div className="app-caption">
-              <center>
-                <div className="button-group-area">
-                  <Link to="/Religio/Blog" className="genric-btn success radius"><i className="fas fa-blog"></i>&nbsp; More</Link>
-                </div>
-              </center>
+          <div className="row d-flex justify-content-between">
+            <div className="col-xl-12 col-lg-12">
+              <div className="app-caption">
+                <center>
+                  <div className="button-group-area">
+                    <Link to="/Religio/Blog" className="genric-btn success radius"><i className="fas fa-blog"></i>&nbsp; More</Link>
+                  </div>
+                </center>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* Our Customer End */}
+      </section>
 
       {/* Available App  Start*/}
       <div className="available-app-area" id="Demo">
@@ -485,7 +501,7 @@ function Main() {
               <div className="app-caption">
                 <div className="section-tittle section-tittle3">
                   <center>
-                    <h2 className="ourvision">Get started with Religio today</h2>
+                    <h2 className="ourvision">Get started with Religio today to make your province Digital</h2>
                   </center>
                 </div>
               </div>
@@ -512,7 +528,7 @@ function Main() {
       {/* Available App End*/}
 
 
-    </main>
+    </main >
   );
 }
 

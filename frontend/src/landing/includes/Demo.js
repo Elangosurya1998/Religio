@@ -42,7 +42,7 @@ function Demo() {
                   <div className="app-caption">
                     <div className="section-tittle section-tittle3">
                       <center>
-                        <h2 className="ourvision">Get started with Religio today</h2>
+                        <h2 className="ourvision">Get started with Religio today to make your province Digital</h2>
                       </center>
                     </div>
                   </div>
