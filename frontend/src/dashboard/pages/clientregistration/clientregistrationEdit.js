@@ -25,6 +25,8 @@ function ClientRegistrationEdit() {
            data(getValue);
           const fileDatas = resp.data[0].fileAttachment
            fileData(fileDatas);
+           $(".updatebut").hide();
+           $('.regdata').prop("disabled", true);
            }).catch((err) => {
             console.log(err.message);
         })
@@ -108,7 +110,14 @@ function ClientRegistrationEdit() {
         $(".filelabel").hide();
       };
       const [selectedFile, setSelectedFile] = useState();
-      console.log(selectedFile);
+      
+
+      function editData(){
+        $(".updatebut").show();
+        $('.regdata').prop("disabled", false);
+       $(".editbut").hide();
+       }
+
   return (    
       <div className="content-wrapper">
         <div className="page-header">
@@ -117,25 +126,33 @@ function ClientRegistrationEdit() {
               <i className="mdi mdi-account-multiple-plus menu-icon" />
             </span> Update Client Details
           </h3>
-          <nav aria-label="breadcrumb">
+          {/* <nav aria-label="breadcrumb">
             <ul className="breadcrumb">
               <li className="breadcrumb-item active" aria-current="page">
                 <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </div>
         <div className="row"> 
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                    {/* <h4 className="card-title"> Client Registration</h4> */}
+                  <div className="row">
+              <div className="col-lg-4">
+              </div>
+              <div className="col-lg-6"></div>
+              <div className="col-lg-2"> 
+              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+               </div>
+            </div>
+            <br></br>
                     <form className="form-sample" onSubmit={handleSubmit(onSubmitformregister)}>
                       <br></br>
                       <div className="form-row">
                         <div className="form-group col-md-6">
                           <label for="Congregation">Congregation &nbsp;<span style={{ color: 'red' }}>*</span></label>
-                          <select className="form-control" name="congregation"
+                          <select className="form-control regdata" name="congregation"
                             {...register("congregation", { required: true,onChange: CongregationSelect })}
                             aria-invalid={errors?.congregation ? "true" : "false"}>
                             <option value="">Select Congregation</option>
@@ -147,7 +164,7 @@ function ClientRegistrationEdit() {
 
                         <div className="form-group col-md-6">
                           <label for="province">Province &nbsp;<span style={{ color: 'red' }}>*</span></label>
-                          <select className="form-control"  name="province"
+                          <select className="form-control regdata"  name="province"
                             {...register("province", { required: true })}
                             aria-invalid={errors?.province ? "true" : "false"}>
                                 <option value="">Select Province</option>
@@ -162,7 +179,7 @@ function ClientRegistrationEdit() {
                       </div>
                       <div className="form-group">
                          <label>Name&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="name"
+                            <input type="text" className="form-control regdata" name="name"
                             {...register("name", { required: true })}
                              aria-invalid={errors?.name ? "true" : "false"}  />
                              {errors?.name?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Name is required</label></div>}
@@ -170,7 +187,7 @@ function ClientRegistrationEdit() {
                       <div className="form-row">
                         <div className="form-group col-md-6">
                              <label>Client Type&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <select className="form-control" name="clientType"
+                            <select className="form-control regdata" name="clientType"
                             {...register("clientType", { required: true })}
                             aria-invalid={errors?.clientType ? "true" : "false"}>
                                 <option value="">Select Client Type</option>
@@ -182,7 +199,7 @@ function ClientRegistrationEdit() {
                          </div>
                                <div className="form-group col-md-6">
                             <label>Place&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="place" 
+                            <input type="text" className="form-control regdata" name="place" 
                             {...register("place", { required: true})}
                             aria-invalid={errors?.place ? "true" : "false"}  />
                             {errors?.place?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Place is required</label></div>}
@@ -190,7 +207,7 @@ function ClientRegistrationEdit() {
                       </div>
                      <div className="form-group">
                            <label>Client Code&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                             <input type="text" className="form-control" name="clientcode" 
+                             <input type="text" className="form-control regdata" name="clientcode" 
                             {...register("clientcode", { required: true,pattern: /^[0-9a-zA-Z]+$/ })}
                             aria-invalid={errors?.clientcode ? "true" : "false"}/>
                              {errors?.clientcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Client Code is required</label></div>}
@@ -199,7 +216,7 @@ function ClientRegistrationEdit() {
                       <div className="form-row">
                       <div className="form-group col-md-6">
                           <label>Financial Year&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="text" className="form-control" placeholder="YYYY-YYYY" name="financialyear"
+                           <input type="text" className="form-control regdata" placeholder="YYYY-YYYY" name="financialyear"
                              {...register("financialyear", { required: true,pattern:/^\d{4}-\d{4}$/ })}
                              aria-invalid={errors?.financialyear ? "true" : "false"}  />
                              {errors?.financialyear?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Place is required</label></div>}
@@ -207,7 +224,7 @@ function ClientRegistrationEdit() {
                         </div>
                         <div className="form-group col-md-6">
                           <label>Date of Joining&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                             <input type="Date" className="form-control" name="dateofjoining" 
+                             <input type="Date" className="form-control regdata" name="dateofjoining" 
                               {...register("dateofjoining", { required: true })}
                               aria-invalid={errors?.dateofjoining ? "true" : "false"}  />
                               {errors?.dateofjoining?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Date of Joining is required</label></div>}
@@ -215,7 +232,7 @@ function ClientRegistrationEdit() {
                       </div>
                       <div className="form-group">
                            <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                             <input type="text" className="form-control" name="projectValue" 
+                             <input type="text" className="form-control regdata" name="projectValue" 
                              {...register("projectValue", { required: true ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectValue ? "true" : "false"}  />
                              {errors?.projectValue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -224,14 +241,14 @@ function ClientRegistrationEdit() {
                       <div className="form-row">
                       <div className="form-group col-md-6">
                             <label>Contract Signed Date&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="Date" className="form-control" name="dateofcontractsigning" 
+                            <input type="Date" className="form-control regdata" name="dateofcontractsigning" 
                             {...register("dateofcontractsigning", { required: true })}
                             aria-invalid={errors?.dateofcontractsigning ? "true" : "false"}  />
                             {errors?.dateofcontractsigning?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Date of Contract Signing is required</label></div>}
                        </div>
                          <div className="form-group col-md-6">
                            <label >AMC Start Date&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="Date" className="form-control" name="amcDate"
+                           <input type="Date" className="form-control regdata" name="amcDate"
                             {...register("amcDate", { required: true })}
                             aria-invalid={errors?.amcDate ? "true" : "false"}  />
                             {errors?.amcDate?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC Date is required</label></div>}
@@ -240,7 +257,7 @@ function ClientRegistrationEdit() {
                       
                          <div className=" form-group">
                           <label>AMC value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="text" className="form-control"  name="amcvalue"
+                           <input type="text" className="form-control regdata"  name="amcvalue"
                                 {...register("amcvalue", { required: true , pattern: {value: /^[0-9\b]+$/, } })}
                                 aria-invalid={errors?.amcvalue ? "true" : "false"}  />
                                 {errors?.amcvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC value is required</label></div>}
@@ -250,7 +267,7 @@ function ClientRegistrationEdit() {
                       <div className="form-row">
                       <div className="form-group col-md-6">
                             <label>Project Status&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                             <select className="form-control" name="projectStatus"
+                             <select className="form-control regdata" name="projectStatus"
                             {...register("projectStatus", { required: true })}
                             aria-invalid={errors?.projectStatus ? "true" : "false"}>
                                 <option value="" >Select Project Status</option>
@@ -262,7 +279,7 @@ function ClientRegistrationEdit() {
                             </div>
                         <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                             <input type="File" className="form-control" name="fileAttachment" 
+                             <input type="File" className="form-control regdata" name="fileAttachment" 
                               {...register("fileAttachment", {onChange:changeHandler})}/>
                               <div className="Getfile filelabel"><label className="errlabel" >{file}</label></div>
                             </div>
@@ -273,29 +290,29 @@ function ClientRegistrationEdit() {
                       </div>
                       <div className="form-group col-md-3">
                       <label>
-                      <input type="checkbox" className="form-check-input" name="webapplication" {...register("webapplication")}/> Web Application <i className="input-helper" /></label>
+                      <input type="checkbox" className="form-check-input regdata" name="webapplication" {...register("webapplication")}/> Web Application <i className="input-helper" /></label>
                       </div>
                       <div className="form-group col-md-3">
                       <label>
-                      <input type="checkbox" className="form-check-input" name="app"  {...register("app")}/> Mobile Application <i className="input-helper" /></label>
+                      <input type="checkbox" className="form-check-input regdata" name="app"  {...register("app")}/> Mobile Application <i className="input-helper" /></label>
                       </div>
                       <div className="form-group col-md-3">
                       <label className="form-check-label">
-                      <input type="checkbox" className="form-check-input" name="website" {...register("website")}/> Website <i className="input-helper" /></label>
+                      <input type="checkbox" className="form-check-input regdata" name="website" {...register("website")}/> Website <i className="input-helper" /></label>
                       </div>
                       </div>  
                       <div className="row"><b className="card-description"> Address </b></div>
                       <div className="form-row">
                         <div className="form-group col-md-6">
                           <label>Address 1&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                              <input type="text" className="form-control" name="address1"
+                              <input type="text" className="form-control regdata" name="address1"
                               {...register("address1", { required: true })}
                               aria-invalid={errors?.address1 ? "true" : "false"}  />
                               {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
                         </div>
                         <div className="form-group col-md-6">
                           <label>Postcode&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                          <input type="text" className="form-control" name="postcode"
+                          <input type="text" className="form-control regdata" name="postcode"
                               {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
                               aria-invalid={errors?.postcode ? "true" : "false"}  />
                               {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
@@ -305,13 +322,13 @@ function ClientRegistrationEdit() {
                         <div className="form-row">
                           <div className="form-group col-md-6">
                            <label >Address 2</label>
-                               <input type="text" className="form-control" name="address2"
+                               <input type="text" className="form-control regdata" name="address2"
                                 {...register("address2")}
                                 />
                                </div>
                           <div className="form-group col-md-6">
                               <label>Country&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                                <select className="form-control Countryvalue" name="country" 
+                                <select className="form-control Countryvalue regdata" name="country" 
                                   {...register("country", { required: true,onChange: countrySelect })}
                                   aria-invalid={errors?.country ? "true" : "false"}>
                                     <option value="">Select Country</option>
@@ -326,14 +343,14 @@ function ClientRegistrationEdit() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label>City&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                    <input type="text" className="form-control" name="city"
+                    <input type="text" className="form-control regdata" name="city"
                     {...register("city", { required: true })}
                     aria-invalid={errors?.city ? "true" : "false"}  />
                     {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
                   </div>
                  <div className="form-group col-md-6">
                     <label>State&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                    <select className="form-control Countryindia" name="state"
+                    <select className="form-control Countryindia regdata" name="state"
                     {...register("state", { required: true })}
                     aria-invalid={errors?.state ? "true" : "false"}>
                     <option value="">Select State</option>
@@ -348,7 +365,7 @@ function ClientRegistrationEdit() {
                    <div className="form-row">
                    <div className="form-group col-md-6">
                          <label>Email&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="text" className="form-control" name="email"
+                           <input type="text" className="form-control regdata" name="email"
                             {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
                             aria-invalid={errors?.email ? "true" : "false"}  />
                             {errors?.email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required</label></div>}
@@ -356,7 +373,7 @@ function ClientRegistrationEdit() {
                        </div>
                          <div className="form-group col-md-6">
                         <label>Mobile No&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                           <input type="text" className="form-control" name="mobile"
+                           <input type="text" className="form-control regdata" name="mobile"
                             {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
                             aria-invalid={errors?.mobile ? "true" : "false"}  />
                             {errors?.mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required</label></div>}
@@ -366,7 +383,7 @@ function ClientRegistrationEdit() {
                            </div>
                     </div> 
                       <div className="text-center">
-                      <button class="btn btn-gradient-primary font-weight-bold " type="submit">Update</button>
+                      <button class="btn btn-gradient-primary font-weight-bold updatebut" type="submit">Update</button>
                       &nbsp; &nbsp; &nbsp; 
                       <Link to="/Religio/ClientRegistration" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                 </div>  

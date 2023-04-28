@@ -79,3 +79,4 @@ Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']
  Route::post('/forgetpassword',[RegisterController::class, 'ForgetPassword']);
  // Reset Password Routes 
 Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
+

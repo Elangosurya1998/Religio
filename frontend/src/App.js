@@ -15,6 +15,8 @@ import ProeditLayouts from './dashboard/Provinceeditlayout';
 import ProaddLayouts from './dashboard/Provinceaddlayout';
 import PrivateRoutes, { UserPrivate } from "./login/forms/private";
 import User from './login/forms/User';
+import PaymentEditFile from './dashboard/PaymentEditFile';
+
 import ProjectstatusLayouts from './dashboard/projectstatuslayout';
 import ProjectstatusaddLayouts from './dashboard/Projectstatusaddlayout';
 import ProjectstatuseditLayouts from './dashboard/Projectstatuseditlayout';

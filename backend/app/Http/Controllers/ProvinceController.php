@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Congregation;
+use App\Models\Payment;
 use App\Models\Province;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use Carbon\Carbon;
 
 class ProvinceController extends Controller
 { 
@@ -151,6 +153,122 @@ class ProvinceController extends Controller
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
+        }
+
+        public function GetBalance($value){
+            $Balancefilter =Payment::where('clienttype',$value)->get();
+            $balance=[];
+            $total=[];
+            $year =[];
+            $Paid=[];
+          foreach ($Balancefilter as $key => $value) {
+            $balance[]= $value->balance;
+            $total[]=$value->total;
+            // $createddate[] =Carbon::parse($value->created_at)->format('m d Y');
+             $year[] =$value->financialyear;
+            $Paid[]= $value->paid;
+
+          }
+          $balances =array_sum($balance);
+          $totalval = array_sum($total);
+         $paidval = array_sum($Paid);
+
+         $perbal =  round(($balances * 100) / $totalval ,2);
+         $perpaid = round(($paidval * 100) / $totalval,2);
+         
+    
+
+        // dd($balances,$totalval,$paidval);
+  
+            if(count($Balancefilter) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Balancefilter), "data" => [
+                                "balance" =>$balances ?? '0',
+                                "total" => $totalval ?? '0',
+                                "paid" => $paidval ?? '0',
+                                "year" =>$year ?? '0' ,
+                                "balPer" =>$perbal ?? '0' ,
+                                "paidPer" =>$perpaid ?? '0'
+                                ]
+                        
+                        
+                        ]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false,  "count" => count($Balancefilter), "data" => [
+                    "balance" =>$balances ?? '0',
+                    "total" => $totalval ?? '0',
+                    "paid" => $paidval ?? '0',
+                    "balPer" =>$perbal ?? '0' ,
+                    "paidPer" =>$perpaid ?? '0'
+                    ]
+            
+            ]);
+            }
+        }
+
+        public function GetFinancialyear(){
+          
+        $years = DB::table('payments')->select('financialyear')->groupby('financialyear')->get();
+     $finnacialyear =[];
+         foreach ($years as $key => $value) {
+            $finnacialyear[]=$value->financialyear;
+         }
+        //  dd($finnacialyear);
+            if(count($finnacialyear) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($finnacialyear), "data" => $finnacialyear]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            } 
+        }
+        public function financialyear(Request $request){
+           
+            $getBalance = Payment::where('clienttype',$request->type)->where('financialyear',$request->year)->get();
+            $balance=[];
+            $total=[];
+            $Paid=[];
+          foreach ($getBalance as $key => $value) {
+            $balance[]= $value->balance;
+            $total[]=$value->total;
+            $Paid[]= $value->paid;
+            
+          }
+          $balances =array_sum($balance);
+          $totalval = array_sum($total);
+         $paidval = array_sum($Paid);
+    
+         $perbal =  round(($balances * 100) / $totalval ,2);
+         $perpaid = round(($paidval * 100) / $totalval,2);
+
+            if(count($getBalance) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($getBalance), "data" => [
+                                "balance" =>$balances ?? '0',
+                                "total" => $totalval ?? '0',
+                                "paid" => $paidval ?? '0',
+                                "balPer" =>$perbal ?? '0' ,
+                                "paidPer" =>$perpaid ?? '0'
+                               
+                                ]
+            ]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false,  "count" => count($getBalance), "data" => [
+                    "balance" =>$balances ?? '0',
+                    "total" => $totalval ?? '0',
+                    "paid" => $paidval ?? '0',
+                    "balPer" =>$perbal ?? '0' ,
+                     "paidPer" =>$perpaid ?? '0'
+                    ]
+            
+            ]);
+            }
+
         }
 }
 

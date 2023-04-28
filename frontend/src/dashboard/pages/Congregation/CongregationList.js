@@ -71,13 +71,13 @@ function CongregationList() {
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Congregation List
         </h3>
-        <nav aria-label="breadcrumb">
+        {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="breadcrumb-item active" aria-current="page">
               <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
@@ -110,6 +110,7 @@ function CongregationList() {
                   {
                     Cong && Cong.map(item => (
                       <tr key={item.id}>
+
                         <td>{item.congregation}</td>
                         <td>{item.mobile}</td>
                         <td>{item.email}</td>
