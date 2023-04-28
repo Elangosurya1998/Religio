@@ -42,17 +42,17 @@ function Sidemenubar() {
         <li className={`${navitem} ${pathname == '/Religio/PaymentStatus' && 'active'}`}>
           <Link to="/Religio/PaymentStatus" className="nav-link" >
             <span className="menu-title">Payment Status</span>
-            <i className="mdi mdi-account-multiple-plus menu-icon" /></Link>
+            <i className="mdi mdi-cash-multiple menu-icon" /></Link>
         </li>
         <li className={`${navitem} ${pathname == '/Religio/Congregation' && 'active'}`}>
           <Link to="/Religio/Congregation" className="nav-link" >
             <span className="menu-title">Congregation</span>
-            <i className="mdi mdi-account-plus menu-icon" /></Link>
+            <i className="mdi mdi-bank menu-icon" /></Link>
         </li>
         <li className={`${navitem} ${pathname == '/Religio/Province' && 'active'}`}>
           <Link to="/Religio/Province" className="nav-link" >
             <span className="menu-title">Province</span>
-            <i className="mdi mdi-account-plus menu-icon" /></Link>
+            <i className="mdi mdi-home-plus menu-icon" /></Link>
         </li>
         <li className={`${navitem} ${pathname == '/Religio/ProjectstatusLayouts' && 'active'}`}>
           <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >

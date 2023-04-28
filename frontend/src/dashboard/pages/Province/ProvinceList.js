@@ -5,15 +5,15 @@ import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 import $ from 'jquery';
 
-function ProvinceList(){
-  
+function ProvinceList() {
+
   $(document).ready(function () {
     $(".Province").on("keyup", function () {
-      
-        var value = $(this).val().toLowerCase();
-        $(".ProvinceList tbody tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        });
+
+      var value = $(this).val().toLowerCase();
+      $(".ProvinceList tbody tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
     });
  
   });
@@ -26,12 +26,12 @@ function ProvinceList(){
       }).catch((err) => {
           console.log(err.message);
       })
+
   }
 
-useEffect(() => {
-  fetchData();
-}, [])
-
+  useEffect(() => {
+    fetchData();
+  }, [])
 const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 const [ Pro, SetProvince ] = useState([]);
 const navigate = useNavigate();
@@ -132,7 +132,8 @@ const deleteProvince = async (e,id) =>{
             </div>
           </div>
         </div>
-        </div>
-      );
+      </div>
+    </div>
+  );
 }
 export default ProvinceList;

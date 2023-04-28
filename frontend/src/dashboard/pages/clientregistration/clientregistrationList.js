@@ -4,30 +4,31 @@ import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 import $ from 'jquery'
-;
+  ;
 
 
-function ClientregistrationList(){
+function ClientregistrationList() {
 
-$(document).ready(function () {
-  $(".myInput").on("keyup", function () {
-    
+  $(document).ready(function () {
+    $(".myInput").on("keyup", function () {
+
       var value = $(this).val().toLowerCase();
       $(".Mytable tbody tr").filter(function () {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    });
   });
-});
-  const fetchData = ()=>{
-        fetch(`${ApiUrl}/Religio/Clientregistration`).then((res) => {
-          return res.json();
-      }).then((resp) => {
-        console.log(resp);
-        SetClientregister(resp.data);
-      }).catch((err) => {
-          console.log(err.message);
-      })
+  const fetchData = () => {
+    fetch(`${ApiUrl}/Religio/Clientregistration`).then((res) => {
+      return res.json();
+    }).then((resp) => {
+      console.log(resp);
+      SetClientregister(resp.data);
+    }).catch((err) => {
+      console.log(err.message);
+    })
   }
+
 useEffect(() => {
   fetchData();
 }, [])
@@ -61,9 +62,9 @@ const deleteregister = async (e,id) =>{
   })
 }
 
-    return (
-        <div className="content-wrapper">
-        <div className="page-header">
+  return (
+    <div className="content-wrapper">
+      <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
@@ -77,14 +78,19 @@ const deleteregister = async (e,id) =>{
           </ul>
         </nav> */}
       </div>
-        <div className="row">
-          <div className="col-lg-12 grid-margin stretch-card">
-            <div className="card">
-              <div className="card-body">
+      <div className="row">
+        <div className="col-lg-12 grid-margin stretch-card">
+          <div className="card">
+            <div className="card-body">
               {/* <h4 className="card-title">Client Registration List</h4> */}
               <div className="row">
-              <div className="col-lg-4">
-              <input id="myInput" type="text" className="form-control myInput" placeholder="Search.." />
+                <div className="col-lg-4">
+                  <input id="myInput" type="text" className="form-control myInput" placeholder="Search.." />
+                </div>
+                <div className="col-lg-6"></div>
+                <div className="col-lg-2">
+                  <Link to="/Religio/Clientregistration/Add" className="btn btn-gradient-light">Add</Link>
+                </div>
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2">
@@ -125,7 +131,8 @@ const deleteregister = async (e,id) =>{
             </div>
           </div>
         </div>
-        </div>
-      );
+      </div>
+    </div>
+  );
 }
 export default ClientregistrationList;

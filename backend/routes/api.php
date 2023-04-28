@@ -83,3 +83,9 @@ Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'Payment
  // Reset Password Routes 
 Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
 
+
+// dashboard
+Route::get('/Religio/ClientType/getBalance/{value}',[ProvinceController::class, 'GetBalance']);
+Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'financialyear']);
+Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
+
