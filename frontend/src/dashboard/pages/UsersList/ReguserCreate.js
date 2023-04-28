@@ -125,7 +125,7 @@ function ReguserCreate() {
                                             <div className="col-sm-9">
                                                 <select {...register('role')} className={`form-control ${errors.role ? 'is-invalid' : ''}`} name="role" >
 
-                                                    <option value="select your role" selected>User Type</option>
+                                                    <option value="select your role" selected disabled>User Type</option>
 
                                                     <option value="admin">Admin</option>
 
@@ -137,9 +137,9 @@ function ReguserCreate() {
                                     </div>
                                 </div>
                                 <div className="text-center">
-                                    <button class="btn btn-gradient-primary font-weight-bold " type="submit">Submit</button>
+                                    <button className="btn btn-gradient-primary font-weight-bold " type="submit">Submit</button>
                                     &nbsp; &nbsp; &nbsp;
-                                    <Link to="/Religio/UsersList" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                                    <Link to="/Religio/UsersList" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                                 </div>
                             </form>
                         </div>
