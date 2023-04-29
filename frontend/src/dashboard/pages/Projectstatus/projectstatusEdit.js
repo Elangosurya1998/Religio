@@ -20,9 +20,28 @@ function ProjectstatusEdit() {
     })
   }, [])
 
-const [ congre, Congregation ] = useState([]);
+
 
 const navigate = useNavigate();
+
+useEffect(() => {
+  fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
+      return res.json();
+  }).then((resp) => {
+    Congregation(resp.data);
+  }).catch((err) => {
+      console.log(err.message);
+  })
+}, [])
+const [ congre, Congregation ] = useState([]);
+
+const handleNavigation = ()=>{
+navigate({
+  pathname:"/Religio/Tab",
+  search:"?active=1"
+})
+}
+
 
   function onSubmitProjectstatus(data,e){
    console.log(data);
@@ -34,7 +53,8 @@ const navigate = useNavigate();
             'Project status Data Updated ..',
             'success'
           );
-          navigate('/Religio/ProjectstatusLayouts');
+          // navigate('/Religio/ProjectstatusLayouts');
+          handleNavigation()
           e.target.reset();  
       }
     }).catch((err)=>{
@@ -62,15 +82,15 @@ const navigate = useNavigate();
               <select className="form-control" id="Congregation" name="congregation"
               {...register("congregation", { required: true })}
               aria-invalid={errors?.congregation ? "true" : "false"}>
-                <option value="">--Congregation--</option>
-                <option value="Congregation of Divine">Congregation of Divine</option>
-                <option value="Congregation of Holy Cross">Congregation of Holy Cross</option>
-                <option value="Congregation of Maronite Lebanese Missionaries">Congregation of Maronite Lebanese Missionaries</option>
-                <option value="Congregation of the Mission">Congregation of the Mission</option>
-              </select>
-              {errors?.congregation?.type === 'required' && <div 
-              className='text-danger text_error'>Please Choose One congregation</div>}
-            </div>
+                 <option value="">--Congregation--</option>
+                      {         
+                           congre && congre.map(item => (
+                          <option value={item.congregation}>{item.congregation }</option>))
+                             }
+                    </select>
+                    {errors?.congregation?.type === 'required' && <div 
+                    className='text-danger text_error'>Please Choose One congregation</div>}
+                  </div>
 
             <div className="form-group col-md-6">
               <label for="province">Province</label>
@@ -97,71 +117,104 @@ const navigate = useNavigate();
             </div>
 
             <div className="form-group">
-              <label for="exampleInputServer">Server</label>
-              <input type="text" className="form-control" name="dataserver" placeholder="Server"
-              {...register("dataserver", { required: true })}
-              aria-invalid={errors?.dataserver ? "true" : "false"} />
-              {errors?.dataserver?.type === 'required' && <div className='text-danger text_error'>Server is required</div>}
-            </div>
+                    <label for="exampleInputServer">Server</label>
+                    <input type="text" className="form-control" name="dataserver" placeholder="Server"
+                    {...register("dataserver", { required: true })}
+                    aria-invalid={errors?.dataserver ? "true" : "false"} />
+                    {errors?.dataserver?.type === 'required' && <div className='text-danger text_error'>Server is required</div>}
+                  </div>
 
-            <div className="form-group">
-              <label for="exampleinstanceconfig">Instanceconfig/Setup</label>
-              <input type="text" className="form-control" name="instanceconfig" placeholder="Instanceconfig/Setup"
-              {...register("instance", { required: true })}
-              aria-invalid={errors?.instance ? "true" : "false"} />
-               {errors?.instance?.type === 'required' && <div className='text-danger text_error'>Instanceconfig/Setup is required</div>}
-            </div>
-
-
-  <div className="form-group">
-      <label for="exampleInputTestURL">Test URL</label>
-      <div className="form-check">
-      <p>
-      <label>Yes</label>
-      <input type="radio" className="form-check-input" name="testURL" id="YES" value="Yes" 
-       {...register("testURL", { required: true })}
-       aria-invalid={errors?.testURL ? "true" : "false"}/>
-      
-      </p>
-      <p>
-      <label>No</label>
-      <input type="radio" className="form-check-input" name="testURL" id="NO" value="No"
-      {...register("testURL", { required: true })}
-      aria-invalid={errors?.testURL ? "true" : "false"} />
-        {errors?.testURL?.type === 'required' && <div className='text-danger text_error'>Test URL is required</div>}
-      
-      </p>
-    </div>
-  </div>
+                  <div className="form-group">
+                  <div className="form-group col-md-6">
+                    <label for="produsername">Instanceconfig/Setup</label>
+                    <div className="form-group col-md-6">
+                    <p><label>
+                        <input type="radio" className="form-check-input" name="instance" id="YES" value="Yes" 
+                        {...register("instance")}/>
+                          Yes
+                          </label>
+                          </p>
+                      <p><label>
+                        <input type="radio" className="form-check-input" name="instance" id="NO" value="No"
+                        {...register("instance")}
+                         />
+                        No</label>
+                        </p>
+                        </div>
+                  </div>
+                  </div>
 
 
-            <div class="form-row">
-            <div className="form-group col-md-6">
-              <label for="exampleInputUsername">Text Username</label>
+                  <div class="form-row">
+                  <div className="form-group col-md-6">
+                    <label for="exampletestURL">Test URL</label>
 
-              <input type="text" className="form-control" name="textusername" placeholder="Text Username"
-              {...register("textusername", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-              aria-invalid={errors?.textusername ? "true" : "false"}  />
-              {errors?.textusername?.type === 'required' && <div className='text-danger text_error'>Username is required</div>}
-              {errors?.textusername?.type === "pattern" && <div className='text-danger text_error '>Username can contain only alphabets</div>}
-            </div>
+                    <input type="text" className="form-control" name="testURL" placeholder="Test URL"
+                    {...register("testURL", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.testURL ? "true" : "false"}  />
+                    {errors?.testURL?.type === 'required' && <div className='text-danger text_error'>Test URL is required</div>}     
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label for="exampleInputPassword">Product URL</label>
+                    <input type="text" className="form-control" name="prodURL" placeholder="Product URL"
+                    {...register("prodURL", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.prodURL ? "true" : "false"}  />
+                    {errors?.prodURL?.type === 'required' && <div className='text-danger text_error'>Product URL is required</div>}
+                  </div>
+                  </div>
 
-            <div className="form-group col-md-6">
-              <label for="exampleInputPassword">Text Password</label>
-              <input type="text" className="form-control" name="textpassword" placeholder="Text Password"
-              {...register("textpassword", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
-              aria-invalid={errors?.textpassword ? "true" : "false"}  />
-              {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}
-              {errors?.textpassword?.type === "pattern" && <div className='text-danger text_error '>Password can contain only alphabets</div>}
-            </div>
-            </div>
+
+                  <div class="form-row">
+                  <div className="form-group col-md-6">
+                    <label for="exampleInputUsername">Text Username</label>
+                    <input type="text" className="form-control" name="textusername" placeholder="Text Username"
+                    {...register("textusername", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.textusername ? "true" : "false"}  />
+                    {errors?.textusername?.type === 'required' && <div className='text-danger text_error'>Username is required</div>}
+                    {errors?.textusername?.type === "pattern" && <div className='text-danger text_error '>Username can contain only alphabets</div>}
+                  </div>
+
+                  <div className="form-group col-md-6">
+                    <label for="exampleInputPassword">Text Password</label>
+                    <input type="text" className="form-control" name="textpassword" placeholder="Text Password"
+                    {...register("textpassword", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.textpassword ? "true" : "false"}  />
+                    {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}
+                    {errors?.textpassword?.type === "pattern" && <div className='text-danger text_error '>Password can contain only alphabets</div>}
+                  </div>
+                  </div>
+
+
+                  <div class="form-row">
+                  <div className="form-group col-md-6">
+                    <label for="produsername">Product Username</label>
+
+                    <input type="text" className="form-control" name="produsername" placeholder="Product Username"
+                    {...register("produsername", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.produsername ? "true" : "false"}  />
+                    {errors?.produsername?.type === 'required' && <div className='text-danger text_error'>produsername is required</div>}
+                    {errors?.produsername?.type === "pattern" && <div className='text-danger text_error '>produsername can contain only alphabets</div>}
+                  </div>
+
+                  <div className="form-group col-md-6">
+                    <label for="prodpassword">Product Password</label>
+                    <input type="text" className="form-control" name="prodpassword" placeholder="Product Password"
+                    {...register("prodpassword", { required: true, pattern: {value: /^[A-Za-z ]+$/, } })}
+                    aria-invalid={errors?.prodpassword ? "true" : "false"}  />
+                    {errors?.prodpassword?.type === 'required' && <div className='text-danger text_error'>Product Password is required</div>}
+                    {errors?.prodpassword?.type === "pattern" && <div className='text-danger text_error '>Product Password can contain only alphabets</div>}
+                  </div>
+                  </div>
 
             <div className="text-center">
                 <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
           
               &nbsp; &nbsp; &nbsp; 
-          <Link to="/Religio/ProjectstatusLayouts" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
-             </div>
+          {/* <Link to="/Religio/ProjectstatusLayouts" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+             </div> */}
+
+          <div onClick={handleNavigation} class="btn btn-gradient-primary font-weight-bold ">Cancel</div>
+                   </div>
 
                     </form>
                   </div>

@@ -65,11 +65,6 @@ const projectDelete = async (e,id) =>{
           </span> Project status List
         </h3>
         <nav aria-label="breadcrumb">
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-            </li>
-          </ul>
         </nav>
       </div>
         <div className="row">
@@ -84,7 +79,7 @@ const projectDelete = async (e,id) =>{
               <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
-                <table className="table table-striped Mytable">
+                <table className="table table-striped Mytable table-responsive">
                   <thead>
                     <tr>
                       <th>Congregation</th>
@@ -93,7 +88,6 @@ const projectDelete = async (e,id) =>{
                       <th>Instanceconfig</th>
                       <th>Test URL</th>
                       <th>Username</th>
-                      {/* <th>Text Password</th> */}
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -108,7 +102,6 @@ const projectDelete = async (e,id) =>{
                           {/* <td>{item.dataserver}</td> */}
                           <td>{item.instance}</td>
                           <td>{item.textusername }</td>
-                          {/* <td>{item.textpassword }</td> */}
                           <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                           
                           &nbsp;<a onClick={(e) => projectDelete(e, item.id)} style={{ cursor: 'pointer' }} id className="mdi mdi-delete" >Delete</a>

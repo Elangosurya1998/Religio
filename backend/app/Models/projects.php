@@ -17,7 +17,9 @@ class Projects extends Model
         'instance',
         'testURL',
         'textusername',
-        'textpassword'
-        
+        'textpassword',
+        'prodURL',
+        'produsername',
+        'prodpassword'
     ];
 }
