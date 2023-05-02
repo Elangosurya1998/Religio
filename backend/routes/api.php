@@ -55,6 +55,8 @@ Route::get('/Religio/Clientregistration',[ClientregistrationController::class, '
 Route::delete('/Religio/Clientregistration/{id}',[ClientregistrationController::class, 'ClientregistrationDelete']);
 Route::get('/Religio/Registeredit/{id}',[ClientregistrationController::class, 'ClientregistrationEdit']);
 Route::put('/Religio/Clientregistrationupdate/{id}',[ClientregistrationController::class, 'Clientregistrationupdate']);
+Route::get('/Religio/ProvinceAddress/get/{id}',[ClientregistrationController::class, 'ProvinceAddressget']);
+Route::get('/Religio/CheckUniquecode/get/{id}',[ClientregistrationController::class, 'CheckUniquecode']);
 
 // project status
 Route::post('/projectstatuscreate', [ProjectsController::class,'projectstatus']);

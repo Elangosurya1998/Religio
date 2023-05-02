@@ -63,13 +63,17 @@ function CongregationList() {
   const EditCongregation = async (e, id) => {
     navigate("/Religio/Congregation/Edit/" + id);
   }
+
+  const Viewcongregation = async (e, id) => {
+    navigate("/Religio/Congregation/View/" + id);
+  }
   return (
     <div className="content-wrapper">
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Congregation List
+          </span> Congregation
         </h3>
         {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -99,9 +103,9 @@ function CongregationList() {
                 <thead>
                   <tr>
                     <th>Congregation Name </th>
+                    <th>Mobile</th>
+                    <th>Email</th>
                     <th>Address1</th>
-                    <th>State</th>
-                    <th>Address2</th>
                     <th>Postcode</th>
                     {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
                   </tr>
@@ -116,8 +120,13 @@ function CongregationList() {
                         <td>{item.email}</td>
                         <td>{item.address1}</td>
                         <td>{item.postcode}</td>
-                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
-                          &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        {isLogedIn?.role == "admin" ? 
+                        <td id="noprint">
+                           <a onClick={(e) => Viewcongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
+                          &nbsp;
+                          <a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"> </a>
+                          &nbsp;
+                          <a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
                         </td> : ""}
 
                       </tr>
