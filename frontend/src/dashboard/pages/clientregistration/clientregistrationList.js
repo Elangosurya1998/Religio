@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
-import $ from 'jquery'
-  ;
+import $ from 'jquery';
 
 
 function ClientregistrationList() {
@@ -34,9 +33,14 @@ function ClientregistrationList() {
   const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const [register, SetClientregister] = useState([]);
   const navigate = useNavigate();
+  
+  
+  
   const EditClientregistration = async (e, id) => {
     navigate("/Religio/Clientregistration/Edit/" + id);
   }
+
+
   const deleteregister = async (e, id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -60,6 +64,9 @@ function ClientregistrationList() {
       }
     })
   }
+  const Viewregister = async (e, id) => {
+    navigate("/Religio/Clientregistration/View/" + id);
+  }
 
   return (
     <div className="content-wrapper">
@@ -67,7 +74,7 @@ function ClientregistrationList() {
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Client Registration List
+          </span> Client Registration
         </h3>
         {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -111,8 +118,15 @@ function ClientregistrationList() {
                         <td>{item.name}</td>
                         <td>{item.place}</td>
                         <td>{item.financialyear}</td>
-                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
-                          &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        {isLogedIn?.role == "admin" ? 
+                        <td id="noprint">
+                           <a onClick={(e) => Viewregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
+                          &nbsp;
+                          <a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
+                          &nbsp;
+                          <a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
+                          &nbsp;
+                         
                         </td> : ""}
                       </tr>
                     ))

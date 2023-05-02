@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Province;
 use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -166,6 +167,7 @@ class ClientregistrationController extends Controller
             ->select('cr.*','co.congregation','pr.province')
             ->leftjoin('congregation as co','co.id','cr.congregation')
             ->leftjoin('provinces as pr','pr.id','cr.province')
+            ->orderBy('cr.id','desc')
             ->get();
 
             if(count($ClientregistrationAll) > 0) {
@@ -257,5 +259,38 @@ class ClientregistrationController extends Controller
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
+        }
+        public function ProvinceAddressget($id){
+         
+            $Provinceaddress = DB::table('congregation as cr')
+            ->select('cr.congregation','pr.congregation','pr.address1'
+            ,'pr.state','pr.address2','pr.postcode','pr.city','pr.country',
+            'pr.mobile','pr.email')
+            ->leftjoin('provinces as pr','pr.congregation','cr.id')
+            ->where('pr.id',$id)
+            ->get();
+
+            if(count($Provinceaddress) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Provinceaddress), "data" => $Provinceaddress]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+
+        }
+        public function CheckUniquecode($data){
+
+            $CheckUniquecoderegister = Clientregistration::where('clientcode',$data)->first();
+         
+            if($CheckUniquecoderegister !=null){
+                return response()->json(["status" => $this->status, "success" => true 
+               , "message" => "true"]);
+            }else{
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "false"]);
+            }
+
         }
 }

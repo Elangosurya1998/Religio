@@ -26,8 +26,6 @@ import $ from 'jquery'
            const State = require('country-state-city').State
            var getValue = State.getStatesOfCountry(value) 
            data(getValue);
-           $(".updatebut").hide();
-           $('.prodata').prop("disabled", true);
       }).catch((err) => {
           console.log(err.message);
       })
@@ -77,11 +75,7 @@ import $ from 'jquery'
   }
  const [ selectState, data ] = useState([]);
  
- function editData(){
-  $(".updatebut").show();
-  $('.prodata').prop("disabled", false);
- $(".editbut").hide();
- }
+
       return (
  <div className="content-wrapper">
         <div className="page-header">
@@ -103,20 +97,11 @@ import $ from 'jquery'
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-            <div className="row">
-              <div className="col-lg-4">
-              </div>
-              <div className="col-lg-6"></div>
-              <div className="col-lg-2"> 
-              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
-               </div>
-            </div>
-            <br></br>
              <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
                 <div className="row">
                         <div className="col-md-6">
                           <div className="form-group row">
-                            <label className="col-sm-4 col-form-label">Congregation</label>
+                            <label className="col-sm-4 col-form-label">Congregation&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <div className="col-sm-8">
                             <select className="form-control prodata" name="congregation"
                              {...register("congregation", { required: true })}
@@ -133,7 +118,7 @@ import $ from 'jquery'
                         </div>
                         <div className="col-md-6">
                           <div className="form-group row">
-                            <label className="col-sm-3 col-form-label">Province</label>
+                            <label className="col-sm-3 col-form-label">Province&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <div className="col-sm-9">
                             <input type="text" className="form-control prodata" name="province"
                             {...register("province", { required: true})}
@@ -144,73 +129,62 @@ import $ from 'jquery'
                         </div>
                       </div>
                     <div className="row"><b className="card-description"> Address </b></div>
-                     <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Address 1</label>
-                          <div className="col-sm-9">
-                            <input type="text" className="form-control prodata" name="address1"
-                            {...register("address1", { required: true })}
-                            aria-invalid={errors?.address1 ? "true" : "false"}  />
-                            {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
-                            </div>
+                    <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Address1&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control prodata" name="address1"
+                        {...register("address1", { required: true })}
+                        aria-invalid={errors?.address1 ? "true" : "false"}  />
+                        {errors?.address1?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Address 1 is required</label></div>}
                         </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Postcode</label>
-                          <div className="col-sm-9">
-                            <input type="text" className="form-control prodata" name="postcode"
-                            {...register("postcode", { required: true })}
-                            aria-invalid={errors?.postcode ? "true" : "false"}  />
-                            {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
-                        </div>
-                        </div>
-                      </div>
                     </div>
-                <div className="row">
+                  </div>
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 2</label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control prodata" name="address2"
                         {...register("address2")}/>
-                        </div>
+                       </div>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                      <div className="form-group row">
-                        <label className="col-sm-3 col-form-label">Country</label>
-                        <div className="col-sm-9">
-                        <select className="form-control Countryvalue prodata" name="country" 
-                          {...register("country", { required: true,onChange: countrySelect })}
-                          aria-invalid={errors?.country ? "true" : "false"}>
-                            <option value="">Select Country</option>
-                                {         
-                            value && value.map(item => (
-                            <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
-                              }
-                          </select> 
-                          {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Country</label></div>}
-                        </div>
-                      </div>
-                    </div>
-                 </div>
+                </div>
                 <div className="row">
-                  <div className="col-md-6">
+                <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">City</label>
+                      <label className="col-sm-3 col-form-label">City&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control prodata" name="city"
                         {...register("city", { required: true })}
                         aria-invalid={errors?.city ? "true" : "false"}  />
                         {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
-                        </div>
+                         </div>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">State</label>
+                      <label className="col-sm-3 col-form-label">Country&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <div className="col-sm-9">
+                      <select className="form-control Countryvalue prodata" name="country" 
+                         {...register("country", { required: true,onChange: countrySelect })}
+                         aria-invalid={errors?.country ? "true" : "false"}>
+                           <option value="">Select Country</option>
+                              {         
+                           value && value.map(item => (
+                          <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
+                             }
+                        </select> 
+                        {errors?.country?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select Country</label></div>}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">State&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-9">
                         <select className="form-control Countryindia prodata" name="state"
                              {...register("state", { required: true })}
@@ -221,15 +195,27 @@ import $ from 'jquery'
                           <option  key={item.isoCode} value={item.isoCode}>{item.name }</option>))
                              }
                             </select>
-                            {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select State</label></div>}
-                         </div>
+                        {errors?.state?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Please Select State</label></div>}
+                       </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Pin code&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control prodata" name="postcode"
+                        {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                        aria-invalid={errors?.postcode ? "true" : "false"}  />
+                        {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
+                        {errors?.postcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Postcode can contain only Numbers</label></div>}
+                     </div>
                     </div>
                   </div>
                 </div>
-                <div className="row"> 
+                <div className="row">
                 <div className="col-md-6">
                         <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Email</label>
+                          <label className="col-sm-3 col-form-label">Email&nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <div className="col-sm-9">
                             <input type="text" className="form-control prodata" name="email"
                             {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
@@ -239,9 +225,9 @@ import $ from 'jquery'
                         </div>
                         </div>
                       </div>
-                    <div className="col-md-6">
+                      <div className="col-md-6">
                         <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Mobile No</label>
+                          <label className="col-sm-3 col-form-label">Mobile No&nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <div className="col-sm-9">
                             <input type="text" className="form-control prodata" name="mobile"
                             {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
@@ -253,9 +239,9 @@ import $ from 'jquery'
                             </div>
                         </div>
                       </div>
-                    </div>  
+                    </div> 
                 <div className="text-center">
-                <button class="btn btn-gradient-primary font-weight-bold updatebut" type="submit">Update</button>
+                <button class="btn btn-gradient-primary font-weight-bold" type="submit">Update</button>
                 &nbsp; &nbsp; &nbsp; 
                 <Link to="/Religio/Province" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
 

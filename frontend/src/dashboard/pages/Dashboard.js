@@ -92,10 +92,15 @@ function Dashboard() {
       axios.get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
         .then((response) => {
           const resData = response.data;
+          console.log(resData);
           SetBalance(resData.data)
           FinancialYear(resData.data.year);
-        }).catch((err) => {
-          console.log(err);
+        }).catch((response) => {
+          console.log(response.data);
+          const resData = response.data;
+          SetBalance(resData)
+          FinancialYear(resData);
+         
         })
     }
   }
@@ -113,7 +118,7 @@ function Dashboard() {
   // }, [])
 
   const [year, FinancialYear] = useState([]);
-
+ 
   function GetbalanbeYeardata(event) {
     const year = event.target.text;
     const ClientType = $("#client").text();

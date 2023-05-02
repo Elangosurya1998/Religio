@@ -67,8 +67,8 @@ class ProvinceController extends Controller
             $ProvinceAll = DB::table('provinces as pr')
             ->select('pr.*','co.congregation')
             ->leftjoin('congregation as co','co.id','pr.congregation')
+            ->orderBy('pr.id','desc')
             ->get();
-    
             if(count($ProvinceAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ProvinceAll), "data" => $ProvinceAll]);
@@ -169,24 +169,22 @@ class ProvinceController extends Controller
             $Paid[]= $value->paid;
 
           }
-          $balances =array_sum($balance);
-          $totalval = array_sum($total);
-         $paidval = array_sum($Paid);
-
-         $perbal =  round(($balances * 100) / $totalval ,2);
-         $perpaid = round(($paidval * 100) / $totalval,2);
-         
-    
-
-        // dd($balances,$totalval,$paidval);
+           
   
-            if(count($Balancefilter) > 0) {
+      if(count($Balancefilter) > 0) {
+           $balances =array_sum($balance);
+           $totalval = array_sum($total);
+           $paidval = array_sum($Paid);
+
+           $perbal =  round(($balances * 100) / $totalval ,2);
+           $perpaid = round(($paidval * 100) / $totalval,2);
+         
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Balancefilter), "data" => [
                                 "balance" =>$balances ?? '0',
                                 "total" => $totalval ?? '0',
                                 "paid" => $paidval ?? '0',
-                                "year" =>$year ?? '0' ,
+                                "year" =>$year ?? explode(",", "0") ,
                                 "balPer" =>$perbal ?? '0' ,
                                 "paidPer" =>$perpaid ?? '0'
                                 ]
@@ -197,11 +195,12 @@ class ProvinceController extends Controller
             else {
                 return response()->json(["status" => "failed",
                 "success" => false,  "count" => count($Balancefilter), "data" => [
-                    "balance" =>$balances ?? '0',
-                    "total" => $totalval ?? '0',
-                    "paid" => $paidval ?? '0',
-                    "balPer" =>$perbal ?? '0' ,
-                    "paidPer" =>$perpaid ?? '0'
+                    "balance" =>'0',
+                    "total" =>  '0',
+                    "paid" =>  '0',
+                    "year" => explode(",", "0"),
+                    "balPer" => '0' ,
+                    "paidPer" => '0'
                     ]
             
             ]);
@@ -244,6 +243,7 @@ class ProvinceController extends Controller
          $perbal =  round(($balances * 100) / $totalval ,2);
          $perpaid = round(($paidval * 100) / $totalval,2);
 
+        
             if(count($getBalance) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($getBalance), "data" => [
@@ -259,11 +259,11 @@ class ProvinceController extends Controller
             else {
                 return response()->json(["status" => "failed",
                 "success" => false,  "count" => count($getBalance), "data" => [
-                    "balance" =>$balances ?? '0',
-                    "total" => $totalval ?? '0',
-                    "paid" => $paidval ?? '0',
-                    "balPer" =>$perbal ?? '0' ,
-                     "paidPer" =>$perpaid ?? '0'
+                    "balance" => '0',
+                    "total" =>  '0',
+                    "paid" =>'0',
+                    "balPer" => '0' ,
+                     "paidPer" => '0'
                     ]
             
             ]);

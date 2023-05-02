@@ -35,9 +35,17 @@ function ProvinceList() {
   const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const [Pro, SetProvince] = useState([]);
   const navigate = useNavigate();
+
+
   const EditProvince = async (e, id) => {
     navigate("/Religio/Province/Edit/" + id);
   }
+
+  const ViewProvince = async (e, id) => {
+    navigate("/Religio/Province/View/" + id);
+  }
+
+
   const deleteProvince = async (e, id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -66,7 +74,7 @@ function ProvinceList() {
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Province List
+          </span> Province
         </h3>
         {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -119,8 +127,13 @@ function ProvinceList() {
                         {/* <td>{item.Postcode }</td> */}
                         {/* <td>{item.City }</td> */}
                         {/* <td>{item.country }</td> */}
-                        {isLogedIn?.role == "admin" ? <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a>/
-                          &nbsp;<a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        {isLogedIn?.role == "admin" ? 
+                        <td id="noprint" >
+                          <a onClick={(e) => ViewProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
+                          &nbsp;
+                          <a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
+                          &nbsp;
+                          <a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
                         </td> : ""}
 
                       </tr>

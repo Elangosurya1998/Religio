@@ -6,7 +6,7 @@ import ApiUrl from "../Api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from 'jquery'
 
-function ClientRegistrationEdit() {
+function ClientRegistrationViews() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
 
       const country = require('country-state-city').Country
@@ -19,12 +19,14 @@ function ClientRegistrationEdit() {
         }).then((resp) => {
           console.log(resp);
           reset(resp.data[0]);
-           const value =resp.data[0].country
+          const value =resp.data[0].country
            const State = require('country-state-city').State
            var getValue = State.getStatesOfCountry(value) 
            data(getValue);
           const fileDatas = resp.data[0].fileAttachment
            fileData(fileDatas);
+           $(".updatebut").hide();
+           $('.regdata').prop("disabled", true);
            }).catch((err) => {
             console.log(err.message);
         })
@@ -56,37 +58,7 @@ function ClientRegistrationEdit() {
     
     const navigate = useNavigate();
 
-  function onSubmitformregister(data,e){
-   const formData = new FormData();
-   formData.append('File', selectedFile);
-   console.log(formData);    
 
-    axios.put(`${ApiUrl}/Religio/Clientregistrationupdate/${id}`,data)
-      .then((response) =>{
-        axios.post(`${ApiUrl}/Religio/Clientregistration/uploadfile/${id}`,formData)
-        .then((response) => {
-          console.log(response);
-        }).catch((err)=>{
-         console.log(err);
-        })
-        if (response.status === 200) {
-          Swal.fire(
-              'Updated Successfully..!',
-              'Client Data Updated ..',
-              'success'
-            );
-            navigate('/Religio/ClientRegistration');
-            e.target.reset();  
-        }
-      }).catch((err)=>{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          footer: err.message
-        })
-      })  
-  }
   function countrySelect(event ) {
     var value =event.target.value
     const State = require('country-state-city').State
@@ -110,7 +82,7 @@ function ClientRegistrationEdit() {
       const [selectedFile, setSelectedFile] = useState();
       
 
-    
+     
 
   return (    
       <div className="content-wrapper">
@@ -118,15 +90,15 @@ function ClientRegistrationEdit() {
           <h3 className="page-title">
             <span className="page-title-icon bg-gradient-primary text-white me-2">
               <i className="mdi mdi-account-multiple-plus menu-icon" />
-            </span> Update Client Details
+            </span> View Client Details
           </h3>
-      
+          
         </div>
         <div className="row"> 
               <div className="col-12">
                 <div className="card">
                   <div className="card-body">
-                   <form className="form-sample" onSubmit={handleSubmit(onSubmitformregister)}>
+                    <form className="form-sample" onSubmit={handleSubmit()}>
                       <br></br>
                       <div className="form-row">
                         <div className="form-group col-md-6">
@@ -393,10 +365,8 @@ function ClientRegistrationEdit() {
                       </div>
                     </div> 
                       <div className="text-center">
-                      <button class="btn btn-gradient-primary font-weight-bold" type="submit">Update</button>
-                      &nbsp; &nbsp; &nbsp; 
                       <Link to="/Religio/ClientRegistration" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
-                </div>  
+                    </div>  
                     </form>
                   </div>
                 </div>
@@ -406,4 +376,4 @@ function ClientRegistrationEdit() {
          );
     }
 
-  export default ClientRegistrationEdit;
+  export default ClientRegistrationViews;

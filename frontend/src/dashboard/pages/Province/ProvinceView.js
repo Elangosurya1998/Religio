@@ -4,14 +4,35 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
-import { Link, useNavigate } from "react-router-dom";
- 
- function ProvinceCreate() {
-   
+import { Link, useNavigate, useParams } from "react-router-dom";
+import $ from 'jquery'
+
+ function ProvinceView() {
+
+    const { register, handleSubmit, reset,  formState: { errors } } = useForm({ mode: 'onChange' }); 
+  
+    const navigate = useNavigate();
     const country = require('country-state-city').Country
     const value = country.getAllCountries()
-    const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' }); 
-    const navigate = useNavigate();
+
+    const {id} = useParams();
+    useEffect(() => {
+      fetch(`${ApiUrl}/Religio/Provinceedit/${id}`).then((res) => {
+          return res.json();
+      }).then((resp) => {
+        console.log(resp);
+         reset(resp.data[0]);
+         const value =resp.data[0].country
+           const State = require('country-state-city').State
+           var getValue = State.getStatesOfCountry(value) 
+           data(getValue);
+           $(".updatebut").hide();
+           $('.prodata').prop("disabled", true);
+      }).catch((err) => {
+          console.log(err.message);
+      })
+    }, [])
+    
     useEffect(() => {
       fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
           return res.json();
@@ -23,30 +44,6 @@ import { Link, useNavigate } from "react-router-dom";
     }, [])
     const [ congre, Congregation ] = useState([]);
 
-  function onSubmitCongregationform(data ,e){
-    
-    axios.post(`${ApiUrl}/Religio/Province/store`,data)
-    .then((Response)=>{
-      if (Response.status === 200) {
-        Swal.fire(
-          'Province Created Successfully..!',
-          'Province Added ..',
-          'success'
-        );
-        e.target.reset();
-    navigate('/Religio/Province');
-    }     
-  }).catch((err)=>{
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
-      footer: err.message
-    })
-  })  
-  
-  }
-  
   function countrySelect(event ) {
     var value =event.target.value
     const State = require('country-state-city').State
@@ -54,13 +51,15 @@ import { Link, useNavigate } from "react-router-dom";
     data(getValue);
   }
  const [ selectState, data ] = useState([]);
+ 
+
       return (
  <div className="content-wrapper">
         <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
-          </span> Province
+          </span> Province View
         </h3>
         {/* <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
@@ -70,20 +69,20 @@ import { Link, useNavigate } from "react-router-dom";
           </ul>
         </nav> */}
       </div>
-        <div className="row"> 
+      
+      <div className="row"> 
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              {/* <div className="row"><b className="card-description"> Province </b></div> */}
-              <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
+             <form className="form-sample" onSubmit={handleSubmit()} > 
                 <div className="row">
                         <div className="col-md-6">
                           <div className="form-group row">
                             <label className="col-sm-4 col-form-label">Congregation&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <div className="col-sm-8">
-                            <select className="form-control" name="congregation"
+                            <select className="form-control prodata" name="congregation"
                              {...register("congregation", { required: true })}
-                             aria-invalid={errors?.congregation ? "true" : "false"}>
+                             aria-invalid={errors?.congregation ? "true" : "false"} >
                             <option value="">Select Congregation</option>
                             {         
                            congre && congre.map(item => (
@@ -98,7 +97,7 @@ import { Link, useNavigate } from "react-router-dom";
                           <div className="form-group row">
                             <label className="col-sm-3 col-form-label">Province&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <div className="col-sm-9">
-                            <input type="text" className="form-control" name="province"
+                            <input type="text" className="form-control prodata" name="province"
                             {...register("province", { required: true})}
                             aria-invalid={errors?.province ? "true" : "false"}  />
                             {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Province Name is required</label></div>}
@@ -219,10 +218,8 @@ import { Link, useNavigate } from "react-router-dom";
                       </div>
                     </div> 
                 <div className="text-center">
-                <button class="btn btn-gradient-primary font-weight-bold " type="submit">Submit</button>
-                &nbsp; &nbsp; &nbsp; 
                 <Link to="/Religio/Province" class="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
-</div> 
+              </div>  
               </form>
             </div>
           </div>
@@ -231,5 +228,5 @@ import { Link, useNavigate } from "react-router-dom";
         </div>
       );
     }
-    export default ProvinceCreate;
+    export default ProvinceView;
   

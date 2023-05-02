@@ -74,7 +74,7 @@ import { useState } from "react";
                 <div className="row">
                   <div className="col-md-12">
                     <div className="form-group row">
-                      <label className="col-form-label">Congregation Name</label>
+                      <label className="col-form-label">Congregation Name&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-12">
                         <input type="text" className="form-control" name="congregation"
                         {...register("congregation", { required: true})}
@@ -88,7 +88,7 @@ import { useState } from "react";
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Address 1</label>
+                      <label className="col-sm-3 col-form-label">Address1&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control" name="address1"
                         {...register("address1", { required: true })}
@@ -99,20 +99,6 @@ import { useState } from "react";
                   </div>
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Postcode</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="postcode"
-                        {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
-                        aria-invalid={errors?.postcode ? "true" : "false"}  />
-                        {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
-                        {errors?.postcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Postcode can contain only Numbers</label></div>}
-                     </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
-                    <div className="form-group row">
                       <label className="col-sm-3 col-form-label">Address 2</label>
                       <div className="col-sm-9">
                         <input type="text" className="form-control" name="address2"
@@ -120,9 +106,22 @@ import { useState } from "react";
                        </div>
                     </div>
                   </div>
+                </div>
+                <div className="row">
+                <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">City&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="city"
+                        {...register("city", { required: true })}
+                        aria-invalid={errors?.city ? "true" : "false"}  />
+                        {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
+                         </div>
+                    </div>
+                  </div>
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">Country</label>
+                      <label className="col-sm-3 col-form-label">Country&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-9">
                       <select className="form-control Countryvalue" name="country" 
                          {...register("country", { required: true,onChange: countrySelect })}
@@ -141,18 +140,7 @@ import { useState } from "react";
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">City</label>
-                      <div className="col-sm-9">
-                        <input type="text" className="form-control" name="city"
-                        {...register("city", { required: true })}
-                        aria-invalid={errors?.city ? "true" : "false"}  />
-                        {errors?.city?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">City is required</label></div>}
-                         </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6">
-                    <div className="form-group row">
-                      <label className="col-sm-3 col-form-label">State</label>
+                      <label className="col-sm-3 col-form-label">State&nbsp;<span style={{ color: 'red' }}>*</span></label>
                       <div className="col-sm-9">
                         <select className="form-control Countryindia" name="state"
                              {...register("state", { required: true })}
@@ -167,11 +155,23 @@ import { useState } from "react";
                        </div>
                     </div>
                   </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">Pin code&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <div className="col-sm-9">
+                        <input type="text" className="form-control" name="postcode"
+                        {...register("postcode", { required: true, pattern: {value: /^[0-9\b]+$/, } })}
+                        aria-invalid={errors?.postcode ? "true" : "false"}  />
+                        {errors?.postcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Postcode is required</label></div>}
+                        {errors?.postcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Postcode can contain only Numbers</label></div>}
+                     </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="row">
                 <div className="col-md-6">
                         <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Email</label>
+                          <label className="col-sm-3 col-form-label">Email&nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <div className="col-sm-9">
                             <input type="text" className="form-control" name="email"
                             {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
@@ -183,7 +183,7 @@ import { useState } from "react";
                       </div>
                       <div className="col-md-6">
                         <div className="form-group row">
-                          <label className="col-sm-3 col-form-label">Mobile No</label>
+                          <label className="col-sm-3 col-form-label">Mobile No&nbsp;<span style={{ color: 'red' }}>*</span></label>
                           <div className="col-sm-9">
                             <input type="text" className="form-control" name="mobile"
                             {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
