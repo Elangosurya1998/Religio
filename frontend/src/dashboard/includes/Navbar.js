@@ -20,7 +20,7 @@ function Navbar() {
         </a>
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-stretch">
-        <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        {/* <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span className="mdi mdi-menu" />
         </button>
         <div className="search-field d-none d-md-block">
@@ -32,7 +32,7 @@ function Navbar() {
               <input type="text" className="form-control bg-transparent border-0" placeholder="Search projects" />
             </div>
           </form>
-        </div>
+        </div> */}
         <ul className="navbar-nav navbar-nav-right">
           <li className="nav-item nav-profile dropdown">
             <a className="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,11 +54,11 @@ function Navbar() {
               </a>
             </div>
           </li>
-          <li className="nav-item d-none d-lg-block full-screen-link">
+          {/* <li className="nav-item d-none d-lg-block full-screen-link">
             <a className="nav-link">
               <i className="mdi mdi-fullscreen" id="fullscreen-button" />
             </a>
-          </li>
+          </li> 
           <li className="nav-item dropdown">
             <a className="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <i className="mdi mdi-email-outline" />
@@ -100,6 +100,7 @@ function Navbar() {
               <h6 className="p-3 mb-0 text-center">4 new messages</h6>
             </div>
           </li>
+
           <li className="nav-item dropdown">
             <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i className="mdi mdi-bell-outline" />
@@ -147,16 +148,16 @@ function Navbar() {
               <h6 className="p-3 mb-0 text-center">See all notifications</h6>
             </div>
           </li>
-          {/* <li className="nav-item nav-logout d-none d-lg-block">
+          <li className="nav-item nav-logout d-none d-lg-block">
             <a className="nav-link" onClick={() => handleSignOut()} style={{ cursor: "pointer" }}>
               <i className="mdi mdi-power" />
             </a>
-          </li> */}
+          </li> 
           <li className="nav-item nav-settings d-none d-lg-block">
             <a className="nav-link" href="#">
               <i className="mdi mdi-format-line-spacing" />
             </a>
-          </li>
+          </li>*/}  
         </ul>
         <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span className="mdi mdi-menu" />

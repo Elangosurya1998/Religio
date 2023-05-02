@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import ApiUrl from '../../dashboard/pages/Api/Api';
 
 
 function Register() {
@@ -35,7 +36,7 @@ function Register() {
   const navigate = useNavigate();
 
   function onSubmitform(data) {
-    axios.post('http://127.0.0.1:8000/api/Register', data)
+    axios.post(`${ApiUrl}/Register`, data)
       .then((Response) =>{
         Swal.fire({
           text: 'Registered successfully',
