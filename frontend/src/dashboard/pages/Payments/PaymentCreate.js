@@ -57,11 +57,9 @@ function PaymentCreate() {
        
          function CongregationSelect(event ) {
           var id =event.target.value
-          console.log(id);
          axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
          .then((response) => {
           SetProvince(response.data.data)
-          console.log(response.data.data);
         }).catch((err)=>{
           console.log(err);
         })
@@ -76,9 +74,9 @@ function PaymentCreate() {
 
   // Auto Calculate Balance
   //const [provalue, setProvalue] = useState("");
-  const [paidvalue, setPaidvalue] = useState("");
-  const [amcvalue, setAmcvalue] = useState("");
-  const [orgvalue, setOrgvalue] = useState("");
+  const [paidvalue, setPaidvalue] = useState('');
+  const [amcvalue, setAmcvalue] = useState('');
+  const [orgvalue, setOrgvalue] = useState('');
 
   const [paidbalvalue, setPaidbalvalue] = useState("");
 
@@ -118,8 +116,37 @@ function PaymentCreate() {
   const now = new Date();
   const currentYear = now.getFullYear();
 
-  
   //const paymentStatus = totalAmount !== paidvalue ? "Pending" : "Completed";
+
+
+  const [provinceplace, setPlace] = useState("");
+  const [financialyear, setFinancialyear] = useState("");
+  const [clientcode, setClientcode] = useState("");
+
+  function ProvinceSelect(event ) {
+     
+    var id =event.target.value
+
+    axios.get(`${ApiUrl}/Religio/PaymentAddress/get/${id}`)
+    .then((response) => {
+    const  resdata =response.data;
+    
+    var place = resdata.data.place;
+    var financialyear = resdata.data.financialyear;
+    var clientcode = resdata.data.clientcode;
+    var payment = resdata.data.projectValue;
+    var amcvalue = resdata.data.amcvalue;
+
+    setOrgvalue(payment);
+    setAmcvalue(amcvalue);
+    setPlace(place);
+    setFinancialyear(financialyear);
+    setClientcode(clientcode);
+
+  }).catch((err)=>{
+    console.log(err);
+  })
+}
 
   return (  
       <div className="content-wrapper">
@@ -165,7 +192,7 @@ function PaymentCreate() {
                           <label>Province &nbsp;<span style={{ color: 'red' }}>*</span>
                           </label>
                             <select className="form-control"  name="province"
-                              {...register("province", { required: true })}
+                              {...register("province", { required: true ,onChange: ProvinceSelect })}
                               aria-invalid={errors?.province ? "true" : "false"}>
                               <option value="">Select Province</option>
                                 {         
@@ -191,7 +218,7 @@ function PaymentCreate() {
 
                         <div className="form-group">
                             <label>Place&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="place" 
+                            <input type="text" className="form-control" value={provinceplace} name="place" 
                             {...register("place", { required: true})}
                             aria-invalid={errors?.place ? "true" : "false"}  />
                             {errors?.place?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Place is required</label></div>}
@@ -200,7 +227,7 @@ function PaymentCreate() {
                       <div className="form-row">
                         <div className="form-group col-md-6">
                           <label>Financial Year&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="financialyear" 
+                            <input type="text" className="form-control" name="financialyear" value={financialyear}
                             {...register("financialyear", { required: true,pattern:/^\d{4}-\d{4}$/})}
                             aria-invalid={errors?.financialyear ? "true" : "false"}  />
                             {errors?.financialyear?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Financial Year is required</label></div>}
@@ -209,7 +236,7 @@ function PaymentCreate() {
 
                         <div className="form-group col-md-6">
                           <label>Client Code&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                          <input type="text" className="form-control" name="clientcode" 
+                          <input type="text" className="form-control" value={clientcode} name="clientcode" 
                             {...register("clientcode", { required: true,pattern:/^[0-9a-zA-Z]+$/ })}
                             aria-invalid={errors?.clientcode ? "true" : "false"}/>
                              {errors?.clientcode?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Client Code is required</label></div>}
@@ -264,7 +291,7 @@ function PaymentCreate() {
                       {selectedValue === "NewSales" && (
                         <div className="form-group">
                           <label>Project Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="projectvalue"
+                            <input type="text" className="form-control" value={orgvalue} name="projectValue"
                              {...register("projectvalue", { required: true,onChange:projectvalueChange ,pattern: {value: /^[0-9\b]+$/, } })}
                              aria-invalid={errors?.projectvalue ? "true" : "false"}  />
                              {errors?.projectvalue?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Project Value is required</label></div>}
@@ -284,7 +311,7 @@ function PaymentCreate() {
                       )}
 
                         <div className="form-group">
-                          <label>GST</label>
+                          <label>GST 18%</label>
                           <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} disabled {...register("gst")} />
                         </div>
 

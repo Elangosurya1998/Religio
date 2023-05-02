@@ -138,7 +138,7 @@ function PaymentView() {
                   <label>Client Type</label>
                   <select className="form-control" id="clienttype" value={selectedValue} name="clienttype" style={styles} {...register("clienttype")} disabled >
                     <option value="">Select Client</option>
-                    <option value="New Sales">New Sales</option>
+                    <option value="NewSales">New Sales</option>
                     <option value="AMC">AMC</option>
                     <option value="Outstanding">Outstanding</option>
                   </select>

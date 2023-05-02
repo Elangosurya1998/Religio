@@ -78,11 +78,13 @@ Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
 Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);
 Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'PaymentDelete']);
+Route::get('/Religio/PaymentAddress/get/{id}',[PaymentController::class, 'PaymentAddress']);
 
 
- // Forget Password Routes 
+
+ // Forget Password Routes
  Route::post('/forgetpassword',[RegisterController::class, 'ForgetPassword']);
- // Reset Password Routes 
+ // Reset Password Routes
 Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
 
 

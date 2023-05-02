@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\Clientregistration;
 use DB;
 
 class PaymentController extends Controller
@@ -104,6 +105,21 @@ class PaymentController extends Controller
             return response()->json(
                 ["status" => $this->status, "success" => true,
                 "message" => " Province deleted  successfully"]);
+        }
+
+
+    public function PaymentAddress($id){
+
+        $clientRegisterData = Clientregistration::where('province',$id)->first();
+
+            if($clientRegisterData) {
+                return response()->json(["status" => $this->status, "success" => true, "data" => $clientRegisterData]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+
         }
 
 }
