@@ -216,8 +216,10 @@ function PaymentCreate() {
                              {errors?.clientcode?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Client Code contain only Numbers & Alphabets</label></div>}
                             </div>
                       </div>
+                      
+                      <div className="form-row">
+                      <div className="form-group col-md-6">
 
-                      <div className="form-group">
                         <label>P/I &nbsp;<span style={{ color: 'red' }}>*</span>
                         </label>
                             <select className="form-control" id="pi" name="pi" {...register("pi", { required: true })} aria-invalid={errors?.pi ? "true" : "false"}>
@@ -228,8 +230,11 @@ function PaymentCreate() {
                             {errors?.pi?.type === 'required' &&  <div className='text-danger text_error'><label className="errlabel">Please select P/I</label>
                         </div>}
                         </div>
+
                         {/* AMC Extra Fields Start */}
+
                         {selectedValue === 'AMC' && (
+                        <div className="form-group col-md-6">
                         <div className="form-group">
                           <label>Renewel Month &nbsp;<span style={{ color: 'red' }}>*</span>
                           </label>
@@ -238,7 +243,12 @@ function PaymentCreate() {
                               aria-invalid={errors?.renewelmonth ? "true" : "false"}  />
                               {errors?.renewelmonth?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">AMC Date is required</label></div>}
                         </div>
+                        </div>
                         )}
+                        </div>
+
+
+
                         {selectedValue === 'AMC' && (
                         <div className="form-group">
                           <label>AMC Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -285,7 +295,7 @@ function PaymentCreate() {
 
                         <div className="form-group">
                           <label>Paid</label>
-                            <input type="text" className="form-control" name="paid" value={paidvalue} {...register("paid", {onChange:paidvalueChange, pattern: {value: /^[0-9\b]+$/, } })}  />
+                            <input type="text" className="form-control" name="paid" value={ paidvalue} {...register("paid", {onChange:paidvalueChange, pattern: {value: /^[0-9\b]+$/, } })}  />
                              {errors?.paid?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Paid Value can contain only Numbers</label></div>}
                         </div>
 

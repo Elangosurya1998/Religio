@@ -101,13 +101,14 @@ function PaymentList() {
               <table className="table table-striped Mytable">
                 <thead>
                   <tr>
-                    <th>Congregation</th>
                     <th>Province</th>
                     <th>Financial Year</th>
                     <th>Client Type</th>
                     <th>Project Value</th>
                     <th>Total</th>
                     <th>Paid</th>
+                    <th>Balance</th>
+                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -115,13 +116,14 @@ function PaymentList() {
                   {
                     register && register.map(item => (
                       <tr key={item.id}>
-                        <td>{item.congregation}</td>
                         <td>{item.province}</td>
                         <td>{item.financialyear}</td>
                         <td>{item.clienttype}</td>
-                        <td>{item.projectvalue}</td>
-                        <td>{item.total}</td>
-                        <td>{item.paid}</td>
+                        <td><span>&#8377; </span>{item.projectvalue}</td>
+                        <td><span>&#8377; </span>{item.total}</td>
+                        <td><span>&#8377; </span>{item.paid}</td>
+                        <td><span>&#8377; </span>{item.balance}</td>
+                        <td>{item.balance == 0 ? "Completed" : "Pending"}</td>
 
                         <td id="noprint">
                           <a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
