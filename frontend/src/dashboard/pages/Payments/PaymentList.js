@@ -121,7 +121,7 @@ function PaymentList() {
                         <td>{item.clienttype}</td>
                         <td><span>&#8377; </span>{item.projectvalue}</td>
                         <td><span>&#8377; </span>{item.total}</td>
-                        <td><span>&#8377; </span>{item.paid}</td>
+                        <td><span>&#8377; </span>{item.paid == null ? '0' : item.paid}</td>
                         <td><span>&#8377; </span>{item.balance}</td>
                         <td>{item.balance == 0 ? "Completed" : "Pending"}</td>
 

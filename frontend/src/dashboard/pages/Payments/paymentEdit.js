@@ -299,7 +299,7 @@ function PaymentEdit() {
                 )}
 
                 <div className="form-group">
-                  <label>GST</label>
+                  <label>GST 18%</label>
                   <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} readOnly {...register("gst")} />
                 </div>
 
