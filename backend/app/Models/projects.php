@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Projects extends Model
 {
+    use HasFactory;
 
+    protected $table = 'projects';
     protected $fillable = [
         'id',
         'congregation',
@@ -17,7 +19,9 @@ class Projects extends Model
         'instance',
         'testURL',
         'textusername',
-        'textpassword'
-        
+        'textpassword',
+        'prodURL',
+        'produsername',
+        'prodpassword'
     ];
 }
