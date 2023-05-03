@@ -7,7 +7,7 @@ function Footer() {
         <div className="footer-area footer-padding">
           <div className="container">
             <div className="row  justify-content-between">
-              <div className="col-lg-3 col-md-4 col-sm-8">
+              <div className="col-lg-4 col-md-4 col-sm-8">
                 <div className="single-footer-caption mb-30">
                   {/* logo */}
                   <div className="footer-logo">
@@ -34,7 +34,7 @@ function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 col-sm-7">
+              {/* <div className="col-lg-2 col-md-4 col-sm-7">
                 <div className="single-footer-caption mb-50">
                   <div className="footer-tittle">
                     <h4>Support</h4>
@@ -47,7 +47,7 @@ function Footer() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-lg-3 col-md-6 col-sm-8">
                 <div className="single-footer-caption mb-50">
                   <div className="footer-tittle">
