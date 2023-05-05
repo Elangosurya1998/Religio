@@ -9,8 +9,11 @@ import Navbar from "../../includes/Navbar";
 function Trainningstatuscreate() {
 
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' }); 
-    const [state, setState] = useState("");
-    
+   
+    // checkbox form
+    const [state, setState] = useState("onsite");
+
+  
     const navigate = useNavigate();
 
     const handleNavigation =()=>{
@@ -23,20 +26,18 @@ function Trainningstatuscreate() {
 
 
     function onSubmtionlinecreate(datas,e){
-     console.log(datas);
-
-
+      const datass = new FormData();
+      datass.append('online', selectedFiles);
      axios.post(`${ApiUrl}/onlinemeetstatuscreate`,datas)
      .then((response) => {
-       axios.post(`${ApiUrl}/upload`,datas)
+       axios.post(`${ApiUrl}/upload`,datass)
      .then((response) => {
        console.log(response);
      }).catch((err)=>{
       console.log(err);
      })
 
-      // axios.post(`${ApiUrl}/onlinemeetstatuscreate`,datas)
-      // .then((response) => {
+   
         if (response.status === 200) {
           Swal.fire(
               'Online status Successfully..!',
@@ -57,20 +58,20 @@ function Trainningstatuscreate() {
       })
       
     }
+    const changeHandlers = (event) =>{
+      setSelectedFiles(event.target.files[0]);
+     }
+     const [selectedFiles, setSelectedFiles] = useState();
 
     
 
     function onSubmitonsitecreate(data,e){
-
-      const formData = new FormData();
-
-            
+      const formData = new FormData();    
       formData.append('onsite', selectedFile);
       console.log(data);
     axios.post(`${ApiUrl}/onsitemeetstatuscreate`,data)
       .then((response) => {
         axios.post(`${ApiUrl}/onsiteupload`,formData)
-       
       .then((response) => {
         console.log(response);
       }).catch((err)=>{
@@ -120,14 +121,15 @@ function Trainningstatuscreate() {
 
                     <div className="form-group">
                     <div className="form-group col-md-6">
-                    <h2 className="card-title">Trainning Status</h2>
+                    {/* <h2 className="card-title">Trainning Status</h2> */}
                     <div class="row">
                     <div className="form-group col-md-6">
-                    <input class="form-check-input" type="checkbox"  checked={state === "online"} onChange={() => setState("online")  } />
+                    <input class="form-check-input" type="checkbox" checked={state === "online" } onChange={() => setState("online")} />
                     <p>Online</p>
                     </div>
                     <div className="form-group col-md-6">
-                    <input class="form-check-input" type="checkbox" checked={state === "onsite"} onChange={() => setState("onsite")} />         
+                    <input class="form-check-input" type="checkbox" checked={state === "onsite" } onChange={(checked) => setState("onsite")}
+                    defaultChecked={state === "onsite" }/>         
                     <p>Onsite</p>
                     </div>
                     </div>
@@ -144,21 +146,21 @@ function Trainningstatuscreate() {
                     <label for="produsername">Meeting &nbsp;<span style={{ color: 'red' }}>*</span></label>
                     <div className="form-group col-md-6">
                     <p><label>
-                        <input type="radio" className="form-check-input" name="onlinemeeting" id="YES" value="Google meet" 
+                        <input type="radio" className="form-check-input" name="onlinemeeting"  value="Google meet" 
                       {...register("onlinemeeting")}/>
                           Google meet
                           </label>
                           </p>
                       <p>
                         <label>
-                        <input type="radio" className="form-check-input" name="onlinemeeting" id="NO" value="Zoom"
+                        <input type="radio" className="form-check-input" name="onlinemeeting" value="Zoom"
                         {...register("onlinemeeting")}
                          />
                        Zoom</label>
                         </p>
                         <p>
                         <label>
-                        <input type="radio" className="form-check-input" name="onlinemeeting" id="NO" value="Skype"
+                        <input type="radio" className="form-check-input" name="onlinemeeting"  value="Skype"
                         {...register("onlinemeeting")}
                          />
                         Skype</label>
@@ -199,7 +201,7 @@ function Trainningstatuscreate() {
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="online" 
-                              {...register("online", { required: true})}
+                              {...register("online", { required: true, onChange:changeHandlers})}
                               aria-invalid={errors?.online ? "true" : "false"}/>
                                {errors?.online?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
                             </div>

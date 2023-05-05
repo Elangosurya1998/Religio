@@ -63,8 +63,8 @@ function Sidemenubar() {
             <i className="mdi mdi-cash-multiple menu-icon" /></Link>
         </li>
   
-        <li className={`${navitem} ${pathname == '/Religio/ProjectstatusLayouts' && 'active'}`}>
-          <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >
+        <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
+          <Link to="/Religio/Tab" className="nav-link" >
             <span className="menu-title">Project Status</span>
             <i className="mdi mdi-file-document menu-icon" /></Link>
         </li>

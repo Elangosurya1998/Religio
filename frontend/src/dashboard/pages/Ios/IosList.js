@@ -76,12 +76,12 @@ function IosList() {
                 </div>
               </div>
               <div class="row">
-                <table className="table table-striped Mytable table-responsive mx-auto w-auto">
+                <table className="table table-striped Mytable table-responsive">
                   <thead>
                     <tr>
 
-                      <th>IOS Target Date</th>
-                      <th>IOS Status</th>
+                      <th>Android Target Date</th>
+                      <th>Android Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>

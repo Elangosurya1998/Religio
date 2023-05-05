@@ -21,6 +21,19 @@ function ProjectstatusEdit() {
   }, [])
 
 
+  const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'); 
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(false);
+  const myStyle = {
+  position: 'absolute',
+  right: '10px',
+  top: '70%',
+  transform: 'translateY(-50%)',
+  cursor: 'pointer',
+  cursor: 'pointer'
+  };
+
 
   const navigate = useNavigate();
 
@@ -173,16 +186,18 @@ function ProjectstatusEdit() {
                   <label for="exampletestURL">Test URL</label>
 
                   <input type="text" className="form-control" name="testURL" placeholder="Test URL"
-                    {...register("testURL", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                    {...register("testURL", { required: true, pattern: { value: regex } })}
                     aria-invalid={errors?.testURL ? "true" : "false"} />
                   {errors?.testURL?.type === 'required' && <div className='text-danger text_error'>Test URL is required</div>}
+                  {errors?.testURL?.type === 'pattern' && <div className='text-danger text_error'>only used live URL</div>}
                 </div>
                 <div className="form-group col-md-6">
                   <label for="exampleInputPassword">Production URL</label>
                   <input type="text" className="form-control" name="prodURL" placeholder="Production URL"
-                    {...register("prodURL", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                    {...register("prodURL", { required: true, pattern: { value: regex } })}
                     aria-invalid={errors?.prodURL ? "true" : "false"} />
                   {errors?.prodURL?.type === 'required' && <div className='text-danger text_error'>Production URL is required</div>}
+                  {errors?.prodURL?.type === 'pattern' && <div className='text-danger text_error'>only used live URL</div>}
                 </div>
               </div>
 
@@ -199,11 +214,14 @@ function ProjectstatusEdit() {
 
                 <div className="form-group col-md-6">
                   <label for="exampleInputPassword">Test Password</label>
-                  <input type="text" className="form-control" name="textpassword" placeholder="Text Password"
-                    {...register("textpassword", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
-                    aria-invalid={errors?.textpassword ? "true" : "false"} />
-                  {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}
-                  {errors?.textpassword?.type === "pattern" && <div className='text-danger text_error '>Password can contain only alphabets</div>}
+                
+                  <input type={showPassword ? "text" : "password"} className="form-control" name="textpassword" placeholder="Text Password"
+                    {...register("textpassword", { required: true })}
+                    aria-invalid={errors?.textpassword ? "true" : "false"}  autoComplete="off"/>
+                    <span onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <i className="fa fa-eye-slash" style={myStyle}/> 
+                        : <i className="fa fa-eye" style={myStyle} />}</span>
+                  {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}   
                 </div>
               </div>
 
@@ -221,11 +239,13 @@ function ProjectstatusEdit() {
 
                 <div className="form-group col-md-6">
                   <label for="prodpassword">Production Password</label>
-                  <input type="text" className="form-control" name="prodpassword" placeholder="Production Password"
-                    {...register("prodpassword", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                  <input type={viewPassword ? "text" : "password"} className="form-control" name="prodpassword" placeholder="Production Password"
+                    {...register("prodpassword", { required: true })}
                     aria-invalid={errors?.prodpassword ? "true" : "false"} />
+                    <span onClick={() => setViewPassword(!viewPassword)}>
+                        {viewPassword ? <i className="fa fa-eye-slash" style={myStyle}/> 
+                        : <i className="fa fa-eye" style={myStyle} />}</span>
                   {errors?.prodpassword?.type === 'required' && <div className='text-danger text_error'>Production Password is required</div>}
-                  {errors?.prodpassword?.type === "pattern" && <div className='text-danger text_error '>Production Password can contain only alphabets</div>}
                 </div>
               </div>
 

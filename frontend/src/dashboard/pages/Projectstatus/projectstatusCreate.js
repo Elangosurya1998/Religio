@@ -10,7 +10,19 @@ function Projectstatuscreate() {
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' });
   const navigate = useNavigate();
 
-
+  const regex = new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'); 
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(false);
+  const myStyle = {
+  position: 'absolute',
+  right: '10px',
+  top: '70%',
+  transform: 'translateY(-50%)',
+  cursor: 'pointer',
+  cursor: 'pointer'
+  };
+ 
   useEffect(() => {
     fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
       return res.json();
@@ -66,6 +78,8 @@ function Projectstatuscreate() {
       })
 
   }
+
+  
 
 
 
@@ -156,16 +170,18 @@ function Projectstatuscreate() {
                   <label for="exampletestURL">Test URL&nbsp;<span style={{ color: 'red' }}>*</span></label>
 
                   <input type="text" className="form-control" name="testURL" placeholder="Test URL"
-                    {...register("testURL", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                    {...register("testURL", { required: true, pattern: { value : regex}})}
                     aria-invalid={errors?.testURL ? "true" : "false"} />
                   {errors?.testURL?.type === 'required' && <div className='text-danger text_error'>Test URL is required</div>}
+                  {errors?.testURL?.type === "pattern" && <div className='text-danger text_error '>only used live URL</div>}
                 </div>
                 <div className="form-group col-md-6">
                   <label for="exampleInputPassword">Production URL&nbsp;<span style={{ color: 'red' }}>*</span></label>
                   <input type="text" className="form-control" name="prodURL" placeholder="Production URL"
-                    {...register("prodURL", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                    {...register("prodURL", { required: true,pattern: { value : regex } })}
                     aria-invalid={errors?.prodURL ? "true" : "false"} />
-                  {errors?.prodURL?.type === 'required' && <div className='text-danger text_error'>Product URL is required</div>}
+                  {errors?.prodURL?.type === 'required' && <div className='text-danger text_error'>Production URL is required</div>}
+                  {errors?.prodURL?.type === "pattern" && <div className='text-danger text_error '>only used live URL</div>}
                 </div>
               </div>
 
@@ -175,17 +191,21 @@ function Projectstatuscreate() {
                   <label for="exampleInputUsername">Test Username&nbsp;<span style={{ color: 'red' }}>*</span></label>
                   <input type="text" className="form-control" name="textusername" placeholder="Text Username"
                     {...register("textusername", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
-                    aria-invalid={errors?.textusername ? "true" : "false"} />
+                    aria-invalid={errors?.textusername ? "true" : "false"} autoComplete="off"/>
                   {errors?.textusername?.type === 'required' && <div className='text-danger text_error'>Username is required</div>}
                   {errors?.textusername?.type === "pattern" && <div className='text-danger text_error '>Username can contain only alphabets</div>}
                 </div>
 
                 <div className="form-group col-md-6">
                   <label for="exampleInputPassword">Test Password&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                  <input type="text" className="form-control" name="textpassword" placeholder="Text Password"
+ 
+                  <input type={showPassword ? "text" : "password"} className="form-control" name="textpassword" placeholder="Text Password"
                     {...register("textpassword", { required: true })}
-                    aria-invalid={errors?.textpassword ? "true" : "false"} />
-                  {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}
+                    aria-invalid={errors?.textpassword ? "true" : "false"}  autoComplete="off"/>
+                    <span onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <i className="fa fa-eye-slash" style={myStyle}/> 
+                        : <i className="fa fa-eye" style={myStyle} />}</span>
+                  {errors?.textpassword?.type === 'required' && <div className='text-danger text_error'>Password is required</div>}   
 
                 </div>
               </div>
@@ -199,15 +219,18 @@ function Projectstatuscreate() {
                     {...register("produsername", { required: true })}
                     aria-invalid={errors?.produsername ? "true" : "false"} />
                   {errors?.produsername?.type === 'required' && <div className='text-danger text_error'>produsername is required</div>}
-
                 </div>
 
                 <div className="form-group col-md-6">
                   <label for="prodpassword">Production Password&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                  <input type="text" className="form-control" name="prodpassword" placeholder="Product Password"
+                  
+                  <input type={viewPassword ? "text" : "password"} className="form-control" name="prodpassword" placeholder="Production Password"
                     {...register("prodpassword", { required: true })}
                     aria-invalid={errors?.prodpassword ? "true" : "false"} />
-                  {errors?.prodpassword?.type === 'required' && <div className='text-danger text_error'>Product Password is required</div>}
+                    <span onClick={() => setViewPassword(!viewPassword)}>
+                        {viewPassword ? <i className="fa fa-eye-slash" style={myStyle}/> 
+                        : <i className="fa fa-eye" style={myStyle} />}</span>
+                  {errors?.prodpassword?.type === 'required' && <div className='text-danger text_error'>Production Password is required</div>}
 
                 </div>
               </div>
