@@ -17,38 +17,38 @@ function ReguserList() {
     });
     $(function () {
         $('table')
-          .on('click', 'th', function () {
-            var index = $(this).index(),
-                rows = [],
-                thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
-      
-            $('#example th').removeClass('asc desc');
-            $(this).addClass(thClass);
-      
-            $('#example tbody tr').each(function (index, row) {
-              rows.push($(row).detach());
+            .on('click', 'th', function () {
+                var index = $(this).index(),
+                    rows = [],
+                    thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
+
+                $('#example th').removeClass('asc desc');
+                $(this).addClass(thClass);
+
+                $('#example tbody tr').each(function (index, row) {
+                    rows.push($(row).detach());
+                });
+
+                rows.sort(function (a, b) {
+                    var aValue = $(a).find('td').eq(index).text(),
+                        bValue = $(b).find('td').eq(index).text();
+
+                    return aValue > bValue
+                        ? 1
+                        : aValue < bValue
+                            ? -1
+                            : 0;
+                });
+
+                if ($(this).hasClass('desc')) {
+                    rows.reverse();
+                }
+
+                $.each(rows, function (index, row) {
+                    $('#example tbody').append(row);
+                });
             });
-      
-            rows.sort(function (a, b) {
-              var aValue = $(a).find('td').eq(index).text(),
-                  bValue = $(b).find('td').eq(index).text();
-      
-              return aValue > bValue
-                   ? 1
-                   : aValue < bValue
-                   ? -1
-                   : 0;
-            });
-      
-            if ($(this).hasClass('desc')) {
-              rows.reverse();
-            }
-      
-            $.each(rows, function (index, row) {
-              $('#example tbody').append(row);
-            });
-          });
-      });
+    });
     const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
 
     const [User, Setuser] = useState([]);
@@ -90,8 +90,8 @@ function ReguserList() {
         })
     }
     const navigate = useNavigate();
-    const EditCongregation =async (e,id)=>{
-      navigate("/Religio/UserListEdit/" + id);
+    const EditCongregation = async (e, id) => {
+        navigate("/Religio/UserListEdit/" + id);
     }
     return (
         <div className="content-wrapper">
@@ -113,35 +113,31 @@ function ReguserList() {
                                 <div className="col-lg-6"></div>
                                 <div className="col-lg-2">
                                     {/* <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> */}
-                                    {isLogedIn?.role == "admin" ?  <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> : ""}
+                                    {isLogedIn?.role == "admin" ? <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> : ""}
                                 </div>
                             </div>
                             <br></br>
-                            <table className="table table-striped UserList"  id="example" style={{cursor:"pointer"}}>
+                            <table className="table table-striped UserList" id="example" style={{ cursor: "pointer" }}>
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>User Name </th>
                                         <th>Email</th>
                                         <th>Assigned Role</th>
                                         {isLogedIn?.role == "admin" ? <th>Actions</th> : ""}
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         User && User.map(item => (
                                             <tr key={item.id}>
-                                                <td>{item.id}</td>
                                                 <td>{item.username}</td>
                                                 <td>{item.email}</td>
                                                 <td>{item.role}</td>
                                                 {isLogedIn?.role == "admin" ? <td id="noprint">
-                                                    <a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print">Edit</a> /
+                                                    <a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
                                                     &nbsp;
-                                                    <a onClick={(e) => deleteUser(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                                                </td> : "" }
-                                                
+                                                    <a onClick={(e) => deleteUser(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
+                                                </td> : ""}
                                             </tr>
                                         ))
                                     }

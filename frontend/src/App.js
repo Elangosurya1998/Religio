@@ -61,25 +61,26 @@ function App() {
     <BrowserRouter>
       <ScrolltoTop />
       <Routes>
-          <Route exact path="/" element={<Layoutsland />} />
-          <Route exact path="/Religio/Demo" element={<Layoutsland />} />
-          <Route exact path="/Religio/Blog" element={<Layoutsland />} />
-          <Route path='/forget' element={<ForgetPassword />} />
-          <Route path='/reset' element={<ResetPassword />} />
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/register' element={<Register />} />
+        <Route exact path="/" element={<Layoutsland />} />
+        <Route exact path="/Religio/Demo" element={<Layoutsland />} />
+        <Route exact path="/Religio/Blog" element={<Layoutsland />} />
+        <Route path='/forget' element={<ForgetPassword />} />
+        <Route path='/reset' element={<ResetPassword />} />
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />} />
         <Route element={<UserPrivate />}>
           <Route path='/UserPage' element={<User />}></Route>
+          <Route exact path="/Religio/Congregation" element={<ConglistLayouts />} />
+          <Route exact path="/Religio/Congregation/View/:id" element={<CongViewLayouts />} />
+          <Route exact path="/Religio/Province" element={<ProlistLayouts />} />
+          <Route exact path="/Religio/Province/View/:id" element={<ProViewLayouts />} />
+          <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
+          <Route exact path="/Religio/Clientregistration/View/:id" element={<RegViewLayouts />} />
           <Route exact path="/Religio/PaymentStatus" element={<PaymentlistFile />} />
           <Route exact path="/Religio/Payment/View/:id" element={<PaymentViewFile />} />
-          <Route exact path="/Religio/Congregation" element={<ConglistLayouts />} />
-          <Route exact path="/Religio/Congregation/Edit/:id" element={<CongeditLayouts />} />
-          <Route exact path="/Religio/Province" element={<ProlistLayouts />} />
-          <Route exact path="/Religio/Province/Edit/:id" element={<ProeditLayouts />} />
           <Route exact path="/Religio/ProjectstatusLayouts" element={<ProjectstatusLayouts />} />
-          <Route exact path="/Religio/ClientRegistration" element={<RegLayouts />} />
-          <Route exact path="/Religio/Clientregistration/Edit/:id" element={<RegeditLayouts />} />
           <Route exact path="/Religio/UsersList" element={<UsersList />} />
+          <Route exact path="/Religio/Tab" element={< Tabdata />} />
         </Route>
 
         <Route path='/register' element={<Register />} />
@@ -100,10 +101,8 @@ function App() {
           <Route exact path="/Religio/Province/Edit/:id" element={<ProeditLayouts />} />
           <Route exact path="/Religio/Province/View/:id" element={<ProViewLayouts />} />
           <Route exact path="/Religio/Province/Add" element={<ProaddLayouts />} />
-
           <Route exact path="/Religio/Payment/Edit/:id" element={<PaymentEditFile />} />
           <Route exact path="/Religio/Payment/View/:id" element={<PaymentViewFile />} />
-
           <Route exact path="/Religio/Projectstatus" element={<ProjectstatusLayouts />} />
           <Route exact path="/Religio/ProjectstatusAdd" element={< ProjectstatusaddLayouts />} />
           <Route exact path="/Religio/ProjectstatusEdit/:id" element={< ProjectstatuseditLayouts />} />
