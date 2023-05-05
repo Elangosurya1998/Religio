@@ -80,11 +80,17 @@ function ProvinceEdit() {
     var getValue = State.getStatesOfCountry(value);
     data(getValue);
   }
-  const [selectState, data] = useState([]);
+ const [ selectState, data ] = useState([]);
+ const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+ function editData(){
+  $(".updatebut").show();
+  $('.prodata').prop("disabled", false);
+ $(".editbut").hide();
+ }
+      return (
+ <div className="content-wrapper">
+        <div className="page-header">
 
-  return (
-    <div className="content-wrapper">
-      <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
@@ -104,9 +110,18 @@ function ProvinceEdit() {
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <form
-                className="form-sample"
-                onSubmit={handleSubmit(onSubmitCongregationform)}>
+            <div className="row">
+              <div className="col-lg-4">
+              </div>
+              <div className="col-lg-6"></div>
+              <div className="col-lg-2">
+              {isLogedIn?.role == "admin" ? <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label> : ""}
+             
+               </div>
+            </div>
+            <br></br>
+             <form className="form-sample" onSubmit={handleSubmit(onSubmitCongregationform)} > 
+
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">

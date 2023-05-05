@@ -116,7 +116,7 @@ function CongregationList() {
                     <th>Email</th>
                     <th>Address1</th>
                     <th>Postcode</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -128,31 +128,9 @@ function CongregationList() {
                         <td>{item.email}</td>
                         <td>{item.address1}</td>
                         <td>{item.postcode}</td>
-                        {isLogedIn?.role == "admin" ? (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => Viewcongregation(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => EditCongregation(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-pencil-box"
-                              id="print">
-                              {" "}
-                            </a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => deleteCongregation(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-delete"
-                              id="print"></a>
-                          </td>
-                        ) : (
-                          ""
-                        )}
+                        {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
+                          &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        </td> : <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a></td>}
                       </tr>
                     ))}
                 </tbody>

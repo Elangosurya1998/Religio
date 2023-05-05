@@ -123,14 +123,13 @@ function ClientRegistrationEdit() {
       .then((response) => {
         SetProvince(response.data.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  const changeHandler = (event) => {
-    $(".filelabel").hide();
-    var filePath = event.target.value;
-    var allowedExtensions = /(\.pdf|\.docx|\.pptx|\.doc)$/i;
+      }
+      const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+      const changeHandler = (event) => {     
+        setSelectedFile(event.target.files[0]);
+        $(".filelabel").hide();
+      };
+      const [selectedFile, setSelectedFile] = useState();
 
     if (!allowedExtensions.exec(filePath)) {
       $("#uniquefile").show();

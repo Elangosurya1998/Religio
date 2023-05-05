@@ -117,7 +117,7 @@ function ProvinceList() {
                     {/* <th>Postcode</th> */}
                     {/* <th>City</th> */}
                     {/* <th>country</th> */}
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -132,29 +132,9 @@ function ProvinceList() {
                         {/* <td>{item.Postcode }</td> */}
                         {/* <td>{item.City }</td> */}
                         {/* <td>{item.country }</td> */}
-                        {isLogedIn?.role == "admin" ? (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => ViewProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => EditProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-pencil-box"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => deleteProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-delete"
-                              id="print"></a>
-                          </td>
-                        ) : (
-                          ""
-                        )}
+                        {isLogedIn?.role == "admin" ? <td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a>/
+                          &nbsp;<a onClick={(e) => deleteProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
+                        </td> :<td id="noprint" ><a onClick={(e) => EditProvince(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a></td>}
                       </tr>
                     ))}
                 </tbody>

@@ -353,17 +353,17 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr >
                                     <td>
-                                    <img src="http://localhost:3000/logo.png" style="width:180px">
+                                    <img src="http://172.104.76.206:3000/logo.png" style="width:180px">
                                     </td>   
                                 </tr>
                                 <br>
                                 <tr>
                                     <td>
-                                        <h2><b>Welcome back</b></h2> <br>
-                                        <p>You are receiving this email because we received a password reset request for your account.<p> <br>
-                                        <p> If You Want to Change Your Password Click Here to <a href="http://localhost:3000/reset" style="text-decoration: none"><h4>Reset Password</h4></a> </p><br>
+                                        <h2><b>Welcome back</b></h2>
+                                        <p>You are receiving this email because we received a password reset request for your account.<p>
+                                        <p> If You Want to Change Your Password Click Here to <a href="http://172.104.76.206:3000/reset" style="text-decoration: none"><h4>Reset Password</h4></a> </p>
                                         <h3> <b>Pincode : {{ $data }}</b> </h3>
-                                        <p>This password reset link will expire in 60 minutes.<p><br>
+                                        <p>This password reset link will expire in 60 minutes.<p>
                                         <p>If you did not request a password reset, no further action is required.</p><br>
                                         <h4 style="font-size: 12px;">Thank you,<br/><b>Religio Team</b></h4>
                                     </td>
