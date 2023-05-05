@@ -51,16 +51,11 @@ function Footer() {
               <div className="col-lg-3 col-md-6 col-sm-8">
                 <div className="single-footer-caption mb-50">
                   <div className="footer-tittle">
-                    <h4>Newsletter</h4>
-                    <div className="footer-pera footer-pera2">
-                      <p>Heaven fruitful doesn't over lesser in days. Appear </p>
-                    </div>
-                    {/* Form */}
-                    <div className="footer-form">
-                      <div id="mc_embed_signup">
-
-                      </div>
-                    </div>
+                    <h4>Customer Support</h4>
+                    <ul>
+                      <li><a href="mailto:cristo@boscosofttech.com"><i className="fas fa-envelope"></i>&nbsp; cristo@boscosofttech.com</a></li>
+                      <li><i className="fas fa-phone"></i>&nbsp; 9988776655</li>
+                    </ul>
                   </div>
                 </div>
               </div>

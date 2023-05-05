@@ -18,6 +18,7 @@ function PaymentList() {
     });
   });
 
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Paymentlist`).then((res) => {
       return res.json();
@@ -32,7 +33,6 @@ function PaymentList() {
     fetchData();
   }, [])
 
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const [register, SetClientregister] = useState([]);
   const navigate = useNavigate();
 
@@ -68,22 +68,19 @@ function PaymentList() {
       }
     })
   }
+  const Moneyformat = (num) => {
+    const curr = new Intl.NumberFormat('en-IN').format(num);
+    return curr;
+  };
 
   return (
     <div className="content-wrapper">
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
-            <i className="mdi mdi-account-plus menu-icon" />
-          </span> Payments
+            <i className="mdi mdi-cash-multiple menu-icon" />
+          </span> Payment Details
         </h3>
-        <nav aria-label="breadcrumb">
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-            </li>
-          </ul>
-        </nav>
       </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
@@ -95,8 +92,10 @@ function PaymentList() {
                 </div>
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                  {/* <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link> */}
-                  {isLogedIn?.role == "admin" ?  <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link> : ""}
+                  {isLogedIn?.role == "admin" ? (
+                    <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link>
+                  ) : ("")}
+
                 </div>
               </div>
               <br></br>
@@ -111,8 +110,7 @@ function PaymentList() {
                     <th>Paid</th>
                     <th>Balance</th>
                     <th>Status</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> :<th>Action</th>}
-
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -122,18 +120,21 @@ function PaymentList() {
                         <td>{item.province}</td>
                         <td>{item.financialyear}</td>
                         <td>{item.clienttype}</td>
-                        <td><span>&#8377; </span>{item.projectvalue}</td>
-                        <td><span>&#8377; </span>{item.total}</td>
-                        <td><span>&#8377; </span>{item.paid == null ? '0' : item.paid}</td>
-                        <td><span>&#8377; </span>{item.balance}</td>
+                        <td><span>&#8377; </span>{Moneyformat(item.projectvalue)}</td>
+                        <td><span>&#8377; </span>{Moneyformat(item.total)}</td>
+                        <td><span>&#8377; </span>{item.paid == null ? '0' : Moneyformat(item.paid)}</td>
+                        <td><span>&#8377; </span>{Moneyformat(item.balance)}</td>
                         <td>{item.balance == 0 ? "Completed" : "Pending"}</td>
-                        <td id="noprint">
-                          <a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
-                          &nbsp;
-                          <a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
-                          &nbsp;
-                          <a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
-                        </td> : <td id="noprint"><a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">&nbsp;View</a></td>}
+                        {isLogedIn?.role == "admin" ? (
+                          <td id="noprint">
+                            <a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
+                            &nbsp;
+                            <a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
+                            &nbsp;
+                            <a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
+                          </td>
+                        ) : <td id="noprint"><a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a></td>
+                        }
                       </tr>
                     ))
                   }

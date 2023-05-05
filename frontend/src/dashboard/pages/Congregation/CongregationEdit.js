@@ -19,42 +19,45 @@ function CongregationEdit() {
   const value = country.getAllCountries();
   const { id } = useParams();
 
-      useEffect(() => {
-        fetch(`${ApiUrl}/Religio/Congregationedit/${id}`).then((res) => {
-            return res.json();
-        }).then((resp) => {
-           reset(resp.data[0]);
-           const value =resp.data[0].country
-           const State = require('country-state-city').State
-           var getValue = State.getStatesOfCountry(value) 
-           data(getValue);
-           $(".updatebut").hide();
-           $('.congdata').prop("disabled", true);
-        }).catch((err) => {
-            console.log(err.message);
-        })
-      }, [])
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
-  function onSubmitCongregationform(data,e){
-    axios.put(`${ApiUrl}/Religio/Congregationupdate/${id}`,data)
-    .then((Response)=>{
-      if (Response.status === 200) {
-        Swal.fire(
-          'Updated Successfully..!',
-          'Congregation Update ..',
-          'success'
-        );
-        e.target.reset();
-    navigate('/Religio/Congregation');
-    }     
-  }).catch((err)=>{
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Something went wrong!',
-      footer: err.message
-    })
-  })  
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/Congregationedit/${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        reset(resp.data[0]);
+        const value = resp.data[0].country;
+        const State = require("country-state-city").State;
+        var getValue = State.getStatesOfCountry(value);
+        data(getValue);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  function onSubmitCongregationform(data, e) {
+    axios
+      .put(`${ApiUrl}/Religio/Congregationupdate/${id}`, data)
+      .then((Response) => {
+        if (Response.status === 200) {
+          Swal.fire(
+            "Updated Successfully..!",
+            "Congregation Updated ..",
+            "success"
+          );
+          e.target.reset();
+          navigate("/Religio/Congregation");
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: err.message,
+        });
+      });
   }
   function countrySelect(event) {
     var value = event.target.value;
@@ -85,14 +88,6 @@ function CongregationEdit() {
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-            <div className="row">
-              <div className="col-lg-4">
-              </div>
-              <div className="col-lg-6"></div>
-              <div className="col-lg-2">
-              {isLogedIn?.role == "admin" ?  <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label> : ""}
-               </div>
-            </div>
               {/* <div className="row"><b className="card-description"> Congregation </b></div> */}
               <form
                 className="form-sample"
