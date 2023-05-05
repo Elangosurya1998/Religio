@@ -105,6 +105,7 @@ function ClientRegistrationEdit() {
         console.log(err);
       })
       }
+      const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
       const changeHandler = (event) => {     
         setSelectedFile(event.target.files[0]);
         $(".filelabel").hide();
@@ -143,7 +144,7 @@ function ClientRegistrationEdit() {
               </div>
               <div className="col-lg-6"></div>
               <div className="col-lg-2"> 
-              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+              {isLogedIn?.role == "admin" ? <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label> : ""}
                </div>
             </div>
             <br></br>

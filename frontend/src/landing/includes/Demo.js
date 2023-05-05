@@ -1,18 +1,33 @@
-import emailjs from "emailjs-com";
+import axios from 'axios';
+import ApiUrl from '../../dashboard/pages/Api/Api';
+import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form';
+import './app.css';
 
 function Demo() {
-
-  const sendEmail = (e) => {
+  const { register, handleSubmit,  formState: { errors } } = useForm({mode: 'onChange' });
+  const onSubmitform = (data, e) => {
     e.preventDefault();
-
-    emailjs.sendForm("service_6qer626", "template_ryb99tm", e.target, "JiVZwOP-Lb26XJ-_f").then(res => {
-      alert("email sent sucess");
-      e.target.reset();
-    }).catch(err => console.log(err));
-
+    console.log(data);
+    axios.post(`${ApiUrl}/send-email`, data )
+      .then(response => {
+        Swal.fire({
+          title: 'Email Sent Success',
+          text: 'Your Feedback Sent Successfully',
+          icon: 'success',
+          confirmButtonColor: 'green'
+        })
+        e.target.reset();
+      }).catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err.message
+        })
+      })
 
   }
-
   return (
     <main>
       {/* Slider Area Start*/}
@@ -59,31 +74,55 @@ function Demo() {
           </div>
           <div className="row">
             <div className="col-lg-8">
-              <form className="form-contact contact_form" onSubmit={sendEmail}>
+              <form className="form-contact contact_form" id='myForm' onSubmit={handleSubmit(onSubmitform)}>
                 <div className="row">
-                  <div className="col-12">
+                  <div className="col-sm-6">
                     <div className="form-group">
-                      <textarea className="form-control w-100" name="message" id="message" cols={30} rows={9} placeholder=" Enter Message" defaultValue={""} />
+                      <label>Name <span style={{ color: "red" }}>*</span></label>
+                      <input className="form-control valid"  {...register("name", { required: true })}
+                        aria-invalid={errors?.name ? "true" : "false"} name="name" id="name" type="text" placeholder="Enter your name" autoComplete='off' />
+                      {errors?.name?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Name is required *</label></div>}
                     </div>
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
-                      <input className="form-control valid" name="name" id="name" type="text" placeholder="Enter your name" />
+                      <label>Email <span style={{ color: "red" }}>*</span></label>
+                      <input className="form-control valid" {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i })}
+                        aria-invalid={errors?.email ? "true" : "false"} name="email" id="email" type="email" placeholder="Email"  autoComplete='off' />
+                      {errors?.email?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Email is required *</label></div>}
+                      {errors?.email?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Invalid email address *</label></div>}
                     </div>
                   </div>
-                  <div className="col-sm-6">
+                  <div className="col-6">
                     <div className="form-group">
-                      <input className="form-control valid" name="email" id="email" type="email" placeholder="Email" />
+                      <label>Province <span style={{ color: "red" }}>*</span></label>
+                      <input className="form-control"  {...register("province", { required: true })}
+                        aria-invalid={errors?.province ? "true" : "false"} name="province"  id="province" type="text" placeholder="Enter Province" autoComplete='off' />
+                      {errors?.province?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Province Name is required *</label></div>}
+                    </div>
+                  </div>
+                  <div className="col-6">
+                    <div className="form-group">
+                      <label>Mobile Number <span style={{ color: "red" }}>*</span></label>
+                      <input className="form-control" {...register("mobile", { required: true, minLength: 10, maxLength: 12, pattern: /^[]?\d*(?:[.,]\d*)?$/ })}
+                        aria-invalid={errors?.mobile ? "true" : "false"} name="mobile"  id="mobile" type="tel" placeholder="Enter Mobile Number" autoComplete='off' />
+                      {errors?.mobile?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Mobile Number is required *</label></div>}
+                      {errors?.mobile?.type === "pattern" && <div className='text-danger text_error '><label className="errlabel">Mobile Number can contain only Numbers *</label></div>}
+                      {errors?.mobile?.type === "minLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number should be minimum Numbers 10 *</label></div>}
+                      {errors?.mobile?.type === "maxLength" && <div className='text-danger text_error '><label className="errlabel">Mobile Number should be  maximum Numbers12 *</label></div>}
                     </div>
                   </div>
                   <div className="col-12">
                     <div className="form-group">
-                      <input className="form-control" name="subject" id="subject" type="text" placeholder="Enter Subject" />
+                      <label>Message <span style={{ color: "red" }}>*</span></label>
+                      <textarea className="form-control w-100" {...register("message", { required: true })}
+                        aria-invalid={errors?.message ? "true" : "false"} name="message"  id="message" cols={30} rows={9} placeholder=" Enter Message" defaultValue={""}  autoComplete='off' />
+                      {errors?.message?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Message is required *</label></div>}
                     </div>
                   </div>
                 </div>
                 <div className="form-group mt-3">
-                  <button type="submit" className="button button-contactForm boxed-btn radius">Send</button>
+                  <button type="submit" id="submitbtn" className="button button-contactForm boxed-btn radius">Send</button>
                 </div>
               </form>
             </div>

@@ -76,7 +76,7 @@ import $ from 'jquery'
     data(getValue);
   }
  const [ selectState, data ] = useState([]);
- 
+ const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
  function editData(){
   $(".updatebut").show();
   $('.prodata').prop("disabled", false);
@@ -107,8 +107,9 @@ import $ from 'jquery'
               <div className="col-lg-4">
               </div>
               <div className="col-lg-6"></div>
-              <div className="col-lg-2"> 
-              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+              <div className="col-lg-2">
+              {isLogedIn?.role == "admin" ? <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label> : ""}
+             
                </div>
             </div>
             <br></br>

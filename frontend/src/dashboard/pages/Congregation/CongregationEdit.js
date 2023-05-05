@@ -31,7 +31,7 @@ import $ from 'jquery'
             console.log(err.message);
         })
       }, [])
-    
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   function onSubmitCongregationform(data,e){
     axios.put(`${ApiUrl}/Religio/Congregationupdate/${id}`,data)
     .then((Response)=>{
@@ -93,8 +93,8 @@ import $ from 'jquery'
               <div className="col-lg-4">
               </div>
               <div className="col-lg-6"></div>
-              <div className="col-lg-2"> 
-              <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label>
+              <div className="col-lg-2">
+              {isLogedIn?.role == "admin" ?  <label className="btn btn-gradient-light editbut"  onClick={editData} >Edit</label> : ""}
                </div>
             </div>
               {/* <div className="row"><b className="card-description"> Congregation </b></div> */}

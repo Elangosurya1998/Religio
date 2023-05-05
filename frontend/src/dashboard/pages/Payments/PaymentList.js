@@ -32,6 +32,7 @@ function PaymentList() {
     fetchData();
   }, [])
 
+  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
   const [register, SetClientregister] = useState([]);
   const navigate = useNavigate();
 
@@ -94,7 +95,8 @@ function PaymentList() {
                 </div>
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                  <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link>
+                  {/* <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link> */}
+                  {isLogedIn?.role == "admin" ?  <Link to="/Religio/PaymentCreate" className="btn btn-gradient-light">Add</Link> : ""}
                 </div>
               </div>
               <br></br>
@@ -108,7 +110,7 @@ function PaymentList() {
                     <th>Project Value</th>
                     <th>Total</th>
                     <th>Paid</th>
-                    <th>Action</th>
+                    {isLogedIn?.role == "admin" ? <th>Action</th> :<th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -122,14 +124,14 @@ function PaymentList() {
                         <td>{item.projectvalue}</td>
                         <td>{item.total}</td>
                         <td>{item.paid}</td>
-
+                        {isLogedIn?.role == "admin" ? 
                         <td id="noprint">
                           <a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"></a>
                           &nbsp;
                           <a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
                           &nbsp;
                           <a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
-                        </td>
+                        </td> : <td id="noprint"><a onClick={(e) => ViewPaymentStatus(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print">&nbsp;View</a></td>}
                       </tr>
                     ))
                   }

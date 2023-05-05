@@ -99,7 +99,7 @@ function ClientregistrationList() {
                     <th>Name</th>
                     <th>Place</th>
                     <th>Financial Year</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -113,7 +113,7 @@ function ClientregistrationList() {
                         <td>{item.financialyear}</td>
                         {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
                           &nbsp;<a onClick={(e) => deleteregister(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                        </td> : ""}
+                        </td> :  <td id="noprint"><a onClick={(e) => EditClientregistration(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a></td>}
                       </tr>
                     ))
                   }

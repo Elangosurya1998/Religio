@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
+  import { useForm } from "react-hook-form";
+  import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import $ from "jquery";
 
 
+
+$(function () {
+  $("#toggle_rpwd").click(function () {
+    $("#toggle-reye").toggleClass("fa-eye-slash");
+    var type = $("#toggle-reye").hasClass("fa-eye-slash") ? "text" : "password";
+    $("#rpassword").attr("type", type);
+  });
+});
+
+$(function () {
+  $("#toggle_cpwd").click(function () {
+    $("#toggle-ceye").toggleClass("fa-eye-slash");
+    var type = $("#toggle-ceye").hasClass("fa-eye-slash") ? "text" : "password";
+    $("#cpassword").attr("type", type);
+  });
+});
 function Register() {
   const validationSchema = Yup.object().shape({
     username: Yup.string()
@@ -14,8 +31,6 @@ function Register() {
     email: Yup.string()
       .required('* Email is required')
       .email('* Email is invalid'),
-    role: Yup.string()
-      .required('* Role is required'),
     password: Yup.string()
       .min(6, '* Password must be at least 6 characters')
       .required('* Password is required'),
@@ -36,7 +51,7 @@ function Register() {
 
   function onSubmitform(data) {
     axios.post('http://127.0.0.1:8000/api/Register', data)
-      .then((Response) =>{
+      .then((Response) => {
         Swal.fire({
           text: 'Registered successfully',
           icon: 'success',
@@ -68,32 +83,37 @@ function Register() {
                 </div>
                 <form class="pt-3" onSubmit={handleSubmit(onSubmitform)} >
                   <div class="form-group">
-                    <input name="username" placeholder='Enter Username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} />
+                    <input name="username" placeholder='Enter Username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} autoComplete='off' />
                     <div className="invalid-feedback">{errors.username?.message}</div>
                   </div>
                   <div className="form-group">
-                    <input name="email" placeholder='Enter Email' type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                    <input name="email" placeholder='Enter Email' type="text" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} autoComplete='off' />
                     <div className="invalid-feedback">{errors.email?.message}</div>
                   </div>
                   <div className="form-group">
-                    <input name="password" placeholder='Enter Password' type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.password?.message}</div>
+                    <div className="input-group">
+                      <input name="password" placeholder='Enter Password' id='rpassword' type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} autoComplete='off' />
+                      <div className="input-group-append">
+                        <span id="toggle_rpwd" className="input-group-text" style={{ cursor: "pointer" }}><i id="toggle-reye" className="fa fa-eye field_icon"></i></span>
+                      </div>
+                      <div className="invalid-feedback">{errors.password?.message}</div>
+                    </div>
                   </div>
                   <div className="form-group">
-                    <input name="confirmpassword" placeholder='Enter Confirm Password' type="password" {...register('confirmpassword')} className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`} />
-                    <div className="invalid-feedback">{errors.confirmpassword?.message}</div>
+                    <div className="input-group">
+                      <input name="confirmpassword" placeholder='Enter Confirm Password' type="password" id='cpassword' {...register('confirmpassword')} className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`} autoComplete='off' />
+                      <div className="input-group-append">
+                        <span id="toggle_cpwd" className="input-group-text" style={{ cursor: "pointer" }}><i id="toggle-ceye" className="fa fa-eye field_icon"></i></span>
+                      </div>
+                      <div className="invalid-feedback">{errors.confirmpassword?.message}</div>
+                    </div>
                   </div>
                   <div className="form-group">
-                    <select {...register('role')} className={`form-control ${errors.role ? 'is-invalid' : ''}`} name="role" >
-
-                      <option value="select your role" selected>User Type</option>
-
+                    <select className="form-control" name="role">
+                      <option value="select your role" selected disabled>User Type</option>
                       <option value="admin">Admin</option>
-
                       <option value="user">User</option>
-
                     </select>
-                    <div className="invalid-feedback">{errors.role?.message}</div>
                   </div>
                   <div className="mt-3">
                     <button type="submit" className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>

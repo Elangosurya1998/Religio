@@ -9,7 +9,7 @@ function Navbar() {
   const navigate = useNavigate();
   const handleSignOut = () => {
     localStorage.removeItem("userDetails");
-    navigate("/");
+    navigate("/login");
   };
   return (
     <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">

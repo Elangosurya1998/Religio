@@ -101,13 +101,6 @@ function ReguserList() {
                         <i className="mdi mdi-account-plus menu-icon" />
                     </span> Users List
                 </h3>
-                <nav aria-label="breadcrumb">
-                    <ul className="breadcrumb">
-                        <li className="breadcrumb-item active" aria-current="page">
-                            <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-                        </li>
-                    </ul>
-                </nav>
             </div>
             <div className="row">
                 <div className="col-lg-12 grid-margin stretch-card">

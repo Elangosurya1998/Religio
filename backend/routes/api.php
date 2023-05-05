@@ -8,6 +8,7 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\ClientregistrationController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +89,6 @@ Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
 Route::get('/Religio/ClientType/getBalance/{value}',[ProvinceController::class, 'GetBalance']);
 Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'financialyear']);
 Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
+
+Route::post('/send-email',[MailController::class, 'sendContactMail']);
 

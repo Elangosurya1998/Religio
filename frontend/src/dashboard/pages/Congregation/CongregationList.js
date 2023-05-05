@@ -103,7 +103,7 @@ function CongregationList() {
                     <th>State</th>
                     <th>Address2</th>
                     <th>Postcode</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    {isLogedIn?.role == "admin" ? <th>Action</th> : <th>Action</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -118,7 +118,7 @@ function CongregationList() {
                         <td>{item.postcode}</td>
                         {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a> /
                           &nbsp;<a onClick={(e) => deleteCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print">Delete</a>
-                        </td> : ""}
+                        </td> : <td id="noprint"><a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-eye" id="print"> View</a></td>}
 
                       </tr>
                     ))
