@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Province;
 use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -20,15 +21,15 @@ class ClientregistrationController extends Controller
                 "province"   => "required",
                 "name"       => "required",
                 "place"      => "required",
-                "clientType" => "required",
+                "clienttype" => "required",
             "financialyear"  => "required",
                 "clientcode" => "required",
             "dateofjoining"  => "required",
     "dateofcontractsigning"  => "required",
-                "amcDate"    => "required",
-             "projectValue"  => "required",
+                "amcdate"    => "required",
+             "projectvalue"  => "required",
                 "amcvalue"   => "required",
-            "projectStatus"  => "required",
+            "projectstatus"  => "required",
                 "address1"   => "required",
                 "state"      => "required",
                 "address2"   => "required",
@@ -44,23 +45,45 @@ class ClientregistrationController extends Controller
                 return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
                 }
             
+
+                $Website = $request->website;
+                $WebApplication = $request->webapplication;
+                $WebApp = $request->app;
+                         if($Website != 1){
+                            $websitedata = null;
+                         }else{
+                            $websitedata =$Website;
+                         }
+                        
+                         if($WebApplication != 1){
+                            $WebApplicationdata = null;
+                         }else{
+                            $WebApplicationdata =$WebApplication;
+                         }  
+                         
+                         if($WebApp != 1){
+                            $WebAppdata = null;
+                         }else{
+                            $WebAppdata =$WebApp;
+                         }
+
                  $RegisterArray['params'] = array(
                              "congregation"   => $request->congregation,
                                  "province"   => $request->province,
                                  "name"       => $request->name,
                                  "place"      => $request->place,
-                                 "clientType" => $request->clientType,
+                                 "clienttype" => $request->clienttype,
                              "financialyear"  => $request->financialyear,
                                  "clientcode" => $request->clientcode, 
                              "dateofjoining"  => $request->dateofjoining, 
                      "dateofcontractsigning"  => $request->dateofcontractsigning, 
-                                 "amcDate"    => $request->amcDate, 
-                                 "website"    => $request->website, 
-                                 "app"        => $request->app, 
-                          "webapplication"    => $request->webapplication, 
-                              "projectValue"  => $request->projectValue, 
+                                 "amcdate"    => $request->amcdate, 
+                                 "website"    => $websitedata, 
+                                 "app"        => $WebAppdata, 
+                          "webapplication"    => $WebApplicationdata, 
+                              "projectvalue"  => $request->projectvalue, 
                                  "amcvalue"   => $request->amcvalue, 
-                             "projectStatus"  => $request->projectStatus,
+                             "projectstatus"  => $request->projectstatus,
                                  "address1"   => $request->address1,
                                  "state"      => $request->state,
                                  "address2"   => $request->address2,
@@ -104,7 +127,7 @@ class ClientregistrationController extends Controller
 
             $Registerfile = Clientregistration::where('id',$id)
             ->update([
-                "fileAttachment"   =>$file->getClientOriginalName()
+                "fileattachment"   =>$file->getClientOriginalName()
             ]);;
             $file->move($location,$filename);
             $filepath = url('resourcefiles/'.$filename);
@@ -140,7 +163,7 @@ class ClientregistrationController extends Controller
                
                 $Registerfile = Clientregistration::where('id',$id)
                 ->update([
-                    "fileAttachment"   =>$file->getClientOriginalName()
+                    "fileattachment"   =>$file->getClientOriginalName()
                 ]);;
                 $file->move($location,$filename);
                 $filepath = url('resourcefiles/'.$filename);
@@ -166,6 +189,7 @@ class ClientregistrationController extends Controller
             ->select('cr.*','co.congregation','pr.province')
             ->leftjoin('congregation as co','co.id','cr.congregation')
             ->leftjoin('provinces as pr','pr.id','cr.province')
+            ->orderBy('cr.id','desc')
             ->get();
 
             if(count($ClientregistrationAll) > 0) {
@@ -232,15 +256,15 @@ class ClientregistrationController extends Controller
                     "province"   => $request->province,
                     "name"       => $request->name,
                     "place"      => $request->place,
-                    "clientType" => $request->clientType,
+                    "clienttype" => $request->clienttype,
                 "financialyear"  => $request->financialyear,
                     "clientcode" => $request->clientcode, 
                 "dateofjoining"  => $request->dateofjoining, 
         "dateofcontractsigning"  => $request->dateofcontractsigning, 
-                    "amcDate"    => $request->amcDate, 
-                "projectValue"  => $request->projectValue, 
+                    "amcdate"    => $request->amcdate, 
+                "projectvalue"  => $request->projectvalue, 
                     "amcvalue"   => $request->amcvalue, 
-                "projectStatus"  => $request->projectStatus,
+                "projectstatus"  => $request->projectstatus,
                     "address1"   => $request->address1,
                     "state"      => $request->state,
                     "address2"   => $request->address2,
@@ -257,5 +281,38 @@ class ClientregistrationController extends Controller
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
+        }
+        public function ProvinceAddressget($id){
+         
+            $Provinceaddress = DB::table('congregation as cr')
+            ->select('cr.congregation','pr.congregation','pr.address1'
+            ,'pr.state','pr.address2','pr.postcode','pr.city','pr.country',
+            'pr.mobile','pr.email')
+            ->leftjoin('provinces as pr','pr.congregation','cr.id')
+            ->where('pr.id',$id)
+            ->get();
+
+            if(count($Provinceaddress) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Provinceaddress), "data" => $Provinceaddress]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+
+        }
+        public function CheckUniquecode($data){
+
+            $CheckUniquecoderegister = Clientregistration::where('clientcode',$data)->first();
+         
+            if($CheckUniquecoderegister !=null){
+                return response()->json(["status" => $this->status, "success" => true 
+               , "message" => "true"]);
+            }else{
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "false"]);
+            }
+
         }
 }

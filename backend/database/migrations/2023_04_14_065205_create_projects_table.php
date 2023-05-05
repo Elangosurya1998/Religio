@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string("testURL")->nullable();
             $table->string("textusername")->nullable();
             $table->string("textpassword")->nullable();
+            $table->string("prodURL")->nullable();
+            $table->string("produsername")->nullable();
+            $table->string("prodpassword")->nullable();
             $table->timestamps();
         });
     }

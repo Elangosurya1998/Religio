@@ -240,7 +240,8 @@ function PaymentEdit() {
                   </div>
                 </div>
 
-                <div className="form-group">
+                <div className="form-row">
+                  <div className="form-group col-md-6">
                   <label>P/I &nbsp;<span style={{ color: 'red' }}>*</span>
                   </label>
                   <select className="form-control" id="pi" name="pi" {...register("pi", { required: true })} aria-invalid={errors?.pi ? "true" : "false"}>
@@ -253,7 +254,7 @@ function PaymentEdit() {
                 </div>
                 {/* AMC Extra Fields Start */}
                 {selectedValue === 'AMC' && (
-                  <div className="form-group">
+                  <div className="form-group col-md-6">
                     <label>Renewel Month &nbsp;<span style={{ color: 'red' }}>*</span>
                     </label>
                     <input type="month" className="form-control" name="renewelmonth"
@@ -262,6 +263,7 @@ function PaymentEdit() {
                     {errors?.renewelmonth?.type === 'required' && <div className='text-danger text_error'>AMC Date is required</div>}
                   </div>
                 )}
+                </div>
                 {selectedValue === 'AMC' && (
                   <div className="form-group">
                     <label>AMC Value&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -297,7 +299,7 @@ function PaymentEdit() {
                 )}
 
                 <div className="form-group">
-                  <label>GST</label>
+                  <label>GST 18%</label>
                   <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} readOnly {...register("gst")} />
                 </div>
 

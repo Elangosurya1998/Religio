@@ -23,7 +23,7 @@ function ProjectstatusList(){
 useEffect(() => {
   fetchData();
 }, [])
-const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+
 const [ register, Setprojectstatus ] = useState([]);
 
 const navigate = useNavigate();
@@ -65,11 +65,6 @@ const projectDelete = async (e,id) =>{
           </span> Project status List
         </h3>
         <nav aria-label="breadcrumb">
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-            </li>
-          </ul>
         </nav>
       </div>
         <div className="row">
@@ -81,21 +76,20 @@ const projectDelete = async (e,id) =>{
               <div className="col-lg-10">
               </div>
               <div className="col-lg-2"> 
-              {/* <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link> */}
-              {isLogedIn?.role == "admin" ? <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link> : ""}
+              <Link to="/Religio/ProjectstatusAdd" className="btn btn-gradient-light">Add</Link>
                </div>
             </div>
-                <table className="table table-striped Mytable">
+                <table className="table table-striped Mytable table-responsive">
                   <thead>
                     <tr>
                       <th>Congregation</th>
                       <th>Province</th>
-                      <th>Name</th>
-                      <th>Instanceconfig</th>
+                      <th>Name</th> 
                       <th>Test URL</th>
-                      <th>Username</th>
-                      {/* <th>Text Password</th> */}
-                      {isLogedIn?.role == "admin" ? <th>Action</th> : "" }
+                      <th>Production URL</th>
+                      <th>Test Username</th>
+                      <th>Production Username</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,15 +100,13 @@ const projectDelete = async (e,id) =>{
                           <td>{item.province}</td>
                           <td>{item.name}</td>
                           <td>{item.testURL}</td>
-                          {/* <td>{item.dataserver}</td> */}
-                          <td>{item.instance}</td>
+                          <td>{item.prodURL}</td>
                           <td>{item.textusername }</td>
-                          {/* <td>{item.textpassword }</td> */}
-                          {isLogedIn?.role == "admin" ? <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
+                          <td>{item.produsername }</td>
+                          <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                           
                           &nbsp;<a onClick={(e) => projectDelete(e, item.id)} style={{ cursor: 'pointer' }} id className="mdi mdi-delete" >Delete</a>
-                      </td> : "" }
-                          
+                      </td>
                       </tr>   
                       ))
                     }

@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import $ from "jquery";
+import ApiUrl from '../../dashboard/pages/Api/Api';
 
 
 $(function () {
@@ -35,7 +36,7 @@ function Login() {
 
 
   function onSubmitLoginform(data, e) {
-    axios.post('http://127.0.0.1:8000/api/Login', data)
+    axios.post(`${ApiUrl}/Login`, data)
       .then(Response => {
 
         const Logindata = Response.data;

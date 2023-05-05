@@ -67,8 +67,8 @@ class ProvinceController extends Controller
             $ProvinceAll = DB::table('provinces as pr')
             ->select('pr.*','co.congregation')
             ->leftjoin('congregation as co','co.id','pr.congregation')
+            ->orderBy('pr.id','desc')
             ->get();
-    
             if(count($ProvinceAll) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($ProvinceAll), "data" => $ProvinceAll]);
@@ -156,6 +156,7 @@ class ProvinceController extends Controller
         }
 
         public function GetBalance($value){
+          
             $Balancefilter =Payment::where('clienttype',$value)->get();
             $balance=[];
             $total=[];
@@ -164,44 +165,41 @@ class ProvinceController extends Controller
           foreach ($Balancefilter as $key => $value) {
             $balance[]= $value->balance;
             $total[]=$value->total;
-            // $createddate[] =Carbon::parse($value->created_at)->format('m d Y');
-             $year[] =$value->financialyear;
+            $year[] =$value->financialyear;
             $Paid[]= $value->paid;
-
-          }
-          $balances =array_sum($balance);
-          $totalval = array_sum($total);
-         $paidval = array_sum($Paid);
-
-         $perbal =  round(($balances * 100) / $totalval ,2);
-         $perpaid = round(($paidval * 100) / $totalval,2);
-         
-    
-
-        // dd($balances,$totalval,$paidval);
+          }  
   
-            if(count($Balancefilter) > 0) {
+      if(count($Balancefilter) > 0) {
+           $balances =array_sum($balance);
+           $totalval = array_sum($total);
+           $paidval = array_sum($Paid);
+           $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
+           $totalamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $totalval);
+           $paidamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $paidval);
+ 
+           $perbal =  round(($balances * 100) / $totalval ,2);
+           $perpaid = round(($paidval * 100) / $totalval,2);
+         
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Balancefilter), "data" => [
-                                "balance" =>$balances ?? '0',
-                                "total" => $totalval ?? '0',
-                                "paid" => $paidval ?? '0',
-                                "year" =>$year ?? '0' ,
+                                "balance" =>$balanceamount ?? '0',
+                                "total" => $totalamount ?? '0',
+                                "paid" => $paidamount ?? '0',
+                                "year" =>$year ?? explode(",", "0") ,
                                 "balPer" =>$perbal ?? '0' ,
                                 "paidPer" =>$perpaid ?? '0'
                                 ]
-                        
-                        
                         ]);
             }
             else {
                 return response()->json(["status" => "failed",
                 "success" => false,  "count" => count($Balancefilter), "data" => [
-                    "balance" =>$balances ?? '0',
-                    "total" => $totalval ?? '0',
-                    "paid" => $paidval ?? '0',
-                    "balPer" =>$perbal ?? '0' ,
-                    "paidPer" =>$perpaid ?? '0'
+                    "balance" =>'0',
+                    "total" =>  '0',
+                    "paid" =>  '0',
+                    "year" => explode(",", "0"),
+                    "balPer" => '0' ,
+                    "paidPer" => '0'
                     ]
             
             ]);
@@ -215,7 +213,6 @@ class ProvinceController extends Controller
          foreach ($years as $key => $value) {
             $finnacialyear[]=$value->financialyear;
          }
-        //  dd($finnacialyear);
             if(count($finnacialyear) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($finnacialyear), "data" => $finnacialyear]);
@@ -240,32 +237,33 @@ class ProvinceController extends Controller
           $balances =array_sum($balance);
           $totalval = array_sum($total);
          $paidval = array_sum($Paid);
-    
+         $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
+         $totalamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $totalval);
+         $paidamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $paidval);
+
          $perbal =  round(($balances * 100) / $totalval ,2);
          $perpaid = round(($paidval * 100) / $totalval,2);
 
             if(count($getBalance) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($getBalance), "data" => [
-                                "balance" =>$balances ?? '0',
-                                "total" => $totalval ?? '0',
-                                "paid" => $paidval ?? '0',
+                                "balance" =>$balanceamount ?? '0',
+                                "total" => $totalamount ?? '0',
+                                "paid" => $paidamount ?? '0',
                                 "balPer" =>$perbal ?? '0' ,
                                 "paidPer" =>$perpaid ?? '0'
-                               
-                                ]
-            ]);
+                         ]
+                ]);
             }
             else {
                 return response()->json(["status" => "failed",
                 "success" => false,  "count" => count($getBalance), "data" => [
-                    "balance" =>$balances ?? '0',
-                    "total" => $totalval ?? '0',
-                    "paid" => $paidval ?? '0',
-                    "balPer" =>$perbal ?? '0' ,
-                     "paidPer" =>$perpaid ?? '0'
+                    "balance" => '0',
+                    "total" =>  '0',
+                    "paid" =>'0',
+                    "balPer" => '0' ,
+                     "paidPer" => '0'
                     ]
-            
             ]);
             }
 
