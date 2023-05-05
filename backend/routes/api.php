@@ -119,8 +119,7 @@ Route::delete('/mobileappdelete/{id}',[MobileappController::class, 'mobileappDel
 // Online meet
 
 Route::post('/upload',[OnlinemeetController::class, 'upload']);
-Route::put('/fileupdate/{id}',[OnlinemeetController::class, 'upload']);
-Route::put('/onlineuploadupdateid/{id}',[OnlinemeetController::class, 'onlineuploadupdateid']);
+Route::post('/onlineuploadid/{id}',[OnlinemeetController::class, 'onlineuploadid']);
 Route::post('/onlinemeetstatuscreate', [OnlinemeetController::class,'onlinemeetstatus']);
 Route::get('/onlinemeetstatus',[OnlinemeetController::class,'onlinemeetstatusList']);
 Route::get('/onlinetatusedit/{id}',[OnlinemeetController::class, 'onlinetatusedit']);

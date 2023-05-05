@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { YYYYMMDDTODDMMYYYY } from "../../../function/date";
 
 
 function TrainningstatusList(){
@@ -139,7 +140,7 @@ return (
                 {         
                   register && register.map(item => (
                     <tr key={item.id}>
-                        <td>{item.onsitedate}</td>
+                        <td>{YYYYMMDDTODDMMYYYY(item.onsitedate)}</td>
                         <td>{item.onsitedays}</td>
                         <td>{item.expensive}</td>
                         <td>{item.onsiteplace }</td>
@@ -173,7 +174,7 @@ return (
                 {         
                   online && online.map(item => (
                     <tr key={item.id}>
-                        <td>{item.onlinedate}</td>
+                        <td>{YYYYMMDDTODDMMYYYY(item.onlinedate)}</td>
                         <td>{item.onlinehours}</td>
                         <td>{item.onlinemeeting}</td>
                         <td>{item.onlinerating }</td>

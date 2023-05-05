@@ -38,7 +38,7 @@ class OnlinemeetController extends Controller
     // list value
 
     public function onlinemeetstatusList() {
-    $online = onlinemeet::all();
+    $online = onlinemeet::orderBy ('id','desc')->get();
         if(count($online) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
                         "count" => count($online), "data" => $online]);
@@ -89,35 +89,81 @@ class OnlinemeetController extends Controller
 
       public function upload(Request $request) 
       { 
+        $getid = onlinemeet::latest('id')->first(); 
+        $id = $getid->id;
+        // dd($id);
+        $validator    =  Validator::make($request->all(), 
+            [     
+             "online"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
+            ]
+         
+        );
+           if($validator->fails()) {
+            return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
+            }
+           $file = $request->file('online'); 
+           $filename = $file->getClientOriginalName();
+           $extension = $file->getClientOriginalExtension();
+           $location = 'online';
 
-            $validator = Validator::make($request->all(),[ 
-                    'online' => 'required|mimes:doc,docx,pdf,txt,csv|max:2048',
-            ]);   
+            $document = onlinemeet::where('id',$id)
+            ->update([
+                "online"   =>$file->getClientOriginalName()
+            ]);
+            $file->move($location,$filename);
+            $filepath = url('online/'.$filename);
 
-            if($validator->fails()) {          
-                
-                return response()->json(['error'=>$validator->errors()], 401);                        
-            }  
-        
-            $name = time().'.'.$request->online->extension();  
-        
-            $file = $request->online->move(public_path('/online'),$name);
-            $save = new Onlinemeet();
-            $save->name = $name;
-            $save->path= $file;
-            $save->save();
+                if(!is_null($document)){ 
 
-     /* Store $imageName name in DATABASE from HERE */
+                    return response()->json(["status" => $this->status, "success" => true, 
+                            "message" => "upload  successfully", "data" => $document]);
+                }    
+                else {
+                    return response()->json(["status" => "failed", "success" => false,
+                                "message" => "Whoops! failed to create."]);
+                }   
+          
+            }
 
-           return response()->json([
-             "success" => true,
-               "message" => "File successfully uploaded",
-               "online" => $name
-             
-          ]);
-  
+
+            //    file upload
+    public function onlineuploadid(Request $request , $id) 
+    { 
       
-    }
+        $validator    =  Validator::make($request->all(), 
+            [     
+                "online"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
+            ]
+            
+        );
+            if($validator->fails()) {
+            return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
+            }
+            
+            $file = $request->File('online'); 
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $location = 'online';
+
+            $updocument = onlinemeet::where('id',$id)
+            ->update([
+                "online"   =>$file->getClientOriginalName()
+            ]);
+            $file->move($location,$filename);
+            $filepath = url('online/'.$filename);
+
+                if(!is_null($updocument)){ 
+
+                    return response()->json(["status" => $this->status, "success" => true, 
+                            "message" => "upload  successfully", "data" => $updocument]);
+                }    
+                else {
+                    return response()->json(["status" => "failed", "success" => false,
+                                "message" => "Whoops! failed to create."]);
+                }   
+            
+            }
+
 
     }
  
