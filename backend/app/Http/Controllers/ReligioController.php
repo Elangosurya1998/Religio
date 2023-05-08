@@ -56,7 +56,7 @@ class ReligioController extends Controller
     
         public function CongregationList() {
     
-        $Congregation = Congregation::orderBy('id','desc')->get();
+            $Congregation = Congregation::orderBy('id','desc')->get();
             if(count($Congregation) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($Congregation), "data" => $Congregation]);
