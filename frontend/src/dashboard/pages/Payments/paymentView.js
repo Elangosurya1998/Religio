@@ -16,17 +16,61 @@ function PaymentView() {
     fetch(`${ApiUrl}/Religio/Paymentedit/${id}`).then((res) => {
       return res.json();
     }).then((resp) => {
-      reset(resp.data[0])
+      //reset(resp.data[0])
       const event = resp.data[0].clienttype;
-      const proevent = resp.data[0].projectvalue;
+      const projectvalue = resp.data[0].projectvalue;
       const paid = resp.data[0].paid;
+      const amcvalue = resp.data[0].amcvalue;
+      const gstvalue = resp.data[0].gst;
+      const balanceamount = resp.data[0].balance;
+      const totalamount = resp.data[0].total;
+      const renewelmonth = resp.data[0].renewelmonth;
+      const paidbalvalue = resp.data[0].balancepaid;
+      const congregation = resp.data[0].congregation;
+      const province = resp.data[0].province;
+      const place = resp.data[0].place;
+      const clientcode = resp.data[0].clientcode;
+      const financialyear = resp.data[0].financialyear;
+      const product = resp.data[0].product;
+      
       setSelectedValue(event);
-      setOrgvalue(proevent);
       setPaidvalue(paid);
+      setAmcvalue(amcvalue);
+      setGstamount(gstvalue);
+      setbalanceamount(balanceamount);
+      setTotalamount(totalamount);
+      setRenewelmonth(renewelmonth);
+      setProjectvalue(projectvalue);
+      setPaidbalvalue(paidbalvalue);
+      setCongregation(congregation);
+      setProvince(province);
+      setPlace(place);
+      setFinancialyear(financialyear);
+      setClientcode(clientcode);
+      setPi(pi);
+      setProduct(product);
+
     }).catch((err) => {
       console.log(err.message);
     })
-  }, [])
+    }, [])
+
+    const [projectvalue, setProjectvalue] = useState("");
+    const [paidvalue, setPaidvalue] = useState("");
+    const [amcvalue, setAmcvalue] = useState("");
+    const [gstamount, setGstamount] = useState("");
+    const [balanceAmount, setbalanceamount] = useState("");
+    const [totalAmount, setTotalamount] = useState("");
+    const [renewelmonth, setRenewelmonth] = useState("");
+    const [paidbalvalue, setPaidbalvalue] = useState("");
+    const [congregation, setCongregation] = useState("");
+    const [province, setProvince] = useState("");
+    const [place, setPlace] = useState("");
+    const [financialyear, setFinancialyear] = useState("");
+    const [clientcode, setClientcode] = useState("");
+    const [pi, setPi] = useState("");
+    const [product, setProduct] = useState("");
+    
 
   useEffect(() => {
     fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
@@ -42,7 +86,6 @@ function PaymentView() {
 
   function CongregationSelect(event) {
     var id = event.target.value
-    console.log(id);
     axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
       .then((response) => {
         SetProvince(response.data.data)
@@ -66,60 +109,35 @@ function PaymentView() {
 
   // Hide/Show Fields Based on Client Type
   const [selectedValue, setSelectedValue] = useState('');
+
   const handleDropdownChange = (event) => {
     setSelectedValue(event.target.value);
   };
-
-  // Auto Calculate Balance
-  const [paidvalue, setPaidvalue] = useState("");
-  const [amcvalue, setAmcvalue] = useState("");
-  const [orgvalue, setOrgvalue] = useState("");
-
-  const [paidbalvalue, setPaidbalvalue] = useState("");
-
-  const projectvalueChange = (event, e) => {
-    setOrgvalue(event.target.value);
-
-  };
-
   const paidvalueChange = (event) => {
     setPaidvalue(event.target.value);
-  };
-
-  const amcvalueChange = (event) => {
-    setAmcvalue(event.target.value);
-    setOrgvalue(event.target.value)
   };
 
   const paidBalanceChange = (event) => {
     setPaidbalvalue(event.target.value);
   };
 
-  // GST Calculation
-
-  const originalAmount = orgvalue;
-
-  const GSTPercentage = 18;
-
-  const GSTAmount = (originalAmount * GSTPercentage) / 100;
-
-  const totalAmount = Number(originalAmount) + Number(GSTAmount);
-
-  const balanceAmount = paidbalvalue === '' ? totalAmount - paidvalue : totalAmount - paidvalue - paidbalvalue;
-
-  const balpaid = paidbalvalue;
-
-  const paymentStatus = balanceAmount !== 0 ? "Pending" : "Completed";
-
   const now = new Date();
   const currentYear = now.getFullYear();
 
+  const inrsymbols = <span>&#8377; </span>;
+  const inr = inrsymbols.props.children;
+
+  const Moneyformat = (num) => {
+    const curr = new Intl.NumberFormat('en-IN').format(num);
+    return curr;
+ };
+console.log(balanceAmount);
   return (
     <div className="content-wrapper">
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
-            <i className="mdi mdi-account-multiple-plus menu-icon" />
+            <i className="mdi mdi-cash-multiple menu-icon" />
           </span> Payment Status
         </h3>
       </div>
@@ -130,7 +148,7 @@ function PaymentView() {
               <form className="form-sample">
                 <div className="form-group">
 
-                  {paymentStatus == 'Completed' ? <div className="alert alert-success">Payment<strong> Paid.</strong></div> : <div className="alert alert-danger">Payment is <strong>Pending.</strong></div>}
+                  {balanceAmount == 0 ? <div className="alert alert-success">Payment<strong> Paid.</strong></div> : <div className="alert alert-danger">Payment is <strong>Pending.</strong></div>}
 
                 </div>
 
@@ -147,7 +165,7 @@ function PaymentView() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label>Congregation</label>
-                    <select className="form-control" name="congregation"
+                    <select className="form-control" value={congregation} name="congregation"
                       {...register("congregation")} style={styles} disabled>
                       <option value="">Select Congregation</option>
                       {congre && congre.map(item => (
@@ -158,7 +176,7 @@ function PaymentView() {
 
                   <div className="form-group col-md-6">
                     <label>Province </label>
-                    <select className="form-control" name="province"
+                    <select className="form-control" value={province} name="province"
                       {...register("province")} style={styles} disabled  >
                       <option value="">Select Province</option>
                       {
@@ -171,7 +189,7 @@ function PaymentView() {
 
                 <div className="form-group">
                   <label>Product</label>
-                  <select className="form-control" id="product" name="product" {...register("product")} style={styles} disabled>
+                  <select className="form-control" id="product" value={product} name="product" {...register("product")} style={styles} disabled>
                     <option value="">Select Product</option>
                     <option value="RELIGIO">RELIGIO</option>
                     <option value="AVOSA">AVOSA</option>
@@ -180,27 +198,25 @@ function PaymentView() {
 
                 <div className="form-group">
                   <label>Place</label>
-                  <input type="text" className="form-control" name="place"
+                  <input type="text" className="form-control" value={place} name="place"
                     {...register("place")} disabled />
                 </div>
 
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label>Financial Year</label>
-                    <input type="text" className="form-control" name="financialyear"
-                      {...register("financialyear")} disabled />
+                    <input type="text" className="form-control" value={financialyear} name="financialyear" {...register("financialyear")} disabled />
                   </div>
 
                   <div className="form-group col-md-6">
                     <label>Client Code</label>
-                    <input type="text" className="form-control" name="clientcode"
-                      {...register("clientcode")} disabled />
+                    <input type="text" className="form-control" value={clientcode} name="clientcode" {...register("clientcode")} disabled />
                   </div>
                 </div>
 
                 <div className="form-group">
                   <label>P/I</label>
-                  <select className="form-control" id="pi" name="pi" style={styles} {...register("pi")} disabled>
+                  <select className="form-control" id="pi" value={pi} name="pi" style={styles} {...register("pi")} disabled>
                     <option value="">Select P/I</option>
                     <option value="Sales Team">Sales Team</option>
                     <option value="Religio Team">Religio Team</option>
@@ -210,23 +226,22 @@ function PaymentView() {
                 {selectedValue === 'AMC' && (
                   <div className="form-group">
                     <label>Renewel Month</label>
-                    <input type="month" className="form-control" name="renewelmonth"
-                      {...register("renewelmonth")} disabled />
+                    <input type="month" className="form-control" value={renewelmonth} name="renewelmonth" {...register("renewelmonth")} disabled />
                   </div>
                 )}
 
                 {selectedValue === 'AMC' && (
                   <div className="form-group">
                     <label>AMC Value</label>
-                    <input type="text" className="form-control" id="amcvalue" name="amcvalue" value={amcvalue}
+                    <input type="text" className="form-control" id="amcvalue" name="amcvalue" value={inr +' '+ Moneyformat(amcvalue)}
                       {...register("amcvalue")} disabled />
                   </div>
                 )}
 
-                {selectedValue === "New Sales" && (
+                {selectedValue === "NewSales" && (
                   <div className="form-group">
                     <label>Project Value</label>
-                    <input type="text" className="form-control" name="projectvalue"
+                    <input type="text" className="form-control" name="projectvalue" value={inr +' '+ Moneyformat(projectvalue)}
                       {...register("projectvalue")} disabled />
                   </div>
                 )}
@@ -234,29 +249,29 @@ function PaymentView() {
                 {selectedValue === "Outstanding" && (
                   <div className="form-group">
                     <label>Project Value</label>
-                    <input type="text" className="form-control" name="projectvalue"
+                    <input type="text" className="form-control" name="projectvalue" value={inr +' '+ Moneyformat(projectvalue)}
                       {...register("projectvalue")} disabled />
                   </div>
                 )}
 
                 <div className="form-group">
                   <label>GST</label>
-                  <input type="text" className="form-control" id="gst" name="gst" value={GSTAmount} disabled {...register("gst")} />
+                  <input type="text" className="form-control" id="gst" name="gst" value={inr +' '+ Moneyformat(gstamount)} disabled {...register("gst")} />
                 </div>
 
                 <div className="form-group">
                   <label>Total</label>
-                  <input type="text" className="form-control" id="total" name="total" value={totalAmount} disabled {...register("total")} />
+                  <input type="text" className="form-control" id="total" name="total" value={inr +' '+ Moneyformat(totalAmount)} disabled {...register("total")} />
                 </div>
 
                 <div className="form-group">
                   <label>Paid</label>
-                  <input type="text" className="form-control" name="paid" value={paidvalue} {...register("paid")} disabled />
+                  <input type="text" className="form-control" name="paid" value={inr +' '+ Moneyformat(paidvalue)} {...register("paid")} disabled />
                 </div>
 
                 <div className="form-group">
                   <label>Balance</label>
-                  <input type="text" className="form-control" id="balance" name="balance" value={balanceAmount}
+                  <input type="text" className="form-control" id="balance" name="balance" value={inr +' '+ Moneyformat(balanceAmount)}
                     {...register("balance")} disabled />
                 </div>
 
@@ -264,7 +279,7 @@ function PaymentView() {
                 {selectedValue === 'Outstanding' && (
                   <div className="form-group">
                     <label>Balance Paid <b>{currentYear}-{currentYear + 1}</b></label>
-                    <input type="text" className="form-control" id="balancepaid" name="balancepaid" value={paidbalvalue}
+                    <input type="text" className="form-control" id="balancepaid" name="balancepaid" value={inr +' '+ Moneyformat(paidbalvalue)}
                       {...register("balancepaid")} disabled />
                   </div>
                 )}

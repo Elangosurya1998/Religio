@@ -17,9 +17,14 @@ function PaymentEdit() {
       const event = resp.data[0].clienttype;
       const proevent = resp.data[0].projectvalue;
       const paid = resp.data[0].paid;
+      const paidbalvalue = resp.data[0].balancepaid;
+      const amcvalue = resp.data[0].amcvalue;
+
       setSelectedValue(event);
       setOrgvalue(proevent);
       setPaidvalue(paid);
+      setPaidbalvalue(paidbalvalue);
+      setAmcvalue(amcvalue);
     }).catch((err) => {
       console.log(err.message);
     })
@@ -149,8 +154,8 @@ function PaymentEdit() {
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
-            <i className="mdi mdi-account-multiple-plus menu-icon" />
-          </span> Payment Status
+            <i className="mdi mdi-cash-multiple menu-icon" />
+          </span> Update Payment Details
         </h3>
       </div>
       <div className="row">
