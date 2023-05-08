@@ -8,12 +8,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 function OnlinetrdataEdit() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
 
+
+  const [file, filedata] = useState();
   const {id} = useParams();
   useEffect(() => {
     fetch(`${ApiUrl}/onlinetatusedit/${id}`).then((res) => {
         return res.json();
     }).then((resp) => {
        reset(resp.data[0]);
+       filedata(resp.data[0].online)
     }).catch((err) => {
         console.log(err.message);
     })
@@ -32,9 +35,16 @@ const handleNavigation=()=>{
 }
 
   function onSubmitonlineupdate(data,e){
-   console.log(data);
+    const datass = new FormData();
+  datass.append('online', selectedFiles);
     axios.put(`${ApiUrl}/onlinestatusupdate/${id}`,data)
     .then((response) => {
+      axios .post(`${ApiUrl}/onlineuploadid/${id}`,datass)
+      .then((response) => {
+        console.log(response);
+      }).catch((err) => {
+        console.log(err);
+      })
       if (response.status === 200) {
         Swal.fire(
             'Updated Successfully..!',
@@ -55,6 +65,12 @@ const handleNavigation=()=>{
     })
     
   }
+  const changeHandler = (event) => {     
+    setSelectedFiles(event.target.files[0]);
+
+  };
+  const [selectedFiles, setSelectedFiles] = useState();
+  
 
   return (    
     <div className="content-wrapper">
@@ -132,9 +148,10 @@ const handleNavigation=()=>{
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="FileAttachment" 
-                              {...register("FileAttachment", { required: true})}
+                              {...register("FileAttachment", { required: true, onChange:changeHandler})}
                               aria-invalid={errors?.FileAttachment ? "true" : "false"}/>
                                {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
+                               <div className=''><label className="errlabel">{file}</label></div>
                             </div>
                       </div> 
 

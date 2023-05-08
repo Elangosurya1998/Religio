@@ -84,10 +84,11 @@ const projectDelete = async (e,id) =>{
                     <tr>
                       <th>Congregation</th>
                       <th>Province</th>
-                      <th>Name</th>
-                      <th>Instanceconfig</th>
+                      <th>Name</th> 
                       <th>Test URL</th>
-                      <th>Username</th>
+                      <th>Production URL</th>
+                      <th>Test Username</th>
+                      <th>Production Username</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -99,9 +100,9 @@ const projectDelete = async (e,id) =>{
                           <td>{item.province}</td>
                           <td>{item.name}</td>
                           <td>{item.testURL}</td>
-                          {/* <td>{item.dataserver}</td> */}
-                          <td>{item.instance}</td>
+                          <td>{item.prodURL}</td>
                           <td>{item.textusername }</td>
+                          <td>{item.produsername }</td>
                           <td id="noprint"><a onClick={(e) => projectEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                           
                           &nbsp;<a onClick={(e) => projectDelete(e, item.id)} style={{ cursor: 'pointer' }} id className="mdi mdi-delete" >Delete</a>

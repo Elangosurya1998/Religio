@@ -5,8 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import $ from "jquery";
 import ApiUrl from '../../dashboard/pages/Api/Api';
 
+
+$(function () {
+  $("#toggle_pwd").click(function () {
+    $("#toggle_eye").toggleClass("fa-eye-slash");
+    var type = $("#toggle_eye").hasClass("fa-eye-slash") ? "text" : "password";
+    $("#password").attr("type", type);
+  });
+});
 
 function Login() {
   const validationSchema = Yup.object().shape({
@@ -32,29 +41,23 @@ function Login() {
 
         const Logindata = Response.data;
 
-        if (Logindata.loginVal == "true") {
-
+        if (Logindata.loginVal === "true") {
           localStorage.setItem("userDetails", JSON.stringify(Logindata.user));
-
           Swal.fire({
             title: 'Sign-in success',
             text: 'Logged in successfully',
             icon: 'success',
             confirmButtonColor: 'green'
           })
-
           const userData = Logindata.user;
 
           if (userData.role == "admin") {
-
             navigate('/Religio/Dashboard');
-
           } else {
 
             navigate('/UserPage');
 
           }
-
         } else {
           Swal.fire({
             title: "Sign-in Failed",
@@ -75,6 +78,7 @@ function Login() {
       })
 
   }
+
   return (
     <div className="container-scroller">
       <div className="container-fluid page-body-wrapper full-page-wrapper">
@@ -86,19 +90,36 @@ function Login() {
                   <Link to='/'><center><img src="./logo.png" style={{ width: "185px" }} /></center></Link>
                 </div>
                 <form className="pt-3" onSubmit={handleSubmit(onSubmitLoginform)}>
-                  <div className="form-group">
-                    <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Email" autoComplete='off' />
-                    <div className="invalid-feedback">{errors.email?.message}</div>
-                  </div>
-                  <div className="form-group">
-                    <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" autoComplete='off' />
-                    <div className="invalid-feedback">{errors.password?.message}</div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="form-group row">
+                        <label className="col-sm-12 col-form-label">Email <span style={{ color: "red" }}>*</span></label>
+                        <div className='col-sm-12'>
+                          <input name="email" type="email" {...register('email')} className={`form-control ${errors.email ? 'is-invalid' : ''}`} placeholder="Email" autoComplete='off' />
+                          <div className="invalid-feedback">{errors.email?.message}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="form-group row">
+                        <label className="col-sm-12 col-form-label">Password <span style={{ color: "red" }}>*</span></label>
+                        <div className="col-sm-12">
+                          <div className="input-group">
+                            <input name="password" type="password" id='password' {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} placeholder="Password" autoComplete='off' />
+                            <div className="input-group-append">
+                              <span id="toggle_pwd" className="input-group-text" style={{ cursor: "pointer" }}><i id="toggle_eye" className="fa fa-eye field_icon"></i></span>
+                            </div>
+                            <div className="invalid-feedback">{errors.password?.message}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="mt-3">
                     <button type="submit" className="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                   </div>
-                  <div className="text-center mt-4 font-weight-light"><Link to="/forget" className="text-primary" style={{textDecoration:"none"}}>Forget Password</Link>
-                </div>
+                  <div className="text-center mt-4 font-weight-light"><Link to="/forget" className="text-primary" style={{ textDecoration: "none" }}>Forgot Password</Link>
+                  </div>
                   <div className="text-center mt-4 font-weight-light"><Link to="/" className="text-primary" style={{ textDecoration: "none" }}><i className="fa fa-home"> Home</i></Link>
                   </div>
                 </form>

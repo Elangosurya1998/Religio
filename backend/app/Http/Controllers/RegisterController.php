@@ -48,7 +48,7 @@ class RegisterController extends Controller
 
     public function UsersList() {
     
-      $userlist = User::all();
+      $userlist = User::orderBy('id','desc')->get();
           if(count($userlist) > 0) {
               return response()->json(["status" => $this->status, "success" => true, 
                           "count" => count($userlist), "data" => $userlist]);
@@ -65,7 +65,7 @@ class RegisterController extends Controller
          $Userdel->delete();
          return response()->json(
              ["status" => $this->status, "success" => true, 
-             "message" => " Congregation deleted  successfully"]);
+             "message" => " User Data deleted  successfully"]);
      }
 
      public function UserEdit($id){
@@ -87,13 +87,11 @@ class RegisterController extends Controller
         ->update([
             "username" => $request->username,
             "email" => $request->email,
-            // "password" => $request->password,
-            // "confirmpassword" => $request->confirmpassword,
             "role" => $request->role,  
         ]);
         return response()->json(
             ["status" => $this->status, "success" => true, 
-            "message" => " Congregation updated  successfully"]);
+            "message" => " User Data updated  successfully"]);
     }
 
     public function ForgetPassword(ForgetRequest $request){

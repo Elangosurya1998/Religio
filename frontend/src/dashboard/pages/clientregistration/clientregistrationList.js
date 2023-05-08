@@ -113,7 +113,7 @@ function ClientregistrationList() {
                     <th>Name</th>
                     <th>Place</th>
                     <th>Financial Year</th>
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -149,7 +149,13 @@ function ClientregistrationList() {
                             &nbsp;
                           </td>
                         ) : (
-                          ""
+                          <td id="noprint">
+                            <a
+                              onClick={(e) => Viewregister(e, item.id)}
+                              style={{ cursor: "pointer" }}
+                              className="mdi mdi-eye"
+                              id="print"></a>
+                          </td>
                         )}
                       </tr>
                     ))}

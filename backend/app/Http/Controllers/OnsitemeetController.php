@@ -34,7 +34,7 @@ class OnsitemeetController extends Controller
 
     // list value
     public function onsitemeetstatusList() {
-    $onsite = Onsitemeet::all();
+    $onsite = Onsitemeet::orderBy('id','desc')->get();
         if(count($onsite) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
                         "count" => count($onsite), "data" => $onsite]);
@@ -92,7 +92,7 @@ class OnsitemeetController extends Controller
                 $id = $getid->id;
                 $validator    =  Validator::make($request->all(), 
                     [     
-                     "onsite"  => "required", 
+                     "onsite"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
                     ]
                  
                 );
@@ -129,7 +129,7 @@ class OnsitemeetController extends Controller
       
         $validator    =  Validator::make($request->all(), 
             [     
-                "onsite"  => "required", 
+                "onsite"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
             ]
             
         );

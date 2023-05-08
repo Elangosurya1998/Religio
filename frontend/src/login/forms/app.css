@@ -1,0 +1,18 @@
+.msg {
+    display: none;
+}
+.error {
+    color: red;
+    margin-left: 4%;
+}
+.input-group-append .input-group-text, .input-group-prepend .input-group-text {
+    padding: 0.44rem 0.75rem !important;
+}
+.error {
+    color: red;
+    margin-left: 5px;
+  }
+  
+  label.error {
+    display: inline;
+  }

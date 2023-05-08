@@ -132,7 +132,7 @@ function ProvinceList() {
                     {/* <th>Postcode</th> */}
                     {/* <th>City</th> */}
                     {/* <th>country</th> */}
-                    {isLogedIn?.role == "admin" ? <th>Action</th> : ""}
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -167,9 +167,11 @@ function ProvinceList() {
                               className="mdi mdi-delete"
                               id="print"></a>
                           </td>
-                        ) : (
-                          ""
-                        )}
+                        ) : <td id="noprint"><a
+                          onClick={(e) => ViewProvince(e, item.id)}
+                          style={{ cursor: "pointer" }}
+                          className="mdi mdi-eye"
+                          id="print"></a></td>}
                       </tr>
                     ))}
                 </tbody>

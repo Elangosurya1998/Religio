@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationEdit() {
+
   $("#uniquefile").hide();
 
   const {
@@ -19,6 +20,7 @@ function ClientRegistrationEdit() {
   const country = require("country-state-city").Country;
   const value = country.getAllCountries();
   const { id } = useParams();
+  const [selectedFile, setSelectedFile] = useState();
 
   useEffect(() => {
     fetch(`${ApiUrl}/Religio/Registeredit/${id}`)
@@ -139,8 +141,6 @@ function ClientRegistrationEdit() {
       setSelectedFile(event.target.files[0]);
     }
   };
-  const [selectedFile, setSelectedFile] = useState();
-
   return (
     <div className="content-wrapper">
       <div className="page-header">
