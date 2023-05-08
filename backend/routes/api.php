@@ -15,6 +15,7 @@ use App\Http\Controllers\IOSController;
 use App\Http\Controllers\MobileappController;
 use App\Http\Controllers\OnlinemeetController;
 use App\Http\Controllers\OnsitemeetController;
+use App\Http\Controllers\OurclientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,6 +88,14 @@ Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpd
 Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'PaymentDelete']);
 Route::get('/Religio/PaymentAddress/get/{id}',[PaymentController::class, 'PaymentAddress']);
 
+//Home Section - OurClient
+
+Route::post('/Religio/HomeSections/OurClient/Store',[OurclientController::class, 'store']);
+Route::get('/Religio/HomeSections/OurClient/list',[OurclientController::class, 'index']);
+Route::get('/Religio/HomeSections/OurClient/edit/{id}',[OurclientController::class, 'edit']);
+Route::put('/Religio/HomeSections/OurClient/update/{id}',[OurclientController::class, 'update']);
+Route::delete('/Religio/HomeSections/OurClient/delete/{id}',[OurclientController::class, 'destroy']);
+
 // hoese and community status
 Route::post('housecommunitycreate', [HousecommunityController::class,'housecommunitycreate']);
 Route::get('/housecommunity',[HousecommunityController::class,'housecommunityList']);
@@ -148,4 +157,7 @@ Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'fin
 Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
 
 Route::post('/send-email',[MailController::class, 'sendContactMail']);
+
+
+
 

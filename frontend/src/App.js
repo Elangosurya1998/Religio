@@ -54,6 +54,8 @@ import Trainningstatusadd from './dashboard/Trainningstatusadd';
 
 import Onlinestatusedit from './dashboard/Olinetredit';
 import Onsitetredit from './dashboard/Onsitetredit';
+import OurClientLayouts from './dashboard/pages/Ourclientsay/OurClientLayouts';
+
 
 
 function App() {
@@ -131,6 +133,11 @@ function App() {
           <Route exact path="/Religio/onlineedit/:id" element={< Onlinestatusedit />} />
 
           <Route exact path="/Religio/onsiteedit/:id" element={< Onsitetredit />} />
+
+          <Route exact path="/Religio/HomeSections/OurClient" element={<OurClientLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurClient/Edit/:id" element={<OurClientLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurClient/View/:id" element={<OurClientLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurClient/Create" element={<OurClientLayouts />} />
         </Route>
       </Routes>
     </BrowserRouter>
