@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Congregation;
 use App\Models\Payment;
 use App\Models\Province;
+use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Carbon\Carbon;
@@ -100,6 +101,20 @@ class ProvinceController extends Controller
             }
         }
 
+        public function Provinceverifydelete($id){
+
+        $verifyData =DB::table('client_registrations')->select('id')->where('province',$id)->first();
+       
+        if($verifyData !=null){
+            return response()->json(["status" => $this->status, "success" => true 
+           , "message" => "true"]);
+        }else{
+            return response()->json(["status" => "failed",
+            "success" => false, "message" => "false"]);
+        }
+
+
+        }
         public function ProvinceEdit($id){
            
             $Congregationedit = Province::where('id',$id)->get();
@@ -162,13 +177,15 @@ class ProvinceController extends Controller
             $total=[];
             $year =[];
             $Paid=[];
+            $Getmonth =[];
           foreach ($Balancefilter as $key => $value) {
             $balance[]= $value->balance;
             $total[]=$value->total;
             $year[] =$value->financialyear;
             $Paid[]= $value->paid;
+            $Getmonth[]=Carbon::parse($value->created_at)->format('F');
           }  
-  
+
       if(count($Balancefilter) > 0) {
            $balances =array_sum($balance);
            $totalval = array_sum($total);
@@ -185,9 +202,10 @@ class ProvinceController extends Controller
                                 "balance" =>$balanceamount ?? '0',
                                 "total" => $totalamount ?? '0',
                                 "paid" => $paidamount ?? '0',
-                                "year" =>$year ?? explode(",", "0") ,
+                                "year" =>$year ?? explode(",", "") ,
                                 "balPer" =>$perbal ?? '0' ,
-                                "paidPer" =>$perpaid ?? '0'
+                                "paidPer" =>$perpaid ?? '0',
+                                "Month" =>  $Getmonth?? explode(",", "")
                                 ]
                         ]);
             }
@@ -197,9 +215,10 @@ class ProvinceController extends Controller
                     "balance" =>'0',
                     "total" =>  '0',
                     "paid" =>  '0',
-                    "year" => explode(",", "0"),
+                    "year" => explode(",", ""),
                     "balPer" => '0' ,
-                    "paidPer" => '0'
+                    "paidPer" => '0',
+                    "Month" => explode(",", ""),
                     ]
             
             ]);
@@ -228,14 +247,75 @@ class ProvinceController extends Controller
             $balance=[];
             $total=[];
             $Paid=[];
+            $Getmonth =[];
+
           foreach ($getBalance as $key => $value) {
             $balance[]= $value->balance;
             $total[]=$value->total;
             $Paid[]= $value->paid;
-            
+            $Getmonth[]=Carbon::parse($value->created_at)->format('F'); 
           }
+          
+          
           $balances =array_sum($balance);
           $totalval = array_sum($total);
+         $paidval = array_sum($Paid);
+         $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
+         $totalamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $totalval);
+         $paidamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $paidval);
+        
+         $perbal =  round(($balances * 100) / $totalval ,2);
+         $perpaid = round(($paidval * 100) / $totalval,2);
+
+            if(count($getBalance) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($getBalance), "data" => [
+                                "balance" =>$balanceamount ?? '0',
+                                "total" => $totalamount ?? '0',
+                                "paid" => $paidamount ?? '0',
+                                "balPer" =>$perbal ?? '0' ,
+                                "paidPer" =>$perpaid ?? '0',
+                                "Month" =>  $Getmonth?? explode(",", "")
+                         ]
+                ]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false,  "count" => count($getBalance), "data" => [
+                    "balance" => '0',
+                    "total" =>  '0',
+                    "paid" =>'0',
+                    "balPer" => '0' ,
+                     "paidPer" => '0',
+                     "Month" =>  explode(",", "")
+                    ]
+            ]);
+            }
+
+        }
+        public function financialmonth(Request $request){
+           
+            
+            $getBalance = DB::table('payments')
+            ->select('balance','total','paid','financialyear')
+            ->where('clienttype',$request->type)
+            ->where(DB::raw("(DATE_FORMAT(created_at,'%M'))"),$request->month)
+            // ->groupby('financialyear')
+            ->get();
+            $balance=[];
+            $total=[];
+            $Paid=[];
+            $year =[];
+
+          foreach ($getBalance as $key => $value) {
+            $balance[]= $value->balance;
+            $total[]=$value->total;
+            $Paid[]= $value->paid;
+            $year[] =$value->financialyear;
+          }
+         
+         $balances =array_sum($balance);
+         $totalval = array_sum($total);
          $paidval = array_sum($Paid);
          $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
          $totalamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $totalval);
@@ -251,7 +331,8 @@ class ProvinceController extends Controller
                                 "total" => $totalamount ?? '0',
                                 "paid" => $paidamount ?? '0',
                                 "balPer" =>$perbal ?? '0' ,
-                                "paidPer" =>$perpaid ?? '0'
+                                "paidPer" =>$perpaid ?? '0',
+                                "year" =>$year ?? explode(",", "") ,
                          ]
                 ]);
             }
@@ -262,7 +343,8 @@ class ProvinceController extends Controller
                     "total" =>  '0',
                     "paid" =>'0',
                     "balPer" => '0' ,
-                     "paidPer" => '0'
+                     "paidPer" => '0',
+                     "year" =>explode(",", "") ,
                     ]
             ]);
             }

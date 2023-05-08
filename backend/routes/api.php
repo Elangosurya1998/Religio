@@ -42,10 +42,12 @@ Route::get('/Religio/Congregation',[ReligioController::class, 'CongregationList'
 Route::delete('/Religio/Congregation/{id}',[ReligioController::class, 'CongregationDelete']);
 Route::get('/Religio/Congregationedit/{id}',[ReligioController::class, 'CongregationEdit']);
 Route::put('/Religio/Congregationupdate/{id}',[ReligioController::class, 'Congregationupdate']);
+Route::get('/Religio/Congregationverifydelete/{id}',[ReligioController::class, 'Congregationverifydelete']);
 
 // Province
 Route::post('/Religio/Province/store',[ProvinceController::class, 'Provincestore']);
 Route::delete('/Religio/Province/{id}',[ProvinceController::class, 'ProvinceDelete']);
+Route::get('/Religio/Provinceverifydelete/{id}',[ProvinceController::class, 'Provinceverifydelete']);
 Route::get('/Religio/Province',[ProvinceController::class, 'ProvinceList']);
 Route::get('/Religio/Province/Congregation',[ProvinceController::class, 'ProvinceCongregation']);
 Route::get('/Religio/Provinceedit/{id}',[ProvinceController::class, 'ProvinceEdit']);
@@ -145,5 +147,6 @@ Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
 // dashboard
 Route::get('/Religio/ClientType/getBalance/{value}',[ProvinceController::class, 'GetBalance']);
 Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'financialyear']);
+Route::post('/Religio/financialmonth/getBalance',[ProvinceController::class, 'financialmonth']);
 Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
 

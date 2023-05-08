@@ -14,6 +14,7 @@ function Dashboard() {
         const resData = response.data;
         SetBalance(resData.data);
         FinancialYear(resData.data.year);
+        FinancialMonth(resData.data.Month);
       })
       .catch((err) => {
         console.log(err);
@@ -38,26 +39,28 @@ function Dashboard() {
       }
       if (get === "New Sales") {
         const data = "NewSales";
-        $("#yearlabel").text(values);
+        $(".yearlabel").text(values);
         axios
           .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
           .then((response) => {
             const resData = response.data;
             SetBalance(resData.data);
             FinancialYear(resData.data.year);
+            FinancialMonth(resData.data.Month);
           })
           .catch((err) => {
             console.log(err);
           });
       } else {
         const data = get;
-        $("#yearlabel").text(values);
+        $(".yearlabel").text(values);
         axios
           .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
           .then((response) => {
             const resData = response.data;
             SetBalance(resData.data);
             FinancialYear(resData.data.year);
+            FinancialMonth(resData.data.Month);
           })
           .catch((err) => {
             console.log(err);
@@ -72,7 +75,7 @@ function Dashboard() {
           const resData = response.data;
           SetBalance(resData.data);
           FinancialYear(resData.data.year);
-          console.log(resData);
+          FinancialMonth(resData.data.Month);
         })
         .catch((err) => {
           console.log(err);
@@ -80,25 +83,28 @@ function Dashboard() {
     } else {
       const data = values;
       $("#client").text(values);
-      $("#yearlabel").text("Select All");
+      $(".yearlabel").text("Financial Year");
       axios
         .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
         .then((response) => {
           const resData = response.data;
-          console.log(resData);
           SetBalance(resData.data);
           FinancialYear(resData.data.year);
+          FinancialMonth(resData.data.Month);
         })
         .catch((response) => {
           console.log(response.data);
           const resData = response.data;
           SetBalance(resData);
           FinancialYear(resData);
+          FinancialMonth(resData);
         });
     }
   }
 
   const [balance, SetBalance] = useState("");
+  const [year, FinancialYear] = useState([]);
+  const [Month, FinancialMonth] = useState([]);
 
   // useEffect(() => {
   //   fetch(`${ApiUrl}/Religio/ClientType/Getfinancialyears`).then((res) => {
@@ -110,7 +116,40 @@ function Dashboard() {
   //   })
   // }, [])
 
-  const [year, FinancialYear] = useState([]);
+  function getMonthData(event) {
+    const month = event.target.text;
+    const ClientType = $("#client").text();
+    if (ClientType === "New Sales") {
+      const data = "NewSales";
+      axios
+        .post(
+          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${data}&month=${month}`
+        )
+        .then((response) => {
+          const resData = response.data;
+          SetBalance(resData.data);
+          FinancialYear(resData.data.year);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      $(".monthlabel").text(month);
+    } else {
+      axios
+        .post(
+          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${ClientType}&month=${month}`
+        )
+        .then((response) => {
+          const resData = response.data;
+          SetBalance(resData.data);
+          FinancialYear(resData.data.year);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      $(".monthlabel").text(month);
+    }
+  }
 
   function GetbalanbeYeardata(event) {
     const year = event.target.text;
@@ -123,13 +162,14 @@ function Dashboard() {
         )
         .then((response) => {
           const resData = response.data;
-          console.log(resData.data);
+          console.log(resData);
           SetBalance(resData.data);
+          FinancialMonth(resData.data.Month);
         })
         .catch((err) => {
           console.log(err);
         });
-      $("#yearlabel").text(year);
+      $(".yearlabel").text(year);
     } else {
       axios
         .post(
@@ -137,13 +177,13 @@ function Dashboard() {
         )
         .then((response) => {
           const resData = response.data;
-          console.log(resData.data);
           SetBalance(resData.data);
+          FinancialMonth(resData.data.Month);
         })
         .catch((err) => {
           console.log(err);
         });
-      $("#yearlabel").text(year);
+      $(".yearlabel").text(year);
     }
   }
 
@@ -177,15 +217,24 @@ function Dashboard() {
               <div
                 className="dropdown-menu navbar-dropdown nav-profile-text"
                 aria-labelledby="profileDropdown">
-                <a className="dropdown-item" onClick={getData}>
+                <a
+                  className="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={getData}>
                   <i className="mdi mdi-chevron-double-down me-2 text-success " />
                   New Sales
                 </a>
-                <a className="dropdown-item" onClick={getData}>
+                <a
+                  className="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={getData}>
                   <i className="mdi mdi-cached me-2 text-primary" />
                   AMC
                 </a>
-                <a className="dropdown-item" onClick={getData}>
+                <a
+                  className="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={getData}>
                   <i className="mdi mdi-checkbox-multiple-blank-circle-outline me-2 text-danger" />
                   Outstanding
                 </a>
@@ -193,7 +242,6 @@ function Dashboard() {
             </li>
           </ul>
         </nav>
-
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="nav-item nav-profile dropdown">
@@ -207,24 +255,71 @@ function Dashboard() {
                   <span className="availability-status online" />
                 </div>
                 <div className="nav-profile-text">
-                  <p className="mb-1 text-black dropdown-toggle" id="yearlabel">
-                    Select All
+                  <p className="mb-1 text-black dropdown-toggle monthlabel">
+                    Month
                   </p>
                 </div>
               </a>
               <div
                 className="dropdown-menu navbar-dropdown"
                 aria-labelledby="profileDropdown">
-                <a className="dropdown-item" onClick={getData}>
-                  <i className="mdi mdi-check-all me-2 text-primary" />
+                <a
+                  className="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={getMonthData}>
+                  {/* <i className="mdi mdi-check-all me-2 text-primary" /> */}
+                  Select All
+                </a>
+                {Month.map((item) => (
+                  <a
+                    className="dropdown-item"
+                    style={{ cursor: "pointer" }}
+                    onClick={getMonthData}>
+                    {/* <i className="mdi mdi-calendar-check me-2 text-primary" /> */}
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="breadcrumb">
+          <ul className="breadcrumb">
+            <li className="nav-item nav-profile dropdown">
+              <a
+                className="nav-link "
+                id="profileDropdown"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <div className="nav-profile-img">
+                  <span className="availability-status online" />
+                </div>
+                <div className="nav-profile-text">
+                  <p
+                    className="mb-1 text-black dropdown-toggle yearlabel"
+                    id="yearlabel">
+                    Financial Year
+                  </p>
+                </div>
+              </a>
+              <div
+                className="dropdown-menu navbar-dropdown"
+                aria-labelledby="profileDropdown">
+                <a
+                  className="dropdown-item"
+                  style={{ cursor: "pointer" }}
+                  onClick={getData}>
+                  {/* <i className="mdi mdi-check-all me-2 text-primary" /> */}
                   Select All
                 </a>
                 {year.map((item) => (
                   <a
                     className="dropdown-item"
                     key={item}
+                    style={{ cursor: "pointer" }}
                     onClick={GetbalanbeYeardata}>
-                    <i className="mdi mdi-calendar-check me-2 text-primary" />
+                    {/* <i className="mdi mdi-calendar-check me-2 text-primary" /> */}
                     {item}
                   </a>
                 ))}
@@ -267,6 +362,7 @@ function Dashboard() {
                 Received Amount
                 <i className="mdi mdi-cash-usd mdi-24px float-right" />
               </h4>
+
               <h2 className="mb-5">
                 <i className="mdi mdi-currency-inr" /> {balance.paid}
               </h2>
@@ -283,9 +379,8 @@ function Dashboard() {
                 alt="circle-image"
               />
               <h4 className="font-weight-normal mb-3">
-                {" "}
                 Balance
-                <i className="mdi mdi-cash mdi-24px float-right" />
+                <i className="fa-solid fa-money-bill-1-wave mdi-24px float-right" />
               </h4>
               <h2 className="mb-5">
                 <i className="mdi mdi-currency-inr" /> {balance.balance}

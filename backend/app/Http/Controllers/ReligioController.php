@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Congregation;
 use Illuminate\Support\Facades\Validator;
+use DB;
 class ReligioController extends Controller
 { 
         Private $status = 200;
@@ -103,5 +104,17 @@ class ReligioController extends Controller
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
+        }
+        public function Congregationverifydelete($id){
+            
+            $verifyData = DB::table('provinces')->select('id')->where('congregation',$id)->first();
+       
+            if($verifyData !=null){
+                return response()->json(["status" => $this->status, "success" => true 
+               , "message" => "true"]);
+            }else{
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "false"]);
+            }
         }
 }

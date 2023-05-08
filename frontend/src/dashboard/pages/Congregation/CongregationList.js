@@ -35,22 +35,40 @@ function CongregationList() {
   }, []);
 
   const deleteCongregation = async (e, id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios.delete(`${ApiUrl}/Religio/Congregation/${id}`).then((res) => {
-          fetchData();
-        });
-        Swal.fire("Deleted!", "Your record has been deleted.", "success");
-      }
-    });
+    axios
+      .get(`${ApiUrl}/Religio/Congregationverifydelete/${id}`)
+      .then((res) => {
+        const result = res.data.message;
+        if (result === "false") {
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              axios
+                .delete(`${ApiUrl}/Religio/Congregation/${id}`)
+                .then((res) => {
+                  fetchData();
+                });
+              Swal.fire("Deleted!", "Your record has been deleted.", "success");
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Sorry you can't delete this Congregation",
+            text: "Some Provice are registered using this Congregation",
+            icon: "warning",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "OK",
+          });
+        }
+      });
   };
 
   const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
