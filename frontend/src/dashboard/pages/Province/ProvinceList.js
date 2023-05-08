@@ -44,20 +44,35 @@ function ProvinceList() {
   };
 
   const deleteProvince = async (e, id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios.delete(`${ApiUrl}/Religio/Province/${id}`).then((res) => {
-          fetchData();
+    axios.get(`${ApiUrl}/Religio/Provinceverifydelete/${id}`).then((res) => {
+      const result = res.data.message;
+      console.log(result);
+      if (result === "false") {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.delete(`${ApiUrl}/Religio/Province/${id}`).then((res) => {
+              fetchData();
+            });
+            Swal.fire("Deleted!", "Your record has been deleted.", "success");
+          }
         });
-        Swal.fire("Deleted!", "Your record has been deleted.", "success");
+      } else {
+        Swal.fire({
+          title: "Sorry you can't delete this Province",
+          text: "Client's are registered using this Province",
+          icon: "warning",
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "OK",
+        });
       }
     });
   };
