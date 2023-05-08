@@ -16,8 +16,6 @@ class Onsitemeet extends Model
         'expensive',
         'onsiteplace',
         'onsiterating',
-        'onsite',
-        'name',
-        'path'
+        'onsite'
     ];
 }

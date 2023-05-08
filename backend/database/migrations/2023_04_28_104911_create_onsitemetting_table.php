@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string("onsiteplace")->nullable();
             $table->string("onsiterating")->nullable();
             $table->string("onsite")->nullable();  
-            $table->string('name');
-            $table->string('path'); 
             $table->timestamps();
         });
     }

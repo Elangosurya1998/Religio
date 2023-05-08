@@ -4,9 +4,12 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Rating } from 'react-simple-star-rating';
 
 function OnsitedataEdit() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' }); 
+  
+  const [ratings, setRating] = useState(0) 
 
   const {id} = useParams();
   useEffect(() => {
@@ -14,6 +17,7 @@ function OnsitedataEdit() {
         return res.json();
     }).then((resp) => {
        reset(resp.data[0]);
+       setRating(resp.data[0].onsiterating)
        filedata(resp.data[0].onsite)
     }).catch((err) => {
         console.log(err.message);
@@ -33,7 +37,14 @@ const handleNavigation=()=>{
   })
 }
 
+const [ratingss, setRatings] = useState(0)
+const handleRatings = (rates) => {
+  setRatings(rates)
+  // Some logic
+}
+
   function onSubmitonsitedata(data,e){
+    data['onsiterating'] = ratingss
    console.log(data);
     axios.put(`${ApiUrl}/onsitestatusupdate/${id}`,data)
     .then((response) => {
@@ -131,16 +142,23 @@ const handleNavigation=()=>{
                       <div className="form-row">
                       <div className="form-group col-md-6">
                             <label for="exampleInputUsername">Rating&nbsp;&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="hours" placeholder="Number of onsiterating"
-                            {...register("onsiterating", { required: true })}
-                            aria-invalid={errors?.onsiterating ? "true" : "false"}  />
-                            {errors?.onsiterating?.type === 'required' && <div className='text-danger text_error'>Number of hours is required</div>}
-                           
+                            <div className="form-group col-md-12">
+                            <Rating
+                            type="text"
+                                onClick={handleRatings}
+                                initialValue = {ratings}
+                                size={20}
+                                label
+                                transition
+                                fillColor='orange'
+                                emptyColor='gray'                             
+                              />
+                          </div> 
                           </div>
                           <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="onsite" 
-                              {...register("onsite", { required: true,onChange:changeHandler})}
+                              {...register("onsite", { onChange:changeHandler})}
                               aria-invalid={errors?.onsite ? "true" : "false"}/>
                                {errors?.onsite?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
                                <div className=''><label className="errlabel">{file}</label></div>

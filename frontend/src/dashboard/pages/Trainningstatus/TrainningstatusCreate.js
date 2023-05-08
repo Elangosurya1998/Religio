@@ -5,13 +5,16 @@ import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import {Link, Routes, Route, useNavigate} from 'react-router-dom';
 import Navbar from "../../includes/Navbar";
+import { Rating } from 'react-simple-star-rating';
 
 function Trainningstatuscreate() {
 
+
+
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: 'onChange' }); 
-   
     // checkbox form
-    const [state, setState] = useState("onsite");
+   
+  
 
   
     const navigate = useNavigate();
@@ -23,10 +26,18 @@ function Trainningstatuscreate() {
       })
     }
   
+    const [ratings, setRatings] = useState(0) // initial rating value
+    // Catch Rating value
 
+    const handleRatings = (rates) => {
+      setRatings(rates)
+      // Some logic
+    }
 
     function onSubmtionlinecreate(datas,e){
+      datas['onlinerating'] = ratings
       const datass = new FormData();
+      console.log(datass);
       datass.append('online', selectedFiles);
      axios.post(`${ApiUrl}/onlinemeetstatuscreate`,datas)
      .then((response) => {
@@ -64,8 +75,16 @@ function Trainningstatuscreate() {
      const [selectedFiles, setSelectedFiles] = useState();
 
     
+     const [rating, setRating] = useState(0) // initial rating value
+     // Catch Rating value
+     const [state, setState] = useState("onsite");
+     const handleRating = (rate) => {
+       setRating(rate)
+       // Some logic
+     }
 
     function onSubmitonsitecreate(data,e){
+     data['onsiterating'] = rating
       const formData = new FormData();    
       formData.append('onsite', selectedFile);
       console.log(data);
@@ -95,13 +114,15 @@ function Trainningstatuscreate() {
           footer: err.message
         })
       })
-      
+
+
     }
 
     const changeHandler = (event) => {
       setSelectedFile(event.target.files[0]);
      };
      const [selectedFile, setSelectedFile] = useState();
+
 
   return (  
 
@@ -128,8 +149,7 @@ function Trainningstatuscreate() {
                     <p>Online</p>
                     </div>
                     <div className="form-group col-md-6">
-                    <input class="form-check-input" type="checkbox" checked={state === "onsite" } onChange={(checked) => setState("onsite")}
-                    defaultChecked={state === "onsite" }/>         
+                    <input class="form-check-input" type="checkbox" checked={state === "onsite" } onChange={(checked) => setState("onsite")}/>         
                     <p>Onsite</p>
                     </div>
                     </div>
@@ -191,12 +211,21 @@ function Trainningstatuscreate() {
         
                       <div className="form-row">
                       <div className="form-group col-md-6">
-                            <label for="exampleInputUsername">Rating&nbsp;&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="onlinerating" placeholder="Rating"
-                            {...register("onlinerating", { required: true })}
-                            aria-invalid={errors?.onlinerating ? "true" : "false"}  />
-                            {errors?.onlinerating?.type === 'required' && <div className='text-danger text_error'>Rating is required</div>}
-                           
+                      <label for="exampleInputUsername">Rating</label>
+                     <div className="form-group col-md-12">
+                            <Rating
+                            type="text"
+                                onClick={handleRatings}
+                                ratingValue={ratings}
+                                size={20}
+                                label
+                                transition
+                                fillColor='orange'
+                                emptyColor='gray'
+                                value={ratings} 
+                              />
+                              {ratings}
+                          </div>
                           </div>
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
@@ -256,18 +285,24 @@ function Trainningstatuscreate() {
                     {errors?.expensive?.type === 'required' && <div className='text-danger text_error'>Training Expansive is required</div>}
                   </div>
                   </div>
-        
                       <div className="form-row">
                       <div className="form-group col-md-6">
-                            <label for="exampleInputUsername">Rating&nbsp;&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                            <input type="text" className="form-control" name="hours" placeholder="Number of onsiterating"
-                            {...register("onsiterating", { required: true })}
-                            aria-invalid={errors?.onsiterating ? "true" : "false"}  />
-                            {errors?.onsiterating?.type === 'required' && <div className='text-danger text_error'>Number of hours is required</div>}
-                           
+                            <label for="exampleInputUsername">Rating</label>
+                     <div className="form-group col-md-12">
+                            <Rating
+                            type="text"
+                                onClick={handleRating}
+                                ratingValue={rating}
+                                size={20}
+                                label
+                                transition
+                                fillColor='orange'
+                                emptyColor='gray'
+                                value={rating} 
+                              />
                           </div>
-              
-                            <div className=" form-group col-md-6">
+                          </div>
+                            <div className="form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="onsite" 
                               {...register("onsite", { required: true,onChange:changeHandler})}

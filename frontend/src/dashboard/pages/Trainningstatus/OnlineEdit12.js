@@ -4,11 +4,14 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Rating } from 'react-simple-star-rating';
 
 function OnlinetrdataEdit() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
 
 
+  const [ratings, setRating] = useState(0) 
+ 
   const [file, filedata] = useState();
   const {id} = useParams();
   useEffect(() => {
@@ -16,6 +19,7 @@ function OnlinetrdataEdit() {
         return res.json();
     }).then((resp) => {
        reset(resp.data[0]);
+       setRating(resp.data[0].onlinerating)
        filedata(resp.data[0].online)
     }).catch((err) => {
         console.log(err.message);
@@ -34,7 +38,14 @@ const handleNavigation=()=>{
   })
 }
 
+const [ratingss, setRatings] = useState(0)
+const handleRatings = (rates) => {
+  setRatings(rates)
+  // Some logic
+}
+
   function onSubmitonlineupdate(data,e){
+    data['onlinerating'] = ratingss
     const datass = new FormData();
   datass.append('online', selectedFiles);
     axios.put(`${ApiUrl}/onlinestatusupdate/${id}`,data)
@@ -138,17 +149,31 @@ const handleNavigation=()=>{
         
                       <div className="form-row">
                       <div className="form-group col-md-6">
-                            <label for="exampleInputUsername">Rating&nbsp;&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                            {/* <label for="exampleInputUsername">Rating&nbsp;&nbsp;<span style={{ color: 'red' }}>*</span></label>
                             <input type="text" className="form-control" name="onlinerating" placeholder="Rating"
                             {...register("onlinerating", { required: true })}
                             aria-invalid={errors?.onlinerating ? "true" : "false"}  />
-                            {errors?.onlinerating?.type === 'required' && <div className='text-danger text_error'>Rating is required</div>}
-                           
+                            {errors?.onlinerating?.type === 'required' && <div className='text-danger text_error'>Rating is required</div>} */}
+
+                            <label for="exampleInputUsername">Rating</label>
+                     <div className="form-group col-md-12">
+                            <Rating
+                            type="text"
+                                onClick={handleRatings}
+                                initialValue = {ratings}
+                                size={20}
+                                label
+                                transition
+                                fillColor='orange'
+                                emptyColor='gray'              
+                              />
+                          </div> 
+                          
                           </div>
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
                              <input type="File" className="form-control" name="FileAttachment" 
-                              {...register("FileAttachment", { required: true, onChange:changeHandler})}
+                              {...register("FileAttachment", { onChange:changeHandler})}
                               aria-invalid={errors?.FileAttachment ? "true" : "false"}/>
                                {errors?.FileAttachment?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
                                <div className=''><label className="errlabel">{file}</label></div>

@@ -14,8 +14,6 @@ class Onlinemeet extends Model
         'onlinedate',
         'onlinehours',
         'online',
-        'onlinerating',
-        'name',
-        'path'
+        'onlinerating'
     ];
 }
