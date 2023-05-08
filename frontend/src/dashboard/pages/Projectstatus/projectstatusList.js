@@ -59,11 +59,11 @@ const projectDelete = async (e,id) =>{
     return (
         <div className="content-wrapper">
         <div className="page-header">
-        <h3 className="page-title">
+        {/* <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-plus menu-icon" />
           </span> Project status List
-        </h3>
+        </h3> */}
         <nav aria-label="breadcrumb">
         </nav>
       </div>
@@ -71,7 +71,7 @@ const projectDelete = async (e,id) =>{
           <div className="col-lg-12 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              <h4 className="card-title">Project Status List</h4>
+              {/* <h4 className="card-title">Project Status List</h4> */}
               <div className="row">
               <div className="col-lg-10">
               </div>

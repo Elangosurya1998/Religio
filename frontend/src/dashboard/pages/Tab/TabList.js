@@ -36,7 +36,7 @@ function TabLists(){
         <div className="col-lg-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
-            <h4 className="card-title">Data Status Update List</h4>
+            {/* <h4 className="card-title">Data Status Update List</h4> */}
             
             <div className="row">
             <div className="col-lg-10">
@@ -77,6 +77,7 @@ function TabLists(){
         <TabPanel >
         <TrainningstatusList/>
         </TabPanel>
+
 
         </Tabs>
 

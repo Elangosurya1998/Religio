@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string("onlinehours")->nullable();
             $table->string("onlinerating")->nullable();
             $table->string("online")->nullable();
-            $table->string('name');
-            $table->string('path');
             $table->timestamps();
         });
     }

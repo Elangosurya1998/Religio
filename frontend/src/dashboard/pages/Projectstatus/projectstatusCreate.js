@@ -96,11 +96,18 @@ function Projectstatuscreate() {
 
               <div className="form-row">
                 <div className="form-group col-md-6">
-                  <label for="Congregation">Congregation&nbsp;<span style={{ color: 'red' }}>*</span></label>
+                  <label for="Congregation">Congregationrgrg&nbsp;<span style={{ color: 'red' }}>*</span> <span class="caret"></span></label>
+                 {/* <select>
+                  <option>dfgfhghh</option>
+                  <option>dfgfhghh</option>
+                  <option>dfgfhghh</option>
+                 </select> */}
                   <select className="form-control" id="Congregation" name="congregation"
                     {...register("congregation", { required: true, onChange: CongregationSelect })}
                     aria-invalid={errors?.congregation ? "true" : "false"}>
+                      
                     <option value="">--Congregation--</option>
+                 
                     {
                       congre && congre.map(item => (
                         <option value={item.id}>{item.congregation}</option>))
@@ -190,10 +197,10 @@ function Projectstatuscreate() {
                 <div className="form-group col-md-6">
                   <label for="exampleInputUsername">Test Username&nbsp;<span style={{ color: 'red' }}>*</span></label>
                   <input type="text" className="form-control" name="textusername" placeholder="Text Username"
-                    {...register("textusername", { required: true, pattern: { value: /^[A-Za-z ]+$/, } })}
+                    {...register("textusername", { required: true })}
                     aria-invalid={errors?.textusername ? "true" : "false"} autoComplete="off"/>
                   {errors?.textusername?.type === 'required' && <div className='text-danger text_error'>Username is required</div>}
-                  {errors?.textusername?.type === "pattern" && <div className='text-danger text_error '>Username can contain only alphabets</div>}
+                 
                 </div>
 
                 <div className="form-group col-md-6">
@@ -217,7 +224,7 @@ function Projectstatuscreate() {
 
                   <input type="text" className="form-control" name="produsername" placeholder="Product Username"
                     {...register("produsername", { required: true })}
-                    aria-invalid={errors?.produsername ? "true" : "false"} />
+                    aria-invalid={errors?.produsername ? "true" : "false"}  autoComplete="off"/>
                   {errors?.produsername?.type === 'required' && <div className='text-danger text_error'>produsername is required</div>}
                 </div>
 
@@ -226,7 +233,7 @@ function Projectstatuscreate() {
                   
                   <input type={viewPassword ? "text" : "password"} className="form-control" name="prodpassword" placeholder="Production Password"
                     {...register("prodpassword", { required: true })}
-                    aria-invalid={errors?.prodpassword ? "true" : "false"} />
+                    aria-invalid={errors?.prodpassword ? "true" : "false"}  autoComplete="off"/>
                     <span onClick={() => setViewPassword(!viewPassword)}>
                         {viewPassword ? <i className="fa fa-eye-slash" style={myStyle}/> 
                         : <i className="fa fa-eye" style={myStyle} />}</span>

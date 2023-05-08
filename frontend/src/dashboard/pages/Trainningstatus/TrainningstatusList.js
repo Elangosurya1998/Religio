@@ -5,6 +5,7 @@ import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { YYYYMMDDTODDMMYYYY } from "../../../function/date";
+import { Rating } from 'react-simple-star-rating';
 
 
 function TrainningstatusList(){
@@ -53,12 +54,13 @@ if (result.isConfirmed) {
 }
 
 
-const [ online, setOnline ] = useState();
+const [ online, setOnline ] = useState([]);
+console.log(online);
 const fetchDatas = () => {
   fetch(`${ApiUrl}/onlinemeetstatus`).then((res) => {
     return res.json();
   }).then((resp) => {
-    console.log(resp);
+    // console.log(resp.data);
     setOnline(resp.data);
   }).catch((err) => {
     console.log(err.message);
@@ -105,17 +107,17 @@ return (
       <div className="content-wrapper">
       <div className="page-header">
         {/* Basic data Status */}
-      <h3 className="page-title">
+      {/* <h3 className="page-title">
         <span className="page-title-icon bg-gradient-primary text-white me-2">
           <i className="mdi mdi-account-plus menu-icon" />
         </span> Trainning Status
-      </h3>
+      </h3> */}
     </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
-            <h4 className="card-title">Onsite List</h4>
+            <h4 className="card-title">Onsite StatusList</h4>
             <div className="row">
             <div className="col-lg-10">
             </div>
@@ -144,7 +146,13 @@ return (
                         <td>{item.onsitedays}</td>
                         <td>{item.expensive}</td>
                         <td>{item.onsiteplace }</td>
-                        <td>{item.onsiterating }</td>
+                        <td>
+                        <Rating
+                                initialValue = {item.onsiterating}
+                                size={20}
+                                readonly = {true}
+                              /></td>
+                        
                         <td id="noprint">
                           <a onClick={(e) => onsitestatusEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                         
@@ -177,7 +185,14 @@ return (
                         <td>{YYYYMMDDTODDMMYYYY(item.onlinedate)}</td>
                         <td>{item.onlinehours}</td>
                         <td>{item.onlinemeeting}</td>
-                        <td>{item.onlinerating }</td>
+                        <td>
+                   
+                        <Rating
+                                initialValue = {item.onlinerating}
+                                size={20}
+                                readonly = {true}
+                              /></td>
+                              
                         <td id="noprint">
                           <a onClick={(e) => onlinestatusEdit(e, item.id)} style={{ cursor: 'pointer' }}  className="mdi mdi-pencil-box" id="print">Edit</a>
                         

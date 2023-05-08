@@ -58,19 +58,18 @@ if (result.isConfirmed) {
 return (
 
       <div className="content-wrapper">
-      <div className="page-header">
-        {/* Basic data Status */}
+      {/* <div className="page-header">
       <h3 className="page-title">
         <span className="page-title-icon bg-gradient-primary text-white me-2">
           <i className="mdi mdi-account-plus menu-icon" />
         </span> Mobile App
       </h3>
-    </div>
+    </div> */}
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
-            <h4 className="card-title"> Mobile App Data List</h4>
+            {/* <h4 className="card-title"> Mobile App Data List</h4> */}
             <div className="row">
             <div className="col-lg-10">
             </div>
