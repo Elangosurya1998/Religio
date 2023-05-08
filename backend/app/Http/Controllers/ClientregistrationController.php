@@ -21,15 +21,15 @@ class ClientregistrationController extends Controller
                 "province"   => "required",
                 "name"       => "required",
                 "place"      => "required",
-                "clientType" => "required",
+                "clienttype" => "required",
             "financialyear"  => "required",
                 "clientcode" => "required",
             "dateofjoining"  => "required",
     "dateofcontractsigning"  => "required",
-                "amcDate"    => "required",
-             "projectValue"  => "required",
+                "amcdate"    => "required",
+             "projectvalue"  => "required",
                 "amcvalue"   => "required",
-            "projectStatus"  => "required",
+            "projectstatus"  => "required",
                 "address1"   => "required",
                 "state"      => "required",
                 "address2"   => "required",
@@ -45,23 +45,45 @@ class ClientregistrationController extends Controller
                 return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
                 }
             
+
+                $Website = $request->website;
+                $WebApplication = $request->webapplication;
+                $WebApp = $request->app;
+                         if($Website != 1){
+                            $websitedata = null;
+                         }else{
+                            $websitedata =$Website;
+                         }
+                        
+                         if($WebApplication != 1){
+                            $WebApplicationdata = null;
+                         }else{
+                            $WebApplicationdata =$WebApplication;
+                         }  
+                         
+                         if($WebApp != 1){
+                            $WebAppdata = null;
+                         }else{
+                            $WebAppdata =$WebApp;
+                         }
+
                  $RegisterArray['params'] = array(
                              "congregation"   => $request->congregation,
                                  "province"   => $request->province,
                                  "name"       => $request->name,
                                  "place"      => $request->place,
-                                 "clientType" => $request->clientType,
+                                 "clienttype" => $request->clienttype,
                              "financialyear"  => $request->financialyear,
                                  "clientcode" => $request->clientcode, 
                              "dateofjoining"  => $request->dateofjoining, 
                      "dateofcontractsigning"  => $request->dateofcontractsigning, 
-                                 "amcDate"    => $request->amcDate, 
-                                 "website"    => $request->website, 
-                                 "app"        => $request->app, 
-                          "webapplication"    => $request->webapplication, 
-                              "projectValue"  => $request->projectValue, 
+                                 "amcdate"    => $request->amcdate, 
+                                 "website"    => $websitedata, 
+                                 "app"        => $WebAppdata, 
+                          "webapplication"    => $WebApplicationdata, 
+                              "projectvalue"  => $request->projectvalue, 
                                  "amcvalue"   => $request->amcvalue, 
-                             "projectStatus"  => $request->projectStatus,
+                             "projectstatus"  => $request->projectstatus,
                                  "address1"   => $request->address1,
                                  "state"      => $request->state,
                                  "address2"   => $request->address2,
@@ -105,7 +127,7 @@ class ClientregistrationController extends Controller
 
             $Registerfile = Clientregistration::where('id',$id)
             ->update([
-                "fileAttachment"   =>$file->getClientOriginalName()
+                "fileattachment"   =>$file->getClientOriginalName()
             ]);;
             $file->move($location,$filename);
             $filepath = url('resourcefiles/'.$filename);
@@ -141,7 +163,7 @@ class ClientregistrationController extends Controller
                
                 $Registerfile = Clientregistration::where('id',$id)
                 ->update([
-                    "fileAttachment"   =>$file->getClientOriginalName()
+                    "fileattachment"   =>$file->getClientOriginalName()
                 ]);;
                 $file->move($location,$filename);
                 $filepath = url('resourcefiles/'.$filename);
@@ -234,15 +256,15 @@ class ClientregistrationController extends Controller
                     "province"   => $request->province,
                     "name"       => $request->name,
                     "place"      => $request->place,
-                    "clientType" => $request->clientType,
+                    "clienttype" => $request->clienttype,
                 "financialyear"  => $request->financialyear,
                     "clientcode" => $request->clientcode, 
                 "dateofjoining"  => $request->dateofjoining, 
         "dateofcontractsigning"  => $request->dateofcontractsigning, 
-                    "amcDate"    => $request->amcDate, 
-                "projectValue"  => $request->projectValue, 
+                    "amcdate"    => $request->amcdate, 
+                "projectvalue"  => $request->projectvalue, 
                     "amcvalue"   => $request->amcvalue, 
-                "projectStatus"  => $request->projectStatus,
+                "projectstatus"  => $request->projectstatus,
                     "address1"   => $request->address1,
                     "state"      => $request->state,
                     "address2"   => $request->address2,

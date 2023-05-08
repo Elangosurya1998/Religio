@@ -62,9 +62,9 @@ function Sidemenubar() {
             <span className="menu-title">Payment Status</span>
             <i className="mdi mdi-cash-multiple menu-icon" /></Link>
         </li>
-  
-        <li className={`${navitem} ${pathname == '/Religio/ProjectstatusLayouts' && 'active'}`}>
-          <Link to="/Religio/ProjectstatusLayouts" className="nav-link" >
+
+        <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
+          <Link to="/Religio/Tab" className="nav-link" >
             <span className="menu-title">Project Status</span>
             <i className="mdi mdi-file-document menu-icon" /></Link>
         </li>
@@ -74,22 +74,27 @@ function Sidemenubar() {
             <span className="menu-title">Manage Users</span>
             <i className="mdi mdi-account-circle menu-icon" /></Link>
         </li>
-        {/* <li className="nav-item">
+        <li className="nav-item">
           <a className="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-            <span className="menu-title">Sample Pages</span>
+            <span className="menu-title">Home Sections</span>
             <i className="menu-arrow" />
-            <i className="mdi mdi-medical-bag menu-icon" />
+            <i className="mdi mdi-vector-arrange-below menu-icon" />
           </a>
           <div className="collapse" id="general-pages">
             <ul className="nav flex-column sub-menu">
-              <li className="nav-item"> <a className="nav-link" href=""> Blank Page </a></li>
-              <li className="nav-item"> <a className="nav-link" href=""> Login </a></li>
-              <li className="nav-item"> <a className="nav-link" href=""> Register </a></li>
-              <li className="nav-item"> <a className="nav-link" href=""> 404 </a></li>
-              <li className="nav-item"> <a className="nav-link" href=""> 500 </a></li>
+              <li className="nav-item">
+                <Link to="/Religio/HomeSections/OurClient" className="nav-link" >
+                  <span className="menu-title">Our Client</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/Religio/HomeSections/OurCustomerSay" className="nav-link" >
+                  <span className="menu-title">Our Customer Says</span>
+                </Link>
+              </li>
             </ul>
           </div>
-        </li> */}
+        </li>
       </ul>
     </nav >
   )

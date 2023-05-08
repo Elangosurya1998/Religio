@@ -1,0 +1,8 @@
+.errlabel {
+    color: red;
+    margin-top: 7px;
+  }
+  
+  label.error {
+    display: inline;
+  }

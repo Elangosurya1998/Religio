@@ -35,7 +35,7 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      <li><Link to="/">Contact</Link></li>
+                      {/* <li><Link to="/">Contact</Link></li> */}
                       {/* <li><Link to="/login">Login</Link></li> */}
                     </ul>
                   </nav>

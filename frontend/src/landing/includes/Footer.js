@@ -7,7 +7,7 @@ function Footer() {
         <div className="footer-area footer-padding">
           <div className="container">
             <div className="row  justify-content-between">
-              <div className="col-lg-3 col-md-4 col-sm-8">
+              <div className="col-lg-4 col-md-4 col-sm-8">
                 <div className="single-footer-caption mb-30">
                   {/* logo */}
                   <div className="footer-logo">
@@ -34,7 +34,7 @@ function Footer() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 col-sm-7">
+              {/* <div className="col-lg-2 col-md-4 col-sm-7">
                 <div className="single-footer-caption mb-50">
                   <div className="footer-tittle">
                     <h4>Support</h4>
@@ -47,20 +47,21 @@ function Footer() {
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-lg-3 col-md-6 col-sm-8">
                 <div className="single-footer-caption mb-50">
                   <div className="footer-tittle">
-                    <h4>Newsletter</h4>
-                    <div className="footer-pera footer-pera2">
-                      <p>Heaven fruitful doesn't over lesser in days. Appear </p>
-                    </div>
-                    {/* Form */}
-                    <div className="footer-form">
-                      <div id="mc_embed_signup">
-
-                      </div>
-                    </div>
+                    <h4>For Demo : 24/7</h4>
+                    <ul>
+                      <li><a href="mailto:imman@boscosofttech.com"><i className="fas fa-envelope"></i>&nbsp; imman@boscosofttech.com</a></li>
+                      <li><i className="fas fa-phone"></i>&nbsp; +91 96291 46030</li>
+                    </ul>
+                    <br />
+                    <h4>Customer Support : 24/7</h4>
+                    <ul>
+                      <li><a href="mailto:cristo@boscosofttech.com"><i className="fas fa-envelope"></i>&nbsp; cristo@boscosofttech.com</a></li>
+                      <li><i className="fas fa-phone"></i>&nbsp; +91 97860 00436</li>
+                    </ul>
                   </div>
                 </div>
               </div>

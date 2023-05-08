@@ -5,9 +5,27 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import ApiUrl from '../Api/Api';
+import $ from "jquery";
 
 
 
+$(function () {
+    $("#toggle_rcpwd").click(function () {
+      $("#toggle-rceye").toggleClass("fa-eye-slash");
+      var type = $("#toggle-rceye").hasClass("fa-eye-slash") ? "text" : "password";
+      $("#rcpassword").attr("type", type);
+    });
+  });
+
+  $(function () {
+    $("#toggle_crpwd").click(function () {
+      $("#toggle-creye").toggleClass("fa-eye-slash");
+      var type = $("#toggle-creye").hasClass("fa-eye-slash") ? "text" : "password";
+      $("#crpassword").attr("type", type);
+    });
+  });
+  
 function ReguserCreate() {
     const validationSchema = Yup.object().shape({
         username: Yup.string()
@@ -24,19 +42,19 @@ function ReguserCreate() {
             .oneOf([Yup.ref('password'), null], '* Passwords must match')
             .required('* Confirm Password is required'),
     });
+
     const formOptions = { resolver: yupResolver(validationSchema) };
     const [name, setName] = useState('');
     const handleChange = event => {
         const result = event.target.value.replace(/[^a-z ]/gi, '');
         setName(result);
     }
-    // get functions to build form with useForm() hook
     const { register, handleSubmit, formState } = useForm(formOptions);
     const { errors } = formState;
     const navigate = useNavigate();
 
     function onSubmitform(data) {
-        axios.post('http://127.0.0.1:8000/api/Register', data)
+        axios.post(`${ApiUrl}/Register`, data)
             .then((Response) => {
                 Swal.fire({
                     text: 'Registered successfully',
@@ -65,13 +83,6 @@ function ReguserCreate() {
                         <i className="mdi mdi-account-plus menu-icon" />
                     </span> Add New Users
                 </h3>
-                <nav aria-label="breadcrumb">
-                    <ul className="breadcrumb">
-                        <li className="breadcrumb-item active" aria-current="page">
-                            <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-                        </li>
-                    </ul>
-                </nav>
             </div>
             <div className="row">
                 <div className="col-12">
@@ -81,9 +92,9 @@ function ReguserCreate() {
                                 <div className="row">
                                     <div className="col-md-12">
                                         <div className="form-group row">
-                                            <label className="col-form-label">User Name</label>
+                                            <label className="col-form-label">User Name <span style={{ color: "red" }}>*</span></label>
                                             <div className="col-sm-12">
-                                                <input name="username" placeholder='Enter Username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} />
+                                                <input name="username" placeholder='Enter Username' value={name} type="text" {...register('username',)} className={`form-control ${errors.username ? 'is-invalid' : ''}`} onChange={handleChange} autoComplete='off' />
                                                 <div className="invalid-feedback">{errors.username?.message}</div>
                                             </div>
                                         </div>
@@ -92,19 +103,24 @@ function ReguserCreate() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group row">
-                                            <label className="col-sm-3 col-form-label">Email</label>
+                                            <label className="col-sm-6 col-form-label">Email <span style={{ color: "red" }}>*</span></label>
                                             <div className='col-sm-9'>
-                                                <input name="email" placeholder='Enter Email' type="text" {...register('email',)} className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                                                <input name="email" placeholder='Enter Email' type="text" {...register('email',)} className={`form-control ${errors.email ? 'is-invalid' : ''}`} autoComplete='off' />
                                                 <div className="invalid-feedback">{errors.email?.message}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group row">
-                                            <label className="col-sm-3 col-form-label">Password</label>
+                                            <label className="col-sm-6 col-form-label">Password <span style={{ color: "red" }}>*</span></label>
                                             <div className="col-sm-9">
-                                                <input name="password" placeholder='Enter Password' type="password" {...register('password',)} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
-                                                <div className="invalid-feedback">{errors.password?.message}</div>
+                                                <div className="input-group">
+                                                <input name="password" placeholder='Enter Password' type="password" id='rcpassword' {...register('password',)} className={`form-control ${errors.password ? 'is-invalid' : ''}`} autoComplete='off' />
+                                                    <div className="input-group-append">
+                                                        <span id="toggle_rcpwd" className="input-group-text" style={{ cursor: "pointer" }}><i id="toggle-rceye" className="fa fa-eye field_icon"></i></span>
+                                                    </div>
+                                                    <div className="invalid-feedback">{errors.password?.message}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -112,18 +128,23 @@ function ReguserCreate() {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="form-group row">
-                                            <label className="col-sm-3 col-form-label">Confirm Password</label>
+                                            <label className="col-sm-6 col-form-label">Confirm Password <span style={{ color: "red" }}>*</span></label>
                                             <div className="col-sm-9">
-                                                <input name="confirmpassword" placeholder='Enter Confirm Password' type="password" {...register('confirmpassword',)} className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`} />
-                                                <div className="invalid-feedback">{errors.confirmpassword?.message}</div>
+                                            <div className="input-group">
+                                            <input name="confirmpassword" placeholder='Enter Confirm Password' id='crpassword' type="password" {...register('confirmpassword',)} className={`form-control ${errors.confirmpassword ? 'is-invalid' : ''}`} autoComplete='off' />
+                                                    <div className="input-group-append">
+                                                        <span id="toggle_crpwd" className="input-group-text" style={{ cursor: "pointer" }}><i id="toggle-creye" className="fa fa-eye field_icon"></i></span>
+                                                    </div>
+                                                    <div className="invalid-feedback">{errors.confirmpassword?.message}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-group row">
-                                            <label className="col-sm-3 col-form-label">Role</label>
+                                            <label className="col-sm-6 col-form-label">Role <span style={{ color: "red" }}>*</span></label>
                                             <div className="col-sm-9">
-                                                <select {...register('role')} className={`form-control ${errors.role ? 'is-invalid' : ''}`} name="role" >
+                                                <select className={`form-control ${errors.role ? 'is-invalid' : ''}`} id="role" name="role" {...register("role", { required: true })} >
 
                                                     <option value="select your role" selected disabled>User Type</option>
 
@@ -132,6 +153,7 @@ function ReguserCreate() {
                                                     <option value="user">User</option>
 
                                                 </select>
+                                                <div className="invalid-feedback">{errors.role?.message}</div>
                                             </div>
                                         </div>
                                     </div>
