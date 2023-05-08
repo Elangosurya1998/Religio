@@ -70,6 +70,7 @@ function PaymentList() {
   }
   const Moneyformat = (num) => {
     const curr = new Intl.NumberFormat('en-IN').format(num);
+
     return curr;
   };
 

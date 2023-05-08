@@ -27,6 +27,7 @@ class PaymentController extends Controller
                     "paid" => $request->paid,
                     "balancepaid" => $request->balancepaid,
                     "balance"   => $request->balance,
+                    "renewelmonth"   => $request->renewelmonth,
                 );
                 $payment  = Payment::create($paymentArray['params']);
 
@@ -85,6 +86,7 @@ class PaymentController extends Controller
                 "financialyear"   => $request->financialyear,
                 "clientcode" => $request->clientcode,
                 "pi"   => $request->pi,
+                "renewelmonth"   => $request->renewelmonth,
                 "projectvalue"   => $request->projectvalue,
                 "amcvalue" => $request->amcvalue,
                 "gst" => $request->gst,
