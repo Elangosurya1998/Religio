@@ -37,14 +37,14 @@ const handleNavigation=()=>{
   })
 }
 
-const [ratingss, setRatings] = useState(0)
+// const [ratingss, setRatings] = useState(0)
 const handleRatings = (rates) => {
-  setRatings(rates)
+  setRating(rates)
   // Some logic
 }
 
   function onSubmitonsitedata(data,e){
-    data['onsiterating'] = ratingss
+    data['onsiterating'] = ratings
    console.log(data);
     axios.put(`${ApiUrl}/onsitestatusupdate/${id}`,data)
     .then((response) => {
@@ -153,6 +153,7 @@ const handleRatings = (rates) => {
                                 fillColor='orange'
                                 emptyColor='gray'                             
                               />
+                             
                           </div> 
                           </div>
                           <div className=" form-group col-md-6">

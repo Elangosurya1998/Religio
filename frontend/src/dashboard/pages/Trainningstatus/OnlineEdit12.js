@@ -10,7 +10,7 @@ function OnlinetrdataEdit() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm({ mode: 'onChange' });  
 
 
-  const [ratings, setRating] = useState(0) 
+  const [ratings, setRatings] = useState(0) 
  
   const [file, filedata] = useState();
   const {id} = useParams();
@@ -19,7 +19,7 @@ function OnlinetrdataEdit() {
         return res.json();
     }).then((resp) => {
        reset(resp.data[0]);
-       setRating(resp.data[0].onlinerating)
+       setRatings(resp.data[0].onlinerating)
        filedata(resp.data[0].online)
     }).catch((err) => {
         console.log(err.message);
@@ -38,14 +38,14 @@ const handleNavigation=()=>{
   })
 }
 
-const [ratingss, setRatings] = useState(0)
+// const [ratings, setRatings] = useState(0)
 const handleRatings = (rates) => {
   setRatings(rates)
   // Some logic
 }
 
   function onSubmitonlineupdate(data,e){
-    data['onlinerating'] = ratingss
+    data['onlinerating'] = ratings
     const datass = new FormData();
   datass.append('online', selectedFiles);
     axios.put(`${ApiUrl}/onlinestatusupdate/${id}`,data)
@@ -168,7 +168,7 @@ const handleRatings = (rates) => {
                                 emptyColor='gray'              
                               />
                           </div> 
-                          
+                        
                           </div>
                             <div className=" form-group col-md-6">
                             <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>

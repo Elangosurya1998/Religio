@@ -37,7 +37,7 @@ const handleNavigation=()=>{
       if (response.status === 200) {
         Swal.fire(
             'Updated Successfully..!',
-            'Project status Data Updated ..',
+            'Mobileapp status Data Updated ..',
             'success'
           );
           // navigate('/Religio/Memberdata');

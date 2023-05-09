@@ -26,8 +26,8 @@ function Housecommunitycreate() {
       .then((response) => {
         if (response.status === 200) {
           Swal.fire(
-              'Project status Successfully..!',
-              'Project status Added ..',
+              'Housecommunity data Successfully..!',
+              'Housecommunity data Added ..',
               'success'
             );
             // navigate('/Religio/Tab');

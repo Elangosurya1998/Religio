@@ -27,8 +27,8 @@ function Mobileappcreate() {
       .then((response) => {
         if (response.status === 200) {
           Swal.fire(
-              'Project status Successfully..!',
-              'Project status Added ..',
+              'Mobileapp status Successfully..!',
+              'Mobileapp status Added ..',
               'success'
             );
             handleNavigation()
