@@ -10,6 +10,7 @@ import HouseList from "../Housecommunity/HousecommunityList";
 import MobileappList from "../Mobileapp/MobileappList";
 import IosList from "../Ios/IosList";
 import TrainningstatusList from "../Trainningstatus/TrainningstatusList";
+import DatasupportList from "../Datasupport/DatasupportList";
 // import { makeJsDate } from "./date";
 
 
@@ -52,6 +53,7 @@ function TabLists(){
         <Tab>Mobile App</Tab>
         <Tab>IOS </Tab>
         <Tab>Trainning Status</Tab>
+        <Tab>Data Support</Tab>
         </TabList>
 
         <TabPanel>
@@ -76,6 +78,10 @@ function TabLists(){
 
         <TabPanel >
         <TrainningstatusList/>
+        </TabPanel>
+
+        <TabPanel >
+        <DatasupportList/>
         </TabPanel>
 
 

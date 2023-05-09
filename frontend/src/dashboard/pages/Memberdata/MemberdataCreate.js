@@ -26,8 +26,8 @@ function Memberdatacreate() {
       .then((response) => {
         if (response.status === 200) {
           Swal.fire(
-              'Project status Successfully..!',
-              'Project status Added ..',
+              'Member Data Successfully..!',
+              'Member Data Added ..',
               'success'
             );
             // navigate('/Religio/Tab');

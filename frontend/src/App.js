@@ -55,6 +55,9 @@ import Trainningstatusadd from './dashboard/Trainningstatusadd';
 import Onlinestatusedit from './dashboard/Olinetredit';
 import Onsitetredit from './dashboard/Onsitetredit';
 import OurClientLayouts from './dashboard/pages/Ourclientsay/OurClientLayouts';
+import Datasupportadd from './dashboard/Datasupportadd';
+import Datasupportedit from './dashboard/Datasupportedit';
+
 
 
 
@@ -130,7 +133,11 @@ function App() {
           <Route exact path="/Religio/Trainningstatus" element={< TrainningstatusList />} />
           <Route exact path="/Religio/Trainningstatusadd" element={< Trainningstatusadd />} />
 
+          <Route exact path="/Religio/Datasupportadd" element={< Datasupportadd />} />
+          <Route exact path="/Religio/DatasupportEdit/:id" element={< Datasupportedit />} />
+
           <Route exact path="/Religio/onlineedit/:id" element={< Onlinestatusedit />} />
+         
 
           <Route exact path="/Religio/onsiteedit/:id" element={< Onsitetredit />} />
 

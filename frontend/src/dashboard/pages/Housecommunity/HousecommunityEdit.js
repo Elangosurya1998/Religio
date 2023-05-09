@@ -30,14 +30,14 @@ const handleNavigation=()=>{
   })
 }
 
-  function onSubmitmemberdata(data,e){
+  function onSubmithousecommunity(data,e){
    console.log(data);
     axios.put(`${ApiUrl}/housecommunityupdate/${id}`,data)
     .then((response) => {
       if (response.status === 200) {
         Swal.fire(
             'Updated Successfully..!',
-            'Project status Data Updated ..',
+            'Housecommunity Data Updated ..',
             'success'
           );
           // navigate('/Religio/Memberdata');
@@ -68,7 +68,7 @@ const handleNavigation=()=>{
             <div className="card">
               <div className="card-body">
 
-                <form className="form-sample" onSubmit={handleSubmit(onSubmitmemberdata) } >                                
+                <form className="form-sample" onSubmit={handleSubmit(onSubmithousecommunity) } >                                
 
                   <div className="row"><b className="card-description">House / Community</b></div>
                   <div className="form-row">

@@ -16,6 +16,7 @@ use App\Http\Controllers\MobileappController;
 use App\Http\Controllers\OnlinemeetController;
 use App\Http\Controllers\OnsitemeetController;
 use App\Http\Controllers\OurclientController;
+use App\Http\Controllers\DatasupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,6 +147,13 @@ Route::get('/onsitemeetstatus',[OnsitemeetController::class,'onsitemeetstatusLis
 Route::get('/onsitestatusedit/{id}',[OnsitemeetController::class, 'onsitestatusedit']);
 Route::put('/onsitestatusupdate/{id}',[OnsitemeetController::class, 'onsitestatusupdate']);
 Route::delete('/onsitestatusdelete/{id}',[OnsitemeetController::class, 'onsitestatusDelete']);
+
+// Data Support
+Route::post('/Datasupportcreate',[DatasupportController::class,'datasupportcreate']);
+Route::get('/Datasupport',[DatasupportController::class,'Datasupportshow']);
+Route::get('/Datasupportedit/{id}',[DatasupportController::class, 'Datasupportedit']);
+Route::put('/Datasupportupdate/{id}',[DatasupportController::class, 'Datasupportupdate']);
+Route::delete('/Datasupportdelete/{id}',[DatasupportController::class, 'Datasupportdestroy']);
 
 // Forget Password Routes
 Route::post('/forgetpassword',[RegisterController::class, 'ForgetPassword']);
