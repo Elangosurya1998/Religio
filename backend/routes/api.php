@@ -44,6 +44,7 @@ Route::get('/Religio/Congregation',[ReligioController::class, 'CongregationList'
 Route::delete('/Religio/Congregation/{id}',[ReligioController::class, 'CongregationDelete']);
 Route::get('/Religio/Congregationedit/{id}',[ReligioController::class, 'CongregationEdit']);
 Route::put('/Religio/Congregationupdate/{id}',[ReligioController::class, 'Congregationupdate']);
+Route::get('/Religio/CongrationAddress/get/{id}',[ReligioController::class, 'CongrationAddress']);
 Route::get('/Religio/Congregationverifydelete/{id}',[ReligioController::class, 'Congregationverifydelete']);
 
 // Province

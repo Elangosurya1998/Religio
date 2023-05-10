@@ -7,6 +7,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationViews() {
+  const Routepath = "http://127.0.0.1:8000";
+
   const {
     register,
     handleSubmit,
@@ -412,9 +414,9 @@ function ClientRegistrationViews() {
                       name="projectstatus"
                       {...register("projectstatus", { required: true })}
                       aria-invalid={errors?.projectstatus ? "true" : "false"}>
-                      <option value="">Select Project Status</option>
+                      <option>Select Project Status</option>
                       <option value="Completed">Completed</option>
-                      <option value="InProgress">InProgress</option>
+                      <option value="InProgress">In Progress</option>
                       <option value="Notstrated">Not Started</option>
                     </select>
                     {errors?.projectstatus?.type === "required" && (
@@ -439,7 +441,13 @@ function ClientRegistrationViews() {
                       })}
                     />
                     <div className="Getfile filelabel">
-                      <label className="errlabel">{file}</label>
+                      <Link
+                        style={{ color: "#222324", paddingTop: 10 }}
+                        to={Routepath + "/resourcefiles/" + file}
+                        target="_blank"
+                        download>
+                        {file}
+                      </Link>
                     </div>
                   </div>
                 </div>

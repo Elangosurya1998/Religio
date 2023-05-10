@@ -112,7 +112,7 @@ function ClientregistrationList() {
                     <th>Province</th>
                     <th>Name</th>
                     <th>Place</th>
-                    <th>Financial Year</th>
+                    {/* <th>Financial Year</th> */}
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -124,7 +124,7 @@ function ClientregistrationList() {
                         <td>{item.province}</td>
                         <td>{item.name}</td>
                         <td>{item.place}</td>
-                        <td>{item.financialyear}</td>
+                        {/* <td>{item.financialyear}</td> */}
                         {isLogedIn?.role == "admin" ? (
                           <td id="noprint">
                             <a

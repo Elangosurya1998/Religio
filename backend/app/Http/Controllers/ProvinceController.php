@@ -46,6 +46,11 @@ class ProvinceController extends Controller
                                 "country"   => $request->country, 
                                 "mobile"   => $request->mobile, 
                                 "email"   => $request->email, 
+                                "contactname"   => $request->contactname, 
+                                "contactrole"   => $request->contactrole, 
+                                "contactemail"   => $request->contactemail, 
+                                "contactmobile"   => $request->contactmobile, 
+                                "contactstatus"   => $request->contactstatus, 
                          );
     
                 $Province  = Province::create($ProvinceArray['params']);
@@ -163,6 +168,11 @@ class ProvinceController extends Controller
                 "country"   => $request->country, 
                 "mobile"   => $request->mobile, 
                 "email"   => $request->email, 
+                "contactname"   => $request->contactname, 
+                "contactrole"   => $request->contactrole, 
+                "contactemail"   => $request->contactemail, 
+                "contactmobile"   => $request->contactmobile, 
+                "contactstatus"   => $request->contactstatus, 
             ]);
 
             return response()->json(
