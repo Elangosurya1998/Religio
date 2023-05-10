@@ -48,7 +48,6 @@ function ReguserEdit() {
           Swal.fire({
             icon: 'success',
             title: 'Updated Successfully!',
-            text: 'Data Has been Updated Successfully',
             showConfirmButton: true,
           });
           e.target.reset();

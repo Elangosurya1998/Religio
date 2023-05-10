@@ -29,7 +29,7 @@ function ClientregistrationList() {
   useEffect(() => {
     fetchData();
   }, []);
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const [register, SetClientregister] = useState([]);
   const navigate = useNavigate();
 

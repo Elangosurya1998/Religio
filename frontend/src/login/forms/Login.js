@@ -42,10 +42,9 @@ function Login() {
         const Logindata = Response.data;
 
         if (Logindata.loginVal === "true") {
-          localStorage.setItem("userDetails", JSON.stringify(Logindata.user));
+          sessionStorage.setItem("userDetails", JSON.stringify(Logindata.user));
           Swal.fire({
-            title: 'Sign-in success',
-            text: 'Logged in successfully',
+            title: 'Logged in successfully',
             icon: 'success',
             confirmButtonColor: 'green'
           })
@@ -55,7 +54,7 @@ function Login() {
             navigate('/Religio/Dashboard');
           } else {
 
-            navigate('/UserPage');
+            navigate('/Religio/Dashboard');
 
           }
         } else {
