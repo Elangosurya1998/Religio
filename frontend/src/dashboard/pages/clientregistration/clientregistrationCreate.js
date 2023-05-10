@@ -50,11 +50,7 @@ function ClientRegistrationCreate() {
             console.log(err);
           });
         if (response.status === 200) {
-          Swal.fire(
-            "Registrated Successfully..!",
-            "Client Added ..",
-            "success"
-          );
+          Swal.fire("Registrated Successfully..!", "", "success");
           navigate("/Religio/ClientRegistration");
           e.target.reset();
         }
@@ -336,7 +332,9 @@ function ClientRegistrationCreate() {
                     />
                     {errors?.financialyear?.type === "required" && (
                       <div className="text-danger text_error">
-                        <label className="errlabel">Place is required</label>
+                        <label className="errlabel">
+                          Financial Year is required
+                        </label>
                       </div>
                     )}
                     {errors?.financialyear?.type === "pattern" && (
@@ -479,9 +477,9 @@ function ClientRegistrationCreate() {
                       name="projectstatus"
                       {...register("projectstatus", { required: true })}
                       aria-invalid={errors?.projectstatus ? "true" : "false"}>
-                      <option value="">Select Project Status</option>
+                      <option>Select Project Status</option>
                       <option value="Completed">Completed</option>
-                      <option value="InProgress">InProgress</option>
+                      <option value="InProgress">In Progress</option>
                       <option value="Notstrated">Not Started</option>
                     </select>
                     {errors?.projectstatus?.type === "required" && (
@@ -495,7 +493,8 @@ function ClientRegistrationCreate() {
                   <div className=" form-group col-md-6">
                     <label>
                       File Attachment&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      <span style={{ color: "red" }}>*</span>&nbsp; ( Supported
+                      format is pdf ,pptx, docx ,doc )
                     </label>
                     <input
                       type="File"

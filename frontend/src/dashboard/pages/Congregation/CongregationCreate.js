@@ -24,11 +24,7 @@ function CongregationCreate() {
       .then((Response) => {
         console.log(Response);
         if (Response.status === 200) {
-          Swal.fire(
-            "Created Successfully..!",
-            "Congregation Add ..",
-            "success"
-          );
+          Swal.fire("Created Successfully..!", "", "success");
           e.target.reset();
           navigate("/Religio/Congregation");
         }

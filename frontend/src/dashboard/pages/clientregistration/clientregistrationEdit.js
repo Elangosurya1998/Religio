@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationEdit() {
-
   $("#uniquefile").hide();
-
+  const Routepath = "http://127.0.0.1:8000";
   const {
     register,
     handleSubmit,
@@ -93,11 +92,7 @@ function ClientRegistrationEdit() {
             console.log(err);
           });
         if (response.status === 200) {
-          Swal.fire(
-            "Updated Successfully..!",
-            "Client Data Updated ..",
-            "success"
-          );
+          Swal.fire("Updated Successfully..!", "", "success");
           navigate("/Religio/ClientRegistration");
           e.target.reset();
         }
@@ -460,9 +455,9 @@ function ClientRegistrationEdit() {
                       name="projectstatus"
                       {...register("projectstatus", { required: true })}
                       aria-invalid={errors?.projectstatus ? "true" : "false"}>
-                      <option value="">Select Project Status</option>
+                      <option>Select Project Status</option>
                       <option value="Completed">Completed</option>
-                      <option value="InProgress">InProgress</option>
+                      <option value="InProgress">In Progress</option>
                       <option value="Notstrated">Not Started</option>
                     </select>
                     {errors?.projectstatus?.type === "required" && (
@@ -487,9 +482,15 @@ function ClientRegistrationEdit() {
                       })}
                     />
                     <div className="Getfile filelabel">
-                      <label className="errlabel">{file}</label>
+                      <Link
+                        style={{ color: "#222324", paddingTop: 10 }}
+                        to={Routepath + "/resourcefiles/" + file}
+                        target="_blank"
+                        download>
+                        {file}
+                      </Link>
                     </div>
-                    <div className="clientcode filelabel" id="uniquefile">
+                    <div className="filelabel" id="uniquefile">
                       <label className="errlabel text-danger text_error">
                         The file must be a file of type: pdf ,pptx, docx ,doc
                       </label>

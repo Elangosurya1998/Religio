@@ -186,6 +186,8 @@ function Dashboard() {
       $(".yearlabel").text(year);
     }
   }
+  // const date = new Date();
+  // const month = date.toLocaleString("default", { month: "long" });
 
   return (
     <div className="content-wrapper">
@@ -256,6 +258,7 @@ function Dashboard() {
                 </div>
                 <div className="nav-profile-text">
                   <p className="mb-1 text-black dropdown-toggle monthlabel">
+                    {/* {month} */}
                     Month
                   </p>
                 </div>

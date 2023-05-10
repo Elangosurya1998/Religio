@@ -117,4 +117,21 @@ class ReligioController extends Controller
                 "success" => false, "message" => "false"]);
             }
         }
+        public function CongrationAddress($id){
+          
+            $CongrationAddress = DB::table('congregation as cr')
+            ->select('cr.address1'
+            ,'cr.state','cr.address2','cr.postcode','cr.city','cr.country',
+            'cr.mobile','cr.email')
+            ->where('cr.id',$id)
+            ->get();
+            if(count($CongrationAddress) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($CongrationAddress), "data" => $CongrationAddress]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
+        }
 }

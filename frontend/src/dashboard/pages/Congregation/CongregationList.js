@@ -129,11 +129,12 @@ function CongregationList() {
               <table className="table table-striped CongregationList">
                 <thead>
                   <tr>
+                    {/* <th>S.No</th> */}
                     <th>Congregation Name </th>
                     <th>Mobile</th>
                     <th>Email</th>
-                    <th>Address1</th>
-                    <th>Postcode</th>
+                    {/* <th>Address1</th>
+                    <th>Postcode</th> */}
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -141,11 +142,12 @@ function CongregationList() {
                   {Cong &&
                     Cong.map((item) => (
                       <tr key={item.id}>
+                        {/* <td></td> */}
                         <td>{item.congregation}</td>
                         <td>{item.mobile}</td>
                         <td>{item.email}</td>
-                        <td>{item.address1}</td>
-                        <td>{item.postcode}</td>
+                        {/* <td>{item.address1}</td>
+                        <td>{item.postcode}</td> */}
                         <td id="noprint">
                           <a
                             onClick={(e) => Viewcongregation(e, item.id)}
@@ -153,20 +155,22 @@ function CongregationList() {
                             className="mdi mdi-eye"
                             id="print"></a>
                           &nbsp;
-                          {isLogedIn?.role == "admin" && <a
-                            onClick={(e) => EditCongregation(e, item.id)}
-                            style={{ cursor: "pointer" }}
-                            className="mdi mdi-pencil-box"
-                            id="print">
-                            {" "}
-                          </a>}
-                          {isLogedIn?.role == "admin" &&
+                          {isLogedIn?.role == "admin" && (
+                            <a
+                              onClick={(e) => EditCongregation(e, item.id)}
+                              style={{ cursor: "pointer" }}
+                              className="mdi mdi-pencil-box"
+                              id="print">
+                              {" "}
+                            </a>
+                          )}
+                          {isLogedIn?.role == "admin" && (
                             <a
                               onClick={(e) => deleteCongregation(e, item.id)}
                               style={{ cursor: "pointer" }}
                               className="mdi mdi-delete"
                               id="print"></a>
-                          }
+                          )}
                         </td>
                       </tr>
                     ))}

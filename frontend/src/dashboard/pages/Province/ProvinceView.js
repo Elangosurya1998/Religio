@@ -387,6 +387,173 @@ function ProvinceView() {
                     </div>
                   </div>
                 </div>
+                <div className="row">
+                  <b className="card-description"> Contact Person </b>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">
+                        Name&nbsp;<span style={{ color: "red" }}>*</span>
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          type="text"
+                          className="form-control prodata"
+                          name="contactname"
+                          {...register("contactname", {
+                            required: true,
+                          })}
+                          aria-invalid={errors?.contactname ? "true" : "false"}
+                        />
+                        {errors?.contactname?.type === "required" && (
+                          <div className="text-danger text_error">
+                            <label className="errlabel">Name is required</label>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">
+                        Role&nbsp;<span style={{ color: "red" }}>*</span>
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          className="form-control Countryindia prodata"
+                          name="contactrole"
+                          {...register("contactrole", { required: true })}
+                          aria-invalid={
+                            errors?.contactrole ? "true" : "false"
+                          }></input>
+                        {errors?.contactrole?.type === "required" && (
+                          <div className="text-danger text_error">
+                            <label className="errlabel">
+                              Please Select Role
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">
+                        Email&nbsp;<span style={{ color: "red" }}>*</span>
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          type="text"
+                          className="form-control prodata"
+                          name="contactemail"
+                          {...register("contactemail", {
+                            required: true,
+                            pattern:
+                              /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                          })}
+                          aria-invalid={errors?.contactemail ? "true" : "false"}
+                        />
+                        {errors?.contactemail?.type === "required" && (
+                          <div className="text-danger text_error">
+                            <label className="errlabel">
+                              Email is required
+                            </label>
+                          </div>
+                        )}
+                        {errors?.contactemail?.type === "pattern" && (
+                          <div className="text-danger text_error ">
+                            <label className="errlabel">
+                              Invalid email address
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">
+                        Mobile No&nbsp;<span style={{ color: "red" }}>*</span>
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          type="text"
+                          className="form-control prodata"
+                          name="contactmobile"
+                          {...register("contactmobile", {
+                            required: true,
+                            minLength: 10,
+                            maxLength: 12,
+                            pattern: /^[]?\d*(?:[.,]\d*)?$/,
+                          })}
+                          aria-invalid={
+                            errors?.contactmobile ? "true" : "false"
+                          }
+                        />
+                        {errors?.contactmobile?.type === "required" && (
+                          <div className="text-danger text_error">
+                            <label className="errlabel">
+                              Mobile Number is required
+                            </label>
+                          </div>
+                        )}
+                        {errors?.contactmobile?.type === "minLength" && (
+                          <div className="text-danger text_error ">
+                            <label className="errlabel">
+                              Mobile Number shoul be minimum Numbers 10
+                            </label>
+                          </div>
+                        )}
+                        {errors?.contactmobile?.type === "maxLength" && (
+                          <div className="text-danger text_error ">
+                            <label className="errlabel">
+                              Mobile Number shoul be maximum Numbers12
+                            </label>
+                          </div>
+                        )}
+                        {errors?.contactmobile?.type === "pattern" && (
+                          <div className="text-danger text_error ">
+                            <label className="errlabel">
+                              Mobile Number can contain only Numbers
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="form-group row">
+                      <label className="col-sm-3 col-form-label">
+                        Status&nbsp;<span style={{ color: "red" }}>*</span>
+                      </label>
+                      <div className="col-sm-9">
+                        <select
+                          className="form-control Countryindia prodata"
+                          name="contactstatus"
+                          {...register("contactstatus", { required: true })}
+                          aria-invalid={
+                            errors?.contactstatus ? "true" : "false"
+                          }>
+                          <option value="">Select Status</option>
+                          <option value="Active">Active</option>
+                          <option value="Completed">Completed</option>
+                        </select>
+                        {errors?.contactstatus?.type === "required" && (
+                          <div className="text-danger text_error">
+                            <label className="errlabel">
+                              Please Select Status
+                            </label>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="text-center">
                   <Link
                     to="/Religio/Province"
