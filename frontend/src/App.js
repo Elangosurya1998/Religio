@@ -68,7 +68,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Layoutsland />} />
         <Route exact path="/Religio/Demo" element={<Layoutsland />} />
-        <Route exact path="/Religio/Blog" element={<Layoutsland />} />
+        <Route exact path="/Religio/Gallery" element={<Layoutsland />} />
+        <Route exact path="/Religio/Aboutus" element={<Layoutsland />} />
         <Route path='/forget' element={<ForgetPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
         <Route path='/login' element={<Login />}></Route>

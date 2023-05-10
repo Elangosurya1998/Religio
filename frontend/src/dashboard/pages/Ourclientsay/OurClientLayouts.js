@@ -9,8 +9,6 @@ import OurclientCreate from "./includes/OurclientCreate";
 import OurclientEdit from "./includes/OurclientEdit";
 import OurclientView from "./includes/OurclientView";
 
-
-
 function OurClientLayouts() {
 
     const { pathname } = useLocation();

@@ -2072,42 +2072,42 @@ hr {
 }
 
 .section-padding2 {
-	padding-top: 100px;
-	padding-bottom: 100px
+	padding-top: 60px;
+	padding-bottom: 60px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.section-padding2 {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 60px;
+	padding-bottom: 60px
 	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.section-padding2 {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 60px;
+	padding-bottom: 60px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.section-padding2 {
-		padding-top: 80px;
-		padding-bottom: 80px
+		padding-top: 40px;
+		padding-bottom: 40px
 	}
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 	.section-padding2 {
-		padding-top: 50px;
-		padding-bottom: 50px
+		padding-top: 40px;
+		padding-bottom: 40px
 	}
 }
 
 @media (max-width: 767px) {
 	.section-padding2 {
-		padding-top: 50px;
-		padding-bottom: 50px
+		padding-top: 30px;
+		padding-bottom: 30px
 	}
 }
 
@@ -5800,7 +5800,7 @@ z .slider-area .hero-cap h2 {
 }
 
 .section-tittle h2 {
-	font-size: 50px;
+	font-size: 33px;
 	font-weight: 700;
 	line-height: 1.2;
 	margin-bottom: 40px
@@ -6353,21 +6353,21 @@ z .slider-area .hero-cap h2 {
 
 .available-app-area {
 	position: relative;
-	padding-top: 100px;
-	padding-bottom: 100px
+	padding-top: 50px;
+	padding-bottom: 50px
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.available-app-area {
-		padding-top: 150px;
-		padding-bottom: 150px
+		padding-top: 100px;
+		padding-bottom: 100px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.available-app-area {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 50px;
+		padding-bottom: 50px
 	}
 }
 
@@ -6961,7 +6961,7 @@ ul {
 
 .marquee {
     position: relative;
-	animation: animatedImage 10s linear infinite;
+	animation: animatedImage 10s linear infinite running;
 }
 
 .marquee-content {
@@ -7015,12 +7015,9 @@ ul.li-col{
 
 @keyframes animatedImage {
     from {
-		transform: translateX(-200px);
+		transform: translateX(0);
 	}
 	to {
-		transform: translateX(-800px);
+		transform: translateX(-200px);
 	}
 }
-
-
-

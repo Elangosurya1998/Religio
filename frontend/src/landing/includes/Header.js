@@ -24,9 +24,10 @@ function Header() {
                     <ul id="navigation">
 
                       <li className={`${hash == "#Home" && 'active'}`}><Link to="/">Home</Link></li>
+                      <li className={`${pathname == '/Religio/Aboutus' && 'active'}`}><Link to="/Religio/Aboutus">About us</Link></li>
                       <li className={`${hash == "#Feature" && 'active'}`}><Link to="/#Feature">Feature</Link></li>
                       <li className={`${hash == "#Services" && 'active'}`}><Link to="/#Services">Services</Link></li>
-                      <li className={`${pathname == '/Religio/Blog' || hash == "#Blog" ? 'active' : ''}`}><Link to="/#Blog">Blog</Link></li>
+                      <li className={`${pathname == '/Religio/Gallery' || hash == "#Gallery" ? 'active' : ''}`}><Link to="/#Gallery">Gallery</Link></li>
                       <li className={`${pathname == '/Religio/Demo' && 'active'}`}><Link to="/Religio/Demo">Demo</Link></li>
                       {/* <li><a href="#">Pages</a>
                           <ul className="submenu">
@@ -35,8 +36,6 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      {/* <li><Link to="/">Contact</Link></li> */}
-                      {/* <li><Link to="/login">Login</Link></li> */}
                     </ul>
                   </nav>
                 </div>
