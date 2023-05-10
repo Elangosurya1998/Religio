@@ -26,7 +26,7 @@ function scroltoSection(hash) {
         case "#Services":
             window.scrollTo(0, 1900);
             break;
-        case "#Blog":
+        case "#Gallery":
             window.scrollTo(0, 4700);
             break;
         default:

@@ -25,6 +25,29 @@ function OurclientList() {
 
   const [OurClients, OurClientList] = useState([]);
 
+  function deleteClientLogo(e, clientId) {
+    const id = clientId;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${ApiUrl}/Religio/HomeSections/OurClient/delete/${id}`)
+          .then((res) => {
+            fetchData();
+          });
+        Swal.fire("Deleted!", "Your record has been deleted.", "success");
+      }
+    });
+
+  }
+
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -55,7 +78,7 @@ function OurclientList() {
                   <tr>
                     <th>Congregation</th>
                     <th>Province</th>
-                    <th>Logo</th>
+                    <th>Logo with Name</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -63,15 +86,23 @@ function OurclientList() {
                   {
                     OurClients && OurClients.map(item => (
                       <tr>
-                        <td>{item.congregation}</td>
-                        <td>{item.province}</td>
-                        <td>{item.logo}</td>
+                        <td>{item.cgname}</td>
+                        <td>
+                          {item.prname}
+                        </td>
+                        <td>
+                          <img src={"http://localhost:8000/Ourclient/logo/" + item.logo} className="me-2" alt="image" />
+                          {item.logo}</td>
                         <td>
                           <a className="mdi mdi-eye" id="print"></a>
                           &nbsp;
                           <a className="mdi mdi-pencil-box" id="print"></a>
                           &nbsp;
-                          <a className="mdi mdi-delete" id="print"></a>
+                          <a
+                            className="mdi mdi-delete"
+                            onClick={(e) => deleteClientLogo(e, item.id)}
+                            style={{ cursor: "pointer" }}
+                            id="print"></a>
                         </td>
                       </tr>
                     ))

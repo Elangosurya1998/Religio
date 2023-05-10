@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ourclient;
 use Illuminate\Http\Request;
+use carbon\Carbon;
 use DB;
 
 
@@ -18,7 +19,12 @@ class OurclientController extends Controller
      */
     public function index()
     {
-        $data = Ourclient::orderBy('id','desc')->get();
+        $data = DB::table('ourclient as oc')
+            ->select('oc.*','cg.congregation as cgname','pr.province as prname')
+            ->leftjoin('congregation as cg', 'oc.congregation','=','cg.id')
+            ->leftjoin('provinces as pr', 'oc.province','=','pr.id')
+            ->get();
+
         if(count($data) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
                         "count" => count($data), "data" => $data]);
@@ -47,8 +53,35 @@ class OurclientController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        Ourclient::insert($input);
+        $cong = $request->congregation;
+        $province = $request->province;
+        
+        // Retrieve file
+        $file = $request->file('logo');
+        $fileName = $file->getClientOriginalName();
+
+        // Move the file to the desired location
+        $file->move(public_path('Ourclient/logo/'), $fileName);
+
+        $input = [
+            'congregation' => $cong,
+            'province' => $province,
+            'logo' => $file->getClientOriginalName()
+        ];
+
+        $Ourclient = new Ourclient($input);
+        $Ourclient->save();
+
+        if(!is_null($Ourclient)){ 
+
+            return response()->json(["status" => $this->status, "success" => true, 
+                    "message" => "File uploaded successfully", "data" => $Ourclient]);
+        }    
+        else {
+            return response()->json(["status" => "failed", "success" => false,
+                        "message" => "Whoops! failed to create."]);
+        } 
+       
     }
 
     /**
@@ -91,8 +124,12 @@ class OurclientController extends Controller
      * @param  \App\Models\Ourclient  $Ourclient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ourclient $Ourclient)
+    public function destroy($id)
     {
-        //
+        $Ourclientdel = Ourclient::where('id',$id)->first();
+        $Ourclientdel->delete();
+        return response()->json(
+            ["status" => $this->status, "success" => true, 
+            "message" => " Province deleted  successfully"]);
     }
 }
