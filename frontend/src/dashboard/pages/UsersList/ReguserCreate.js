@@ -57,7 +57,7 @@ function ReguserCreate() {
         axios.post(`${ApiUrl}/Register`, data)
             .then((Response) => {
                 Swal.fire({
-                    text: 'Registered successfully',
+                    title: 'Registered successfully',
                     icon: 'success',
                     confirmButtonColor: 'green'
                 }).then((result) => {
@@ -146,7 +146,7 @@ function ReguserCreate() {
                                             <div className="col-sm-9">
                                                 <select className={`form-control ${errors.role ? 'is-invalid' : ''}`} id="role" name="role" {...register("role", { required: true })} >
 
-                                                    <option value="select your role" selected disabled>User Type</option>
+                                                    <option value="">User Type</option>
 
                                                     <option value="admin">Admin</option>
 

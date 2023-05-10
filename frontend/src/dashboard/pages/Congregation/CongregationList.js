@@ -71,7 +71,7 @@ function CongregationList() {
       });
   };
 
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const navigate = useNavigate();
   const EditCongregation = async (e, id) => {
     navigate("/Religio/Congregation/Edit/" + id);

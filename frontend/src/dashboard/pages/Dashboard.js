@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import $ from "jquery";
 
 function Dashboard() {
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const value = "NewSales";
 
   useEffect(() => {
@@ -198,6 +199,7 @@ function Dashboard() {
           </span>{" "}
           Dashboard
         </h3>
+        {isLogedIn?.role == "admin" ?
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="nav-item nav-profile dropdown">
@@ -244,6 +246,8 @@ function Dashboard() {
             </li>
           </ul>
         </nav>
+        : ""}
+        {isLogedIn?.role == "admin" ?
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="nav-item nav-profile dropdown">
@@ -286,6 +290,8 @@ function Dashboard() {
             </li>
           </ul>
         </nav>
+         : ""}
+         {isLogedIn?.role == "admin" ?
         <nav aria-label="breadcrumb">
           <ul className="breadcrumb">
             <li className="nav-item nav-profile dropdown">
@@ -330,7 +336,9 @@ function Dashboard() {
             </li>
           </ul>
         </nav>
+        : ""}
       </div>
+      {isLogedIn?.role == "admin" ?
       <div className="row">
         <div className="col-md-4 stretch-card grid-margin">
           <div className="card bg-gradient-success card-img-holder text-white">
@@ -393,7 +401,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-
+: ""}
       <div className="row">
         <div className="col-12 grid-margin">
           <div className="card">

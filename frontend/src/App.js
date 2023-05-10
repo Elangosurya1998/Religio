@@ -75,7 +75,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />} />
         <Route element={<UserPrivate />}>
-          <Route path='/UserPage' element={<User />}></Route>
+          <Route path='/Religio/Dashboard' element={<User />}></Route>
           <Route exact path="/Religio/Congregation" element={<ConglistLayouts />} />
           <Route exact path="/Religio/Congregation/View/:id" element={<CongViewLayouts />} />
           <Route exact path="/Religio/Province" element={<ProlistLayouts />} />

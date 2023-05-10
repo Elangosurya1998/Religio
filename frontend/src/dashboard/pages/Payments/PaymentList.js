@@ -18,7 +18,7 @@ function PaymentList() {
     });
   });
 
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Paymentlist`).then((res) => {
       return res.json();

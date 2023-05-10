@@ -1,16 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import React from 'react';
 
-function Capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+// function Capitalize(str) {
+//   return str.charAt(0).toUpperCase() + str.slice(1);
+// }
 
 
 function Sidemenubar() {
 
   const { pathname } = useLocation();
 
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
 
   const navitem = "nav-item";
 
@@ -25,8 +25,8 @@ function Sidemenubar() {
               {/*change to offline or busy as needed*/}
             </div>
             <div className="nav-profile-text d-flex flex-column">
-              <span className="font-weight-bold mb-2">{Capitalize(isLogedIn?.username)}</span>
-              <span className="text-secondary text-small">{Capitalize(isLogedIn?.role)}</span>
+              <span className="font-weight-bold mb-2">{(isLogedIn?.username)}</span>
+              <span className="text-secondary text-small">{(isLogedIn?.role)}</span>
             </div>
             <i className="mdi mdi-bookmark-check text-success nav-profile-badge" />
           </a>
@@ -58,9 +58,11 @@ function Sidemenubar() {
         </li>
 
         <li className={`${navitem} ${pathname == '/Religio/PaymentStatus' && 'active'}`}>
-          <Link to="/Religio/PaymentStatus" className="nav-link" >
-            <span className="menu-title">Payment Status</span>
-            <i className="mdi mdi-cash-multiple menu-icon" /></Link>
+          {isLogedIn?.role == "admin" ?
+            <Link to="/Religio/PaymentStatus" className="nav-link" >
+              <span className="menu-title">Payment Status</span>
+              <i className="mdi mdi-cash-multiple menu-icon" /></Link>
+            : ""}
         </li>
 
         <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
@@ -70,9 +72,11 @@ function Sidemenubar() {
         </li>
 
         <li className={`${navitem} ${pathname == '/Religio/UsersList' && 'active'}`}>
-          <Link to="/Religio/UsersList" className="nav-link" >
-            <span className="menu-title">Manage Users</span>
-            <i className="mdi mdi-account-circle menu-icon" /></Link>
+          {isLogedIn?.role == "admin" ?
+            <Link to="/Religio/UsersList" className="nav-link" >
+              <span className="menu-title">Manage Users</span>
+              <i className="mdi mdi-account-circle menu-icon" /></Link>
+            : ""}
         </li>
         <li className="nav-item">
           <a className="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">

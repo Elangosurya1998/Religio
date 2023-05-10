@@ -123,7 +123,7 @@ function PaymentCreate() {
     axios.get(`${ApiUrl}/Religio/PaymentAddress/get/${id}`)
       .then((response) => {
         const resdata = response.data;
-        reset(resdata.data);
+        // reset(resdata.data);
         setOrgvalue(resdata.data.projectvalue);
         setAmcvalue(resdata.data.amcvalue);
 

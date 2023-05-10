@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router";
 
-function Capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+// function Capitalize(str) {
+//   return str.charAt(0).toUpperCase() + str.slice(1);
+// }
 
 function Navbar() {
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const navigate = useNavigate();
   const handleSignOut = () => {
-    localStorage.removeItem("userDetails");
+    sessionStorage.removeItem("userDetails");
     navigate("/login");
   };
   return (
@@ -41,7 +41,7 @@ function Navbar() {
                 <span className="availability-status online" />
               </div>
               <div className="nav-profile-text">
-                <p className="mb-1 text-black">{Capitalize(isLogedIn?.username)}</p>
+                <p className="mb-1 text-black">{(isLogedIn?.username)}</p>
               </div>
             </a>
             <div className="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
