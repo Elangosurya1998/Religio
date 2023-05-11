@@ -4,18 +4,11 @@ import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import $ from "jquery";
-
+import DataTable from "react-data-table-component";
 function CongregationList() {
-  $(document).ready(function () {
-    $(".Congregation").on("keyup", function () {
-      var value = $(this).val().toLowerCase();
-      $(".CongregationList tbody tr").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-      });
-    });
-  });
-
   const [Cong, Setcongregation] = useState([]);
+
+  const [filterCong, congregationFilter] = useState([]);
 
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Congregation`)
@@ -24,6 +17,7 @@ function CongregationList() {
       })
       .then((resp) => {
         Setcongregation(resp.data);
+        congregationFilter(resp.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -72,6 +66,7 @@ function CongregationList() {
   };
 
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
+
   const navigate = useNavigate();
   const EditCongregation = async (e, id) => {
     navigate("/Religio/Congregation/Edit/" + id);
@@ -80,6 +75,77 @@ function CongregationList() {
   const Viewcongregation = async (e, id) => {
     navigate("/Religio/Congregation/View/" + id);
   };
+  const columns = [
+    {
+      name: "Congregation Name",
+      selector: (row) => row.congregation,
+      sortable: true,
+    },
+    {
+      name: "Mobile",
+      selector: (row) => row.mobile,
+      sortable: true,
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      selector: (row) => [
+        <a
+          onClick={(e) => Viewcongregation(e, row.id)}
+          style={{ cursor: "pointer", paddingRight: 4 }}
+          className="mdi mdi-eye"></a>,
+        <a
+          onClick={(e) => EditCongregation(e, row.id)}
+          style={{ cursor: "pointer", paddingRight: 4 }}
+          className="mdi mdi-pencil-box">
+          {" "}
+        </a>,
+
+        <a
+          onClick={(e) => deleteCongregation(e, row.id)}
+          style={{ cursor: "pointer" }}
+          className="mdi mdi-delete"></a>,
+      ],
+    },
+  ];
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "52px", // override the row height
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for head cells
+        paddingRight: "8px",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for data cells
+        paddingRight: "8px",
+      },
+    },
+  };
+
+  function filterdata(event) {
+    var value = event.target.value;
+
+    const keys = ["congregation", "mobile", "email"];
+
+    const filter = filterCong?.filter((item) =>
+      keys.some((key) =>
+        item[key].toString()?.toLowerCase()?.includes(value?.toLowerCase())
+      )
+    );
+    Setcongregation(filter);
+  }
+
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -89,31 +155,24 @@ function CongregationList() {
           </span>{" "}
           Congregation
         </h3>
-        {/* <nav aria-label="breadcrumb">
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-            </li>
-          </ul>
-        </nav> */}
       </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
-              {/* <h4 className="card-title">Congregation List</h4>   */}
               <div className="row">
                 <div className="col-lg-4">
                   <input
                     id="myInput"
                     type="text"
-                    className="form-control Congregation"
+                    onChange={filterdata}
+                    className="form-control Province"
                     placeholder="Search.."
                   />
                 </div>
+
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                  {/* <Link to="/Religio/Congregation/Add" className="btn btn-gradient-light">Add</Link> */}
                   {isLogedIn?.role == "admin" ? (
                     <Link
                       to="/Religio/Congregation/Add"
@@ -126,58 +185,13 @@ function CongregationList() {
                 </div>
               </div>
               <br></br>
-              <div className="table-responsive text-nowrap">
-                <table className="table table-striped CongregationList">
-                  <thead>
-                    <tr>
-                      {/* <th>S.No</th> */}
-                      <th>Congregation Name </th>
-                      <th>Mobile</th>
-                      <th>Email</th>
-                      {/* <th>Address1</th>
-                    <th>Postcode</th> */}
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Cong &&
-                      Cong.map((item) => (
-                        <tr key={item.id}>
-                          {/* <td></td> */}
-                          <td>{item.congregation}</td>
-                          <td>{item.mobile}</td>
-                          <td>{item.email}</td>
-                          {/* <td>{item.address1}</td>
-                        <td>{item.postcode}</td> */}
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => Viewcongregation(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            {isLogedIn?.role == "admin" && (
-                              <a
-                                onClick={(e) => EditCongregation(e, item.id)}
-                                style={{ cursor: "pointer" }}
-                                className="mdi mdi-pencil-box"
-                                id="print">
-                                {" "}
-                              </a>
-                            )}
-                            {isLogedIn?.role == "admin" && (
-                              <a
-                                onClick={(e) => deleteCongregation(e, item.id)}
-                                style={{ cursor: "pointer" }}
-                                className="mdi mdi-delete"
-                                id="print"></a>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
+              <DataTable
+                columns={columns}
+                data={Cong}
+                pagination
+                // selectableRows
+                customStyles={customStyles}
+              />
             </div>
           </div>
         </div>
@@ -185,4 +199,5 @@ function CongregationList() {
     </div>
   );
 }
+
 export default CongregationList;
