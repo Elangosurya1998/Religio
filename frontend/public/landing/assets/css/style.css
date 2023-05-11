@@ -7009,6 +7009,15 @@ ul.li-col{
 	column-count: 2;
 }
 
+.adderssCopy {
+	margin: 0 0 16px 28px !important;
+}
+
+select{
+	color: #000 !important; 
+}
+
+
 /* h2.sectiontitle{
 	color: #2b044d !important;
 } */

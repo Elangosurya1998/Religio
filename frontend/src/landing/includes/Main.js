@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from 'react';
 import ApiUrl from "../../dashboard/pages/Api/Api";
+import AppUrl from "../../dashboard/pages/Api/Url";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
@@ -357,11 +358,86 @@ function Main() {
                           OurClients && OurClients.map(item => (
                             <li>
                               <div className="what-img">
-                                <img src={"http://localhost:8000/Ourclient/logo/" + item.logo} alt="" />
+                                <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" />
                               </div>
                             </li>
                           ))
                         }
+                        {/* <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man3.png" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div className="what-img">
+                            <img src="./landing/assets/img/shape/man2.png" alt="" />
+                          </div>
+                        </li> */}
                       </ul>
                     </div>
                   </div>

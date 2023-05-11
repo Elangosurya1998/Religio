@@ -3,12 +3,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useEffect, useRef, useState } from "react";
 import ApiUrl from "../Api/Api";
+import AppUrl from "../Api/Url";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationEdit() {
   $("#uniquefile").hide();
-  const Routepath = "http://127.0.0.1:8000";
+  const Routepath = AppUrl;
   const {
     register,
     handleSubmit,
@@ -499,40 +500,30 @@ function ClientRegistrationEdit() {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-3">
-                    <label className="form-group">Solutions :</label>
+                    <label className="form-group">Solutions </label>
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="webapplication"
-                        {...register("webapplication")}
-                      />{" "}
-                      Web Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="webapplication"
+                          {...register("webapplication")} /> Web Application <i className="input-helper" /></label>
+                    </div>
+
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="app"
-                        {...register("app")}
-                      />{" "}
-                      Mobile Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="app"
+                          {...register("app")} /> Mobile Application <i className="input-helper" /></label>
+                    </div>
+
                   </div>
                   <div className="form-group col-md-3">
-                    <label className="form-check-label">
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="website"
-                        {...register("website")}
-                      />{" "}
-                      Website <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="website"
+                          {...register("website")} /> Website <i className="input-helper" /></label>
+                    </div>
                   </div>
                 </div>
                 <div className="row">
