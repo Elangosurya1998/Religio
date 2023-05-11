@@ -59,20 +59,25 @@ function ProvinceCreate() {
 
   function checkedvalue(data, evt) {
     var id = $("#congregation").val();
+
     if ($(".addresscheck").is(":checked")) {
-      axios
-        .get(`${ApiUrl}/Religio/CongrationAddress/get/${id}`)
-        .then((response) => {
-          const resdata = response.data;
-          reset(resdata.data[0]);
-          const value = resdata.data[0].country;
-          const State = require("country-state-city").State;
-          var getValue = State.getStatesOfCountry(value);
-          datas(getValue);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (id === "") {
+        alert("Please Choose one congregation");
+      } else {
+        axios
+          .get(`${ApiUrl}/Religio/CongrationAddress/get/${id}`)
+          .then((response) => {
+            const resdata = response.data;
+            reset(resdata.data[0]);
+            const value = resdata.data[0].country;
+            const State = require("country-state-city").State;
+            var getValue = State.getStatesOfCountry(value);
+            datas(getValue);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } else {
       reset({
         country: "",
@@ -175,7 +180,14 @@ function ProvinceCreate() {
                     <b className="card-description"> Address </b>
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input addresscheck" name="adderssCopy" onChange={checkedvalue} /> Remember me <i class="input-helper"></i></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input addresscheck"
+                          name="adderssCopy"
+                          onChange={checkedvalue}
+                        />{" "}
+                        Use Congregation Address <i class="input-helper"></i>
+                      </label>
                     </div>
                     <div className="col-md-6"> </div>
                   </div>
