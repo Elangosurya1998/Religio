@@ -492,25 +492,18 @@ function ClientRegistrationCreate() {
                   </div>
                   <div className=" form-group col-md-6">
                     <label>
-                      File Attachment&nbsp;
-                      <span style={{ color: "red" }}>*</span>&nbsp; ( Supported
-                      format is pdf ,pptx, docx ,doc )
+                      File Attachment&nbsp; &nbsp; ( Supported format is pdf
+                      ,pptx, docx ,doc )
                     </label>
                     <input
                       type="File"
                       className="form-control"
                       name="fileattachment"
                       {...register("fileattachment", {
-                        required: true,
                         onChange: changeHandler,
                       })}
                       aria-invalid={errors?.fileattachment ? "true" : "false"}
                     />
-                    {errors?.fileattachment?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">Choose a File</label>
-                      </div>
-                    )}
                     <div className="clientcode filelabel" id="uniquefile">
                       <label className="errlabel text-danger text_error">
                         The file must be a file of type: pdf ,pptx, docx ,doc

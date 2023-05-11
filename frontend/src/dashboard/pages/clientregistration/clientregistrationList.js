@@ -105,62 +105,64 @@ function ClientregistrationList() {
                 </div>
               </div>
               <br></br>
-              <table className="table table-striped Mytable">
-                <thead>
-                  <tr>
-                    <th>Congregation</th>
-                    <th>Province</th>
-                    <th>Name</th>
-                    <th>Place</th>
-                    {/* <th>Financial Year</th> */}
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {register &&
-                    register.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.congregation}</td>
-                        <td>{item.province}</td>
-                        <td>{item.name}</td>
-                        <td>{item.place}</td>
-                        {/* <td>{item.financialyear}</td> */}
-                        {isLogedIn?.role == "admin" ? (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => Viewregister(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) =>
-                                EditClientregistration(e, item.id)
-                              }
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-pencil-box"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => deleteregister(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-delete"
-                              id="print"></a>
-                            &nbsp;
-                          </td>
-                        ) : (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => Viewregister(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                          </td>
-                        )}
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <div className="table-responsive text-nowrap">
+                <table className="table table-striped Mytable">
+                  <thead>
+                    <tr>
+                      <th>Congregation</th>
+                      <th>Province</th>
+                      <th>Name</th>
+                      <th>Place</th>
+                      {/* <th>Financial Year</th> */}
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {register &&
+                      register.map((item) => (
+                        <tr key={item.id}>
+                          <td>{item.congregation}</td>
+                          <td>{item.province}</td>
+                          <td>{item.name}</td>
+                          <td>{item.place}</td>
+                          {/* <td>{item.financialyear}</td> */}
+                          {isLogedIn?.role == "admin" ? (
+                            <td id="noprint">
+                              <a
+                                onClick={(e) => Viewregister(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-eye"
+                                id="print"></a>
+                              &nbsp;
+                              <a
+                                onClick={(e) =>
+                                  EditClientregistration(e, item.id)
+                                }
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-pencil-box"
+                                id="print"></a>
+                              &nbsp;
+                              <a
+                                onClick={(e) => deleteregister(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-delete"
+                                id="print"></a>
+                              &nbsp;
+                            </td>
+                          ) : (
+                            <td id="noprint">
+                              <a
+                                onClick={(e) => Viewregister(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-eye"
+                                id="print"></a>
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
