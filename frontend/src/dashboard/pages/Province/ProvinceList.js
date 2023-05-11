@@ -121,65 +121,67 @@ function ProvinceList() {
                 </div>
               </div>
               <br></br>
-              <table className="table table-striped ProvinceList">
-                <thead>
-                  <tr>
-                    <th>Province</th>
-                    <th>Congregation</th>
-                    <th>Email</th>
-                    {/* <th>Mobile</th> */}
-                    {/* <th>Address1</th> */}
-                    {/* <th>Postcode</th> */}
-                    {/* <th>City</th> */}
-                    {/* <th>country</th> */}
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Pro &&
-                    Pro.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.province}</td>
-                        <td>{item.congregation}</td>
-                        <td>{item.email}</td>
-                        {/* <td>{item.mobile}</td> */}
-                        {/* <td>{item.address1}</td> */}
-                        {/* <td>{item.Postcode }</td> */}
-                        {/* <td>{item.City }</td> */}
-                        {/* <td>{item.country }</td> */}
-                        {isLogedIn?.role == "admin" ? (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => ViewProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => EditProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-pencil-box"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => deleteProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-delete"
-                              id="print"></a>
-                          </td>
-                        ) : (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => ViewProvince(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                          </td>
-                        )}
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <div className="table-responsive text-nowrap">
+                <table className="table table-striped ProvinceList">
+                  <thead>
+                    <tr>
+                      <th>Province</th>
+                      <th>Congregation</th>
+                      <th>Email</th>
+                      {/* <th>Mobile</th> */}
+                      {/* <th>Address1</th> */}
+                      {/* <th>Postcode</th> */}
+                      {/* <th>City</th> */}
+                      {/* <th>country</th> */}
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Pro &&
+                      Pro.map((item) => (
+                        <tr key={item.id}>
+                          <td>{item.province}</td>
+                          <td>{item.congregation}</td>
+                          <td>{item.email}</td>
+                          {/* <td>{item.mobile}</td> */}
+                          {/* <td>{item.address1}</td> */}
+                          {/* <td>{item.Postcode }</td> */}
+                          {/* <td>{item.City }</td> */}
+                          {/* <td>{item.country }</td> */}
+                          {isLogedIn?.role == "admin" ? (
+                            <td id="noprint">
+                              <a
+                                onClick={(e) => ViewProvince(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-eye"
+                                id="print"></a>
+                              &nbsp;
+                              <a
+                                onClick={(e) => EditProvince(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-pencil-box"
+                                id="print"></a>
+                              &nbsp;
+                              <a
+                                onClick={(e) => deleteProvince(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-delete"
+                                id="print"></a>
+                            </td>
+                          ) : (
+                            <td id="noprint">
+                              <a
+                                onClick={(e) => ViewProvince(e, item.id)}
+                                style={{ cursor: "pointer" }}
+                                className="mdi mdi-eye"
+                                id="print"></a>
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

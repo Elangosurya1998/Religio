@@ -429,8 +429,8 @@ function ClientRegistrationViews() {
                   </div>
                   <div className=" form-group col-md-6">
                     <label>
-                      File Attachment&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      File Attachment&nbsp; &nbsp;( Supported format is pdf
+                      ,pptx, docx ,doc )
                     </label>
                     <input
                       type="File"
