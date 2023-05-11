@@ -173,17 +173,14 @@ function ProvinceCreate() {
                 <div className="row">
                   <div className="col-md-6">
                     <b className="card-description"> Address </b>
-                    <label className="adderssCopy">
-                      <input
-                        type="checkbox"
-                        className="form-check-input addresscheck"
-                        name="adderssCopy"
-                        onChange={checkedvalue}
-                      />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input addresscheck" name="adderssCopy" onChange={checkedvalue} /> Remember me <i class="input-helper"></i></label>
+                    </div>
                     <div className="col-md-6"> </div>
                   </div>
                 </div>
+                <br />
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group row">

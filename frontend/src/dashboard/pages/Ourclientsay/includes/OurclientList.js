@@ -2,13 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../../Api/Api";
+import AppUrl from "../../Api/Url";
 import { Link, useNavigate } from "react-router-dom";
 import $ from "jquery";
+
 
 function OurclientList() {
 
   // Get User data
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
 
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/HomeSections/OurClient/list`).then((res) => {
@@ -91,7 +93,7 @@ function OurclientList() {
                           {item.prname}
                         </td>
                         <td>
-                          <img src={"http://localhost:8000/Ourclient/logo/" + item.logo} className="me-2" alt="image" />
+                          <img src={AppUrl + "/Ourclient/logo/" + item.logo} className="me-2" alt="image" />
                           {item.logo}</td>
                         <td>
                           <a className="mdi mdi-eye" id="print"></a>
