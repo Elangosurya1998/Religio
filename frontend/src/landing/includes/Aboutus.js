@@ -37,7 +37,6 @@ function Aboutus() {
                         </div>
                     </div>
                     {/* Available App End*/}
-
                 </div>
             </div>
             {/* Our Customer Start */}
@@ -46,6 +45,11 @@ function Aboutus() {
                     <div className="our-customer-wrapper">
                         {/* Section Tittle */}
                         <div className="row justify-content-center">
+                            <p>Greetings to you from Boscosoft Technologies Pvt. Ltd. We are a corporate software company
+                                established by the Salesians of Don Bosco in India. The Company provides IT support to
+                                organizations that foster Knowledge Society, with special reference to Organizations of the
+                                Church, Education, Health care, Accounting, Micro Finance and NGOs.
+                            </p>
                             <p>In our industrial orchestration of technologies, tools, processes and methods, we strive to be on level with our professional philosophy of “customer-friendly investments”.</p>
                             <h3>Boscosoft is known for</h3>
                             <ul style={{ 'padding-left': '44px' }}>
@@ -59,6 +63,18 @@ function Aboutus() {
                         <br />
                         <div className="row justify-content-center">
                             <img src="/landing/assets/img/about/Vision.jpg" alt="" className="app-shape-left d-none d-xl-block" />
+                        </div>
+                        <br />
+                        <div className="row justify-content-center">
+                            <h3>Religio</h3>
+                            <p>Religio is an integrated robust online application. It is a platform to collate, maintain and share
+                                information of religious congregations, province, members, and institutions. It allows robust
+                                communication among the members through various means such as calendar, meeting notices,
+                                emails and SMS. The software offers an online portal & Mobile Application for multiple
+                                target-users to get need-based information. It fosters community faith by providing quick
+                                information about liturgical and para- liturgical celebrations recognizing the individuals, their
+                                needs and involvement in the parish community.
+                            </p>
                         </div>
                     </div>
                 </div>

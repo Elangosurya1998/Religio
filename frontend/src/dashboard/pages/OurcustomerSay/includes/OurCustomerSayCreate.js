@@ -11,11 +11,6 @@ function OurclientCreate() {
   const [Prov, Province] = useState([]);
   const [Client, Clients] = useState([]);
 
-  const [congregation, Setcongregation] = useState([]);
-  const [province, Setprovince] = useState([]);
-  const [client, Setclient] = useState([]);
-  const [logo, SetLogo] = useState(null);
-
   const {
     register,
     reset,
@@ -37,7 +32,6 @@ function OurclientCreate() {
 
   function CongregationSelect(event) {
     var id = event.target.value
-    Setcongregation(event.target.value)
     reset({ province: "", client: "" })
     axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
       .then((response) => {
@@ -49,7 +43,6 @@ function OurclientCreate() {
 
   function provinceSelect(event) {
     var id = event.target.value
-    Setprovince(event.target.value)
     axios.get(`${ApiUrl}/Religio/Clients/get/${id}`)
       .then((response) => {
         Clients(response.data.data)
@@ -58,36 +51,23 @@ function OurclientCreate() {
       })
   }
 
-  function clientSelect(event) {
-    Setclient(event.target.value)
-  }
 
-  function logoSelect(event) {
-    SetLogo(event.target.files[0]);
-  }
 
   function onSubmitOurClientform(data, e) {
+
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('congregation', congregation);
-    formData.append('province', province);
-    formData.append('client', client);
-    formData.append('logo', logo);
-
     axios
-      .post(`${ApiUrl}/Religio/HomeSections/OurClient/Store`, formData)
+      .post(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/Store`, data)
       .then((Response) => {
-
-        console.log(Response);
         if (Response.status === 200) {
           Swal.fire(
-            "Clients Logo Added Successfully..!",
+            "Our Customer say Added Successfully..!",
             "",
             "success"
           );
           e.target.reset();
-          navigate("/Religio/HomeSections/OurClient");
+          navigate("/Religio/HomeSections/OurCustomerSay");
         }
       })
       .catch((err) => {
@@ -106,7 +86,7 @@ function OurclientCreate() {
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-account-multiple-plus menu-icon" />
-          </span> Our Clients
+          </span> Our Customers Says
         </h3>
       </div>
       <div className="row">
@@ -155,9 +135,9 @@ function OurclientCreate() {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
+                  <div className="form-group col-md-12">
                     <label>Clients &nbsp;<span style={{ color: 'red' }}>*</span></label>
-                    <select className="form-control" name="client" {...register("client", { required: true })} onChange={clientSelect}>
+                    <select className="form-control" name="client" {...register("client", { required: true })} >
                       <option value="">Select Client</option>
                       {
                         Client && Client.map(item => (
@@ -165,7 +145,7 @@ function OurclientCreate() {
                         ))
                       }
                     </select>
-                    {errors?.congregation?.type === "required" && (
+                    {errors?.client?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
                           Please Select Client
@@ -173,14 +153,28 @@ function OurclientCreate() {
                       </div>
                     )}
                   </div>
-                  <div className="form-group col-md-6">
-                    <label>Logo &nbsp;<span style={{ color: 'red' }}>*</span>
-                    </label>
-                    <input type="file" className="form-control" name="logo" accept=".jpg,.png,.jpeg" {...register("logo", { required: true })} onChange={logoSelect} />
-                    {errors?.logo?.type === "required" && (
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-12">
+                    <label>Title &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <input type="text" className="form-control" name="title" {...register("title", { required: true })} />
+                    {errors?.title?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
-                          Please Choose Logo File
+                          Please enter a title
+                        </label>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-12">
+                    <label>Comments &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <textarea className="form-control" name="comments" rows="5" {...register("comments", { required: true })}></textarea>
+                    {errors?.comments?.type === "required" && (
+                      <div className="text-danger text_error">
+                        <label className="errlabel">
+                          Please enter your comments
                         </label>
                       </div>
                     )}
@@ -189,7 +183,7 @@ function OurclientCreate() {
                 <div className="text-center">
                   <button className="btn btn-gradient-primary font-weight-bold " type="submit">Save</button>
                   &nbsp; &nbsp; &nbsp;
-                  <Link to="/Religio/HomeSections/OurClient" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                  <Link to="/Religio/HomeSections/OurCustomerSay" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                 </div>
               </form>
             </div>
