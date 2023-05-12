@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import ApiUrl from "../../Api/Api";
 import AppUrl from "../../Api/Url";
 import { Link, useNavigate } from "react-router-dom";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 import $ from "jquery";
 
 
@@ -25,7 +27,20 @@ function OurclientList() {
     fetchData();
   }, [])
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const [preImg, previewImage] = useState([])
+
+  function handleShow(e, logoitem) {
+    setShow(true)
+    previewImage(logoitem);
+  }
+
+
+
   const [OurClients, OurClientList] = useState([]);
+
 
   function deleteClientLogo(e, clientId) {
     const id = clientId;
@@ -78,27 +93,32 @@ function OurclientList() {
               <table className="table table-striped Mytable">
                 <thead>
                   <tr>
-                    <th>Congregation</th>
                     <th>Province</th>
+                    <th>Client Name</th>
                     <th>Logo with Name</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    OurClients && OurClients.map(item => (
+                    OurClients && OurClients.map((item, index) => (
                       <tr>
-                        <td>{item.cgname}</td>
+                        {/* <td>{item.cgname}</td> */}
                         <td>
                           {item.prname}
                         </td>
                         <td>
-                          <img src={AppUrl + "/Ourclient/logo/" + item.logo} className="me-2" alt="image" />
-                          {item.logo}</td>
+                          {item.crname}
+                        </td>
                         <td>
-                          <a className="mdi mdi-eye" id="print"></a>
-                          &nbsp;
-                          <a className="mdi mdi-pencil-box" id="print"></a>
+                          <img src={AppUrl + "/Ourclient/logo/" + item.logo} className="me-2" alt="image" onClick={(e) => handleShow(e, item)} style={{ cursor: "pointer" }} />
+                          {item.logo}
+
+                        </td>
+                        <td>
+                          <a
+                            onClick={(e) => handleShow(e, item)} style={{ cursor: "pointer" }}
+                            className="mdi mdi-eye"></a>
                           &nbsp;
                           <a
                             className="mdi mdi-delete"
@@ -111,11 +131,49 @@ function OurclientList() {
                   }
                 </tbody>
               </table>
+              <Modal show={show} onHide={handleClose} className="modal-md">
+                <Modal.Header closeButton>
+                  <Modal.Title>Our Client Preview</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label>Congregation &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <input type="text" className="form-control" value={preImg.cgname} disabled />
+                      <br />
+                    </div>
+                    <div className="col-md-6">
+                      <label>Province &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <input type="text" className="form-control" value={preImg.prname} disabled />
+                      <br />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <label>Client &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <input type="text" className="form-control" value={preImg.crname} disabled />
+                      <br />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-12">
+                      <label>Client Logo &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                      <center><img src={AppUrl + "/Ourclient/logo/" + preImg.logo} height={130} /></center>
+                    </div>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>
       </div>
     </div >
+
   );
 }
 export default OurclientList;

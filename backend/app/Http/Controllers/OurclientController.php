@@ -20,9 +20,10 @@ class OurclientController extends Controller
     public function index()
     {
         $data = DB::table('ourclient as oc')
-            ->select('oc.*','cg.congregation as cgname','pr.province as prname')
+            ->select('oc.*','cg.congregation as cgname','pr.province as prname','cr.name as crname')
             ->leftjoin('congregation as cg', 'oc.congregation','=','cg.id')
             ->leftjoin('provinces as pr', 'oc.province','=','pr.id')
+            ->leftjoin('client_registrations as cr', 'oc.client','=','cr.id')
             ->get();
 
         if(count($data) > 0) {
@@ -53,8 +54,10 @@ class OurclientController extends Controller
      */
     public function store(Request $request)
     {
+
         $cong = $request->congregation;
         $province = $request->province;
+        $client = $request->client;
         
         // Retrieve file
         $file = $request->file('logo');
@@ -66,6 +69,7 @@ class OurclientController extends Controller
         $input = [
             'congregation' => $cong,
             'province' => $province,
+            'client' => $client,
             'logo' => $file->getClientOriginalName()
         ];
 

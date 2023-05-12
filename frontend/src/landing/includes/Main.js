@@ -28,7 +28,7 @@ const responsive = {
 
 function Main() {
 
-  const fetchData = () => {
+  useEffect(() => {
     fetch(`${ApiUrl}/Religio/HomeSections/OurClient/list`).then((res) => {
       return res.json();
     }).then((resp) => {
@@ -36,12 +36,49 @@ function Main() {
     }).catch((err) => {
       console.log(err.message);
     })
-  }
+  }, [])
+
   useEffect(() => {
-    fetchData();
+    fetch(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex`).then((res) => {
+      return res.json();
+    }).then((resp) => {
+      OurCustomerSayList(resp.data);
+    }).catch((err) => {
+      console.log(err.message);
+    })
   }, [])
 
   const [OurClients, OurClientList] = useState([]);
+
+  const [OurCustomerSay, OurCustomerSayList] = useState([]);
+
+
+
+  function OurClientsdata(OurClients) {
+    let count = [1, 2, 3, 4, 5];
+
+    return (
+      <div className="marquee">
+        <div className="marquee-content">
+          {
+            count.map(item => (
+              <div>
+                {
+                  OurClients && OurClients.map(item => (
+                    <div className="what-img">
+                      <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                    </div>
+                  ))
+                }
+              </div>
+            )
+            )
+          }
+        </div>
+      </div >
+    );
+
+  }
 
   return (
     <main>
@@ -246,39 +283,21 @@ function Main() {
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
                   <div className="row">
-                    <div className="col-md-4 col-lg-4 col-sm-12">
-                      <div className="single-customer ">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man2.png" alt="" />
+                    {
+                      OurCustomerSay && OurCustomerSay.map(item => (
+                        <div className="col-md-4 col-lg-4 col-sm-12">
+                          <div className="single-customer" style={{ backgroundColor: '#f0f0f0', borderRadius: '10px' }}>
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "70px" }} />
+                            </div>
+                            <div className="what-cap">
+                              <h4><a href="#">{item.title}</a></h4>
+                              <p>{item.comments}</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 col-sm-12">
-                      <div className="single-customer">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man3.png" alt="" />
-                        </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 col-sm-12">
-                      <div className="single-customer">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man2.png" alt="" />
-                        </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
@@ -340,108 +359,44 @@ function Main() {
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
                   <div>
-                    {/* <div class="Marquee">
-                      <div class="Marquee-content">
-                        <div class="Marquee-tag">1</div>
-                        <div class="Marquee-tag">2</div>
-                        <div class="Marquee-tag">3</div>
-                        <div class="Marquee-tag">4</div>
-                        <div class="Marquee-tag">5</div>
-                        <div class="Marquee-tag">6</div>
-                        <div class="Marquee-tag">7</div>
-                        <div class="Marquee-tag">8</div>
-                      </div>
-                    </div> */}
-                    <div className="marquee">
-                      <ul className="marquee-content">
+                    {OurClientsdata(OurClients)}
+                    {/* <div className="marquee-content">
+
                         {
                           OurClients && OurClients.map(item => (
-                            <li>
-                              <div className="what-img">
-                                <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" />
-                              </div>
-                            </li>
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
                           ))
                         }
-                        {/* <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li> */}
-                      </ul>
-                    </div>
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                      </div> */}
                   </div>
-                  {/* <div className="single-customer mb-100">
+                </div>
+                {/* <div className="single-customer mb-100">
                           <div className="what-img">
                             <img src="./landing/assets/img/shape/man2.png" alt="" />
                           </div>
@@ -456,7 +411,6 @@ function Main() {
                             <img src="./landing/assets/img/shape/man2.png" alt="" />
                           </div>
                         </div> */}
-                </div>
               </div>
             </div>
           </div>

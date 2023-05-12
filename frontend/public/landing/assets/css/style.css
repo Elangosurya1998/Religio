@@ -6961,24 +6961,21 @@ ul {
 
 .marquee {
     position: relative;
-	animation: animatedImage 10s linear infinite running;
 }
 
 .marquee-content {
-    list-style: none;
-    height: 50%;
-    display: flex;
+	display: flex;
+	animation: animatedImage 180s linear infinite;
+	justify-content: space-between;
 }
 
-.marquee-content li {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-shrink: 0;
-	width: 20%;
-    max-height: 150%;
-    font-size: calc(var(--marquee-height)*3/4);
+.marquee-content div{
+	display: flex;
+}
+
+
+.marquee-content div .what-img:hover{
+	transform:scale(1.2)
 }
 
 .marquee-content li div img {
@@ -7027,6 +7024,6 @@ select{
 		transform: translateX(0);
 	}
 	to {
-		transform: translateX(-200px);
+		transform: translateX(calc(-600px * 10));
 	}
 }
