@@ -234,6 +234,7 @@ function PaymentView() {
                       {...register("invoice", {
                         // onChange: changeHandler,
                       })}
+                      disabled
                       aria-invalid={errors?.invoice ? "true" : "false"}
                     />
                     <div className="Getfile filelabel">
@@ -256,6 +257,7 @@ function PaymentView() {
                       type="File"
                       className="form-control"
                       name="receipt"
+                      disabled
                       {...register("receipt", {
                         // onChange: changeHandlerreceipt,
                       })}
