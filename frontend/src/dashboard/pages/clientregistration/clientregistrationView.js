@@ -114,7 +114,7 @@ function ClientRegistrationViews() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label for="Congregation">
-                      Congregation &nbsp;<span style={{ color: "red" }}>*</span>
+                      Congregation &nbsp;
                     </label>
                     <select
                       className="form-control regdata"
@@ -141,7 +141,7 @@ function ClientRegistrationViews() {
 
                   <div className="form-group col-md-6">
                     <label for="province">
-                      Province &nbsp;<span style={{ color: "red" }}>*</span>
+                      Province &nbsp;
                     </label>
                     <select
                       className="form-control regdata"
@@ -165,7 +165,7 @@ function ClientRegistrationViews() {
                 </div>
                 <div className="form-group">
                   <label>
-                    Name&nbsp;<span style={{ color: "red" }}>*</span>
+                    Name&nbsp;
                   </label>
                   <input
                     type="text"
@@ -183,7 +183,7 @@ function ClientRegistrationViews() {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label>
-                      Client Type&nbsp;<span style={{ color: "red" }}>*</span>
+                      Client Type&nbsp;
                     </label>
                     <select
                       className="form-control regdata"
@@ -205,7 +205,7 @@ function ClientRegistrationViews() {
                   </div>
                   <div className="form-group col-md-6">
                     <label>
-                      Client Code&nbsp;<span style={{ color: "red" }}>*</span>
+                      Client Code&nbsp;
                     </label>
                     <input
                       type="text"
@@ -235,7 +235,7 @@ function ClientRegistrationViews() {
                 </div>
                 <div className="form-group">
                   <label>
-                    Place&nbsp;<span style={{ color: "red" }}>*</span>
+                    Place&nbsp;
                   </label>
                   <input
                     type="text"
@@ -254,7 +254,7 @@ function ClientRegistrationViews() {
                   <div className="form-group col-md-6">
                     <label>
                       Financial Year&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <input
                       type="text"
@@ -283,7 +283,7 @@ function ClientRegistrationViews() {
                   <div className="form-group col-md-6">
                     <label>
                       Date of Joining&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <input
                       type="Date"
@@ -303,7 +303,7 @@ function ClientRegistrationViews() {
                 </div>
                 <div className="form-group">
                   <label>
-                    Project Value&nbsp;<span style={{ color: "red" }}>*</span>
+                    Project Value&nbsp;
                   </label>
                   <input
                     type="text"
@@ -334,7 +334,7 @@ function ClientRegistrationViews() {
                   <div className="form-group col-md-6">
                     <label>
                       Contract Signed Date&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <input
                       type="Date"
@@ -356,7 +356,7 @@ function ClientRegistrationViews() {
                   <div className="form-group col-md-6">
                     <label>
                       AMC Start Date&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <input
                       type="Date"
@@ -375,7 +375,7 @@ function ClientRegistrationViews() {
 
                 <div className=" form-group">
                   <label>
-                    AMC value&nbsp;<span style={{ color: "red" }}>*</span>
+                    AMC value&nbsp;
                   </label>
                   <input
                     type="text"
@@ -405,7 +405,7 @@ function ClientRegistrationViews() {
                   <div className="form-group col-md-6">
                     <label>
                       Project Status&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <select
                       className="form-control regdata"
@@ -428,7 +428,7 @@ function ClientRegistrationViews() {
                   <div className=" form-group col-md-6">
                     <label>
                       File Attachment&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      
                     </label>
                     <input
                       type="File"
@@ -488,7 +488,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        Address 1&nbsp;<span style={{ color: "red" }}>*</span>
+                        Address 1&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <input
@@ -528,7 +528,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        City&nbsp;<span style={{ color: "red" }}>*</span>
+                        City&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <input
@@ -549,7 +549,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        Country&nbsp;<span style={{ color: "red" }}>*</span>
+                        Country&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <select
@@ -583,7 +583,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        State&nbsp;<span style={{ color: "red" }}>*</span>
+                        State&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <select
@@ -612,7 +612,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        Pin code&nbsp;<span style={{ color: "red" }}>*</span>
+                        Pin code&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <input
@@ -647,7 +647,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        Email&nbsp;<span style={{ color: "red" }}>*</span>
+                        Email&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <input
@@ -681,7 +681,7 @@ function ClientRegistrationViews() {
                   <div className="col-md-6">
                     <div className="form-group row">
                       <label className="col-sm-3 col-form-label">
-                        Mobile No&nbsp;<span style={{ color: "red" }}>*</span>
+                        Mobile No&nbsp;
                       </label>
                       <div className="col-sm-9">
                         <input

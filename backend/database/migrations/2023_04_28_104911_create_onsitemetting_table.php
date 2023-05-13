@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("onsiteplace")->nullable();
             $table->string("onsiterating")->nullable();
             $table->string("onsite")->nullable();  
+            $table->integer('client_id');
             $table->timestamps();
         });
     }

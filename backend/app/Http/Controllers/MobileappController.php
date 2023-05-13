@@ -76,7 +76,8 @@ class MobileappController extends Controller
           $projectupdate = Mobileapps::where('id',$id)
           ->update([
             "mobiledate"   => $request->mobiledate,
-            "mobilestatus" => $request->mobilestatus
+            "mobilestatus" => $request->mobilestatus,
+            "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

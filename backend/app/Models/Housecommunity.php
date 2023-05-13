@@ -9,7 +9,8 @@ class Housecommunity extends Model
 {
     protected $fillable = [
                     'housedate',
-                    'housestatus'
+                    'housestatus',
+                    'client_id'
     ];
 }
 

@@ -3,8 +3,47 @@ import { useForm } from "react-hook-form";
 import ApiUrl from "./Api/Api";
 import { useEffect, useState } from "react";
 import $ from "jquery";
+import { Link, useLocation, useNavigate} from "react-router-dom";
+
+
 
 function Dashboard() {
+
+
+  const { pathname } = useLocation();
+  const navitem = "nav-item";
+
+  // // client
+//   const fetchData = () => {
+
+//     fetch(`${ApiUrl}/Dashboardlist`)
+    
+//       .then((res) => {
+//         console.log(res);
+//         return res.json();
+//       })
+//       .then((resp) => {
+//         SetClientregister(resp.data);
+//       })
+//       .catch((err) => {
+//         console.log(err.message);
+//       });
+//   };
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const [register, SetClientregister] = useState([]);
+
+// const navigate = useNavigate();
+// const viewDashboardlist =async (e,id)=>{
+//   console.log(id);
+// navigate("/Religio/Tab/" + id);
+// }
+  
+
+
+
   const value = "NewSales";
 
   useEffect(() => {
@@ -185,7 +224,12 @@ function Dashboard() {
         });
       $(".yearlabel").text(year);
     }
+
+
+
   }
+
+
 
   return (
     <div className="content-wrapper">
@@ -395,20 +439,33 @@ function Dashboard() {
         <div className="col-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Recent Tickets</h4>
+              <h4 className="card-title">Project Status</h4>
               <div className="table-responsive">
                 <table className="table">
                   <thead>
                     <tr>
-                      <th> Assignee </th>
-                      <th> Subject </th>
-                      <th> Status </th>
-                      <th> Last Update </th>
-                      <th> Tracking ID </th>
+                      <th> Congregation </th>
+                      <th> Province </th>
+                      <th> Name </th>
+                      <th> clienttype </th>
+                      <th> Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+
+               
+                  
+                    
+
+
+
+                    {/* <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
+                    <Link to="/Religio/Tab" className="nav-link" >
+                      <span className="menu-title">Project Status</span>
+                      <i className="mdi mdi-file-document menu-icon" /></Link>
+                  </li> */}
+
+                    {/* <tr>
                       <td>
                         <img
                           src="assets/images/faces/face1.jpg"
@@ -479,9 +536,10 @@ function Dashboard() {
                       </td>
                       <td> Dec 3, 2017 </td>
                       <td> WD-12348 </td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
+
               </div>
             </div>
           </div>

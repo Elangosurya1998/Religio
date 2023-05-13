@@ -9,7 +9,8 @@ class Mobileapps extends Model
 {
     protected $fillable = [
                     'mobiledate', 
-                    'mobilestatus'
+                    'mobilestatus',
+                    'client_id'
     ];
 }
 

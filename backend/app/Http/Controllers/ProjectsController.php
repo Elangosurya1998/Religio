@@ -8,6 +8,7 @@ use App\Models\Clientregistration;
 use App\Models\Congregation;
 use App\Models\Province;
 use App\Http\Controllers\Controller;
+use DB;
 
 
 class ProjectsController extends Controller
@@ -36,18 +37,17 @@ class ProjectsController extends Controller
             }
 
              $projectArray['params'] = array(
-                "name"           =>$request->name,
-                "congregation"   =>$request->congregation,
-                "province"       =>$request->province,
+             
                 "dataserver"     =>$request->dataserver,
                 "instance"       =>$request->instance,
                 "testURL"        =>$request->testURL,
-                "textusername"   =>$request->textusername,
-                "textpassword"   =>$request->textpassword,
+                "testusername"   =>$request->testusername,
+                "testpassword"   =>$request->testpassword,
                 "prodURL"        =>$request->prodURL,
                 "produsername"   =>$request->produsername,
                 "prodpassword"   =>$request->prodpassword
                              );
+
             $project  =  Projects::create($projectArray['params']);
       
             if(!is_null($project)){ 
@@ -103,17 +103,15 @@ class ProjectsController extends Controller
          
           $projectupdate = Projects::where('id',$id)
           ->update([
-              "name"           =>$request->name,
-              "congregation"   =>$request->congregation,
-              "province"       =>$request->province,
-              "dataserver"     =>$request->dataserver,
-              "instance"       =>$request->instance,
-              "testURL"        =>$request->testURL,
-              "textusername"   =>$request->textusername,
-              "textpassword"   =>$request->textpassword,
-              "prodURL"        =>$request->prodURL,
-              "produsername"   =>$request->produsername,
-              "prodpassword"   =>$request->prodpassword
+            "dataserver"     =>$request->dataserver,
+            "instance"       =>$request->instance,
+            "testURL"        =>$request->testURL,
+            "testusername"   =>$request->testusername,
+            "testpassword"   =>$request->testpassword,
+            "prodURL"        =>$request->prodURL,
+            "produsername"   =>$request->produsername,
+            "prodpassword"   =>$request->prodpassword,
+            "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 
@@ -128,6 +126,71 @@ class ProjectsController extends Controller
               ["status" => $this->status, "success" => true, 
               "message" => "Project Status deleted  successfully"]);
       }
+
+
+    Public function Dashboardlist(Request $request){
+
+     
+        $dashboard = DB::table('payments as pay')
+
+        ->select(
+                    DB::raw('(CASE 
+                    WHEN pay.status IS NOT NULL THEN pay.status 
+                    ELSE "Pending"
+                    END) AS status'), 
+                'co.congregation',
+                'pr.province','cr.name','pay.clienttype','pay.id')
+        ->leftjoin('congregation as co', 'co.id', 'pay.congregation')
+        ->leftjoin('provinces as pr', 'pr.id', 'pay.province')
+        ->leftjoin('client_registrations as cr','cr.id','=','pay.id')
+        // ->where('pay.id',$id)
+        ->get();
+// dd($dashboard);
+        if(count($dashboard) > 0) {
+            return response()->json(["status" => $this->status, "success" => true,
+                        "count" => count($dashboard), "data" => $dashboard]);
+        }
+        else {
+            return response()->json(["status" => "failed",
+            "success" => false, "message" => "Whoops! no record found"]);
+        }
+
+
+    }
+
+    Public function Dashboardall(Request $request,$id){
+
+     
+        $alldashboard = DB::table('payments as pay')
+
+        ->select(
+            DB::raw('(CASE 
+            WHEN pay.status IS NOT NULL THEN pay.status 
+            ELSE "Pending"
+            END) AS status'),
+            'co.congregation','pr.province',
+            'cr.name','cr.clienttype','cr.projectvalue','cr.amcvalue','cr.amcdate','cr.amcvalue',
+            'cr.dateofjoining','cr.dateofcontractsigning','cr.projectstatus','cr.clientcode','cr.financialyear','cr.mobile',
+            'cr.email','cr.country',
+            'pay.product','pay.pi','pay.balancepaid','pay.renewelmonth','pay.gst','pay.total','pay.paid','pay.balance','pay.id')
+        ->leftjoin('congregation as co', 'co.id', 'pay.congregation')
+        ->leftjoin('provinces as pr', 'pr.id', 'pay.province')
+        ->leftjoin('client_registrations as cr','cr.id','=','pay.id')
+        ->where('cr.id',$id)
+        ->get();
+// dd($alldashboard);
+        if(count($alldashboard) > 0) {
+            return response()->json(["status" => $this->status, "success" => true,
+                        "count" => count($alldashboard), "data" => $alldashboard]);
+        }
+        else {
+            return response()->json(["status" => "failed",
+            "success" => false, "message" => "Whoops! no record found"]);
+        }
+
+
+    }
+
 
 
  }

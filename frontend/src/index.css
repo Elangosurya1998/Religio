@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.hover-link:hover {
+  /* Define your hover styles here */
+  /* For example, change the background color and add a border */
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}

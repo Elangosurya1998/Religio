@@ -75,7 +75,8 @@ class IOSController extends Controller
           $projectupdate = Ios::where('id',$id)
           ->update([
             "Iosdate"       => $request->Iosdate,
-            "Iosstatus"     => $request->Iosstatus
+            "Iosstatus"     => $request->Iosstatus,
+            "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

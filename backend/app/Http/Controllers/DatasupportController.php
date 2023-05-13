@@ -107,7 +107,8 @@ class DatasupportController extends Controller
                 "noofcommunity"   =>$request->noofcommunity,
                 "noofinstitution" =>$request->noofinstitution,
                 "noofmembers"     =>$request->noofmembers,
-                "dataentry"       =>$request->dataentry
+                "dataentry"       =>$request->dataentry,
+                "client_id"      =>$request->client_id
             ]);
             return response()->json(
                 ["status" => $this->status, "success" => true, 

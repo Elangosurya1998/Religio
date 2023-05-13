@@ -19,9 +19,11 @@ return new class extends Migration
             $table->string("noofinstitution")->nullable();
             $table->string("noofmembers")->nullable();
             $table->string("dataentry")->nullable();
+            $table->integer('client_id');
             $table->timestamps();
         });
     }
+  
 
     /**
      * Reverse the migrations.

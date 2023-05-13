@@ -69,7 +69,8 @@ class OnsitemeetController extends Controller
               "onsitedays"    =>$request->onsitedays,
               "expensive"     =>$request->expensive,
               "onsiterating"  =>$request->onsiterating,
-              "onsiteplace"  =>$request->onsiteplace
+              "onsiteplace"  =>$request->onsiteplace,
+              "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

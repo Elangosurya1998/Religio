@@ -9,7 +9,8 @@ class Memberdata extends Model
 {
     protected $fillable = [
                     'memberdate',  
-                    'memberstatus'
+                    'memberstatus',
+                    'client_id'
     ];
 }
 

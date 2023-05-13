@@ -12,7 +12,8 @@ class Datasupport extends Model
         'noofcommunity',
         'noofinstitution',
         'noofmembers',
-        'dataentry'
+        'dataentry',
+        'client_id'
 ];
  
 }

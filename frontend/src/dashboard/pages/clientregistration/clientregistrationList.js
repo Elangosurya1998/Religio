@@ -16,6 +16,7 @@ function ClientregistrationList() {
   });
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Clientregistration`)
+  
       .then((res) => {
         return res.json();
       })
@@ -60,6 +61,11 @@ function ClientregistrationList() {
   const Viewregister = async (e, id) => {
     navigate("/Religio/Clientregistration/View/" + id);
   };
+
+  const viewDashboardlist = async (e, id) => {
+    navigate("/Religio/Tab/" + id);
+  };
+
 
   return (
     <div className="content-wrapper">
@@ -124,11 +130,12 @@ function ClientregistrationList() {
                         <td>{item.province}</td>
                         <td>{item.name}</td>
                         <td>{item.place}</td>
+      
                         <td>{item.financialyear}</td>
                         {isLogedIn?.role == "admin" ? (
                           <td id="noprint">
                             <a
-                              onClick={(e) => Viewregister(e, item.id)}
+                              onClick={(e) => viewDashboardlist(e, item.id)}
                               style={{ cursor: "pointer" }}
                               className="mdi mdi-eye"
                               id="print"></a>

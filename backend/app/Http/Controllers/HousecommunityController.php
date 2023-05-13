@@ -77,7 +77,8 @@ class HousecommunityController extends Controller
           $projectupdate = Housecommunity::where('id',$id)
           ->update([
             "housedate"   =>$request->housedate,
-            "housestatus" =>$request->housestatus
+            "housestatus" =>$request->housestatus,
+            "client_id"   =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

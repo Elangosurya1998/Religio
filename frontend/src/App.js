@@ -85,7 +85,7 @@ function App() {
           <Route exact path="/Religio/Payment/View/:id" element={<PaymentViewFile />} />
           <Route exact path="/Religio/ProjectstatusLayouts" element={<ProjectstatusLayouts />} />
           <Route exact path="/Religio/UsersList" element={<UsersList />} />
-          <Route exact path="/Religio/Tab" element={< Tabdata />} />
+          <Route exact path="/Religio/Tab/:id" element={< Tabdata />} />
         </Route>
 
         <Route path='/register' element={<Register />} />
