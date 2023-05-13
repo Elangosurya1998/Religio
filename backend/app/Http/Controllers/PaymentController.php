@@ -60,7 +60,81 @@ class PaymentController extends Controller
 
     }
 
+    public function paymentuploadfile(Request $request){
+       
+       
 
+        $getid = Payment::latest('id')->first(); 
+        $id = $getid->id;
+       
+    
+            $file = $request->file('File'); 
+            $filereceipt = $request->file('FileRes'); 
+            // $filerecept
+           
+            $filename = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $location = 'Invoice';
+
+            $receptname = $filereceipt->getClientOriginalName();
+            $extension = $filereceipt->getClientOriginalExtension();
+            $place = 'Receipt';
+
+            $Registerfile = Payment::where('id',$id)->update([
+                "invoice"   =>$file->getClientOriginalName(),
+                "receipt"   =>$filereceipt->getClientOriginalName()
+            ]);
+
+            $file->move($location,$filename);
+            $filereceipt->move($place,$receptname);
+            $filepath = url('Invoice/'.$filename);
+            $resfilepath = url('Receipt/'.$receptname);
+    
+            if(!is_null($Registerfile)){ 
+
+                return response()->json(["status" => $this->status, "success" => true, 
+                        "message" => "Registered  successfully", "data" => $Registerfile]);
+            }    
+            else {
+                return response()->json(["status" => "failed", "success" => false,
+                            "message" => "Whoops! failed to create."]);
+            }   
+              
+    }
+
+    public function updateuploadfile(Request $request,$id){
+       
+        $file = $request->file('File'); 
+        $filereceipt = $request->file('FileRes'); 
+        
+        $filename = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $location = 'Invoice';
+
+        $receptname = $filereceipt->getClientOriginalName();
+        $extension = $filereceipt->getClientOriginalExtension();
+        $place = 'Receipt';
+
+        $Registerfile = Payment::where('id',$id)->update([
+            "invoice"   =>$file->getClientOriginalName(),
+            "receipt"   =>$filereceipt->getClientOriginalName()
+        ]);
+
+        $file->move($location,$filename);
+        $filereceipt->move($place,$receptname);
+        $filepath = url('Invoice/'.$filename);
+        $resfilepath = url('Receipt/'.$receptname);
+
+        if(!is_null($Registerfile)){ 
+
+            return response()->json(["status" => $this->status, "success" => true, 
+                    "message" => "Registered  successfully", "data" => $Registerfile]);
+        }    
+        else {
+            return response()->json(["status" => "failed", "success" => false,
+                        "message" => "Whoops! failed to create."]);
+        }   
+    }
     public function PaymentEdit($id){
 
         $payment = Payment::where('id',$id)->get();

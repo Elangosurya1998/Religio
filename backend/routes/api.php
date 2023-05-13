@@ -90,6 +90,8 @@ Route::delete('/Religio/UsersList/{id}',[RegisterController::class, 'UsersListDe
 //Payment status
 
 Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentstore']);
+Route::post('/Religio/Paymentstatus/uploadfile',[PaymentController::class, 'paymentuploadfile']);
+Route::post('/Religio/Paymentupdate/uploadfile/{id}',[PaymentController::class, 'updateuploadfile']);
 Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
 Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);

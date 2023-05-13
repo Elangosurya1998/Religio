@@ -519,26 +519,41 @@ function ClientRegistrationCreate() {
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="webapplication"
-                          {...register("webapplication")} /> Web Application <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="webapplication"
+                          {...register("webapplication")}
+                        />{" "}
+                        Web Application <i className="input-helper" />
+                      </label>
                     </div>
-
                   </div>
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="app"
-                          {...register("app")} /> Mobile Application <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="app"
+                          {...register("app")}
+                        />{" "}
+                        Mobile Application <i className="input-helper" />
+                      </label>
                     </div>
-
                   </div>
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="website"
-                          {...register("website")} /> Website <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="website"
+                          {...register("website")}
+                        />{" "}
+                        Website <i className="input-helper" />
+                      </label>
                     </div>
-
                   </div>
                 </div>
                 <div className="row">
