@@ -30,6 +30,8 @@ class Payment extends Model
         'paid',
         'balance',
         'status',
+        'receipt',
+        'invoice'
 
     ];
 }

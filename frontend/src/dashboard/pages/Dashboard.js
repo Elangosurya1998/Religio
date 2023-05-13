@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useForm } from "react-hook-form";
+import React from "react";
 import ApiUrl from "./Api/Api";
 import { useEffect, useState } from "react";
 import $ from "jquery";
@@ -53,7 +53,7 @@ function Dashboard() {
             SetBalance(resData.data);
             FinancialYear(resData.data.year);
             FinancialMonth(resData.data.Month);
-            Dynamictitle(value);
+            Dynamictitle("New Sales");
             console.log(resData.dataall);
             getDatatable(resData.dataall);
           })
@@ -71,7 +71,7 @@ function Dashboard() {
             SetBalance(resData.data);
             FinancialYear(resData.data.year);
             FinancialMonth(resData.data.Month);
-            Dynamictitle(value);
+            Dynamictitle(data);
 
             getDatatable(resData.dataall);
           })
@@ -107,7 +107,6 @@ function Dashboard() {
           SetBalance(resData.data);
           FinancialYear(resData.data.year);
           FinancialMonth(resData.data.Month);
-          console.log(resData.dataall);
           Dynamictitle(data);
           getDatatable(resData.dataall);
         })
@@ -125,16 +124,6 @@ function Dashboard() {
   const [year, FinancialYear] = useState([]);
   const [Month, FinancialMonth] = useState([]);
   const [getdatafilter, getDatatable] = useState([]);
-
-  // useEffect(() => {
-  //   fetch(`${ApiUrl}/Religio/ClientType/Getfinancialyears`).then((res) => {
-  //       return res.json();
-  //   }).then((resp) => {
-  //     FinancialYear(resp.data);
-  //   }).catch((err) => {
-  //       console.log(err.message);
-  //   })
-  // }, [])
 
   function getMonthData(event) {
     const month = event.target.text;
@@ -215,18 +204,55 @@ function Dashboard() {
       sortable: true,
     },
     {
-      name: "ClientType",
+      name: "Client Type",
       selector: (row) => row.clienttype,
       sortable: true,
     },
     {
-      name: "Clientcode",
+      name: "Client Code",
       selector: (row) => row.clientcode,
       sortable: true,
     },
     {
-      name: "Projectvalue",
+      name: "Project Value",
       selector: (row) => row.projectvalue,
+      sortable: true,
+    },
+    {
+      name: "Paid",
+      selector: (row) => row.paid,
+      sortable: true,
+    },
+    {
+      name: "Balance",
+      selector: (row) => row.balance,
+      sortable: true,
+    },
+    {
+      name: "Total",
+      selector: (row) => row.total,
+      sortable: true,
+    },
+  ];
+  const amccolumns = [
+    {
+      name: "Province",
+      selector: (row) => row.province,
+      sortable: true,
+    },
+    {
+      name: "Client Type",
+      selector: (row) => row.clienttype,
+      sortable: true,
+    },
+    {
+      name: "Client Code",
+      selector: (row) => row.clientcode,
+      sortable: true,
+    },
+    {
+      name: "AMC Value",
+      selector: (row) => row.amcvalue,
       sortable: true,
     },
     {
@@ -249,19 +275,29 @@ function Dashboard() {
   const customStyles = {
     rows: {
       style: {
-        minHeight: "52px", // override the row height
+        minHeight: "52px",
       },
     },
     headCells: {
       style: {
         paddingLeft: "8px", // override the cell padding for head cells
         paddingRight: "8px",
+        fontSize: "13px",
+        fontWeight: "600",
+        fontFamily: "sans-serif",
+        color: "#343a40",
       },
     },
     cells: {
       style: {
         paddingLeft: "8px", // override the cell padding for data cells
         paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
       },
     },
   };
@@ -490,15 +526,33 @@ function Dashboard() {
         <div className="col-12 grid-margin">
           <div className="card">
             <div className="card-body">
+              <h4 className="card-title">Clients {Title}</h4>
               <div className="table-responsive">
-                <DataTable
-                  title={Title}
+                {Title === "AMC" && (
+                  <DataTable
+                    // title={Title}
+                    columns={amccolumns}
+                    data={getdatafilter}
+                    pagination
+                    customStyles={customStyles}
+                  />
+                )}
+                {Title !== "AMC" && (
+                  <DataTable
+                    // title={Title}
+                    columns={columns}
+                    data={getdatafilter}
+                    pagination
+                    customStyles={customStyles}
+                  />
+                )}
+                {/* <DataTable
+                  // title={Title}
                   columns={columns}
                   data={getdatafilter}
                   pagination
-                  // selectableRows
                   customStyles={customStyles}
-                />
+                /> */}
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
-
+import React from "react";
 import DataTable from "react-data-table-component";
 
 function ProvinceList() {
@@ -75,6 +75,11 @@ function ProvinceList() {
   };
   const columns = [
     {
+      name: "S.No",
+      selector: (row, index) => index + 1,
+      width: "70px",
+    },
+    {
       name: "Province",
       selector: (row) => row.province,
       sortable: true,
@@ -94,40 +99,50 @@ function ProvinceList() {
       selector: (row) => [
         <a
           onClick={(e) => ViewProvince(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4 }}
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-eye"
           id="print"></a>,
         <a
           onClick={(e) => EditProvince(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4 }}
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-pencil-box"
           id="print"></a>,
 
         <a
           onClick={(e) => deleteProvince(e, row.id)}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", color: "#b66dff" }}
           className="mdi mdi-delete"
           id="print"></a>,
       ],
+      width: "100px",
     },
   ];
 
   const customStyles = {
     rows: {
       style: {
-        minHeight: "52px", // override the row height
+        minHeight: "52px",
+        backgroundColor: "#fafafa", // override the row height
       },
     },
     headCells: {
       style: {
         paddingLeft: "8px", // override the cell padding for head cells
         paddingRight: "8px",
+        fontSize: "14px",
+        fontWeight: "600",
       },
     },
     cells: {
       style: {
         paddingLeft: "8px", // override the cell padding for data cells
         paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
       },
     },
   };
@@ -143,7 +158,15 @@ function ProvinceList() {
     );
     SetProvince(filter);
   }
-
+  const [pending, setPending] = React.useState(true);
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRows(Pro);
+      setPending(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, []);
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -187,7 +210,7 @@ function ProvinceList() {
                 columns={columns}
                 data={Pro}
                 pagination
-                // selectableRows
+                progressPending={pending}
                 customStyles={customStyles}
               />
             </div>

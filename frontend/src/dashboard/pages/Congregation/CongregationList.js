@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import $ from "jquery";
+import React from "react";
 import DataTable from "react-data-table-component";
 function CongregationList() {
   const [Cong, Setcongregation] = useState([]);
@@ -77,6 +77,11 @@ function CongregationList() {
   };
   const columns = [
     {
+      name: "S.No",
+      selector: (row, index) => index + 1,
+      width: "70px",
+    },
+    {
       name: "Congregation Name",
       selector: (row) => row.congregation,
       sortable: true,
@@ -96,39 +101,48 @@ function CongregationList() {
       selector: (row) => [
         <a
           onClick={(e) => Viewcongregation(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4 }}
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-eye"></a>,
         <a
           onClick={(e) => EditCongregation(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4 }}
-          className="mdi mdi-pencil-box">
-          {" "}
-        </a>,
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+          className="mdi mdi-pencil-box"></a>,
 
         <a
           onClick={(e) => deleteCongregation(e, row.id)}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", color: "#b66dff" }}
           className="mdi mdi-delete"></a>,
       ],
+      width: "100px",
     },
   ];
 
   const customStyles = {
     rows: {
       style: {
-        minHeight: "52px", // override the row height
+        minHeight: "52px",
+        backgroundColor: "#fafafa",
+        // override the row height
       },
     },
     headCells: {
       style: {
         paddingLeft: "8px", // override the cell padding for head cells
         paddingRight: "8px",
+        fontSize: "14px",
+        fontWeight: "600",
       },
     },
     cells: {
       style: {
         paddingLeft: "8px", // override the cell padding for data cells
         paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
       },
     },
   };
@@ -145,7 +159,15 @@ function CongregationList() {
     );
     Setcongregation(filter);
   }
-
+  const [pending, setPending] = React.useState(true);
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRows(Cong);
+      setPending(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, []);
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -189,7 +211,7 @@ function CongregationList() {
                 columns={columns}
                 data={Cong}
                 pagination
-                // selectableRows
+                progressPending={pending}
                 customStyles={customStyles}
               />
             </div>
