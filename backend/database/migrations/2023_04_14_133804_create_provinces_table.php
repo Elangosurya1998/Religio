@@ -23,6 +23,11 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('mobile')->nullable();
             $table->string('email')->nullable(); 
+            $table->string('contactname')->nullable(); 
+            $table->string('contactrole')->nullable(); 
+            $table->string('contactemail')->nullable(); 
+            $table->string('contactmobile')->nullable(); 
+            $table->string('contactstatus')->nullable(); 
             $table->timestamps();
         });
     }

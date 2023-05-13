@@ -1,7 +1,85 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import React from 'react';
+import ApiUrl from "../../dashboard/pages/Api/Api";
+import AppUrl from "../../dashboard/pages/Api/Url";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 function Main() {
+
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/HomeSections/OurClient/list`).then((res) => {
+      return res.json();
+    }).then((resp) => {
+      OurClientList(resp.data);
+    }).catch((err) => {
+      console.log(err.message);
+    })
+  }, [])
+
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex`).then((res) => {
+      return res.json();
+    }).then((resp) => {
+      OurCustomerSayList(resp.data);
+    }).catch((err) => {
+      console.log(err.message);
+    })
+  }, [])
+
+  const [OurClients, OurClientList] = useState([]);
+
+  const [OurCustomerSay, OurCustomerSayList] = useState([]);
+
+
+
+  function OurClientsdata(OurClients) {
+    let count = [1, 2, 3, 4, 5];
+
+    return (
+      <div className="marquee">
+        <div className="marquee-content">
+          {
+            count.map(item => (
+              <div>
+                {
+                  OurClients && OurClients.map(item => (
+                    <div className="what-img">
+                      <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                    </div>
+                  ))
+                }
+              </div>
+            )
+            )
+          }
+        </div>
+      </div >
+    );
+
+  }
+
   return (
     <main>
       {/* Slider Area Start*/}
@@ -142,9 +220,9 @@ function Main() {
         <div className="container">
           {/* Section Tittle */}
           <div className="row d-flex justify-content-center">
-            <div className="col-lg-6">
+            <div className="col-lg-12">
               <div className="section-tittle text-center">
-                <h2>How Can We Help Your<br />Province with Religio!</h2>
+                <h2>How Can We Help Your <br />Province with Religio!</h2>
               </div>
             </div>
           </div>
@@ -205,39 +283,21 @@ function Main() {
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
                   <div className="row">
-                    <div className="col-md-4 col-lg-4 col-sm-12">
-                      <div className="single-customer ">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man2.png" alt="" />
+                    {
+                      OurCustomerSay && OurCustomerSay.map(item => (
+                        <div className="col-md-4 col-lg-4 col-sm-12">
+                          <div className="single-customer" style={{ backgroundColor: '#f0f0f0', borderRadius: '10px' }}>
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "70px" }} />
+                            </div>
+                            <div className="what-cap">
+                              <h4><a href="#">{item.title}</a></h4>
+                              <p>{item.comments}</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 col-sm-12">
-                      <div className="single-customer">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man3.png" alt="" />
-                        </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-6 col-lg-4 col-sm-12">
-                      <div className="single-customer">
-                        <div className="what-img">
-                          <img src="./landing/assets/img/shape/man2.png" alt="" />
-                        </div>
-                        <div className="what-cap">
-                          <h4><a href="#">Welcome To The Best Model  Winner Contest</a></h4>
-                          <p>Utenim ad minim veniam quisnostrud exercitation ullamcolabor nisiut aliquip ex ea commodo consequat duis aute irure dolor in represse.</p>
-                        </div>
-                      </div>
-                    </div>
+                      ))
+                    }
                   </div>
                 </div>
               </div>
@@ -299,87 +359,44 @@ function Main() {
               <div className="col-12">
                 <div className="customar-active dot-style d-flex dot-style">
                   <div>
-                    <div className="marquee">
-                      <ul className="marquee-content">
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man3.png" alt="" />
-                          </div>
-                        </li>
-                        <li>
-                          <div className="what-img">
-                            <img src="./landing/assets/img/shape/man2.png" alt="" />
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+                    {OurClientsdata(OurClients)}
+                    {/* <div className="marquee-content">
+
+                        {
+                          OurClients && OurClients.map(item => (
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                        {
+                          OurClients && OurClients.map(item => (
+
+                            <div className="what-img">
+                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
+                            </div>
+                          ))
+                        }
+                      </div> */}
                   </div>
-                  {/* <div className="single-customer mb-100">
+                </div>
+                {/* <div className="single-customer mb-100">
                           <div className="what-img">
                             <img src="./landing/assets/img/shape/man2.png" alt="" />
                           </div>
@@ -394,7 +411,6 @@ function Main() {
                             <img src="./landing/assets/img/shape/man2.png" alt="" />
                           </div>
                         </div> */}
-                </div>
               </div>
             </div>
           </div>
@@ -409,17 +425,29 @@ function Main() {
             <div className="d-flex justify-content-center">
               <div className="col-xl-8">
                 <div className="section-tittle text-center">
-                  <h2>Our Blog</h2>
+                  <h2>Gallery</h2>
                 </div>
               </div>
             </div>
           </div>
+          <div className="row">
+            <Carousel responsive={responsive}>
+              <div><img src="/landing/assets/img/gallerysection/1.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/2.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/3.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/4.png" alt="" /></div>
+              {/* <div><img src="/landing/assets/img/gallerysection/5.png" alt="" /></div> */}
+              <div><img src="/landing/assets/img/gallerysection/6.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/7.png" alt="" /></div>
+            </Carousel>
+          </div>
+          <br />
           <div className="row d-flex justify-content-between">
             <div className="col-xl-12 col-lg-12">
               <div className="app-caption">
                 <center>
                   <div className="button-group-area">
-                    <Link to="/Religio/Blog" className="genric-btn success radius"><i className="fas fa-blog"></i>&nbsp; More</Link>
+                    <Link to="/Religio/Gallery" className="genric-btn success radius">More</Link>
                   </div>
                 </center>
               </div>
@@ -462,7 +490,7 @@ function Main() {
             <div className="app-caption">
               <center>
                 <div className="button-group-area">
-                  <Link to="/Religio/Demo" className="genric-btn success radius"><i className="fas fa-shopping-cart"></i>&nbsp; Demo</Link>
+                  <Link to="/Religio/Demo" className="genric-btn success radius">Request for Demo</Link>
                 </div>
               </center>
             </div>

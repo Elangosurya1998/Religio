@@ -3,10 +3,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
+import AppUrl from "../Api/Url";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationViews() {
+  const Routepath = AppUrl;
+
   const {
     register,
     handleSubmit,
@@ -412,9 +415,9 @@ function ClientRegistrationViews() {
                       name="projectstatus"
                       {...register("projectstatus", { required: true })}
                       aria-invalid={errors?.projectstatus ? "true" : "false"}>
-                      <option value="">Select Project Status</option>
+                      <option>Select Project Status</option>
                       <option value="Completed">Completed</option>
-                      <option value="InProgress">InProgress</option>
+                      <option value="InProgress">In Progress</option>
                       <option value="Notstrated">Not Started</option>
                     </select>
                     {errors?.projectstatus?.type === "required" && (
@@ -427,8 +430,8 @@ function ClientRegistrationViews() {
                   </div>
                   <div className=" form-group col-md-6">
                     <label>
-                      File Attachment&nbsp;
-                      
+                      File Attachment&nbsp; &nbsp;( Supported format is pdf
+                      ,pptx, docx ,doc )
                     </label>
                     <input
                       type="File"
@@ -439,46 +442,40 @@ function ClientRegistrationViews() {
                       })}
                     />
                     <div className="Getfile filelabel">
-                      <label className="errlabel">{file}</label>
+                      <Link
+                        style={{ color: "#222324", paddingTop: 10 }}
+                        to={Routepath + "/resourcefiles/" + file}
+                        target="_blank"
+                        download>
+                        {file}
+                      </Link>
                     </div>
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-3">
-                    <label className="form-group">Solutions :</label>
+                    <label className="form-group">Solutions </label>
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="webapplication"
-                        {...register("webapplication")}
-                      />{" "}
-                      Web Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input regdata" name="webapplication"
+                          {...register("webapplication")} /> Web Application <i className="input-helper" /></label>
+                    </div>
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="app"
-                        {...register("app")}
-                      />{" "}
-                      Mobile Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input regdata" name="app"
+                          {...register("app")} /> Mobile Application <i className="input-helper" /></label>
+                    </div>
                   </div>
                   <div className="form-group col-md-3">
-                    <label className="form-check-label">
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="website"
-                        {...register("website")}
-                      />{" "}
-                      Website <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input regdata" name="website"
+                          {...register("website")} /> Website <i className="input-helper" /></label>
+                    </div>
                   </div>
                 </div>
                 <div className="row">

@@ -5,7 +5,8 @@ import Header from "./includes/Header";
 import Main from "./includes/Main";
 import Footer from "./includes/Footer";
 import Demo from "./includes/Demo";
-import Blog from "./includes/Blog";
+import Gallery from "./includes/Gallery";
+import Aboutus from "./includes/Aboutus";
 
 function Layoutsland() {
 
@@ -15,8 +16,9 @@ function Layoutsland() {
         <>
             <Header />
             {pathname == "" || pathname == "/" && <Main />}
-            {pathname == "/Religio/Blog" && <Blog />}
+            {pathname == "/Religio/Gallery" && <Gallery />}
             {pathname == "/Religio/Demo" && <Demo />}
+            {pathname == "/Religio/Aboutus" && <Aboutus />}
             <Footer />
         </>
     );

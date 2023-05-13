@@ -16,7 +16,9 @@ use App\Http\Controllers\MobileappController;
 use App\Http\Controllers\OnlinemeetController;
 use App\Http\Controllers\OnsitemeetController;
 use App\Http\Controllers\OurclientController;
+use App\Http\Controllers\OurCustomerSayController;
 use App\Http\Controllers\DatasupportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +47,7 @@ Route::get('/Religio/Congregation',[ReligioController::class, 'CongregationList'
 Route::delete('/Religio/Congregation/{id}',[ReligioController::class, 'CongregationDelete']);
 Route::get('/Religio/Congregationedit/{id}',[ReligioController::class, 'CongregationEdit']);
 Route::put('/Religio/Congregationupdate/{id}',[ReligioController::class, 'Congregationupdate']);
+Route::get('/Religio/CongrationAddress/get/{id}',[ReligioController::class, 'CongrationAddress']);
 Route::get('/Religio/Congregationverifydelete/{id}',[ReligioController::class, 'Congregationverifydelete']);
 
 // Province
@@ -68,6 +71,8 @@ Route::get('/Religio/Registeredit/{id}',[ClientregistrationController::class, 'C
 Route::put('/Religio/Clientregistrationupdate/{id}',[ClientregistrationController::class, 'Clientregistrationupdate']);
 Route::get('/Religio/ProvinceAddress/get/{id}',[ClientregistrationController::class, 'ProvinceAddressget']);
 Route::get('/Religio/CheckUniquecode/get/{id}',[ClientregistrationController::class, 'CheckUniquecode']);
+Route::get('/Religio/Clients/get/{id}',[ClientregistrationController::class, 'Clients']);
+
 
 // project status
 Route::post('/projectstatuscreate', [ProjectsController::class,'projectstatus']);
@@ -89,6 +94,8 @@ Route::delete('/Religio/UsersList/{id}',[RegisterController::class, 'UsersListDe
 //Payment status
 
 Route::post('/Religio/Paymentstatus/store',[PaymentController::class, 'paymentstore']);
+Route::post('/Religio/Paymentstatus/uploadfile',[PaymentController::class, 'paymentuploadfile']);
+Route::post('/Religio/Paymentupdate/uploadfile/{id}',[PaymentController::class, 'updateuploadfile']);
 Route::get('/Religio/Paymentlist',[PaymentController::class, 'Paymentlist']);
 Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']);
 Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);
@@ -104,6 +111,16 @@ Route::get('/Religio/HomeSections/OurClient/list',[OurclientController::class, '
 Route::get('/Religio/HomeSections/OurClient/edit/{id}',[OurclientController::class, 'edit']);
 Route::put('/Religio/HomeSections/OurClient/update/{id}',[OurclientController::class, 'update']);
 Route::delete('/Religio/HomeSections/OurClient/delete/{id}',[OurclientController::class, 'destroy']);
+
+//Home Section - OurClient
+
+Route::post('/Religio/HomeSections/OurCustomerSay/Store',[OurCustomerSayController::class, 'store']);
+Route::get('/Religio/HomeSections/OurCustomerSay/View/{id}',[OurCustomerSayController::class, 'show']);
+Route::get('/Religio/HomeSections/OurCustomerSay/list',[OurCustomerSayController::class, 'index']);
+Route::get('/Religio/HomeSections/OurCustomerSay/Edit/{id}',[OurCustomerSayController::class, 'edit']);
+Route::put('/Religio/HomeSections/OurCustomerSay/Update/{id}',[OurCustomerSayController::class, 'update']);
+Route::delete('/Religio/HomeSections/OurCustomerSay/delete/{id}',[OurCustomerSayController::class, 'destroy']);
+Route::get('/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex',[OurCustomerSayController::class, 'OurCustomerSayindex']);
 
 // hoese and community status
 Route::post('housecommunitycreate', [HousecommunityController::class,'housecommunitycreate']);

@@ -54,9 +54,11 @@ import Trainningstatusadd from './dashboard/Trainningstatusadd';
 
 import Onlinestatusedit from './dashboard/Olinetredit';
 import Onsitetredit from './dashboard/Onsitetredit';
-import OurClientLayouts from './dashboard/pages/Ourclientsay/OurClientLayouts';
 import Datasupportadd from './dashboard/Datasupportadd';
 import Datasupportedit from './dashboard/Datasupportedit';
+
+import OurClientLayouts from './dashboard/pages/Ourclientsay/OurClientLayouts';
+import OurCustomerSayLayouts from './dashboard/pages/OurcustomerSay/OurCustomerSayLayouts';
 
 
 
@@ -68,13 +70,14 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Layoutsland />} />
         <Route exact path="/Religio/Demo" element={<Layoutsland />} />
-        <Route exact path="/Religio/Blog" element={<Layoutsland />} />
+        <Route exact path="/Religio/Gallery" element={<Layoutsland />} />
+        <Route exact path="/Religio/Aboutus" element={<Layoutsland />} />
         <Route path='/forget' element={<ForgetPassword />} />
         <Route path='/reset' element={<ResetPassword />} />
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />} />
         <Route element={<UserPrivate />}>
-          <Route path='/UserPage' element={<User />}></Route>
+          <Route path='/Religio/Dashboard' element={<User />}></Route>
           <Route exact path="/Religio/Congregation" element={<ConglistLayouts />} />
           <Route exact path="/Religio/Congregation/View/:id" element={<CongViewLayouts />} />
           <Route exact path="/Religio/Province" element={<ProlistLayouts />} />
@@ -137,7 +140,7 @@ function App() {
           <Route exact path="/Religio/DatasupportEdit/:id" element={< Datasupportedit />} />
 
           <Route exact path="/Religio/onlineedit/:id" element={< Onlinestatusedit />} />
-         
+
 
           <Route exact path="/Religio/onsiteedit/:id" element={< Onsitetredit />} />
 
@@ -145,6 +148,11 @@ function App() {
           <Route exact path="/Religio/HomeSections/OurClient/Edit/:id" element={<OurClientLayouts />} />
           <Route exact path="/Religio/HomeSections/OurClient/View/:id" element={<OurClientLayouts />} />
           <Route exact path="/Religio/HomeSections/OurClient/Create" element={<OurClientLayouts />} />
+
+          <Route exact path="/Religio/HomeSections/OurCustomerSay" element={<OurCustomerSayLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurCustomerSay/Edit/:id" element={<OurCustomerSayLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurCustomerSay/View/:id" element={<OurCustomerSayLayouts />} />
+          <Route exact path="/Religio/HomeSections/OurCustomerSay/Create" element={<OurCustomerSayLayouts />} />
         </Route>
       </Routes>
     </BrowserRouter>

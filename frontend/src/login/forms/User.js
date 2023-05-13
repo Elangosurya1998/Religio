@@ -23,7 +23,7 @@ function User() {
     const navigate = useNavigate();
     // idleLogout is used to Actual navigate to logout
     function idleLogout() {
-        localStorage.removeItem("userDetails");
+        sessionStorage.removeItem("userDetails");
         window.location.href = '/login'; // Here goes to your logout url 
     }
     return (

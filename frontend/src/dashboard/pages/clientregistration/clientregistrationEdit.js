@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ApiUrl from "../Api/Api";
+import AppUrl from "../Api/Url";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function ClientRegistrationEdit() {
-
   $("#uniquefile").hide();
-
+  const Routepath = AppUrl;
   const {
     register,
     handleSubmit,
@@ -93,11 +93,7 @@ function ClientRegistrationEdit() {
             console.log(err);
           });
         if (response.status === 200) {
-          Swal.fire(
-            "Updated Successfully..!",
-            "Client Data Updated ..",
-            "success"
-          );
+          Swal.fire("Updated Successfully..!", "", "success");
           navigate("/Religio/ClientRegistration");
           e.target.reset();
         }
@@ -460,9 +456,9 @@ function ClientRegistrationEdit() {
                       name="projectstatus"
                       {...register("projectstatus", { required: true })}
                       aria-invalid={errors?.projectstatus ? "true" : "false"}>
-                      <option value="">Select Project Status</option>
+                      <option>Select Project Status</option>
                       <option value="Completed">Completed</option>
-                      <option value="InProgress">InProgress</option>
+                      <option value="InProgress">In Progress</option>
                       <option value="Notstrated">Not Started</option>
                     </select>
                     {errors?.projectstatus?.type === "required" && (
@@ -475,8 +471,8 @@ function ClientRegistrationEdit() {
                   </div>
                   <div className=" form-group col-md-6">
                     <label>
-                      File Attachment&nbsp;
-                      <span style={{ color: "red" }}>*</span>
+                      File Attachment&nbsp; &nbsp;( Supported format is pdf
+                      ,pptx, docx ,doc )
                     </label>
                     <input
                       type="File"
@@ -487,9 +483,15 @@ function ClientRegistrationEdit() {
                       })}
                     />
                     <div className="Getfile filelabel">
-                      <label className="errlabel">{file}</label>
+                      <Link
+                        style={{ color: "#222324", paddingTop: 10 }}
+                        to={Routepath + "/resourcefiles/" + file}
+                        target="_blank"
+                        download>
+                        {file}
+                      </Link>
                     </div>
-                    <div className="clientcode filelabel" id="uniquefile">
+                    <div className="filelabel" id="uniquefile">
                       <label className="errlabel text-danger text_error">
                         The file must be a file of type: pdf ,pptx, docx ,doc
                       </label>
@@ -498,40 +500,30 @@ function ClientRegistrationEdit() {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-3">
-                    <label className="form-group">Solutions :</label>
+                    <label className="form-group">Solutions </label>
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="webapplication"
-                        {...register("webapplication")}
-                      />{" "}
-                      Web Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="webapplication"
+                          {...register("webapplication")} /> Web Application <i className="input-helper" /></label>
+                    </div>
+
                   </div>
                   <div className="form-group col-md-3">
-                    <label>
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="app"
-                        {...register("app")}
-                      />{" "}
-                      Mobile Application <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="app"
+                          {...register("app")} /> Mobile Application <i className="input-helper" /></label>
+                    </div>
+
                   </div>
                   <div className="form-group col-md-3">
-                    <label className="form-check-label">
-                      <input
-                        type="checkbox"
-                        className="form-check-input regdata"
-                        name="website"
-                        {...register("website")}
-                      />{" "}
-                      Website <i className="input-helper" />
-                    </label>
+                    <div className="form-check form-check-flat form-check-primary">
+                      <label className="form-check-label">
+                        <input type="checkbox" className="form-check-input" name="website"
+                          {...register("website")} /> Website <i className="input-helper" /></label>
+                    </div>
                   </div>
                 </div>
                 <div className="row">

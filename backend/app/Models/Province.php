@@ -22,6 +22,11 @@ class Province extends Model
         'city',
         'country',
         'mobile',
-        'email'
+        'email',
+        'contactname',
+        'contactrole',
+        'contactemail',
+        'contactmobile',
+        'contactstatus'
     ];
 }

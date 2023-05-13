@@ -12,21 +12,22 @@ function Header() {
           <div className="container">
             <div className="row align-items-center">
               {/* Logo */}
-              <div className="col-xl-2 col-lg-2 col-md-2">
+              <div className="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-xs-3">
                 <div className="logo">
                   <Link to="/Religio/Dashboard"><img src="/logo.png" alt="" /></Link>
                 </div>
               </div>
-              <div className="col-xl-10 col-lg-10 col-md-10">
+              <div className="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-xs-9">
                 {/* Main-menu */}
                 <div className="main-menu f-right d-none d-lg-block">
                   <nav>
                     <ul id="navigation">
 
                       <li className={`${hash == "#Home" && 'active'}`}><Link to="/">Home</Link></li>
+                      <li className={`${pathname == '/Religio/Aboutus' && 'active'}`}><Link to="/Religio/Aboutus">About us</Link></li>
                       <li className={`${hash == "#Feature" && 'active'}`}><Link to="/#Feature">Feature</Link></li>
                       <li className={`${hash == "#Services" && 'active'}`}><Link to="/#Services">Services</Link></li>
-                      <li className={`${pathname == '/Religio/Blog' || hash == "#Blog" ? 'active' : ''}`}><Link to="/#Blog">Blog</Link></li>
+                      <li className={`${pathname == '/Religio/Gallery' || hash == "#Gallery" && 'active'}`}><Link to="/#Gallery">Gallery</Link></li>
                       <li className={`${pathname == '/Religio/Demo' && 'active'}`}><Link to="/Religio/Demo">Demo</Link></li>
                       {/* <li><a href="#">Pages</a>
                           <ul className="submenu">
@@ -35,18 +36,15 @@ function Header() {
                             <li><a href="">Element</a></li>
                           </ul>
                         </li> */}
-                      {/* <li><Link to="/">Contact</Link></li> */}
-                      {/* <li><Link to="/login">Login</Link></li> */}
                     </ul>
                   </nav>
                 </div>
+                {/* Mobile-menu */}
                 <div className="col-12">
                   <div className="mobile_menu d-block d-lg-none" >
+
                   </div>
                 </div>
-              </div>
-              <div className="col-12">
-                <div className="mobile_menu d-block d-lg-none" />
               </div>
             </div>
           </div>

@@ -3,17 +3,10 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import ApiUrl from "../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
-import $ from "jquery";
+import DataTable from "react-data-table-component";
+import React from "react";
 
 function ClientregistrationList() {
-  $(document).ready(function () {
-    $(".myInput").on("keyup", function () {
-      var value = $(this).val().toLowerCase();
-      $(".Mytable tbody tr").filter(function () {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-      });
-    });
-  });
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Clientregistration`)
   
@@ -22,6 +15,7 @@ function ClientregistrationList() {
       })
       .then((resp) => {
         SetClientregister(resp.data);
+        FilterClientregister(resp.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -30,8 +24,9 @@ function ClientregistrationList() {
   useEffect(() => {
     fetchData();
   }, []);
-  const isLogedIn = JSON.parse(localStorage.getItem("userDetails"));
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const [register, SetClientregister] = useState([]);
+  const [FilterRegister, FilterClientregister] = useState([]);
   const navigate = useNavigate();
 
   const EditClientregistration = async (e, id) => {
@@ -61,11 +56,111 @@ function ClientregistrationList() {
   const Viewregister = async (e, id) => {
     navigate("/Religio/Clientregistration/View/" + id);
   };
+  const columns = [
+    {
+      name: "S.No",
+      selector: (row, index) => index + 1,
+      width: "70px",
+    },
+    {
+      name: "Congregation",
+      selector: (row) => row.congregation,
+      sortable: true,
+    },
+    {
+      name: "Province",
+      selector: (row) => row.province,
+      sortable: true,
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+      sortable: true,
+    },
+    {
+      name: "Place",
+      selector: (row) => row.place,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      selector: (row) => [
+        <a
+          onClick={(e) => Viewregister(e, row.id)}
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+          className="mdi mdi-eye"
+          id="print"></a>,
+        <a
+          onClick={(e) => EditClientregistration(e, row.id)}
+          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+          className="mdi mdi-pencil-box"
+          id="print"></a>,
+        <a
+          onClick={(e) => deleteregister(e, row.id)}
+          style={{ cursor: "pointer", color: "#b66dff" }}
+          className="mdi mdi-delete"
+          id="print"></a>,
+      ],
+      width: "100px",
+    },
+  ];
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "52px",
+        backgroundColor: "#fafafa",
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for head cells
+        paddingRight: "8px",
+        fontSize: "14px",
+        fontWeight: "600",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for data cells
+        paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
+      },
+    },
+  };
 
   const viewDashboardlist = async (e, id) => {
     navigate("/Religio/Tab/" + id);
   };
 
+  function filterdata(event) {
+    var value = event.target.value;
+    const keys = ["congregation", "province", "name", "place"];
+
+    const filter = FilterRegister?.filter((item) =>
+      keys.some((key) =>
+        item[key].toString()?.toLowerCase()?.includes(value?.toLowerCase())
+      )
+    );
+    console.log(value, filter);
+
+    SetClientregister(filter);
+  }
+
+  const [pending, setPending] = React.useState(true);
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRows(register);
+      setPending(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className="content-wrapper">
@@ -76,13 +171,6 @@ function ClientregistrationList() {
           </span>{" "}
           Client Registration
         </h3>
-        {/* <nav aria-label="breadcrumb">
-          <ul className="breadcrumb">
-            <li className="breadcrumb-item active" aria-current="page">
-              <span />Overview <i className="mdi mdi-alert-circle-outline icon-sm text-primary align-middle" />
-            </li>
-          </ul>
-        </nav> */}
       </div>
       <div className="row">
         <div className="col-lg-12 grid-margin stretch-card">
@@ -93,6 +181,7 @@ function ClientregistrationList() {
                   <input
                     id="myInput"
                     type="text"
+                    onChange={filterdata}
                     className="form-control myInput"
                     placeholder="Search.."
                   />
@@ -111,63 +200,14 @@ function ClientregistrationList() {
                 </div>
               </div>
               <br></br>
-              <table className="table table-striped Mytable">
-                <thead>
-                  <tr>
-                    <th>Congregation</th>
-                    <th>Province</th>
-                    <th>Name</th>
-                    <th>Place</th>
-                    <th>Financial Year</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {register &&
-                    register.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.congregation}</td>
-                        <td>{item.province}</td>
-                        <td>{item.name}</td>
-                        <td>{item.place}</td>
-      
-                        <td>{item.financialyear}</td>
-                        {isLogedIn?.role == "admin" ? (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => viewDashboardlist(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) =>
-                                EditClientregistration(e, item.id)
-                              }
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-pencil-box"
-                              id="print"></a>
-                            &nbsp;
-                            <a
-                              onClick={(e) => deleteregister(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-delete"
-                              id="print"></a>
-                            &nbsp;
-                          </td>
-                        ) : (
-                          <td id="noprint">
-                            <a
-                              onClick={(e) => Viewregister(e, item.id)}
-                              style={{ cursor: "pointer" }}
-                              className="mdi mdi-eye"
-                              id="print"></a>
-                          </td>
-                        )}
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <DataTable
+                columns={columns}
+                theme="solarized"
+                data={register}
+                pagination
+                progressPending={pending}
+                customStyles={customStyles}
+              />
             </div>
           </div>
         </div>

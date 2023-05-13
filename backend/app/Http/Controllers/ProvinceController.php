@@ -46,6 +46,11 @@ class ProvinceController extends Controller
                                 "country"   => $request->country, 
                                 "mobile"   => $request->mobile, 
                                 "email"   => $request->email, 
+                                "contactname"   => $request->contactname, 
+                                "contactrole"   => $request->contactrole, 
+                                "contactemail"   => $request->contactemail, 
+                                "contactmobile"   => $request->contactmobile, 
+                                "contactstatus"   => $request->contactstatus, 
                          );
     
                 $Province  = Province::create($ProvinceArray['params']);
@@ -163,6 +168,11 @@ class ProvinceController extends Controller
                 "country"   => $request->country, 
                 "mobile"   => $request->mobile, 
                 "email"   => $request->email, 
+                "contactname"   => $request->contactname, 
+                "contactrole"   => $request->contactrole, 
+                "contactemail"   => $request->contactemail, 
+                "contactmobile"   => $request->contactmobile, 
+                "contactstatus"   => $request->contactstatus, 
             ]);
 
             return response()->json(
@@ -173,6 +183,15 @@ class ProvinceController extends Controller
         public function GetBalance($value){
           
             $Balancefilter =Payment::where('clienttype',$value)->get();
+            
+            $GetallData = DB::table('payments as pay')
+            ->select('pay.*','co.congregation','pr.province')
+            ->leftjoin('congregation as co','co.id','pay.congregation')
+            ->leftjoin('provinces as pr','pr.id','pay.province')
+            ->where('clienttype',$value)
+            ->get();
+         
+
             $balance=[];
             $total=[];
             $year =[];
@@ -206,7 +225,8 @@ class ProvinceController extends Controller
                                 "balPer" =>$perbal ?? '0' ,
                                 "paidPer" =>$perpaid ?? '0',
                                 "Month" =>  $Getmonth?? explode(",", "")
-                                ]
+                            ],
+                                "dataall"=>$GetallData,
                         ]);
             }
             else {

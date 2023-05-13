@@ -17,6 +17,7 @@ class Ourclient extends Model
         'id',
         'congregation',
         'province',
+        'client',
         'logo',
         'created_at',
         'updated_at'

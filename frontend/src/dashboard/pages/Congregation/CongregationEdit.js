@@ -41,11 +41,7 @@ function CongregationEdit() {
       .put(`${ApiUrl}/Religio/Congregationupdate/${id}`, data)
       .then((Response) => {
         if (Response.status === 200) {
-          Swal.fire(
-            "Updated Successfully..!",
-            "Congregation Updated ..",
-            "success"
-          );
+          Swal.fire("Updated Successfully..!", "", "success");
           e.target.reset();
           navigate("/Religio/Congregation");
         }

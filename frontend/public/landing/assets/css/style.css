@@ -2072,42 +2072,42 @@ hr {
 }
 
 .section-padding2 {
-	padding-top: 100px;
-	padding-bottom: 100px
+	padding-top: 60px;
+	padding-bottom: 60px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.section-padding2 {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 60px;
+	padding-bottom: 60px
 	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.section-padding2 {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 60px;
+	padding-bottom: 60px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.section-padding2 {
-		padding-top: 80px;
-		padding-bottom: 80px
+		padding-top: 40px;
+		padding-bottom: 40px
 	}
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 	.section-padding2 {
-		padding-top: 50px;
-		padding-bottom: 50px
+		padding-top: 40px;
+		padding-bottom: 40px
 	}
 }
 
 @media (max-width: 767px) {
 	.section-padding2 {
-		padding-top: 50px;
-		padding-bottom: 50px
+		padding-top: 30px;
+		padding-bottom: 30px
 	}
 }
 
@@ -5800,7 +5800,7 @@ z .slider-area .hero-cap h2 {
 }
 
 .section-tittle h2 {
-	font-size: 50px;
+	font-size: 33px;
 	font-weight: 700;
 	line-height: 1.2;
 	margin-bottom: 40px
@@ -6353,21 +6353,21 @@ z .slider-area .hero-cap h2 {
 
 .available-app-area {
 	position: relative;
-	padding-top: 100px;
-	padding-bottom: 100px
+	padding-top: 50px;
+	padding-bottom: 50px
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	.available-app-area {
-		padding-top: 150px;
-		padding-bottom: 150px
+		padding-top: 100px;
+		padding-bottom: 100px
 	}
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	.available-app-area {
-		padding-top: 100px;
-		padding-bottom: 100px
+		padding-top: 50px;
+		padding-bottom: 50px
 	}
 }
 
@@ -6961,24 +6961,21 @@ ul {
 
 .marquee {
     position: relative;
-	animation: animatedImage 10s linear infinite;
 }
 
 .marquee-content {
-    list-style: none;
-    height: 50%;
-    display: flex;
+	display: flex;
+	animation: animatedImage 180s linear infinite;
+	justify-content: space-between;
 }
 
-.marquee-content li {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-shrink: 0;
-	width: 20%;
-    max-height: 150%;
-    font-size: calc(var(--marquee-height)*3/4);
+.marquee-content div{
+	display: flex;
+}
+
+
+.marquee-content div .what-img:hover{
+	transform:scale(1.2)
 }
 
 .marquee-content li div img {
@@ -7009,18 +7006,24 @@ ul.li-col{
 	column-count: 2;
 }
 
+.adderssCopy {
+	margin: 0 0 16px 28px !important;
+}
+
+select{
+	color: #000 !important; 
+}
+
+
 /* h2.sectiontitle{
 	color: #2b044d !important;
 } */
 
 @keyframes animatedImage {
     from {
-		transform: translateX(-200px);
+		transform: translateX(0);
 	}
 	to {
-		transform: translateX(-800px);
+		transform: translateX(calc(-600px * 10));
 	}
 }
-
-
-
