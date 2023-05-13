@@ -53,8 +53,9 @@ function ClientregistrationList() {
       }
     });
   };
-  const Viewregister = async (e, id) => {
-    navigate("/Religio/Clientregistration/View/" + id);
+
+  const peojectstatsadd = async (e, id) => {
+    navigate("/Religio/Tab/" + id);
   };
   const columns = [
     {
@@ -86,7 +87,7 @@ function ClientregistrationList() {
       name: "Action",
       selector: (row) => [
         <a
-          onClick={(e) => Viewregister(e, row.id)}
+          onClick={(e) => peojectstatsadd(e, row.id)}
           style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-eye"
           id="print"></a>,
