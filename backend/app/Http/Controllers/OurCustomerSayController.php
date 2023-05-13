@@ -118,7 +118,20 @@ class OurCustomerSayController extends Controller
      */
     public function update(Request $request, Ourcustomersay $Ourcustomersay)
     {
-        //
+
+        $input = $request->all();
+        $Ourcustomersay = Ourcustomersay::where('id', $request->id)->first();
+        $Ourcustomersay->update($input);
+
+        if(!is_null($Ourcustomersay)){ 
+
+            return response()->json(["status" => $this->status, "success" => true, 
+                    "message" => "File uploaded successfully", "data" => $Ourcustomersay]);
+        }    
+        else {
+            return response()->json(["status" => "failed", "success" => false,
+                        "message" => "Whoops! failed to create."]);
+        } 
     }
 
     /**
@@ -145,6 +158,7 @@ class OurCustomerSayController extends Controller
             ->leftjoin('client_registrations as cr', 'cs.client','=','cr.id')
             ->leftjoin('ourclient as oc', 'cs.client','=','oc.client')
             ->limit(3)->latest()
+            ->orderBy('cs.id', 'asc')
             ->get();
 
         if(count($data) > 0) {

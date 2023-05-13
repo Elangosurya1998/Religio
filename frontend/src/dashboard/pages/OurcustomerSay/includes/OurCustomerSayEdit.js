@@ -7,9 +7,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function OurclientView() {
-  const [Congre, Congregation] = useState([]);
-  const [Prov, Province] = useState([]);
-  const [Client, Clients] = useState([]);
+
+  const { id } = useParams();
 
   const {
     register,
@@ -19,23 +18,44 @@ function OurclientView() {
   } = useForm({ mode: "onChange" });
 
   const navigate = useNavigate();
+  const [congre, Congregation] = useState([]);
+  const [getPro, SetProvince] = useState([]);
+  const [getCli, SetClient] = useState([]);
 
-  useEffect(() => {
-    fetch(`${ApiUrl}/Religio/Province/Congregation`).then((res) => {
-      return res.json();
-    }).then((resp) => {
-      Congregation(resp.data);
-    }).catch((err) => {
-      console.log(err.message);
-    })
-  }, []);
+  function getProvince(id, data) {
+    fetch(`${ApiUrl}/Religio/Province/get/${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        SetProvince(resp.data);
+        reset(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
+
+  function getClient(id, data) {
+    fetch(`${ApiUrl}/Religio/Clients/get/${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        SetClient(resp.data);
+        reset(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }
 
   function CongregationSelect(event) {
     var id = event.target.value
     reset({ province: "", client: "" })
     axios.get(`${ApiUrl}/Religio/Province/get/${id}`)
       .then((response) => {
-        Province(response.data.data)
+        SetProvince(response.data.data)
       }).catch((err) => {
         console.log(err);
       })
@@ -45,29 +65,48 @@ function OurclientView() {
     var id = event.target.value
     axios.get(`${ApiUrl}/Religio/Clients/get/${id}`)
       .then((response) => {
-        Clients(response.data.data)
+        SetClient(response.data.data)
       }).catch((err) => {
         console.log(err);
       })
   }
 
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/View/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        getProvince(res.data.congregation, res.data);
+        getClient(res.data.province, res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
+  useEffect(() => {
+    fetch(`${ApiUrl}/Religio/Province/Congregation`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        Congregation(resp.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
-  function onSubmitOurClientform(data, e) {
-
+  function onSubmitform(data, e) {
     e.preventDefault();
-
     axios
-      .post(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/update`, data)
-      .then((Response) => {
-        if (Response.status === 200) {
-          Swal.fire(
-            "Our Customer say Added Successfully..!",
-            "",
-            "success"
-          );
-          e.target.reset();
+      .put(`${ApiUrl}/Religio/HomeSections/OurCustomerSay/Update/${id}`, data)
+      .then((response) => {
+        if (response.status === 200) {
+          Swal.fire("Updated Successfully..!", "", "success");
           navigate("/Religio/HomeSections/OurCustomerSay");
+          e.target.reset();
         }
       })
       .catch((err) => {
@@ -79,6 +118,7 @@ function OurclientView() {
         });
       });
   }
+
 
   return (
     <div className="content-wrapper">
@@ -93,15 +133,16 @@ function OurclientView() {
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <form className="form-sample" encType="multipart/form-data" onSubmit={handleSubmit(onSubmitOurClientform)}>
+              <form className="form-sample" encType="multipart/form-data" onSubmit={handleSubmit(onSubmitform)}>
                 <br></br>
+                <input type="hidden" name="id" {...register("id")} />
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label>Congregation &nbsp;<span style={{ color: 'red' }}>*</span></label>
                     <select className="form-control" name="congregation" {...register("congregation", { required: true })} onChange={CongregationSelect}>
                       <option value="">Select Congregation</option>
                       {
-                        Congre && Congre.map(item => (
+                        congre && congre.map(item => (
                           <option value={item.id}>{item.congregation}</option>
                         ))
                       }
@@ -120,7 +161,7 @@ function OurclientView() {
                     <select className="form-control" name="province" {...register("province", { required: true })} onChange={provinceSelect}>
                       <option value="">Select Province</option>
                       {
-                        Prov && Prov.map(item => (
+                        getPro && getPro.map(item => (
                           <option value={item.id}>{item.province}</option>
                         ))
                       }
@@ -135,12 +176,12 @@ function OurclientView() {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
+                  <div className="form-group col-md-12">
                     <label>Clients &nbsp;<span style={{ color: 'red' }}>*</span></label>
                     <select className="form-control" name="client" {...register("client", { required: true })} >
                       <option value="">Select Client</option>
                       {
-                        Client && Client.map(item => (
+                        getCli && getCli.map(item => (
                           <option value={item.id}>{item.name}</option>
                         ))
                       }
@@ -181,7 +222,7 @@ function OurclientView() {
                   </div>
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-gradient-primary font-weight-bold " type="submit">Save</button>
+                  <button className="btn btn-gradient-primary font-weight-bold" type="submit"> Update </button>
                   &nbsp; &nbsp; &nbsp;
                   <Link to="/Religio/HomeSections/OurCustomerSay" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
                 </div>

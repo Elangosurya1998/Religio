@@ -225,13 +225,11 @@ class ClientregistrationController extends Controller
 
         }
         
-        public function Clientregistrationupdate($id,Request $request){
-           
-
-            
-     $Website = $request->website;
-    $WebApplication = $request->webapplication;
-    $WebApp = $request->app;
+        public function Clientregistrationupdate($id,Request $request)
+        {
+            $Website = $request->website;
+            $WebApplication = $request->webapplication;
+            $WebApp = $request->app;
              if($Website != 1){
                 $websitedata = null;
              }else{
@@ -251,20 +249,20 @@ class ClientregistrationController extends Controller
              }
             //  dd($websitedata);
             $Congregationupdate = Clientregistration::where('id',$id)
-            ->update([
-                "congregation"   => $request->congregation,
+                ->update([
+                    "congregation"   => $request->congregation,
                     "province"   => $request->province,
                     "name"       => $request->name,
                     "place"      => $request->place,
                     "clienttype" => $request->clienttype,
-                "financialyear"  => $request->financialyear,
+                    "financialyear"  => $request->financialyear,
                     "clientcode" => $request->clientcode, 
-                "dateofjoining"  => $request->dateofjoining, 
-        "dateofcontractsigning"  => $request->dateofcontractsigning, 
+                    "dateofjoining"  => $request->dateofjoining, 
+                    "dateofcontractsigning"  => $request->dateofcontractsigning, 
                     "amcdate"    => $request->amcdate, 
-                "projectvalue"  => $request->projectvalue, 
+                    "projectvalue"  => $request->projectvalue, 
                     "amcvalue"   => $request->amcvalue, 
-                "projectstatus"  => $request->projectstatus,
+                    "projectstatus"  => $request->projectstatus,
                     "address1"   => $request->address1,
                     "state"      => $request->state,
                     "address2"   => $request->address2,
@@ -275,13 +273,14 @@ class ClientregistrationController extends Controller
                     "email"      => $request->email, 
                     "website"    => $websitedata, 
                     "app"        => $WebAppdata, 
-             "webapplication"    => $WebApplicationdata, 
-            ]);
+                    "webapplication"    => $WebApplicationdata, 
+                ]);
 
             return response()->json(
                 ["status" => $this->status, "success" => true, 
                 "message" => " Congregation updated  successfully"]);
         }
+
         public function ProvinceAddressget($id){
          
             $Provinceaddress = DB::table('congregation as cr')
@@ -302,6 +301,7 @@ class ClientregistrationController extends Controller
             }
 
         }
+
         public function CheckUniquecode($data){
 
             $CheckUniquecoderegister = Clientregistration::where('clientcode',$data)->first();
@@ -315,4 +315,19 @@ class ClientregistrationController extends Controller
             }
 
         }
+
+        public function Clients($id){
+
+            $Clients = Clientregistration::where('id',$id)->get();
+         
+            if($Clients != null){
+                return response()->json(["status" => $this->status, "success" => true 
+               , "message" => "true", "data" => $Clients]);
+            }else{
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "false"]);
+            }
+
+        }
+
 }
