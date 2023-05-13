@@ -9,6 +9,7 @@ import React from "react";
 function ClientregistrationList() {
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Clientregistration`)
+  
       .then((res) => {
         return res.json();
       })
@@ -133,6 +134,10 @@ function ClientregistrationList() {
     },
   };
 
+  const viewDashboardlist = async (e, id) => {
+    navigate("/Religio/Tab/" + id);
+  };
+
   function filterdata(event) {
     var value = event.target.value;
     const keys = ["congregation", "province", "name", "place"];
@@ -156,6 +161,7 @@ function ClientregistrationList() {
     }, 500);
     return () => clearTimeout(timeout);
   }, []);
+
   return (
     <div className="content-wrapper">
       <div className="page-header">

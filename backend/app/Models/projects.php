@@ -12,16 +12,15 @@ class Projects extends Model
     protected $table = 'projects';
     protected $fillable = [
         'id',
-        'congregation',
-        'province',
-        'name',
         'dataserver',
         'instance',
         'testURL',
-        'textusername',
-        'textpassword',
+        'testusername',
+        'testpassword',
         'prodURL',
         'produsername',
-        'prodpassword'
+        'prodpassword',
+        'client_id'
     ];
+
 }

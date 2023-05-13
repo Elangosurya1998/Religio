@@ -76,7 +76,8 @@ class MemberdataController extends Controller
           $projectupdate = Memberdata::where('id',$id)
           ->update([
             "memberdate"    => $request->memberdate,
-            "memberstatus"  => $request->memberstatus
+            "memberstatus"  => $request->memberstatus,
+            "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

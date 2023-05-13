@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("Iosdate")->nullable();
             $table->string("Iosstatus")->nullable();
+            $table->integer('client_id');
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("onlinehours")->nullable();
             $table->string("onlinerating")->nullable();
             $table->string("online")->nullable();
+            $table->integer('client_id');
             $table->timestamps();
         });
     }

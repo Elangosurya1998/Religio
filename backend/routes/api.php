@@ -81,6 +81,10 @@ Route::get('/projectstatusedit/{id}',[ProjectsController::class, 'projectEdit'])
 Route::put('/projectstatusupdate/{id}',[ProjectsController::class, 'projectupdate']);
 Route::delete('/projectstatusdelete/{id}',[ProjectsController::class, 'projectDelete']);
 
+// dashboard
+Route::get('/Dashboardlist',[ProjectsController::class, 'Dashboardlist']);
+Route::get('/allDashboardlist/{id}',[ProjectsController::class, 'Dashboardall']);
+
 // RegUsers
 Route::get('/Religio/UsersList',[RegisterController::class, 'UsersList']);
 Route::get('/Religio/UsersList/{id}',[RegisterController::class, 'UserEdit']);
@@ -97,6 +101,8 @@ Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']
 Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);
 Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'PaymentDelete']);
 Route::get('/Religio/PaymentAddress/get/{id}',[PaymentController::class, 'PaymentAddress']);
+
+
 
 //Home Section - OurClient
 

@@ -71,7 +71,8 @@ class OnlinemeetController extends Controller
               "onlinemeeting" =>$request->onlinemeeting,
               "onlinedate"    =>$request->onlinedate,
               "onlinehours"   =>$request->onlinehours,
-              "onlinerating"  =>$request->onlinerating
+              "onlinerating"  =>$request->onlinerating,
+              "client_id"      =>$request->client_id
           ]);
           return response()->json(
               ["status" => $this->status, "success" => true, 

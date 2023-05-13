@@ -7,7 +7,16 @@ use App\Models\Province;
 use App\Models\Clientregistration;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Models\Projects;
+use App\Models\Datasupport;
+use App\Models\Housecommunity;
+use App\Models\Mobileapps;
+use App\Models\Onlinemeet;
+use App\Models\Onsitemeet;
+use App\Models\Memberdata;
+use App\Models\Ios;
 use DB;
+
 
 class ClientregistrationController extends Controller
 { 
@@ -42,9 +51,8 @@ class ClientregistrationController extends Controller
             );
            
             if($validator->fails()) {
-            return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
+                return response()->json(["status" => "failed", "validation_errors" => $validator->errors()]);
             }
-            
 
             $Website = $request->website;
             $WebApplication = $request->webapplication;
@@ -53,7 +61,7 @@ class ClientregistrationController extends Controller
             if($Website != 1){
                 $websitedata = null;
             }else{
-            $websitedata =$Website;
+                $websitedata =$Website;
             }
         
             if($WebApplication != 1){
@@ -96,15 +104,27 @@ class ClientregistrationController extends Controller
             ); 
 
             $Register  = Clientregistration::create($RegisterArray['params']);
-            
-            if(!is_null($Register)){ 
 
+            $getid = [
+            "client_id" => $Register->id
+            ];
+
+            $project = Projects::create($getid );
+            $project = Datasupport::create($getid );
+            $project = Housecommunity::create($getid );
+            $project = Mobileapps::create($getid );
+            $project = Memberdata::create($getid );
+            $project = Ios::create($getid );
+            $project = Onlinemeet::create($getid );
+            $project = Onsitemeet::create($getid );
+
+            if(!is_null($Register)){ 
                 return response()->json(["status" => $this->status, "success" => true, 
-                        "message" => "Registered  successfully", "data" => $Register]);
+                    "message" => "Registered  successfully", "data" => $Register]);
             }    
             else {
                 return response()->json(["status" => "failed", "success" => false,
-                            "message" => "Whoops! failed to create."]);
+                        "message" => "Whoops! failed to create."]);
             }      
         }
     
@@ -275,6 +295,18 @@ class ClientregistrationController extends Controller
                     "app"        => $WebAppdata, 
                     "webapplication"    => $WebApplicationdata, 
                 ]);
+
+            // $getid = [
+            //     "client_id" => $id
+            // ];
+            // $project = Projects::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Datasupport::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Housecommunity::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Mobileapps::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Memberdata::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Ios::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Onlinemeet::where('client_id', $getid['client_id'])->update($getid);
+            // $project = Onsitemeet::where('client_id', $getid['client_id'])->update($getid);
 
             return response()->json(
                 ["status" => $this->status, "success" => true, 

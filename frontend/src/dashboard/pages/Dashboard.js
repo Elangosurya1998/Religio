@@ -3,6 +3,7 @@ import React from "react";
 import ApiUrl from "./Api/Api";
 import { useEffect, useState } from "react";
 import $ from "jquery";
+
 import DataTable from "react-data-table-component";
 
 function Dashboard() {
@@ -194,6 +195,9 @@ function Dashboard() {
         });
       $(".yearlabel").text(year);
     }
+
+
+
   }
   // for table view
 
@@ -301,6 +305,8 @@ function Dashboard() {
       },
     },
   };
+
+
 
   return (
     <div className="content-wrapper">

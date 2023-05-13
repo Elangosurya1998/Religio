@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("mobiledate")->nullable();
             $table->string("mobilestatus")->nullable();
+            $table->integer('client_id');
             $table->timestamps();
         });
     }

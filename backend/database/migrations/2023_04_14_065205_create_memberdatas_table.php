@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string("memberdate")->nullable();
             $table->string("memberstatus")->nullable();
+            $table->integer('client_id');
             $table->timestamps();
         });
     }

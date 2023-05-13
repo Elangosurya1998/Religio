@@ -65,11 +65,11 @@ function Sidemenubar() {
             : ""}
         </li>
 
-        <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
+        {/* <li className={`${navitem} ${pathname == '/Religio/Tab' && 'active'}`}>
           <Link to="/Religio/Tab" className="nav-link" >
             <span className="menu-title">Project Status</span>
             <i className="mdi mdi-file-document menu-icon" /></Link>
-        </li>
+        </li> */}
 
         <li className={`${navitem} ${pathname.includes('/Religio/UsersList') && 'active'}`}>
           {isLogedIn?.role == "admin" ?

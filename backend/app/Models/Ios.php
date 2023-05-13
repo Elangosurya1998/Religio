@@ -9,7 +9,8 @@ class Ios extends Model
 {
     protected $fillable = [
                     'Iosdate',    
-                    'Iosstatus'
+                    'Iosstatus',
+                    'client_id'
     ];
 }
 
