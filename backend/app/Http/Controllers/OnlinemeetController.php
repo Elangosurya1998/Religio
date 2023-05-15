@@ -95,7 +95,7 @@ class OnlinemeetController extends Controller
         // dd($id);
         $validator    =  Validator::make($request->all(), 
             [     
-             "online"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
+             "online"  => 'required|mimes:doc,docx,pdf|max:2048', 
             ]
          
         );
@@ -133,7 +133,7 @@ class OnlinemeetController extends Controller
       
         $validator    =  Validator::make($request->all(), 
             [     
-                "online"  => 'required|mimes:doc,docx,pdf,csv|max:2048', 
+                "online"  => 'required|mimes:doc,docx,pdf|max:2048', 
             ]
             
         );
