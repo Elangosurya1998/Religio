@@ -32,20 +32,20 @@ function TabLists() {
   }, [])
 
   // client
-  const {id} = useParams();
+  const { id } = useParams();
   function dash(params) {
     fetch(`${ApiUrl}/allDashboardlist/${id}`).then((res) => {
       return res.json();
-  }).then((resp) => {
-    Setview(resp.data);
-  }).catch((err) => {
+    }).then((resp) => {
+      Setview(resp.data);
+    }).catch((err) => {
       console.log(err.message);
-  })
-    
+    })
+
   }
-  
+
   useEffect(() => {
-   dash()
+    dash()
   }, [])
   const [register, Setview] = useState([]);
 
@@ -72,109 +72,111 @@ function TabLists() {
                     <div className="card">
                       <div className="card-body">
 
-      
-                      {register &&
-                      register.map((item) => (
-                        <p key={item.id}>
-                         
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Congregation : </b>&nbsp;&nbsp;{item.congregation}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Province : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.province}</p>
-                            </div>
-                          </div>
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Name : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.name}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Client Type : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.clienttype}</p>
-                            </div>
-                          </div>
-                          
-                          
+                        {register &&
+                          register.map((item) => (
+                            <p key={item.id}>
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Date of Joining : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofjoining}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Contract Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofcontractsigning}</p>
-                            </div>
-                          </div>
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Name :</b>&nbsp;&nbsp;{item.name}</p>
+                                </div>
+
+                              </div>
 
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>AMC Start Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.amcdate}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Financial Year : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.financialyear}</p>
-                            </div>
-                          </div>
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Project Value : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.projectvalue}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Renewel Month : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.renewelmonth}</p>
-                            </div>
-                          </div>
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Congregation : </b>&nbsp;&nbsp;{item.congregation}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Province : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.province}</p>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Name : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.name}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Client Type : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.clienttype}</p>
+                                </div>
+                              </div>
 
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>P/I:</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.pi}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Solutions : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.solutions}</p>
-                            </div>
-                          </div>
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Email</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.mobile}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Phone : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.email}</p>
-                            </div>
-                          </div>
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Date of Joining : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofjoining}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Contract Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofcontractsigning}</p>
+                                </div>
+                              </div>
 
-                          <div class="row">
-                            <div class="col">
-                            <p><b>Place</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.mobile}</p>
-                            </div>
-                            <div class="col">
-                            <p><b>Address : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.email}</p>
-                                               
-                            </div>
-                          </div>
-<hr></hr>
 
-                          <div class="col">
-                            <div class="row">
-                            <p><b>Total</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.total}</p>
-                            </div>
-                            <div class="row">
-                            <p><b>Paid : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.paid}</p>
-                            </div>
-                            <div class="row">
-                            <p><b>Balance : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.balance}</p>
-                            </div>
-                          </div>
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>AMC Start Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.amcdate}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Financial Year : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.financialyear}</p>
+                                </div>
+                              </div>
 
-                    
-                          </p>
-                      
-                       
-                      ))
-                       
-                    }  
- 
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Project Value : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.projectvalue}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Renewel Month : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.renewelmonth}</p>
+                                </div>
+                              </div>
+
+
+
+
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Email</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.email}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Phone : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.mobile}</p>
+                                </div>
+                              </div>
+
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Place</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.place}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Address : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.address1}</p>
+
+                                </div>
+                              </div>
+                              <hr></hr>
+
+                              <div class="col">
+                                <div class="row">
+                                  <p><b>Total</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.total}</p>
+                                </div>
+                                <div class="row">
+                                  <p><b>Paid : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.paid}</p>
+                                </div>
+                                <div class="row">
+                                  <p><b>Balance : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.balance}</p>
+                                </div>
+                              </div>
+
+
+                            </p>
+
+
+                          ))
+
+                        }
+
 
                         <hr></hr>
 

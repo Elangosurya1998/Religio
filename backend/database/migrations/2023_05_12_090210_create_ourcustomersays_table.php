@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('congregation')->length(11)->index();
             $table->integer('province')->length(11)->index();
             $table->integer('client')->length(11)->index();
-            $table->string('message',255);
+            $table->string('title',255);
             $table->text('comments');
             $table->timestamps();
         });

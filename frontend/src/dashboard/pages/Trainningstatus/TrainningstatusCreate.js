@@ -15,17 +15,10 @@ function Trainningstatuscreate() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
   // checkbox form
-  const [isEditable, setIsEditable] = useState(false);
-  const toggleEditability = () => {
-    isEditable && handleSubmit(onSubmtionlinecreate);
-    setIsEditable(!isEditable);
-  };
 
-  const [ratings, setRatings] = useState(0);
-
-  const [file, filedata] = useState();
   const { id } = useParams();
 
+  const [file, filedatass] = useState();
   const onlinestatus = () => {
     fetch(`${ApiUrl}/onlinetatusedit/${id}`)
       .then((res) => {
@@ -33,21 +26,26 @@ function Trainningstatuscreate() {
       })
       .then((resp) => {
         reset(resp.data[0]);
-        setRatings(resp.data[0].onlinerating);
-        filedata(resp.data[0].online);
+        setRating(resp.data[0].onlinerating);
+        filedatass(resp.data[0].online);
       })
       .catch((err) => {
         console.log(err.message);
       });
   };
 
-  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
+  const [rating, setRating] = useState(0); // initial rating value
+  // Catch Rating value
+  const [state, setState] = useState("onsite");
+  const handleRating = (rate) => {
+    setRating(rate);
+    // Some logic
+  };
 
   function onSubmtionlinecreate(data, e) {
     if (isEditable) return;
-    data["onlinerating"] = ratings;
-    const datass = new FormData();
-    datass.append("online", selectedFiles);
+    data["onlinerating"] = rating;
+
     axios
       .put(`${ApiUrl}/onlinestatusupdate/${id}`, data)
       .then((response) => {
@@ -75,18 +73,20 @@ function Trainningstatuscreate() {
           footer: err.message,
         });
       });
+
+    const datass = new FormData();
+    datass.append("online", selectedFiles);
   }
   const changeHandler = (event) => {
-    setSelectedFiles(event.target.file[0]);
+    setSelectedFiles(event.target.files[0]);
   };
   const [selectedFiles, setSelectedFiles] = useState();
+  console.log(selectedFiles);
 
-  const [rating, setRating] = useState(0); // initial rating value
-  // Catch Rating value
-  const [state, setState] = useState("onsite");
-  const handleRating = (rate) => {
-    setRating(rate);
-    // Some logic
+  const [isEditable, setIsEditable] = useState(false);
+  const toggleEditability = () => {
+    isEditable && handleSubmit(onSubmtionlinecreate);
+    setIsEditable(!isEditable);
   };
 
   //  onsite
@@ -94,8 +94,6 @@ function Trainningstatuscreate() {
   function onSubmitonsitecreate(datas, e) {
     if (isEditables) return;
     datas["onsiterating"] = ratings;
-    const formData = new FormData();
-    formData.append("onsite", selectedFile);
     axios
       .put(`${ApiUrl}/onsitestatusupdate/${id}`, datas)
       .then((response) => {
@@ -124,9 +122,18 @@ function Trainningstatuscreate() {
           footer: err.message,
         });
       });
+
+    const formData = new FormData();
+    formData.append("onsite", selectedFile);
   }
+  const changeHandlers = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const [selectedFile, setSelectedFile] = useState();
+  console.log(selectedFile);
 
   const [files, filedatas] = useState();
+
   const onsitestatusget = () => {
     fetch(`${ApiUrl}/onsitestatusedit/${id}`)
       .then((res) => {
@@ -135,7 +142,7 @@ function Trainningstatuscreate() {
       .then((resp) => {
         reset(resp.data[0]);
         setRatings(resp.data[0].onsiterating);
-        filedatas(resp.data[0].online);
+        filedatas(resp.data[0].onsite);
       })
       .catch((err) => {
         console.log(err.message);
@@ -147,22 +154,19 @@ function Trainningstatuscreate() {
     onlinestatus();
   }, []);
 
+  const [ratings, setRatings] = useState(0);
+
   const handleRatingss = (ratess) => {
     setRatings(ratess);
     // Some logic
   };
-
-  const changeHandlers = (event) => {
-    setSelectedFile(event.target.file[0]);
-  };
-  const [selectedFile, setSelectedFile] = useState();
 
   const [isEditables, setIsEditables] = useState(false);
   const toggleEditabilities = () => {
     isEditable && handleSubmit(onSubmitonsitecreate);
     setIsEditables(!isEditables);
   };
-
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   return (
     <div className="col-12 grid-margin stretch-card">
       <div className="card">
@@ -308,8 +312,9 @@ function Trainningstatuscreate() {
                     <Rating
                       type="text"
                       onClick={handleRating}
-                      initialValue={ratings}
+                      initialValue={rating}
                       size={20}
+                      readonly={!isEditable}
                       label
                       transition
                       fillColor="orange"
@@ -323,10 +328,12 @@ function Trainningstatuscreate() {
                   </label>
                   <input
                     type="File"
+                    accept=".pdf, .docx, .pptx, .doc"
                     className="form-control"
                     name="FileAttachment"
                     {...register("FileAttachment", { onChange: changeHandler })}
                     aria-invalid={errors?.FileAttachment ? "true" : "false"}
+                    disabled={!isEditable}
                   />
                   {errors?.FileAttachment?.type === "required" && (
                     <div className="text-danger text_error">
@@ -334,7 +341,7 @@ function Trainningstatuscreate() {
                     </div>
                   )}
                   <div className="">
-                    <label className="errlabel">{file}</label>
+                    <label>{file}</label>
                   </div>
                 </div>
               </div>
@@ -467,6 +474,7 @@ function Trainningstatuscreate() {
                       onClick={handleRatingss}
                       initialValue={ratings}
                       size={20}
+                      readonly={!isEditables}
                       label
                       transition
                       fillColor="orange"
@@ -480,6 +488,7 @@ function Trainningstatuscreate() {
                   </label>
                   <input
                     type="File"
+                    accept=".pdf, .docx, .pptx, .doc"
                     className="form-control"
                     name="onsite"
                     {...register("onsite", { onChange: changeHandlers })}
@@ -492,31 +501,24 @@ function Trainningstatuscreate() {
                     </div>
                   )}
                   <div className="">
-                    <label className="errlabel">{file}</label>
+                    <label>{files}</label>
                   </div>
                 </div>
-
-                {/* <label>File Attachment&nbsp;<span style={{ color: 'red' }}>*</span></label>
-                    <input type="File" className="form-control" name="onsite"
-                      {...register("onsite", { required: true, onChange: changeHandler })}
-                      aria-invalid={errors?.onsite ? "true" : "false"} disabled={!isEditables} />
-                    {errors?.onsite?.type === 'required' && <div className='text-danger text_error'><label className="errlabel">Choose a File</label></div>}
-                  </div> */}
               </div>
 
               <div className="text-center">
-                {isLogedIn?.role == "admin" ? (
-                  <button
-                    type="submit"
-                    class="btn btn-gradient-light"
-                    onClick={toggleEditabilities}
-                    value="Submit"
-                  >
-                    {isEditable ? "Save" : "Edit"}
-                  </button>
-                ) : (
-                  ""
-                )}
+              {isLogedIn?.role == "admin" ? (
+                <button
+                  type="submit"
+                  class="btn btn-gradient-light"
+                  onClick={toggleEditabilities}
+                  value="Submit"
+                >
+                  {isEditable ? "Save" : "Edit"}
+                </button>
+              ) : (
+                ""
+              )}
               </div>
             </form>
           )}
