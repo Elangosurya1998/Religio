@@ -3,152 +3,226 @@ import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import Swal from "sweetalert2";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import $ from 'jquery'
+import DataTable from "react-data-table-component";
+import React from "react";
+
 
 function ReguserList() {
-    $(document).ready(function () {
-        $(".User").on("keyup", function () {
+  const exportuserTable = () => {
+    axios.get(`${ApiUrl}/Religio/Users/export`)
+      .then(response => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'users_data.csv');
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        console.error('Export error:', error);
+      });
+  }
+  const fetchData = () => {
+    fetch(`${ApiUrl}/Religio/UsersList`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((resp) => {
+        SetUserregister(resp.data);
+        FilterUserregister(resp.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-            var value = $(this).val().toLowerCase();
-            $(".UserList tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
+  const [User, Setuser] = useState([]);
+  const [register, SetUserregister] = useState([]);
+  const [FilterRegister, FilterUserregister] = useState([]);
+  const navigate = useNavigate();
+
+
+  const EditUserregistration = async (e, id) => {
+    navigate("/Religio/UserListEdit/" + id);
+  };
+
+  const deleteUser = async (e, id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${ApiUrl}/Religio/UsersList/${id}`).then((res) => {
+          fetchData();
         });
+        Swal.fire("Deleted!", "Your record has been deleted.", "success");
+      }
     });
-    $(function () {
-        $('table')
-            .on('click', 'th', function () {
-                var index = $(this).index(),
-                    rows = [],
-                    thClass = $(this).hasClass('asc') ? 'desc' : 'asc';
+  };
 
-                $('#example th').removeClass('asc desc');
-                $(this).addClass(thClass);
+  const columns = [
+    {
+      name: "S.No",
+      selector: (row, index) => index + 1,
+      width: "70px",
+    },
+    {
+      name: "User Name",
+      selector: (row) => row.username,
+      sortable: true,
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+      sortable: true,
+    },
+    {
+      name: "Assigned Role",
+      selector: (row) => row.role,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          <>
+              <a
+                onClick={(e) => EditUserregistration(e, row.id)}
+                style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+                className="mdi mdi-pencil-box"
+                id="print"
+              ></a>
+              <a
+                onClick={(e) => deleteUser(e, row.id)}
+                style={{ cursor: "pointer", color: "#b66dff" }}
+                className="mdi mdi-delete"
+                id="print"
+              ></a>
+            </>
+        </>
+      ),
 
-                $('#example tbody tr').each(function (index, row) {
-                    rows.push($(row).detach());
-                });
+      width: "100px",
+    },
+  ];
 
-                rows.sort(function (a, b) {
-                    var aValue = $(a).find('td').eq(index).text(),
-                        bValue = $(b).find('td').eq(index).text();
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "52px",
+        backgroundColor: "#fafafa",
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for head cells
+        paddingRight: "8px",
+        fontSize: "14px",
+        fontWeight: "600",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for data cells
+        paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
+      },
+    },
+  };
 
-                    return aValue > bValue
-                        ? 1
-                        : aValue < bValue
-                            ? -1
-                            : 0;
-                });
+  function filterdata(event) {
+    var value = event.target.value;
+    const keys = ["username", "email", "role"];
 
-                if ($(this).hasClass('desc')) {
-                    rows.reverse();
-                }
-
-                $.each(rows, function (index, row) {
-                    $('#example tbody').append(row);
-                });
-            });
-    });
-    const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
-
-    const [User, Setuser] = useState([]);
-
-    const fetchData = () => {
-        fetch(`${ApiUrl}/Religio/UsersList`).then((res) => {
-            return res.json();
-        }).then((resp) => {
-            Setuser(resp.data);
-        }).catch((err) => {
-            console.log(err.message);
-        })
-    }
-    useEffect(() => {
-        fetchData();
-    }, [])
-
-    const deleteUser = async (e, id) => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axios.delete(`${ApiUrl}/Religio/UsersList/${id}`).then((res) => {
-                    fetchData();
-                })
-                Swal.fire(
-                    'Deleted!',
-                    'Your record has been deleted.',
-                    'success'
-                )
-            };
-
-        })
-    }
-    const navigate = useNavigate();
-    const EditCongregation = async (e, id) => {
-        navigate("/Religio/UserListEdit/" + id);
-    }
-    return (
-        <div className="content-wrapper">
-            <div className="page-header">
-                <h3 className="page-title">
-                    <span className="page-title-icon bg-gradient-primary text-white me-2">
-                        <i className="mdi mdi-account-plus menu-icon" />
-                    </span> Users List
-                </h3>
-            </div>
-            <div className="row">
-                <div className="col-lg-12 grid-margin stretch-card">
-                    <div className="card">
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-lg-4">
-                                    <input id="myInput" type="text" className="form-control User" placeholder="Search.." />
-                                </div>
-                                <div className="col-lg-6"></div>
-                                <div className="col-lg-2">
-                                    {/* <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> */}
-                                    {isLogedIn?.role == "admin" ? <Link to="/Religio/UserCreate" className="btn btn-gradient-light">Add</Link> : ""}
-                                </div>
-                            </div>
-                            <br></br>
-                            <table className="table table-striped UserList" id="example" style={{ cursor: "pointer" }}>
-                                <thead>
-                                    <tr>
-                                        <th>User Name </th>
-                                        <th>Email</th>
-                                        <th>Assigned Role</th>
-                                        {isLogedIn?.role == "admin" ? <th>Actions</th> : ""}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        User && User.map(item => (
-                                            <tr key={item.id}>
-                                                <td>{item.username}</td>
-                                                <td>{item.email}</td>
-                                                <td>{item.role}</td>
-                                                {isLogedIn?.role == "admin" ? <td id="noprint">
-                                                    <a onClick={(e) => EditCongregation(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-pencil-box" id="print"></a>
-                                                    &nbsp;
-                                                    <a onClick={(e) => deleteUser(e, item.id)} style={{ cursor: 'pointer' }} className="mdi mdi-delete" id="print"></a>
-                                                </td> : ""}
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    const filter = FilterRegister?.filter((item) =>
+      keys.some((key) =>
+        item[key].toString()?.toLowerCase()?.includes(value?.toLowerCase())
+      )
     );
+    console.log(value, filter);
+
+    SetUserregister(filter);
+  }
+
+  const [pending, setPending] = React.useState(true);
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setRows(register);
+      setPending(false);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, []);
+  return (
+    <div className="content-wrapper">
+      <div className="page-header">
+        <h3 className="page-title">
+          <span className="page-title-icon bg-gradient-primary text-white me-2">
+            <i className="mdi mdi-account-plus menu-icon" />
+          </span>{" "}
+          Users List
+        </h3>
+      </div>
+      <div className="row">
+        <div className="col-lg-12 grid-margin stretch-card">
+          <div className="card">
+            <div className="card-body">
+              <div className="row">
+                <div className="col-lg-4">
+                <input
+                    id="myInput"
+                    type="text"
+                    onChange={filterdata}
+                    className="form-control myInput"
+                    placeholder="Search.."
+                  />
+                </div>
+                <div className="col-lg-6"></div>
+                <div className="col-lg-2">
+                {isLogedIn?.role == "admin" ? (
+                    <Link
+                      to="/Religio/UserCreate"
+                      className="btn btn-gradient-light btn-sm"
+                    >
+                       <i class="fa-solid fa-user-plus"></i>
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                   &nbsp;&nbsp;&nbsp;
+                  <button onClick={exportuserTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
+                </div>
+              </div>
+              <br></br>
+              <DataTable
+                columns={columns}
+                theme="solarized"
+                data={register}
+                pagination
+                progressPending={pending}
+                customStyles={customStyles}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ReguserList;

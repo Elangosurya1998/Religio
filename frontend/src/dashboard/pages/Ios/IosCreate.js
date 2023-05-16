@@ -35,7 +35,7 @@ function Iosdatacreate() {
   //     search:"?active=5"
   //   })
   // }
-
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   function onSubmitioscreate(data, e) {
     if(isEditable) return
     console.log(data);
@@ -96,10 +96,13 @@ function Iosdatacreate() {
             </div>
 
             <div className="text-center">
+            {isLogedIn?.role == "admin" ? (
               <button type="submit" class="btn btn-gradient-light" onClick={toggleEditability} value="Submit" >
                 {isEditable ? 'Save' : 'Edit'}
               </button>
-           
+            ) : (
+              ""
+            )}
             </div>
 
           </form>

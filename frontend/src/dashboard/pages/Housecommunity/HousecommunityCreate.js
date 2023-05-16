@@ -36,7 +36,7 @@ function Housecommunitycreate() {
       console.log(err.message);
     })
   }, [])
-
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   function onSubmitHousecommunitycreate(data, e) {
     if(isEditable) return
     axios.put(`${ApiUrl}/housecommunityupdate/${id}`, data)
@@ -100,10 +100,13 @@ function Housecommunitycreate() {
             </div>
 
             <div className="text-center">
+            {isLogedIn?.role == "admin" ? (
               <button type="submit" class="btn btn-gradient-light" onClick={toggleEditability} value="Submit" >
                 {isEditable ? 'Save' : 'Edit'}
               </button>
-           
+            ) : (
+              ""
+            )}
             </div>
 
 

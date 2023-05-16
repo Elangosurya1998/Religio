@@ -6,7 +6,24 @@ import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import DataTable from "react-data-table-component";
 
+
+
 function ProvinceList() {
+  const exportprovinceTable = () => {
+    axios.get(`${ApiUrl}/Religio/Province/export`)
+      .then(response => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'province_data.csv');
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        console.error('Export error:', error);
+      });
+  }
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Province`)
       .then((res) => {
@@ -96,24 +113,30 @@ function ProvinceList() {
     },
     {
       name: "Action",
-      selector: (row) => [
+      cell: (row) => (
+        <>
         <a
           onClick={(e) => ViewProvince(e, row.id)}
           style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-eye"
-          id="print"></a>,
+          id="print"></a>
+          {isLogedIn?.role === "admin" && (
+            <>
         <a
           onClick={(e) => EditProvince(e, row.id)}
           style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
           className="mdi mdi-pencil-box"
-          id="print"></a>,
+          id="print"></a>
 
         <a
           onClick={(e) => deleteProvince(e, row.id)}
           style={{ cursor: "pointer", color: "#b66dff" }}
           className="mdi mdi-delete"
-          id="print"></a>,
-      ],
+          id="print"></a>
+          </>
+     )}
+     </>
+   ),
       width: "100px",
     },
   ];
@@ -196,12 +219,14 @@ function ProvinceList() {
                   {isLogedIn?.role == "admin" ? (
                     <Link
                       to="/Religio/Province/Add"
-                      className="btn btn-gradient-light">
-                      Add
+                      className="btn btn-gradient-light btn-sm">
+                      <i class="fa-solid fa-user-plus"></i>
                     </Link>
                   ) : (
                     ""
                   )}
+                   &nbsp;&nbsp;&nbsp;
+                   <button onClick={exportprovinceTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
                 </div>
               </div>
               <br></br>
