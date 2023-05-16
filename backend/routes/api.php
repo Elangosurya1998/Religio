@@ -18,6 +18,7 @@ use App\Http\Controllers\OnsitemeetController;
 use App\Http\Controllers\OurclientController;
 use App\Http\Controllers\OurCustomerSayController;
 use App\Http\Controllers\DatasupportController;
+use App\Http\Controllers\ExportController;
 
 
 /*
@@ -49,6 +50,7 @@ Route::get('/Religio/Congregationedit/{id}',[ReligioController::class, 'Congrega
 Route::put('/Religio/Congregationupdate/{id}',[ReligioController::class, 'Congregationupdate']);
 Route::get('/Religio/CongrationAddress/get/{id}',[ReligioController::class, 'CongrationAddress']);
 Route::get('/Religio/Congregationverifydelete/{id}',[ReligioController::class, 'Congregationverifydelete']);
+Route::get('/Religio/Congregation/export',[ExportController::class, 'exportcongregationTable']);
 
 // Province
 Route::post('/Religio/Province/store',[ProvinceController::class, 'Provincestore']);
@@ -59,6 +61,7 @@ Route::get('/Religio/Province/Congregation',[ProvinceController::class, 'Provinc
 Route::get('/Religio/Provinceedit/{id}',[ProvinceController::class, 'ProvinceEdit']);
 Route::put('/Religio/Provinceupdate/{id}',[ProvinceController::class, 'Provinceupdate']);
 Route::get('/Religio/Province/get/{id}',[ProvinceController::class, 'Provinceget']);
+Route::get('/Religio/Province/export',[ExportController::class, 'exportprovinceTable']);
 
 
 // ClientRegisteration
@@ -72,6 +75,7 @@ Route::put('/Religio/Clientregistrationupdate/{id}',[ClientregistrationControlle
 Route::get('/Religio/ProvinceAddress/get/{id}',[ClientregistrationController::class, 'ProvinceAddressget']);
 Route::get('/Religio/CheckUniquecode/get/{id}',[ClientregistrationController::class, 'CheckUniquecode']);
 Route::get('/Religio/Clients/get/{id}',[ClientregistrationController::class, 'Clients']);
+Route::get('/Religio/Clientregistration/export',[ExportController::class, 'exportTable']);
 
 
 // project status
@@ -90,6 +94,7 @@ Route::get('/Religio/UsersList',[RegisterController::class, 'UsersList']);
 Route::get('/Religio/UsersList/{id}',[RegisterController::class, 'UserEdit']);
 Route::put('/Religio/Userupdate/{id}',[RegisterController::class, 'Userupdate']);
 Route::delete('/Religio/UsersList/{id}',[RegisterController::class, 'UsersListDelete']);
+Route::get('/Religio/Users/export',[ExportController::class, 'exportuserTable']);
 
 //Payment status
 
@@ -101,6 +106,7 @@ Route::get('/Religio/Paymentedit/{id}',[PaymentController::class, 'PaymentEdit']
 Route::put('/Religio/Payment/update/{id}',[PaymentController::class, 'PaymentUpdate']);
 Route::delete('/Religio/Payment/delete/{id}',[PaymentController::class, 'PaymentDelete']);
 Route::get('/Religio/PaymentAddress/get/{id}',[PaymentController::class, 'PaymentAddress']);
+Route::get('/Religio/Payments/export',[ExportController::class, 'exportpaymentTable']);
 
 
 

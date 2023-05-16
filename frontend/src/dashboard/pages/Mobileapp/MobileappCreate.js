@@ -16,7 +16,7 @@ function Mobileappcreate() {
     setIsEditable(!isEditable);
   };
 
-
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const { id } = useParams();
   useEffect(() => {
     fetch(`${ApiUrl}/mobileappedit/${id}`).then((res) => {
@@ -84,9 +84,13 @@ function Mobileappcreate() {
 
 
             <div className="text-center">
+            {isLogedIn?.role == "admin" ? (
               <button type="submit" class="btn btn-gradient-light" onClick={toggleEditability} value="Submit" >
                 {isEditable ? 'Save' : 'Edit'}
               </button>
+               ) : (
+                ""
+              )}
 
             </div>
 

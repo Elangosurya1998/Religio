@@ -76,7 +76,7 @@ function Projectstatuscreate({dash,data}) {
       console.log(err.message);
     })
   }, [])
-
+  const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   function onSubmitProjectstatus(data, e) {
     if(isEditable) return
     console.log(data);
@@ -211,13 +211,16 @@ function Projectstatuscreate({dash,data}) {
 
               </div>
             </div>
-
+            {isLogedIn?.role == "admin" ? (
             <div className="text-center">
               <button type="submit" class="btn btn-gradient-light" onClick={toggleEditability} value="Submit" >
                 {isEditable ? 'Save' : 'Edit'}
               </button>
               {/* <div onClick={handleNavigation} class="btn btn-gradient-primary font-weight-bold ">Cancel</div> */}
             </div>
+            ) : (
+              ""
+            )}
           </form>
         </div>
       </div>

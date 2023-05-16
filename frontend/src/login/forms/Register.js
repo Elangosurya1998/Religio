@@ -110,7 +110,7 @@ function Register() {
                     </div>
                   </div>
                   <div className="form-group">
-                    <select className="form-control" name="role">
+                    <select className="form-control" {...register('role')} name="role">
                       <option value="select your role" selected disabled>User Type</option>
                       <option value="admin">Admin</option>
                       <option value="user">User</option>

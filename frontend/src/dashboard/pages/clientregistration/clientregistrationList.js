@@ -7,9 +7,23 @@ import DataTable from "react-data-table-component";
 import React from "react";
 
 function ClientregistrationList() {
+  const exportTable = () => {
+    axios.get(`${ApiUrl}/Religio/Clientregistration/export`)
+      .then(response => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'client_registration.csv');
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        console.error('Export error:', error);
+      });
+  }
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Clientregistration`)
-  
       .then((res) => {
         return res.json();
       })
@@ -53,7 +67,6 @@ function ClientregistrationList() {
       }
     });
   };
-
   const peojectstatsadd = async (e, id) => {
     navigate("/Religio/Tab/" + id);
   };
@@ -85,23 +98,33 @@ function ClientregistrationList() {
     },
     {
       name: "Action",
-      selector: (row) => [
-        <a
-          onClick={(e) => peojectstatsadd(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
-          className="mdi mdi-eye"
-          id="print"></a>,
-        <a
-          onClick={(e) => EditClientregistration(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
-          className="mdi mdi-pencil-box"
-          id="print"></a>,
-        <a
-          onClick={(e) => deleteregister(e, row.id)}
-          style={{ cursor: "pointer", color: "#b66dff" }}
-          className="mdi mdi-delete"
-          id="print"></a>,
-      ],
+      cell: (row) => (
+        <>
+          <a
+            onClick={(e) => peojectstatsadd(e, row.id)}
+            style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+            className="mdi mdi-eye"
+            id="print"
+          ></a>
+          {isLogedIn?.role === "admin" && (
+            <>
+              <a
+                onClick={(e) => EditClientregistration(e, row.id)}
+                style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+                className="mdi mdi-pencil-box"
+                id="print"
+              ></a>
+              <a
+                onClick={(e) => deleteregister(e, row.id)}
+                style={{ cursor: "pointer", color: "#b66dff" }}
+                className="mdi mdi-delete"
+                id="print"
+              ></a>
+            </>
+          )}
+        </>
+      ),
+
       width: "100px",
     },
   ];
@@ -135,10 +158,6 @@ function ClientregistrationList() {
     },
   };
 
-  const viewDashboardlist = async (e, id) => {
-    navigate("/Religio/Tab/" + id);
-  };
-
   function filterdata(event) {
     var value = event.target.value;
     const keys = ["congregation", "province", "name", "place"];
@@ -162,7 +181,6 @@ function ClientregistrationList() {
     }, 500);
     return () => clearTimeout(timeout);
   }, []);
-
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -192,12 +210,15 @@ function ClientregistrationList() {
                   {isLogedIn?.role == "admin" ? (
                     <Link
                       to="/Religio/Clientregistration/Add"
-                      className="btn btn-gradient-light">
-                      Add
+                      className="btn btn-gradient-light btn-sm"
+                    >
+                      <i class="fa-solid fa-user-plus"></i>
                     </Link>
                   ) : (
                     ""
                   )}
+                  &nbsp;&nbsp;&nbsp;
+                  <button onClick={exportTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
                 </div>
               </div>
               <br></br>

@@ -15,7 +15,21 @@ function PaymentList() {
   //     });
   //   });
   // });
-
+  const exportpaymentTable = () => {
+    axios.get(`${ApiUrl}/Religio/Payments/export`)
+      .then(response => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'payment_data.csv');
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        console.error('Export error:', error);
+      });
+  }
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Paymentlist`)
@@ -228,12 +242,14 @@ function PaymentList() {
                   {isLogedIn?.role == "admin" ? (
                     <Link
                       to="/Religio/PaymentCreate"
-                      className="btn btn-gradient-light">
-                      Add
+                      className="btn btn-gradient-light btn-sm">
+                       <i class="fa-solid fa-user-plus"></i>
                     </Link>
                   ) : (
                     ""
                   )}
+                   &nbsp;&nbsp;&nbsp;
+                  <button onClick={exportpaymentTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
                 </div>
               </div>
               <br></br>

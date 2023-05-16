@@ -5,7 +5,24 @@ import ApiUrl from "../Api/Api";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import React from "react";
 import DataTable from "react-data-table-component";
+
+
 function CongregationList() {
+  const exportcongregationTable = () => {
+    axios.get(`${ApiUrl}/Religio/Congregation/export`)
+      .then(response => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'congregation_data.csv');
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch(error => {
+        console.error('Export error:', error);
+      });
+  }
   const [Cong, Setcongregation] = useState([]);
 
   const [filterCong, congregationFilter] = useState([]);
@@ -98,21 +115,27 @@ function CongregationList() {
     },
     {
       name: "Action",
-      selector: (row) => [
+      cell: (row) => (
+        <>
         <a
           onClick={(e) => Viewcongregation(e, row.id)}
           style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
-          className="mdi mdi-eye"></a>,
+          className="mdi mdi-eye"></a>
+           {isLogedIn?.role === "admin" && (
+            <>
         <a
           onClick={(e) => EditCongregation(e, row.id)}
           style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
-          className="mdi mdi-pencil-box"></a>,
+          className="mdi mdi-pencil-box"></a>
 
         <a
           onClick={(e) => deleteCongregation(e, row.id)}
           style={{ cursor: "pointer", color: "#b66dff" }}
-          className="mdi mdi-delete"></a>,
-      ],
+          className="mdi mdi-delete"></a>
+          </>
+      )}
+      </>
+    ),
       width: "100px",
     },
   ];
@@ -198,12 +221,14 @@ function CongregationList() {
                   {isLogedIn?.role == "admin" ? (
                     <Link
                       to="/Religio/Congregation/Add"
-                      className="btn btn-gradient-light">
-                      Add
+                      className="btn btn-gradient-light btn-sm">
+                      <i class="fa-solid fa-user-plus"></i>
                     </Link>
                   ) : (
                     ""
                   )}
+                  &nbsp;&nbsp;&nbsp;
+                  <button onClick={exportcongregationTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
                 </div>
               </div>
               <br></br>

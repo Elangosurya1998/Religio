@@ -9,6 +9,7 @@ import $ from "jquery";
 import ApiUrl from '../../dashboard/pages/Api/Api';
 
 
+
 $(function () {
   $("#toggle_pwd").click(function () {
     $("#toggle_eye").toggleClass("fa-eye-slash");
