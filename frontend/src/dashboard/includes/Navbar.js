@@ -1,8 +1,7 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
-// function Capitalize(str) {
-//   return str.charAt(0).toUpperCase() + str.slice(1);
-// }
+import ApiUrl from "../pages/Api/Api";
 
 function Navbar() {
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
@@ -11,6 +10,22 @@ function Navbar() {
     sessionStorage.removeItem("userDetails");
     navigate("/login");
   };
+
+  useEffect(() => {
+    axios
+      .get(`${ApiUrl}/Religio/Balance/notification`)
+      .then((response) => {
+        const resData = response.data;
+        notificationData(resData.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const [data, notificationData] = useState([]);
+  function notificationAMC() {
+    navigate("/Religio/AMC/Notification");
+  }
   return (
     <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -57,16 +72,18 @@ function Navbar() {
                   </div>
                 </div>
                 <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 className="preview-subject font-weight-normal mb-1">
+                  {/* <h6 className="preview-subject font-weight-normal mb-1">
                     Event today
-                  </h6>
-                  <p className="text-gray ellipsis mb-0">
+                  </h6> */}
+                  <p
+                    className="text-gray ellipsis mb-0"
+                    onClick={notificationAMC}>
                     {" "}
-                    Just a reminder that you have an event today{" "}
+                    Upcoming AMC Clients{" "}
                   </p>
                 </div>
               </a>
-              <div className="dropdown-divider" />
+              {/* <div className="dropdown-divider" />
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-warning">
@@ -79,8 +96,8 @@ function Navbar() {
                   </h6>
                   <p className="text-gray ellipsis mb-0"> Update dashboard </p>
                 </div>
-              </a>
-              <div className="dropdown-divider" />
+              </a> */}
+              {/* <div className="dropdown-divider" />
               <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-info">
@@ -93,9 +110,9 @@ function Navbar() {
                   </h6>
                   <p className="text-gray ellipsis mb-0"> New admin wow! </p>
                 </div>
-              </a>
-              <div className="dropdown-divider" />
-              <h6 className="p-3 mb-0 text-center">See all notifications</h6>
+              </a> */}
+              {/* <div className="dropdown-divider" />
+              <h6 className="p-3 mb-0 text-center">See all notifications</h6> */}
             </div>
           </li>
           <li className="nav-item dropdown">&nbsp;</li>
