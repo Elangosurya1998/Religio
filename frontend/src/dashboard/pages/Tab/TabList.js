@@ -20,6 +20,7 @@ import Trainningstatuscreate from "../Trainningstatus/TrainningstatusCreate";
 import Datasupportcreate from "../Datasupport/DatasupportCreate";
 // import { makeJsDate } from "./date";
 import Form from 'react-bootstrap/Form';
+import { YYYYMMDDTODDMMYYYY } from "../../../function/date";
 
 
 function TabLists() {
@@ -88,7 +89,7 @@ function TabLists() {
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>Congregation : </b>&nbsp;&nbsp;{item.congregation}</p>
+                                  <p><b>Congregation : </b>&nbsp;{item.congregation}</p>
                                 </div>
                                 <div class="col">
                                   <p><b>Province : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.province}</p>
@@ -97,28 +98,37 @@ function TabLists() {
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>Name : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.name}</p>
+                                  <p><b>Client Code : </b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.clientcode}</p>
                                 </div>
                                 <div class="col">
                                   <p><b>Client Type : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.clienttype}</p>
                                 </div>
                               </div>
 
+                              <div class="row">
+                                <div class="col">
+                                  <p><b>Project Value : </b>&nbsp;&nbsp;{item.projectvalue}</p>
+                                </div>
+                                <div class="col">
+                                  <p><b>Project Status : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.projectstatus}</p>
+                                </div>
+                              </div>
+
 
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>Date of Joining : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofjoining}</p>
+                                  <p><b>Product : </b>&nbsp;&nbsp;{item.product}</p>
                                 </div>
                                 <div class="col">
-                                  <p><b>Contract Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.dateofcontractsigning}</p>
+                                <p><b>Renewel Month : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.renewelmonth}</p>
                                 </div>
                               </div>
 
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>AMC Start Date : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.amcdate}</p>
+                                  <p><b>AMC Start Date : </b>&nbsp;&nbsp;{YYYYMMDDTODDMMYYYY(item.amcdate)}</p>
                                 </div>
                                 <div class="col">
                                   <p><b>Financial Year : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.financialyear}</p>
@@ -130,16 +140,17 @@ function TabLists() {
                                   <p><b>Project Value : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.projectvalue}</p>
                                 </div>
                                 <div class="col">
-                                  <p><b>Renewel Month : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.renewelmonth}</p>
+                                  <p><b>Project Status : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.projectstatus}</p>
                                 </div>
                               </div>
 
+                              
 
 
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>Email</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.email}</p>
+                                  <p><b>Email:</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.email}</p>
                                 </div>
                                 <div class="col">
                                   <p><b>Phone : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.mobile}</p>
@@ -148,7 +159,7 @@ function TabLists() {
 
                               <div class="row">
                                 <div class="col">
-                                  <p><b>Place</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.place}</p>
+                                  <p><b>Place:</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.place}</p>
                                 </div>
                                 <div class="col">
                                   <p><b>Address : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.address1}</p>
@@ -159,13 +170,16 @@ function TabLists() {
 
                               <div class="col">
                                 <div class="row">
-                                  <p><b>Total</b>&nbsp;&nbsp;&nbsp;&nbsp;{item.total}</p>
+                                  <p><b>Total Amount:</b>&nbsp;&nbsp;{item.total}</p>
                                 </div>
                                 <div class="row">
-                                  <p><b>Paid : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.paid}</p>
+                                  <p><b>GST Amount: </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.gst}</p>
                                 </div>
                                 <div class="row">
-                                  <p><b>Balance : </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.balance}</p>
+                                  <p><b>Paid Amount: </b>&nbsp;&nbsp;&nbsp;&nbsp;{item.paid}</p>
+                                </div>
+                                <div class="row">
+                                  <p><b>Balance Amount: </b>{item.balance}</p>
                                 </div>
                               </div>
 
