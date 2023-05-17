@@ -190,6 +190,11 @@ Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'fin
 Route::post('/Religio/financialmonth/getBalance',[ProvinceController::class, 'financialmonth']);
 Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);
 
+//notification filter
+Route::get('/Religio/Balance/notification',[ReligioController::class, 'BalanceNotification']);
+Route::get('/Religio/AMC/Outstanding/{id}',[ReligioController::class, 'AMCOutstanding']);
+
+
 Route::post('/send-email',[MailController::class, 'sendContactMail']);
 
 
