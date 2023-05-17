@@ -134,4 +134,56 @@ class ReligioController extends Controller
                 "success" => false, "message" => "Whoops! no record found"]);
             }
         }
+        public function BalanceNotification()
+        {
+        
+            $currentMonth = date('m');
+            $currentyear = date('y');
+
+            $AmcNotification =  DB::table('client_registrations as cr')
+                ->select('cr.*','co.congregation','pr.province')
+                ->leftjoin('payments as py','py.province','cr.province')
+                ->leftjoin('congregation as co','co.id','cr.congregation')
+                ->leftjoin('provinces as pr','pr.id','cr.province')
+                ->where(DB::raw("(DATE_FORMAT(cr.dateofcontractsigning, '%y'))"),'<',DB::raw("(DATE_FORMAT(cr.amcdate, '%y'))"))
+                ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%m'))"),$currentMonth)
+                ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'<=',$currentyear)
+                ->get();
+           
+           if(count($AmcNotification) > 0) {
+            return response()->json(["status" => $this->status, "success" => true, 
+                        "count" => count($AmcNotification), "data" => $AmcNotification]);
+        }
+        else {
+            return response()->json(["status" => "failed",
+            "success" => false, "message" => "Whoops! no record found"]);
+        }
+        
+        }
+        public function AMCOutstanding($clientCode)
+        {
+            $currentMonth = date('m');
+            $currentyear = date('y');
+            
+            $payments = DB::table('payments as py')
+                ->where('py.clientcode',$clientCode)
+                ->get();
+            
+            $client = DB::table('client_registrations as cr')
+            ->select('cr.*','co.congregation','pr.province')
+            ->leftjoin('payments as py','py.province','cr.province')
+            ->leftjoin('congregation as co','co.id','cr.congregation')
+            ->leftjoin('provinces as pr','pr.id','cr.province')
+            ->where(DB::raw("(DATE_FORMAT(cr.dateofcontractsigning, '%y'))"),'<',DB::raw("(DATE_FORMAT(cr.amcdate, '%y'))"))
+            ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%m'))"),$currentMonth)
+            ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'<=',$currentyear)
+            ->where('cr.clientcode',$clientCode)
+            ->get();
+            
+
+            dd($payments,$client);
+            return response()->json(["status" => $this->status, "success" => true, 
+                        "data" => $clientCode]);
+        }
 }
+
