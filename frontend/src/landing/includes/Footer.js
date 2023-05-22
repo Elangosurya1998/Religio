@@ -62,9 +62,9 @@ function Footer() {
               <div className="row align-items-center">
                 <div className="col-xl-12 ">
                   <div className="footer-copy-right">
-                    <p>
-                      Copyright © All rights reserved | by <a href="" target="_blank">Boscosoft Technologies</a>
-                    </p>
+                    <p>© 2021. Powered by <a href="https://www.boscosofttech.com/" target="_blank">Boscosoft Technologies</a> | All Rights Reserved. <span className="float-sm-end mt-1 mt-sm-0 text-end"><a href="https://www.boscosofttech.com/terms-of-use" target="_blank">Terms of Use</a>
+                      &nbsp;&nbsp;&nbsp;<a className="privacypolicy" href="https://www.boscosofttech.com/privacy-policy" target="_blank">Privacy Policy</a></span></p>
+
                   </div>
                 </div>
               </div>

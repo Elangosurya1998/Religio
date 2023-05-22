@@ -119,7 +119,12 @@ function Main() {
       <section className="best-features-area section-padd4" id="Feature">
         <div className="container">
           <div className="row justify-content-end">
-            <div className="col-xl-8 col-lg-10">
+            <div className="col-xl-4 col-lg-4">
+              <div className="features-shpae d-none d-lg-block">
+                <img src="./landing/assets/img/shape/best-features.png" alt="" />
+              </div>
+            </div>
+            <div className="col-xl-8 col-lg-8">
               {/* Section Tittle */}
               <div className="row">
                 <div className="col-lg-10 col-md-10">
@@ -178,11 +183,7 @@ function Main() {
             </div>
           </div>
         </div>
-        {/* Shpe */}
-        <div className="features-shpae d-none d-lg-block">
-          <img src="./landing/assets/img/shape/best-features.png" alt="" />
-        </div>
-      </section>
+      </section >
       {/* Best Features End */}
 
       {/* Available App  Start*/}
@@ -280,24 +281,26 @@ function Main() {
               </div>
             </div>
             <div className="row">
-              <div className="col-12">
+              <div className="col-md-12 col-lg-12 col-sm-12">
                 <div className="customar-active dot-style d-flex dot-style">
-                  <div className="row">
-                    {
-                      OurCustomerSay && OurCustomerSay.map(item => (
-                        <div className="col-md-4 col-lg-4 col-sm-12">
-                          <div className="single-customer" style={{ backgroundColor: '#f0f0f0', borderRadius: '10px' }}>
-                            <div className="what-img">
-                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "70px" }} />
-                            </div>
-                            <div className="what-cap">
-                              <h4><a href="#">{item.title}</a></h4>
-                              <p>{item.comments}</p>
+                  <div className="container">
+                    <div className="row d-flex justify-content-between">
+                      {
+                        OurCustomerSay && OurCustomerSay.map(item => (
+                          <div className="col-md-4 col-lg-4 col-sm-12">
+                            <div className="single-customer" style={{ backgroundColor: '#f0f0f0', borderRadius: '10px' }}>
+                              <div className="what-img">
+                                <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "70px" }} />
+                              </div>
+                              <div className="what-cap">
+                                <h4><a href="#">{item.title}</a></h4>
+                                <p>{item.comments}</p>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))
-                    }
+                        ))
+                      }
+                    </div>
                   </div>
                 </div>
               </div>
@@ -336,7 +339,10 @@ function Main() {
             </div>
             <div className="col-xl-7 col-lg-7">
               <div className="app-img">
-                <img src="/landing/assets/img/shape/available-app-religio.png" alt="" />
+                <img src="/landing/assets/img/shape/available-app-religio.png" className="img-appp" style={{
+                  "width": "100%",
+                  "margin": "24px 0"
+                }} alt="" />
               </div>
             </div>
           </div>
@@ -360,40 +366,6 @@ function Main() {
                 <div className="customar-active dot-style d-flex dot-style">
                   <div>
                     {OurClientsdata(OurClients)}
-                    {/* <div className="marquee-content">
-
-                        {
-                          OurClients && OurClients.map(item => (
-                            <div className="what-img">
-                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
-                            </div>
-                          ))
-                        }
-                        {
-                          OurClients && OurClients.map(item => (
-
-                            <div className="what-img">
-                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
-                            </div>
-                          ))
-                        }
-                        {
-                          OurClients && OurClients.map(item => (
-
-                            <div className="what-img">
-                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
-                            </div>
-                          ))
-                        }
-                        {
-                          OurClients && OurClients.map(item => (
-
-                            <div className="what-img">
-                              <img src={AppUrl + "/Ourclient/logo/" + item.logo} alt="" style={{ "height": "120px", "padding": "10px 30px" }} />
-                            </div>
-                          ))
-                        }
-                      </div> */}
                   </div>
                 </div>
                 {/* <div className="single-customer mb-100">
@@ -425,20 +397,20 @@ function Main() {
             <div className="d-flex justify-content-center">
               <div className="col-xl-8">
                 <div className="section-tittle text-center">
-                  <h2>Gallery</h2>
+                  <h2> Province App</h2>
                 </div>
               </div>
             </div>
           </div>
           <div className="row">
             <Carousel responsive={responsive}>
-              <div><img src="/landing/assets/img/gallerysection/1.png" alt="" /></div>
-              <div><img src="/landing/assets/img/gallerysection/2.png" alt="" /></div>
-              <div><img src="/landing/assets/img/gallerysection/3.png" alt="" /></div>
-              <div><img src="/landing/assets/img/gallerysection/4.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/1.png" alt="" style={{ "margin-left": "27px" }} /></div>
+              <div><img src="/landing/assets/img/gallerysection/2.png" alt="" style={{ "margin-left": "27px" }} /></div>
+              <div><img src="/landing/assets/img/gallerysection/3.png" alt="" style={{ "margin-left": "27px" }} /></div>
+              <div><img src="/landing/assets/img/gallerysection/4.png" alt="" style={{ "margin-left": "27px" }} /></div>
               {/* <div><img src="/landing/assets/img/gallerysection/5.png" alt="" /></div> */}
-              <div><img src="/landing/assets/img/gallerysection/6.png" alt="" /></div>
-              <div><img src="/landing/assets/img/gallerysection/7.png" alt="" /></div>
+              <div><img src="/landing/assets/img/gallerysection/6.png" alt="" style={{ "margin-left": "27px" }} /></div>
+              <div><img src="/landing/assets/img/gallerysection/7.png" alt="" style={{ "margin-left": "27px" }} /></div>
             </Carousel>
           </div>
           <br />
