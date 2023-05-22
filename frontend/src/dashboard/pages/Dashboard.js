@@ -7,6 +7,18 @@ import $ from "jquery";
 import DataTable from "react-data-table-component";
 
 function Dashboard() {
+
+  hidemenubar()
+
+  function hidemenubar() {
+    let value = $("body").attr("class");
+    if (value === undefined) {
+      $("body").addClass("sidebar-icon-only");
+    } else {
+      $("body").removeAttr("class");
+    }
+  }
+
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const [Title, Dynamictitle] = useState([]);
 

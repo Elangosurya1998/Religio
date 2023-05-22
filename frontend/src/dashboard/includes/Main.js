@@ -3,13 +3,13 @@ import Dashboard from "../pages/Dashboard";
 
 function Main() {
 
-    return (
-      <>
+  return (
+    <>
 
-<Dashboard />
+      <Dashboard />
 
-      </>
-    )
+    </>
+  )
 }
 
 export default Main;

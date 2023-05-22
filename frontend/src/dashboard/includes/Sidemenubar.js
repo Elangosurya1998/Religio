@@ -1,9 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import React from 'react';
 
-// function Capitalize(str) {
-//   return str.charAt(0).toUpperCase() + str.slice(1);
-// }
 
 
 function Sidemenubar() {

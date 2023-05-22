@@ -2,8 +2,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import ApiUrl from "../pages/Api/Api";
+import $ from "jquery";
+
+function hidemenubar() {
+  let value = $("body").attr("class");
+  if (value === undefined) {
+    $("body").addClass("sidebar-icon-only");
+  } else {
+    $("body").removeAttr("class");
+  }
+}
+
+function hideshowmenubar() {
+  let value = $("nav.sidebar-offcanvas").attr("class");
+  if (value === "sidebar sidebar-offcanvas") {
+    $("nav.sidebar-offcanvas").addClass("active");
+  }
+}
 
 function Navbar() {
+
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -26,6 +44,8 @@ function Navbar() {
   function notificationAMC() {
     navigate("/Religio/AMC/Notification");
   }
+
+
   return (
     <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -37,7 +57,7 @@ function Navbar() {
         </a>
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-stretch">
-        <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" onClick={hidemenubar}>
           <span className="mdi mdi-menu" />
         </button>
         {/* <div className="search-field d-none d-md-block">
@@ -83,36 +103,6 @@ function Navbar() {
                   </p>
                 </div>
               </a>
-              {/* <div className="dropdown-divider" />
-              <a className="dropdown-item preview-item">
-                <div className="preview-thumbnail">
-                  <div className="preview-icon bg-warning">
-                    <i className="mdi mdi-settings" />
-                  </div>
-                </div>
-                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 className="preview-subject font-weight-normal mb-1">
-                    Settings
-                  </h6>
-                  <p className="text-gray ellipsis mb-0"> Update dashboard </p>
-                </div>
-              </a> */}
-              {/* <div className="dropdown-divider" />
-              <a className="dropdown-item preview-item">
-                <div className="preview-thumbnail">
-                  <div className="preview-icon bg-info">
-                    <i className="mdi mdi-link-variant" />
-                  </div>
-                </div>
-                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 className="preview-subject font-weight-normal mb-1">
-                    Launch Admin
-                  </h6>
-                  <p className="text-gray ellipsis mb-0"> New admin wow! </p>
-                </div>
-              </a> */}
-              {/* <div className="dropdown-divider" />
-              <h6 className="p-3 mb-0 text-center">See all notifications</h6> */}
             </div>
           </li>
           <li className="nav-item dropdown">&nbsp;</li>
@@ -159,7 +149,7 @@ function Navbar() {
         <button
           className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
           type="button"
-          data-toggle="offcanvas">
+          data-toggle="offcanvas" onClick={hideshowmenubar}>
           <span className="mdi mdi-menu" />
         </button>
       </div>
