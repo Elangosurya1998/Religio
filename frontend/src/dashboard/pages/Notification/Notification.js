@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 
 function NotificationShow() {
+  const [Notifydata, notificationData] = useState([]);
+
   useEffect(() => {
     axios
       .get(`${ApiUrl}/Religio/Balance/notification`)
@@ -15,8 +17,7 @@ function NotificationShow() {
         console.log(err);
       });
   }, []);
-  const [Notifydata, notificationData] = useState([]);
-  console.log(Notifydata);
+
   const columns = [
     {
       name: "S.No",
@@ -38,14 +39,6 @@ function NotificationShow() {
       selector: (row) => row.amcvalue,
       sortable: true,
     },
-    {
-      name: "Outstanding Amount",
-      selector: (row) => row,
-      sortable: true,
-      cell: (row) => {
-        return <div>{outstanding(row.id)} </div>;
-      },
-    },
   ];
 
   const customStyles = {
@@ -57,7 +50,7 @@ function NotificationShow() {
     },
     headCells: {
       style: {
-        paddingLeft: "8px", // override the cell padding for head cells
+        paddingLeft: "8px",
         paddingRight: "8px",
         fontSize: "14px",
         fontWeight: "600",
@@ -65,7 +58,7 @@ function NotificationShow() {
     },
     cells: {
       style: {
-        paddingLeft: "8px", // override the cell padding for data cells
+        paddingLeft: "8px",
         paddingRight: "8px",
       },
     },
@@ -76,12 +69,6 @@ function NotificationShow() {
       },
     },
   };
-
-  async function outstanding(id) {
-    const response = await axios.get(`${ApiUrl}/Religio/AMC/Outstanding/` + id);
-    var datatrue = response.data.data;
-    return datatrue;
-  }
 
   return (
     <div className="content-wrapper">
@@ -99,10 +86,9 @@ function NotificationShow() {
             <div className="card-body">
               <DataTable
                 columns={columns}
-                theme="solarized"
                 data={Notifydata}
                 pagination
-                // progressPending={pending}
+                keyField={(row) => row.id} // Replace "id" with the actual key field in your data
                 customStyles={customStyles}
               />
             </div>
@@ -112,4 +98,5 @@ function NotificationShow() {
     </div>
   );
 }
+
 export default NotificationShow;
