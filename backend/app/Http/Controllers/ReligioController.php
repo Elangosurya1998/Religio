@@ -196,20 +196,23 @@ class ReligioController extends Controller
 
             }
 
-            $overAll[] = [
-                'name' => $AmcNoti->name,
-                'amcdate'=>$AmcNoti->amcdate,
-                'clientcode' => $AmcNoti->clientcode,
-                'projectvalue' => $AmcNoti->projectvalue,
-                // 'GST' => intdiv($AmcNoti->projectvalue,100) * 18,
-                'TotalProjectPay+GST' => array_sum($newsales) + array_sum($outstanding),
-                'TotalProjectoutstandingGST' => ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding)),
-                'AMC' => $AmcNoti->amcvalue,
-                // 'AMC gst' => intdiv($AmcNoti->amcvalue,100) * 18,
-                'OverallAMC+GST' => $AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18,
-                'TotalAMCPay+GST' => array_sum($amc),
-                'TotalAMCoutstanding' => ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc)
-            ]; 
+            $outstandingVal = ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc);
+            if($outstandingVal > 0){
+                $overAll[] = [
+                    'name' => $AmcNoti->name,
+                    'amcdate'=>$AmcNoti->amcdate,
+                    'clientcode' => $AmcNoti->clientcode,
+                    'projectvalue' => $AmcNoti->projectvalue,
+                    // 'GST' => intdiv($AmcNoti->projectvalue,100) * 18,
+                    'TotalProjectPay+GST' => array_sum($newsales) + array_sum($outstanding),
+                    'TotalProjectoutstandingGST' => ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding)),
+                    'AMC' => $AmcNoti->amcvalue,
+                    // 'AMC gst' => intdiv($AmcNoti->amcvalue,100) * 18,
+                    'OverallAMC+GST' => $AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18,
+                    'TotalAMCPay+GST' => array_sum($amc),
+                    'TotalAMCoutstanding' => ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc)
+                ];
+            }
         }
            
         if(count($overAll) > 0) {
