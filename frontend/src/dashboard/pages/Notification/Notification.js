@@ -5,7 +5,6 @@ import ApiUrl from "../Api/Api";
 
 function NotificationShow() {
   const [Notifydata, notificationData] = useState([]);
-
   useEffect(() => {
     axios
       .get(`${ApiUrl}/Religio/Balance/notification`)
@@ -36,7 +35,17 @@ function NotificationShow() {
     },
     {
       name: "AMC Value",
-      selector: (row) => row.amcvalue,
+      selector: (row) => row.AMC,
+      sortable: true,
+    },
+    {
+      name: "AMC Balance",
+      selector: (row) => row.TotalAMCoutstanding,
+      sortable: true,
+    },
+    {
+      name: "Outstanding",
+      selector: (row) => row.TotalProjectoutstandingGST,
       sortable: true,
     },
   ];
