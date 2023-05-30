@@ -43,11 +43,11 @@ function NotificationShow() {
       selector: (row) => row.TotalAMCoutstanding,
       sortable: true,
     },
-    {
-      name: "Outstanding",
-      selector: (row) => row.TotalProjectoutstandingGST,
-      sortable: true,
-    },
+    // {
+    //   name: "Outstanding",
+    //   selector: (row) => row.TotalProjectoutstandingGST,
+    //   sortable: true,
+    // },
   ];
 
   const customStyles = {

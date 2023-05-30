@@ -7,8 +7,7 @@ import $ from "jquery";
 import DataTable from "react-data-table-component";
 
 function Dashboard() {
-
-  hidemenubar()
+  hidemenubar();
 
   function hidemenubar() {
     let value = $("body").attr("class");
@@ -31,9 +30,11 @@ function Dashboard() {
         const resData = response.data;
         Dynamictitle("New Sales");
         getDatatable(resData.dataall);
+
         SetBalance(resData.data);
         FinancialYear(resData.data.year);
         FinancialMonth(resData.data.Month);
+        $(".pericon").hide();
       })
       .catch((err) => {
         console.log(err);
@@ -41,11 +42,32 @@ function Dashboard() {
   }, []);
 
   function getData(event) {
+    $(".monthlabel").text("Select All");
     const values = event.target.text;
     if (values === "AMC") {
       $("#hdvalue").text("AMC Cost");
+      $("#thisclient").text("Received Amount");
+      $("#Balance").text("Balance");
+      $(".yearlabel").text(financial);
+      $("#monthnav").show();
+      $(".inricon").show();
+      $(".pericon").hide();
+    } else if (values === "Clients") {
+      $("#hdvalue").text("Overall Clients");
+      $("#thisclient").text("New Clients");
+      $("#Balance").text("Ongoing Projects");
+      $(".yearlabel").text(financial);
+      $("#monthnav").hide();
+      $(".inricon").hide();
+      $(".pericon").show();
     } else {
-      $("#hdvalue").text("Project Cost");
+      $("#hdvalue").text("New Sales");
+      $("#thisclient").text("Received Amount");
+      $("#Balance").text("Balance");
+      $(".yearlabel").text(financial);
+      $("#monthnav").show();
+      $(".inricon").show();
+      $(".pericon").hide();
     }
 
     if (values === "Select All") {
@@ -53,21 +75,38 @@ function Dashboard() {
 
       if (get === "AMC") {
         $("#hdvalue").text("AMC Cost");
+        $("#thisclient").text("Received Amount");
+        $("#monthnav").show();
+        $("#Balance").text("Balance");
+        $(".inricon").show();
+        $(".pericon").hide();
+      } else if (get === "Clients") {
+        $("#hdvalue").text("Overall Clients");
+        $("#monthnav").hide();
+        $("#thisclient").text("New Clients");
+        $("#Balance").text("Ongoing Projects");
+        $(".inricon").hide();
+        $(".pericon").show();
       } else {
-        $("#hdvalue").text("Project Cost");
+        $("#hdvalue").text("New Sales");
+        $("#thisclient").text("Received Amount");
+        $("#monthnav").show();
+        $("#Balance").text("Balance");
+        $(".inricon").show();
+        $(".pericon").hide();
       }
       if (get === "New Sales") {
         const data = "NewSales";
         $(".yearlabel").text(values);
         axios
-          .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+          .get(`${ApiUrl}/Religio/ClientType/getBalance/selectall/${data}`)
           .then((response) => {
             const resData = response.data;
+
             SetBalance(resData.data);
             FinancialYear(resData.data.year);
             FinancialMonth(resData.data.Month);
             Dynamictitle("New Sales");
-            console.log(resData.dataall);
             getDatatable(resData.dataall);
           })
           .catch((err) => {
@@ -75,28 +114,42 @@ function Dashboard() {
           });
       } else {
         const data = get;
-        $(".yearlabel").text(values);
-        axios
-          .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
-          .then((response) => {
-            const resData = response.data;
-            console.log(resData);
-            SetBalance(resData.data);
-            FinancialYear(resData.data.year);
-            FinancialMonth(resData.data.Month);
-            Dynamictitle(data);
-
-            getDatatable(resData.dataall);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        console.log(data);
+        if (data === "Clients") {
+          $(".yearlabel").text(values);
+          axios
+            .get(`${ApiUrl}/Religio/ClientType/getBalance/selectall/${data}`)
+            .then((response) => {
+              const resData = response.data;
+              SetBalance(resData.data);
+              Dynamictitle("Clients");
+              SetClientregister(resData.dataall);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          $(".yearlabel").text(values);
+          axios
+            .get(`${ApiUrl}/Religio/ClientType/getBalance/selectall/${data}`)
+            .then((response) => {
+              const resData = response.data;
+              SetBalance(resData.data);
+              FinancialYear(resData.data.year);
+              FinancialMonth(resData.data.Month);
+              Dynamictitle(data);
+              getDatatable(resData.dataall);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       }
     } else if (values === "New Sales") {
       const data = "NewSales";
       $("#client").text(values);
       axios
-        .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+        .get(`${ApiUrl}/Religio/ClientType/getBalance/selectall/${data}`)
         .then((response) => {
           const resData = response.data;
           SetBalance(resData.data);
@@ -111,25 +164,40 @@ function Dashboard() {
     } else {
       const data = values;
       $("#client").text(values);
-      $(".yearlabel").text("Financial Year");
-
-      axios
-        .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
-        .then((response) => {
-          const resData = response.data;
-          SetBalance(resData.data);
-          FinancialYear(resData.data.year);
-          FinancialMonth(resData.data.Month);
-          Dynamictitle(data);
-          getDatatable(resData.dataall);
-        })
-        .catch((response) => {
-          console.log(response.data);
-          const resData = response.data;
-          SetBalance(resData);
-          FinancialYear(resData);
-          FinancialMonth(resData);
-        });
+      if (data === "Clients") {
+        axios
+          .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+          .then((response) => {
+            const resData = response.data;
+            SetBalance(resData.data);
+            Dynamictitle(data);
+            FinancialYear(resData.data.year);
+            SetClientregister(resData.dataall);
+          })
+          .catch((response) => {
+            const resData = response.data;
+            SetBalance(resData);
+            FinancialYear(resData);
+            FinancialMonth(resData);
+          });
+      } else {
+        axios
+          .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
+          .then((response) => {
+            const resData = response.data;
+            SetBalance(resData.data);
+            FinancialYear(resData.data.year);
+            FinancialMonth(resData.data.Month);
+            Dynamictitle(data);
+            getDatatable(resData.dataall);
+          })
+          .catch((response) => {
+            const resData = response.data;
+            SetBalance(resData);
+            FinancialYear(resData);
+            FinancialMonth(resData);
+          });
+      }
     }
   }
 
@@ -137,20 +205,23 @@ function Dashboard() {
   const [year, FinancialYear] = useState([]);
   const [Month, FinancialMonth] = useState([]);
   const [getdatafilter, getDatatable] = useState([]);
+  const [register, SetClientregister] = useState([]);
 
   function getMonthData(event) {
     const month = event.target.text;
+    const choyear = $("#yearlabel").text();
     const ClientType = $("#client").text();
     if (ClientType === "New Sales") {
       const data = "NewSales";
       axios
         .post(
-          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${data}&month=${month}`
+          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${data}&month=${month}&year=${choyear}`
         )
         .then((response) => {
           const resData = response.data;
           SetBalance(resData.data);
-          FinancialYear(resData.data.year);
+          getDatatable(resData.dataall);
+          console.log(resData);
         })
         .catch((err) => {
           console.log(err);
@@ -159,12 +230,14 @@ function Dashboard() {
     } else {
       axios
         .post(
-          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${ClientType}&month=${month}`
+          `${ApiUrl}/Religio/financialmonth/getBalance/?type=${ClientType}&month=${month}&year=${choyear}`
         )
         .then((response) => {
           const resData = response.data;
+          console.log(resData);
           SetBalance(resData.data);
-          FinancialYear(resData.data.year);
+          console.log(resData);
+          getDatatable(resData.dataall);
         })
         .catch((err) => {
           console.log(err);
@@ -175,6 +248,7 @@ function Dashboard() {
 
   function GetbalanbeYeardata(event) {
     const year = event.target.text;
+    $(".monthlabel").text("Select All");
     const ClientType = $("#client").text();
     if (ClientType === "New Sales") {
       const data = "NewSales";
@@ -184,9 +258,24 @@ function Dashboard() {
         )
         .then((response) => {
           const resData = response.data;
-          console.log(resData);
+
           SetBalance(resData.data);
           FinancialMonth(resData.data.Month);
+          getDatatable(resData.dataall);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      $(".yearlabel").text(year);
+    } else if (ClientType === "Clients") {
+      axios
+        .post(
+          `${ApiUrl}/Religio/financialyear/getBalance/?type=${ClientType}&year=${year}`
+        )
+        .then((response) => {
+          const resData = response.data;
+          SetBalance(resData.data);
+          SetClientregister(resData.dataall);
         })
         .catch((err) => {
           console.log(err);
@@ -201,15 +290,13 @@ function Dashboard() {
           const resData = response.data;
           SetBalance(resData.data);
           FinancialMonth(resData.data.Month);
+          getDatatable(resData.dataall);
         })
         .catch((err) => {
           console.log(err);
         });
       $(".yearlabel").text(year);
     }
-
-
-
   }
   // for table view
 
@@ -287,6 +374,28 @@ function Dashboard() {
       sortable: true,
     },
   ];
+  const columnsreg = [
+    {
+      name: "Congregation",
+      selector: (row) => row.congregation,
+      sortable: true,
+    },
+    {
+      name: "Province",
+      selector: (row) => row.province,
+      sortable: true,
+    },
+    {
+      name: "Name",
+      selector: (row) => row.name,
+      sortable: true,
+    },
+    {
+      name: "Place",
+      selector: (row) => row.place,
+      sortable: true,
+    },
+  ];
 
   const customStyles = {
     rows: {
@@ -317,9 +426,10 @@ function Dashboard() {
       },
     },
   };
-
-
-
+  const today = new Date();
+  const cyear = today.getFullYear();
+  const fyear = cyear + 1;
+  const financial = `${cyear}-${fyear}`;
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -370,7 +480,7 @@ function Dashboard() {
                     style={{ cursor: "pointer" }}
                     onClick={getData}>
                     <i className="mdi mdi-checkbox-multiple-blank-circle-outline me-2 text-danger" />
-                    Outstanding
+                    Clients
                   </a>
                 </div>
               </li>
@@ -380,7 +490,7 @@ function Dashboard() {
           ""
         )}
         {isLogedIn?.role == "admin" ? (
-          <nav aria-label="breadcrumb">
+          <nav aria-label="breadcrumb" id="monthnav">
             <ul className="breadcrumb">
               <li className="nav-item nav-profile dropdown">
                 <a
@@ -394,8 +504,7 @@ function Dashboard() {
                   </div>
                   <div className="nav-profile-text">
                     <p className="mb-1 text-black dropdown-toggle monthlabel">
-                      {/* {month} */}
-                      Month
+                      Select All
                     </p>
                   </div>
                 </a>
@@ -442,7 +551,7 @@ function Dashboard() {
                     <p
                       className="mb-1 text-black dropdown-toggle yearlabel"
                       id="yearlabel">
-                      Financial Year
+                      {cyear}-{fyear}
                     </p>
                   </div>
                 </a>
@@ -485,11 +594,13 @@ function Dashboard() {
                   alt="circle-image"
                 />
                 <h4 className="font-weight-normal mb-3">
-                  <span id="hdvalue">Project Cost</span>
+                  <span id="hdvalue">New Sales</span>
                   <i className="mdi mdi-cash-multiple mdi-24px float-right" />
                 </h4>
                 <h2 className="mb-5">
-                  <i className="mdi mdi-currency-inr" /> {balance.total}
+                  <i className="mdi mdi-currency-inr inricon" />
+                  <i className="mdi mdi-account-group pericon" />{" "}
+                  {balance.total}
                 </h2>
                 {/* <h6 className="card-text">Increased by 100%</h6> */}
               </div>
@@ -505,13 +616,13 @@ function Dashboard() {
                   alt="circle-image"
                 />
                 <h4 className="font-weight-normal mb-3">
-                  {" "}
-                  Received Amount
+                  <span id="thisclient">Received Amount</span>
                   <i className="mdi mdi-cash-usd mdi-24px float-right" />
                 </h4>
 
                 <h2 className="mb-5">
-                  <i className="mdi mdi-currency-inr" /> {balance.paid}
+                  <i className="mdi mdi-currency-inr inricon" />
+                  <i className="mdi mdi-account pericon" /> {balance.paid}
                 </h2>
                 {/* <h6 className="card-text">Decreased by {balance.paidPer}%</h6> */}
               </div>
@@ -526,11 +637,13 @@ function Dashboard() {
                   alt="circle-image"
                 />
                 <h4 className="font-weight-normal mb-3">
-                  Balance
+                  <span id="Balance">Balance</span>
                   <i className="fa-solid fa-money-bill-1-wave mdi-24px float-right" />
                 </h4>
                 <h2 className="mb-5">
-                  <i className="mdi mdi-currency-inr" /> {balance.balance}
+                  <i className="mdi mdi-currency-inr inricon" />
+                  <i className="mdi mdi-account pericon" />
+                  {balance.balance}
                 </h2>
                 {/* <h6 className="card-text">Increased by {balance.balPer}%</h6> */}
               </div>
@@ -544,7 +657,9 @@ function Dashboard() {
         <div className="col-12 grid-margin">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Clients {Title}</h4>
+              <h4 className="card-title">
+                Clients {Title !== "Clients" && Title}
+              </h4>
               <div className="table-responsive">
                 {Title === "AMC" && (
                   <DataTable
@@ -555,7 +670,7 @@ function Dashboard() {
                     customStyles={customStyles}
                   />
                 )}
-                {Title !== "AMC" && (
+                {Title === "New Sales" && (
                   <DataTable
                     // title={Title}
                     columns={columns}
@@ -564,13 +679,15 @@ function Dashboard() {
                     customStyles={customStyles}
                   />
                 )}
-                {/* <DataTable
-                  // title={Title}
-                  columns={columns}
-                  data={getdatafilter}
-                  pagination
-                  customStyles={customStyles}
-                /> */}
+                {Title === "Clients" && (
+                  <DataTable
+                    columns={columnsreg}
+                    theme="solarized"
+                    data={register}
+                    pagination
+                    customStyles={customStyles}
+                  />
+                )}
               </div>
             </div>
           </div>
