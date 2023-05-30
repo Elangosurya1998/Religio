@@ -192,6 +192,7 @@ Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
 
 // dashboard
 Route::get('/Religio/ClientType/getBalance/{value}',[ProvinceController::class, 'GetBalance']);
+Route::get('/Religio/ClientType/getBalance/selectall/{value}',[ProvinceController::class, 'GetBalanceall']);
 Route::post('/Religio/financialyear/getBalance',[ProvinceController::class, 'financialyear']);
 Route::post('/Religio/financialmonth/getBalance',[ProvinceController::class, 'financialmonth']);
 Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, 'GetFinancialyear']);

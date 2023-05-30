@@ -151,6 +151,7 @@ class ReligioController extends Controller
             ->orderBy(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'asc')
             ->get();
 
+        //dd($AmcNotification);
         foreach($AmcNotification as $AmcNoti){
 
             $amcdate = date('Y-m', strtotime($AmcNoti->amcdate));
@@ -165,6 +166,11 @@ class ReligioController extends Controller
             ->where('payments.clientcode',$AmcNoti->clientcode)
             ->get();
             
+            $AmcDate = $AmcNoti->amcdate;
+            $date = explode('-',$AmcDate);
+            $date[0] = date('Y');
+            $imdate = implode('-',$date);
+            $dformat =date("d-m-Y", strtotime($imdate)); 
             $amc = [];
             $newsales = []; 
             $outstanding = [];
@@ -201,7 +207,7 @@ class ReligioController extends Controller
                 if($currentDate >= $amcCurrent){
                     $overAll[] = [
                         'name' => $AmcNoti->name,
-                        'amcdate'=>$AmcNoti->amcdate,
+                        'amcdate'=>$dformat,
                         'clientcode' => $AmcNoti->clientcode,
                         'projectvalue' => $AmcNoti->projectvalue,
                         // 'GST' => intdiv($AmcNoti->projectvalue,100) * 18,
