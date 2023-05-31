@@ -7,8 +7,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
 
 function DomainrenewalEdit() {
-  return (
-    "DomainrenewalsayList"
-  );
+  return "DomainrenewalsayList";
 }
 export default DomainrenewalEdit;
