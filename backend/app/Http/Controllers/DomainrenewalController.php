@@ -84,9 +84,18 @@ class DomainrenewalController extends Controller
      * @param  \App\Models\Domainrenewal  $Domainrenewal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Domainrenewal $Domainrenewal)
+    public function domainEdit($id)
     {
-        //
+        $Getdomain = Domainrenewal::where('id',$id)->first();
+        
+        if (!is_null($Getdomain)) {
+           
+            return response()->json(["status" => $this->status, "success" => true, 
+            "message" => "success", "data" => $Getdomain]);
+        }else {
+            return response()->json(["status" => $this->status, "success" => false, 
+            "message" => "Failed", "data" => 'empty']);
+        }
     }
 
     /**
@@ -96,9 +105,27 @@ class DomainrenewalController extends Controller
      * @param  \App\Models\Domainrenewal  $Domainrenewal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Domainrenewal $Domainrenewal)
+    public function domainupdate(Request $request,$id)
     {
-        //
+        $Domainrenewalupdate = Domainrenewal::where('id',$id)
+            ->update([
+                'sitename' =>$request->sitename,
+                'siteurl' =>$request->siteurl,
+                'serverdetail' =>$request->serverdetail,
+                'servername' =>$request->servername,
+                'domain_create_date' =>$request->domain_create_date,
+                'domain_expire_date' =>$request->domain_expire_date
+            ]);
+
+        if(!is_null($Domainrenewalupdate)){ 
+
+            return response()->json(["status" => $this->status, "success" => true, 
+                    "message" => "Updated successfully", "data" => $Domainrenewalupdate]);
+        }    
+        else {
+            return response()->json(["status" => "failed", "success" => false,
+                        "message" => "Whoops! failed to create."]);
+        } 
     }
 
     /**
