@@ -6,7 +6,6 @@ import ApiUrl from "../../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
 
 function DomainrenewalCreate() {
-
   const {
     register,
     reset,
@@ -18,19 +17,13 @@ function DomainrenewalCreate() {
 
   function onSubmitDomainrenewalform(data, e) {
     e.preventDefault();
-    const formData = new FormData();
     axios
-      .post(`${ApiUrl}/Religio/Domainrenewal/Store`, formData)
+      .post(`${ApiUrl}/Religio/Domainrenewal/Store`, data)
       .then((Response) => {
-
         if (Response.status === 200) {
-          Swal.fire(
-            "Domain Added Successfully..!",
-            "",
-            "success"
-          );
+          Swal.fire("Domain Added Successfully..!", "", "success");
           e.target.reset();
-          navigate("/Religio/Domainrenewal");
+          navigate("/Religio/DomainRenewal");
         }
       })
       .catch((err) => {
@@ -49,22 +42,29 @@ function DomainrenewalCreate() {
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
             <i className="mdi mdi-domain menu-icon" />
-          </span> Domain Renewel
+          </span>{" "}
+          Domain Renewel
         </h3>
       </div>
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-body">
-              <form className="form-sample" encType="multipart/form-data" onSubmit={handleSubmit(onSubmitDomainrenewalform)}>
+              <form
+                className="form-sample"
+                encType="multipart/form-data"
+                onSubmit={handleSubmit(onSubmitDomainrenewalform)}>
                 <br></br>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label>Site Name &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Site Name &nbsp;<span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
-                      name="sitename" placeholder="Site Name"
+                      name="sitename"
+                      placeholder="Site Name"
                       {...register("sitename", {
                         required: true,
                       })}
@@ -79,32 +79,37 @@ function DomainrenewalCreate() {
                     )}
                   </div>
                   <div className="form-group col-md-6">
-                    <label>Site URL &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Site URL &nbsp;<span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="url"
                       className="form-control"
-                      name="siteurl" placeholder="Site URL"
+                      name="siteurl"
+                      placeholder="Site URL"
                       {...register("siteurl", {
-                        required: true
+                        required: true,
                       })}
                       aria-invalid={errors?.siteurl ? "true" : "false"}
                     />
                     {errors?.siteurl?.type === "required" && (
                       <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Site URL is required
-                        </label>
+                        <label className="errlabel">Site URL is required</label>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label>Server Details &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Server Details &nbsp;
+                      <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
-                      name="serverdetail" placeholder="Server Detail"
+                      name="serverdetail"
+                      placeholder="Server Detail"
                       {...register("serverdetail", {
                         required: true,
                       })}
@@ -119,11 +124,14 @@ function DomainrenewalCreate() {
                     )}
                   </div>
                   <div className="form-group col-md-6">
-                    <label>Server Name &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Server Name &nbsp;<span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
-                      name="servername" placeholder="Server Name "
+                      name="servername"
+                      placeholder="Server Name "
                       {...register("servername", {
                         required: true,
                       })}
@@ -140,13 +148,18 @@ function DomainrenewalCreate() {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label>Domain Create Date &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Domain Create Date &nbsp;
+                      <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="Date"
                       className="form-control"
                       name="domain_create_date"
                       {...register("domain_create_date", { required: true })}
-                      aria-invalid={errors?.domain_create_date ? "true" : "false"}
+                      aria-invalid={
+                        errors?.domain_create_date ? "true" : "false"
+                      }
                     />
                     {errors?.domain_create_date?.type === "required" && (
                       <div className="text-danger text_error">
@@ -157,34 +170,47 @@ function DomainrenewalCreate() {
                     )}
                   </div>
                   <div className="form-group col-md-6">
-                    <label>Domain Expire  Date &nbsp;<span style={{ color: 'red' }}>*</span></label>
+                    <label>
+                      Domain Expire Date &nbsp;
+                      <span style={{ color: "red" }}>*</span>
+                    </label>
                     <input
                       type="Date"
                       className="form-control"
                       name="domain_expire_date"
                       {...register("domain_expire_date", { required: true })}
-                      aria-invalid={errors?.domain_expire_date ? "true" : "false"}
+                      aria-invalid={
+                        errors?.domain_expire_date ? "true" : "false"
+                      }
                     />
                     {errors?.domain_expire_date?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
-                          Domain Expire  Date is required
+                          Domain Expire Date is required
                         </label>
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="text-center">
-                  <button className="btn btn-gradient-primary font-weight-bold" type="submit">Save</button>
+                  <button
+                    className="btn btn-gradient-primary font-weight-bold"
+                    type="submit">
+                    Save
+                  </button>
                   &nbsp; &nbsp; &nbsp;
-                  <Link to="/Religio/Domainrenewal" className="btn btn-gradient-primary font-weight-bold ">Cancel</Link>
+                  <Link
+                    to="/Religio/DomainRenewal"
+                    className="btn btn-gradient-primary font-weight-bold ">
+                    Cancel
+                  </Link>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }
 export default DomainrenewalCreate;
