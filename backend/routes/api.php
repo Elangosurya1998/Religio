@@ -129,12 +129,12 @@ Route::put('/Religio/HomeSections/OurCustomerSay/Update/{id}',[OurCustomerSayCon
 Route::delete('/Religio/HomeSections/OurCustomerSay/delete/{id}',[OurCustomerSayController::class, 'destroy']);
 Route::get('/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex',[OurCustomerSayController::class, 'OurCustomerSayindex']);
 
-//Home Section - OurClient
+//Home Section - domain
 
 Route::post('/Religio/Domainrenewal/Store',[DomainrenewalController::class, 'store']);
 Route::get('/Religio/Domainrenewal/list',[DomainrenewalController::class, 'index']);
-Route::get('/Religio/Domainrenewal/edit/{id}',[DomainrenewalController::class, 'edit']);
-Route::put('/Religio/Domainrenewal/update/{id}',[DomainrenewalController::class, 'update']);
+Route::get('/Religio/Domainrenewal/edit/{id}',[DomainrenewalController::class, 'domainEdit']);
+Route::put('/Religio/Domainrenewal/update/{id}',[DomainrenewalController::class, 'domainupdate']);
 Route::delete('/Religio/Domainrenewal/delete/{id}',[DomainrenewalController::class, 'destroy']);
 
 // hoese and community status

@@ -10,24 +10,29 @@ import DomainrenewalEdit from "./includes/DomainrenewalEdit";
 import DomainrenewalView from "./includes/DomainrenewalView";
 
 function DomainRenewalLayouts() {
+  const { pathname } = useLocation();
 
-    const { pathname } = useLocation();
-
-    return (
-        <div className="container-scroller">
-            <Navbar />
-            <div className="container-fluid page-body-wrapper">
-                <Sidemenubar />
-                <div className="main-panel">
-                    {pathname == "/Religio/DomainRenewal" && <DomainrenewalList />}
-                    {pathname == "/Religio/DomainRenewal/Create" && <DomainrenewalCreate />}
-                    {/* {pathname == "" && <DomainrenewalEdit />}
-                    {pathname == "" && <DomainrenewalView />} */}
-                    <Footer />
-                </div>
-            </div>
+  return (
+    <div className="container-scroller">
+      <Navbar />
+      <div className="container-fluid page-body-wrapper">
+        <Sidemenubar />
+        <div className="main-panel">
+          {pathname == "/Religio/DomainRenewal" && <DomainrenewalList />}
+          {pathname == "/Religio/DomainRenewal/Create" && (
+            <DomainrenewalCreate />
+          )}
+          {pathname.includes("/Religio/DomainRenewal/Edit/") && (
+            <DomainrenewalEdit />
+          )}
+          {pathname.includes("/Religio/DomainRenewal/View/") && (
+            <DomainrenewalView />
+          )}
+          <Footer />
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default DomainRenewalLayouts;

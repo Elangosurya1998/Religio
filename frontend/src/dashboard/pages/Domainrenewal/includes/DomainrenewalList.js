@@ -7,11 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import $ from "jquery";
+import DataTable from "react-data-table-component";
 
 function DomainrenewalList() {
   // Get User data
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
-
+  const navigate = useNavigate();
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Domainrenewal/list`)
       .then((res) => {
@@ -19,6 +20,7 @@ function DomainrenewalList() {
       })
       .then((resp) => {
         DomainrenewalList(resp.data);
+        FilterClientregister(resp.data);
       })
       .catch((err) => {
         console.log(err.message);
@@ -28,16 +30,13 @@ function DomainrenewalList() {
     fetchData();
   }, []);
 
-  const [show, setShow] = useState(false);
+  const handleShow = async (e, id) => {
+    navigate("/Religio/DomainRenewal/View/" + id);
+  };
 
-  const handleClose = () => setShow(false);
-  const [preImg, previewImage] = useState([]);
-
-  function handleShow(e, logoitem) {
-    setShow(true);
-    previewImage(logoitem);
-  }
-
+  const handleEdit = async (e, id) => {
+    navigate("/Religio/DomainRenewal/Edit/" + id);
+  };
   const [Domainrenewals, DomainrenewalList] = useState([]);
 
   function deleteClientLogo(e, clientId) {
@@ -61,7 +60,111 @@ function DomainrenewalList() {
       }
     });
   }
+  const columns = [
+    {
+      name: "S.No",
+      selector: (row, index) => index + 1,
+      width: "70px",
+    },
+    {
+      name: "Domain Name",
+      selector: (row) => row.sitename,
+      sortable: true,
+    },
+    {
+      name: "Domain Url",
+      selector: (row) => row.siteurl,
+      sortable: true,
+    },
+    {
+      name: "Server Name",
+      selector: (row) => row.servername,
+      sortable: true,
+    },
+    {
+      name: "Domain Expire Date",
+      selector: (row) => row.domain_expire_date,
+      sortable: true,
+    },
+    {
+      name: "Action",
+      cell: (row) => (
+        <>
+          <a
+            onClick={(e) => handleShow(e, row.id)}
+            style={{
+              cursor: "pointer",
+              paddingRight: 4,
+              color: "#b66dff",
+            }}
+            className="mdi mdi-eye"></a>
 
+          <a
+            onClick={(e) => handleEdit(e, row.id)}
+            style={{
+              cursor: "pointer",
+              paddingRight: 4,
+              color: "#b66dff",
+            }}
+            className="mdi mdi-pencil-box"></a>
+
+          <a
+            className="mdi mdi-delete"
+            onClick={(e) => deleteClientLogo(e, row.id)}
+            style={{
+              cursor: "pointer",
+              paddingRight: 4,
+              color: "#b66dff",
+            }}
+            id="print"></a>
+        </>
+      ),
+      width: "100px",
+    },
+  ];
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: "52px",
+        backgroundColor: "#fafafa",
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for head cells
+        paddingRight: "8px",
+        fontSize: "14px",
+        fontWeight: "600",
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for data cells
+        paddingRight: "8px",
+      },
+    },
+    pagination: {
+      style: {
+        fontWeight: "700",
+        color: "black",
+      },
+    },
+  };
+  const [FilterRegister, FilterClientregister] = useState([]);
+
+  function filterdata(event) {
+    var value = event.target.value;
+    const keys = ["sitename", "siteurl", "servername", "domain_expire_date"];
+
+    const filter = FilterRegister?.filter((item) =>
+      keys.some((key) =>
+        item[key].toString()?.toLowerCase()?.includes(value?.toLowerCase())
+      )
+    );
+    console.log(value, filter);
+
+    DomainrenewalList(filter);
+  }
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -81,6 +184,7 @@ function DomainrenewalList() {
                   <input
                     id="myInput"
                     type="text"
+                    onChange={filterdata}
                     className="form-control myInput"
                     placeholder="Search.."
                   />
@@ -97,107 +201,13 @@ function DomainrenewalList() {
                 </div>
               </div>
               <br></br>
-              <table className="table table-striped Mytable">
-                <thead>
-                  <tr>
-                    <th>Domain Name</th>
-                    <th>Domain Url</th>
-                    <th>Server Name</th>
-                    <th>Domain Expire Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Domainrenewals &&
-                    Domainrenewals.map((item, index) => (
-                      <tr>
-                        <td>{item.sitename}</td>
-                        <td>{item.siteurl}</td>
-                        <td>{item.servername}</td>
-                        <td>{item.domain_expire_date}</td>
-                        <td>
-                          <a
-                            onClick={(e) => handleShow(e, item)}
-                            style={{ cursor: "pointer" }}
-                            className="mdi mdi-eye"></a>
-                          &nbsp;
-                          <a
-                            className="mdi mdi-delete"
-                            onClick={(e) => deleteClientLogo(e, item.id)}
-                            style={{ cursor: "pointer" }}
-                            id="print"></a>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-              <Modal show={show} onHide={handleClose} className="modal-md">
-                <Modal.Header closeButton>
-                  <Modal.Title>Our Client Preview</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <label>
-                        Congregation &nbsp;
-                        <span style={{ color: "red" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={preImg.cgname}
-                        disabled
-                      />
-                      <br />
-                    </div>
-                    <div className="col-md-6">
-                      <label>
-                        Province &nbsp;<span style={{ color: "red" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={preImg.prname}
-                        disabled
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12">
-                      <label>
-                        Client &nbsp;<span style={{ color: "red" }}>*</span>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={preImg.crname}
-                        disabled
-                      />
-                      <br />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-12">
-                      <label>
-                        Client Logo &nbsp;
-                        <span style={{ color: "red" }}>*</span>
-                      </label>
-                      <center>
-                        <img
-                          src={AppUrl + "/Domainrenewal/logo/" + preImg.logo}
-                          height={130}
-                        />
-                      </center>
-                    </div>
-                  </div>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+              <DataTable
+                columns={columns}
+                theme="solarized"
+                data={Domainrenewals}
+                pagination
+                customStyles={customStyles}
+              />
             </div>
           </div>
         </div>

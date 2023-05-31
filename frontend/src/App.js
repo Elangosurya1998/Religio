@@ -370,6 +370,11 @@ function App() {
           />
           <Route
             exact
+            path="/Religio/DomainRenewal/View/:id"
+            element={<DomainRenewalLayouts />}
+          />
+          <Route
+            exact
             path="/Religio/DomainRenewal"
             element={<DomainRenewalLayouts />}
           />
@@ -378,7 +383,6 @@ function App() {
             path="/Religio/UpcomingDomainRenewel"
             element={<DomainRenewalLayouts />}
           />
-
         </Route>
       </Routes>
     </BrowserRouter>

@@ -35,6 +35,9 @@ function DomainrenewalCreate() {
         });
       });
   }
+  const regex = new RegExp(
+    "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?"
+  );
 
   return (
     <div className="content-wrapper">
@@ -89,12 +92,18 @@ function DomainrenewalCreate() {
                       placeholder="Site URL"
                       {...register("siteurl", {
                         required: true,
+                        pattern: { value: regex },
                       })}
                       aria-invalid={errors?.siteurl ? "true" : "false"}
                     />
                     {errors?.siteurl?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">Site URL is required</label>
+                      </div>
+                    )}
+                    {errors?.siteurl?.type === "pattern" && (
+                      <div className="text-danger text_error ">
+                        <label className="errlabel">Invalid url</label>
                       </div>
                     )}
                   </div>
