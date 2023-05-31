@@ -41,8 +41,13 @@ function Navbar() {
       });
   }, []);
   const [data, notificationData] = useState([]);
+
   function notificationAMC() {
     navigate("/Religio/AMC/Notification");
+  }
+
+  function notificationDomain() {
+    navigate("/Religio/UpcomingDomainRenewel");
   }
 
 
@@ -100,6 +105,23 @@ function Navbar() {
                     onClick={notificationAMC}>
                     {" "}
                     Upcoming AMC Clients{" "}
+                  </p>
+                </div>
+              </a>
+              <a className="dropdown-item preview-item">
+                <div className="preview-thumbnail">
+                  <div className="preview-icon bg-warning">
+                    <i className="mdi mdi-domain" />
+                  </div>
+                </div>
+                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  {/* <h6 className="preview-subject font-weight-normal mb-1">
+                    Event today
+                  </h6> */}
+                  <p
+                    className="text-gray ellipsis mb-0"
+                    onClick={notificationDomain}>
+                    {" "}Upcoming Domain Renewel{" "}
                   </p>
                 </div>
               </a>

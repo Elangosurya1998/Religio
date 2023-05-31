@@ -34,9 +34,8 @@ function Sidemenubar() {
         </li>
         <div>
           <li
-            className={`${navitem} ${
-              pathname.includes("/Religio/Dashboard") && "active"
-            }`}>
+            className={`${navitem} ${pathname.includes("/Religio/Dashboard") && "active"
+              }`}>
             <Link to="/Religio/Dashboard" className="nav-link">
               <span className="menu-title">Dashboard</span>
               <i className="mdi mdi-home menu-icon" />
@@ -45,9 +44,8 @@ function Sidemenubar() {
         </div>
 
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/Congregation") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/Congregation") && "active"
+            }`}>
           <Link to="/Religio/Congregation" className="nav-link">
             <span className="menu-title">Congregation</span>
             <i className="mdi mdi-bank menu-icon" />
@@ -55,9 +53,8 @@ function Sidemenubar() {
         </li>
 
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/Province") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/Province") && "active"
+            }`}>
           <Link to="/Religio/Province" className="nav-link">
             <span className="menu-title">Province</span>
             <i className="mdi mdi-home-plus menu-icon" />
@@ -65,9 +62,8 @@ function Sidemenubar() {
         </li>
 
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/ClientRegistration") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/ClientRegistration") && "active"
+            }`}>
           <Link to="/Religio/ClientRegistration" className="nav-link">
             <span className="menu-title">Client Registration</span>
             <i className="mdi mdi-account-multiple-plus menu-icon" />
@@ -75,9 +71,17 @@ function Sidemenubar() {
         </li>
 
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/PaymentStatus") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/DomainRenewal") && "active"
+            }`}>
+          <Link to="/Religio/DomainRenewal" className="nav-link">
+            <span className="menu-title">Domain</span>
+            <i className="mdi mdi-domain menu-icon" />
+          </Link>
+        </li>
+
+        <li
+          className={`${navitem} ${pathname.includes("/Religio/PaymentStatus") && "active"
+            }`}>
           {isLogedIn?.role == "admin" ? (
             <Link to="/Religio/PaymentStatus" className="nav-link">
               <span className="menu-title">Payment Status</span>
@@ -95,9 +99,8 @@ function Sidemenubar() {
         </li> */}
 
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/UsersList") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/UsersList") && "active"
+            }`}>
           {isLogedIn?.role == "admin" ? (
             <Link to="/Religio/UsersList" className="nav-link">
               <span className="menu-title">Manage Users</span>
@@ -108,9 +111,8 @@ function Sidemenubar() {
           )}
         </li>
         <li
-          className={`${navitem} ${
-            pathname.includes("/Religio/HomeSections") && "active"
-          }`}>
+          className={`${navitem} ${pathname.includes("/Religio/HomeSections") && "active"
+            }`}>
           <a
             className="nav-link"
             data-bs-toggle="collapse"
@@ -122,25 +124,22 @@ function Sidemenubar() {
             <i className="mdi mdi-vector-arrange-below menu-icon" />
           </a>
           <div
-            className={`collapse ${
-              pathname.includes("/Religio/HomeSections") && "show"
-            }`}
+            className={`collapse ${pathname.includes("/Religio/HomeSections") && "show"
+              }`}
             id="general-pages">
             <ul className="nav flex-column sub-menu">
               <li
-                className={`${navitem} ${
-                  pathname.includes("/Religio/HomeSections/OurClient") &&
+                className={`${navitem} ${pathname.includes("/Religio/HomeSections/OurClient") &&
                   "active"
-                }`}>
+                  }`}>
                 <Link to="/Religio/HomeSections/OurClient" className="nav-link">
                   <span className="menu-title">Our Client</span>
                 </Link>
               </li>
               <li
-                className={`${navitem} ${
-                  pathname.includes("/Religio/HomeSections/OurCustomerSay") &&
+                className={`${navitem} ${pathname.includes("/Religio/HomeSections/OurCustomerSay") &&
                   "active"
-                }`}>
+                  }`}>
                 <Link
                   to="/Religio/HomeSections/OurCustomerSay"
                   className="nav-link">

@@ -19,6 +19,7 @@ use App\Http\Controllers\OurclientController;
 use App\Http\Controllers\OurCustomerSayController;
 use App\Http\Controllers\DatasupportController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\DomainrenewalController;
 
 
 /*
@@ -127,6 +128,14 @@ Route::get('/Religio/HomeSections/OurCustomerSay/Edit/{id}',[OurCustomerSayContr
 Route::put('/Religio/HomeSections/OurCustomerSay/Update/{id}',[OurCustomerSayController::class, 'update']);
 Route::delete('/Religio/HomeSections/OurCustomerSay/delete/{id}',[OurCustomerSayController::class, 'destroy']);
 Route::get('/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex',[OurCustomerSayController::class, 'OurCustomerSayindex']);
+
+//Home Section - OurClient
+
+Route::post('/Religio/Domainrenewal/Store',[DomainrenewalController::class, 'store']);
+Route::get('/Religio/Domainrenewal/list',[DomainrenewalController::class, 'index']);
+Route::get('/Religio/Domainrenewal/edit/{id}',[DomainrenewalController::class, 'edit']);
+Route::put('/Religio/Domainrenewal/update/{id}',[DomainrenewalController::class, 'update']);
+Route::delete('/Religio/Domainrenewal/delete/{id}',[DomainrenewalController::class, 'destroy']);
 
 // hoese and community status
 Route::post('housecommunitycreate', [HousecommunityController::class,'housecommunitycreate']);
