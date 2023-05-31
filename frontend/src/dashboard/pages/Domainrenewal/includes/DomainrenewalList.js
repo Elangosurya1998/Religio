@@ -103,7 +103,6 @@ function DomainrenewalList() {
                   {
                     Domainrenewals && Domainrenewals.map((item, index) => (
                       <tr>
-                        {/* <td>{item.cgname}</td> */}
                         <td>
                           {item.sitename}
                         </td>
