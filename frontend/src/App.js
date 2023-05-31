@@ -61,6 +61,8 @@ import OurClientLayouts from "./dashboard/pages/Ourclientsay/OurClientLayouts";
 import OurCustomerSayLayouts from "./dashboard/pages/OurcustomerSay/OurCustomerSayLayouts";
 import NotificationShowlayout from "./dashboard/pages/Notification/NotificationLayout";
 
+import DomainRenewalLayouts from "./dashboard/pages/Domainrenewal/DomainrenewalLayouts";
+
 function App() {
   return (
     <BrowserRouter>
@@ -355,6 +357,28 @@ function App() {
             path="/Religio/HomeSections/OurCustomerSay/Create"
             element={<OurCustomerSayLayouts />}
           />
+
+          <Route
+            exact
+            path="/Religio/DomainRenewal/Create"
+            element={<DomainRenewalLayouts />}
+          />
+          <Route
+            exact
+            path="/Religio/DomainRenewal/Edit/:id"
+            element={<DomainRenewalLayouts />}
+          />
+          <Route
+            exact
+            path="/Religio/DomainRenewal"
+            element={<DomainRenewalLayouts />}
+          />
+          <Route
+            exact
+            path="/Religio/UpcomingDomainRenewel"
+            element={<DomainRenewalLayouts />}
+          />
+
         </Route>
       </Routes>
     </BrowserRouter>
