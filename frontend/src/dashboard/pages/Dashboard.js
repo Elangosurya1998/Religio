@@ -8,7 +8,22 @@ import DataTable from "react-data-table-component";
 
 function Dashboard() {
   hidemenubar();
-
+  const today = new Date();
+  const cyear = today.getFullYear();
+  const fyear = cyear + 1;
+  const financial = `${cyear}-${fyear}`;
+  const cday = today.getDate();
+  console.log(cday);
+  if (cday == "1") {
+    axios
+      .get(`${ApiUrl}/Religio/Projectexpire`)
+      .then((response) => {
+        const resData = response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   function hidemenubar() {
     let value = $("body").attr("class");
     if (value === undefined) {
@@ -426,10 +441,7 @@ function Dashboard() {
       },
     },
   };
-  const today = new Date();
-  const cyear = today.getFullYear();
-  const fyear = cyear + 1;
-  const financial = `${cyear}-${fyear}`;
+
   return (
     <div className="content-wrapper">
       <div className="page-header">

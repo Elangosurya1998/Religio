@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\ForgetRequest;
 use App\Http\Requests\ResetRequest;
 use App\Mail\ForgetMail;
+use App\Mail\Domain;
 use Mail;
 Use Auth;
 use DB;
@@ -155,7 +156,38 @@ class RegisterController extends Controller
     
 
     }// end method 
+public function Projectexpire(){
+  $getcmonth =date('m')-1;
+  $getday =date('d');
 
+ if ($getday == '01') {
+ $getdomain =  DB::table('domainrenewal')->where(DB::raw("(DATE_FORMAT(domain_expire_date,'%m'))"),$getcmonth)->get();
+
+//  foreach ($getdomain as $key => $value) {
+//     $exdate =$value->domain_expire_date;
+
+//  }
+ 
+ foreach ($getdomain as $key => $domain) {
+
+                $email = "muni20002raj@gmail.com";
+                $bodyContent = [
+                    'sitename' => $domain->sitename,
+                    'siteurl'   => $domain->siteurl,
+                    'domailexdate'=> $domain->domain_expire_date,
+                    ];
+
+                {  
+                    try {
+                        Mail::to($email)->send(new Domain($bodyContent));
+                        }
+                        catch (Exception $e) {
+                    }
+                } 
+            }
+}
+    
+}
 
 }  
 

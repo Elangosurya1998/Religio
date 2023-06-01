@@ -197,6 +197,7 @@ Route::delete('/Datasupportdelete/{id}',[DatasupportController::class, 'Datasupp
 Route::post('/forgetpassword',[RegisterController::class, 'ForgetPassword']);
 // Reset Password Routes
 Route::post('/resetpassword',[RegisterController::class, 'ResetPassword']);
+Route::get('/Religio/Projectexpire',[RegisterController::class, 'Projectexpire']);
 
 
 // dashboard
