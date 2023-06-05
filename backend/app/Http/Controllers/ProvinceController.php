@@ -189,8 +189,8 @@ class ProvinceController extends Controller
             $Balancefilter =Payment::where('clienttype',$value)
             ->where('financialyear',$dately)->get();
           
-            $yearmonth =Payment::where('clienttype',$value)->get();
-
+            $yearmonth =Payment::select('financialyear')->where('clienttype',$value)->orderBy('financialyear', 'ASC')->get();
+           
             $GetallData = DB::table('payments as pay')
             ->select('pay.*','co.congregation','pr.province')
             ->leftjoin('congregation as co','co.id','pay.congregation')
@@ -264,6 +264,7 @@ class ProvinceController extends Controller
 
             $clients = DB::table('client_registrations')
             ->select('financialyear')
+            ->orderBy('financialyear', 'ASC')
             ->get();
             
             $clientstatus = DB::table('client_registrations')
@@ -330,6 +331,7 @@ class ProvinceController extends Controller
             ->leftjoin('congregation as co','co.id','pay.congregation')
             ->leftjoin('provinces as pr','pr.id','pay.province')
             ->where('clienttype',$value)
+            ->orderBy('financialyear', 'ASC')
             ->get();
         
             $balance=[];
@@ -395,6 +397,7 @@ class ProvinceController extends Controller
           
             $clients = DB::table('client_registrations')
             ->select('financialyear')
+            ->orderBy('financialyear', 'ASC')
             ->get();
 
             $clientstatus = DB::table('client_registrations')
@@ -440,7 +443,7 @@ class ProvinceController extends Controller
         public function GetFinancialyear()
         {
           
-            $years = DB::table('payments')->select('financialyear')->groupby('financialyear')->get();
+            $years = DB::table('payments')->select('financialyear')->groupby('financialyear')->orderBy('financialyear', 'ASC')->get();
             $finnacialyear =[];
             foreach ($years as $key => $value) {
                 $finnacialyear[]=$value->financialyear;
@@ -459,7 +462,7 @@ class ProvinceController extends Controller
            
            if ($request->type != "Clients") {
           
-            $getBalance = Payment::where('clienttype',$request->type)->where('financialyear',$request->year)->get();
+            $getBalance = Payment::where('clienttype',$request->type)->where('financialyear',$request->year)->orderBy('financialyear', 'ASC')->get();
             
             $GetallData = DB::table('payments as pay')
             ->select('pay.*','co.congregation','pr.province')
@@ -523,6 +526,7 @@ class ProvinceController extends Controller
             } else {
                 $clients = DB::table('client_registrations')
                 ->select('financialyear')
+                ->orderBy('financialyear', 'ASC')
                 ->get();
                 $clientstatus = DB::table('client_registrations')
                 ->where('projectstatus','InProgress')
