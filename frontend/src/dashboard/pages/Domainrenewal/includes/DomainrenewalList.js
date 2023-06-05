@@ -95,7 +95,7 @@ function DomainrenewalList() {
             style={{
               cursor: "pointer",
               paddingRight: 4,
-              color: "#b66dff",
+              color: "black",
             }}
             className="mdi mdi-eye"></a>
 
@@ -104,7 +104,7 @@ function DomainrenewalList() {
             style={{
               cursor: "pointer",
               paddingRight: 4,
-              color: "#b66dff",
+              color: "black",
             }}
             className="mdi mdi-pencil-box"></a>
 
@@ -114,7 +114,7 @@ function DomainrenewalList() {
             style={{
               cursor: "pointer",
               paddingRight: 4,
-              color: "#b66dff",
+              color: "black",
             }}
             id="print"></a>
         </>
@@ -192,10 +192,10 @@ function DomainrenewalList() {
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
                   {isLogedIn?.role == "admin" && (
-                    <Link
-                      to="/Religio/DomainRenewal/Create"
-                      className="btn btn-gradient-light">
-                      Add
+                    <Link to="/Religio/DomainRenewal/Create">
+                      <i
+                        class="fa-solid fa-user-plus"
+                        style={{ color: "black" }}></i>
                     </Link>
                   )}
                 </div>

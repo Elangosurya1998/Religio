@@ -16,20 +16,21 @@ function PaymentList() {
   //   });
   // });
   const exportpaymentTable = () => {
-    axios.get(`${ApiUrl}/Religio/Payments/export`)
-      .then(response => {
+    axios
+      .get(`${ApiUrl}/Religio/Payments/export`)
+      .then((response) => {
         // Trigger file download
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'payment_data.csv');
+        link.setAttribute("download", "payment_data.csv");
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
-        console.error('Export error:', error);
+      .catch((error) => {
+        console.error("Export error:", error);
       });
-  }
+  };
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Paymentlist`)
@@ -149,16 +150,16 @@ function PaymentList() {
       selector: (row) => [
         <a
           onClick={(e) => ViewPaymentStatus(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+          style={{ cursor: "pointer", paddingRight: 4, color: "black" }}
           className="mdi mdi-eye"></a>,
         <a
           onClick={(e) => EditClientregistration(e, row.id)}
-          style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+          style={{ cursor: "pointer", paddingRight: 4, color: "black" }}
           className="mdi mdi-pencil-box"></a>,
 
         <a
           onClick={(e) => deleteregister(e, row.id)}
-          style={{ cursor: "pointer", color: "#b66dff" }}
+          style={{ cursor: "pointer", color: "black" }}
           className="mdi mdi-delete"></a>,
       ],
       width: "100px",
@@ -196,7 +197,6 @@ function PaymentList() {
   };
   function filterdata(event) {
     var value = event.target.value;
-
     const keys = [
       "province",
       "financialyear",
@@ -240,16 +240,20 @@ function PaymentList() {
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
                   {isLogedIn?.role == "admin" ? (
-                    <Link
-                      to="/Religio/PaymentCreate"
-                      className="btn btn-gradient-light btn-sm">
-                       <i class="fa-solid fa-user-plus"></i>
+                    <Link to="/Religio/PaymentCreate">
+                      <i
+                        class="fa-solid fa-user-plus"
+                        style={{ color: "black" }}></i>
                     </Link>
                   ) : (
                     ""
                   )}
-                   &nbsp;&nbsp;&nbsp;
-                  <button onClick={exportpaymentTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
+                  &nbsp;&nbsp;&nbsp;
+                  <label onClick={exportpaymentTable}>
+                    <i
+                      class="fa-solid fa-file-csv"
+                      style={{ color: "black", cursor: "pointer" }}></i>
+                  </label>
                 </div>
               </div>
               <br></br>

@@ -6,23 +6,23 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import React from "react";
 
-
 function ReguserList() {
   const exportuserTable = () => {
-    axios.get(`${ApiUrl}/Religio/Users/export`)
-      .then(response => {
+    axios
+      .get(`${ApiUrl}/Religio/Users/export`)
+      .then((response) => {
         // Trigger file download
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'users_data.csv');
+        link.setAttribute("download", "users_data.csv");
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
-        console.error('Export error:', error);
+      .catch((error) => {
+        console.error("Export error:", error);
       });
-  }
+  };
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/UsersList`)
       .then((res) => {
@@ -45,7 +45,6 @@ function ReguserList() {
   const [register, SetUserregister] = useState([]);
   const [FilterRegister, FilterUserregister] = useState([]);
   const navigate = useNavigate();
-
 
   const EditUserregistration = async (e, id) => {
     navigate("/Religio/UserListEdit/" + id);
@@ -96,19 +95,17 @@ function ReguserList() {
       cell: (row) => (
         <>
           <>
-              <a
-                onClick={(e) => EditUserregistration(e, row.id)}
-                style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
-                className="mdi mdi-pencil-box"
-                id="print"
-              ></a>
-              <a
-                onClick={(e) => deleteUser(e, row.id)}
-                style={{ cursor: "pointer", color: "#b66dff" }}
-                className="mdi mdi-delete"
-                id="print"
-              ></a>
-            </>
+            <a
+              onClick={(e) => EditUserregistration(e, row.id)}
+              style={{ cursor: "pointer", paddingRight: 4, color: "black" }}
+              className="mdi mdi-pencil-box"
+              id="print"></a>
+            <a
+              onClick={(e) => deleteUser(e, row.id)}
+              style={{ cursor: "pointer", color: "black" }}
+              className="mdi mdi-delete"
+              id="print"></a>
+          </>
         </>
       ),
 
@@ -184,7 +181,7 @@ function ReguserList() {
             <div className="card-body">
               <div className="row">
                 <div className="col-lg-4">
-                <input
+                  <input
                     id="myInput"
                     type="text"
                     onChange={filterdata}
@@ -194,18 +191,21 @@ function ReguserList() {
                 </div>
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
-                {isLogedIn?.role == "admin" ? (
-                    <Link
-                      to="/Religio/UserCreate"
-                      className="btn btn-gradient-light btn-sm"
-                    >
-                       <i class="fa-solid fa-user-plus"></i>
+                  {isLogedIn?.role == "admin" ? (
+                    <Link to="/Religio/UserCreate">
+                      <i
+                        class="fa-solid fa-user-plus"
+                        style={{ color: "black" }}></i>
                     </Link>
                   ) : (
                     ""
                   )}
-                   &nbsp;&nbsp;&nbsp;
-                  <button onClick={exportuserTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
+                  &nbsp;&nbsp;&nbsp;
+                  <label onClick={exportuserTable}>
+                    <i
+                      class="fa-solid fa-file-csv"
+                      style={{ color: "black", cursor: "pointer" }}></i>
+                  </label>
                 </div>
               </div>
               <br></br>

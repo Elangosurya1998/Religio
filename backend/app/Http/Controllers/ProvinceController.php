@@ -252,7 +252,7 @@ class ProvinceController extends Controller
                     "balance" =>'0',
                     "total" =>  '0',
                     "paid" =>  '0',
-                    "year" => explode(",", ""),
+                    "year" => $year ?? explode(",", "") ,
                     "balPer" => '0' ,
                     "paidPer" => '0',
                     "Month" => explode(",", ""),
