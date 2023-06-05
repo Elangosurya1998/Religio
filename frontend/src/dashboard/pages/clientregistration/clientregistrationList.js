@@ -8,20 +8,21 @@ import React from "react";
 
 function ClientregistrationList() {
   const exportTable = () => {
-    axios.get(`${ApiUrl}/Religio/Clientregistration/export`)
-      .then(response => {
+    axios
+      .get(`${ApiUrl}/Religio/Clientregistration/export`)
+      .then((response) => {
         // Trigger file download
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'client_registration.csv');
+        link.setAttribute("download", "client_registration.csv");
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => {
-        console.error('Export error:', error);
+      .catch((error) => {
+        console.error("Export error:", error);
       });
-  }
+  };
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Clientregistration`)
       .then((res) => {
@@ -102,24 +103,21 @@ function ClientregistrationList() {
         <>
           <a
             onClick={(e) => peojectstatsadd(e, row.id)}
-            style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}
             className="mdi mdi-eye"
-            id="print"
-          ></a>
+            id="print"></a>
           {isLogedIn?.role === "admin" && (
             <>
               <a
                 onClick={(e) => EditClientregistration(e, row.id)}
-                style={{ cursor: "pointer", paddingRight: 4, color: "#b66dff" }}
+                style={{ cursor: "pointer", paddingRight: 4, color: "black" }}
                 className="mdi mdi-pencil-box"
-                id="print"
-              ></a>
+                id="print"></a>
               <a
                 onClick={(e) => deleteregister(e, row.id)}
-                style={{ cursor: "pointer", color: "#b66dff" }}
+                style={{ cursor: "pointer", color: "black" }}
                 className="mdi mdi-delete"
-                id="print"
-              ></a>
+                id="print"></a>
             </>
           )}
         </>
@@ -167,7 +165,6 @@ function ClientregistrationList() {
         item[key].toString()?.toLowerCase()?.includes(value?.toLowerCase())
       )
     );
-    console.log(value, filter);
 
     SetClientregister(filter);
   }
@@ -208,17 +205,20 @@ function ClientregistrationList() {
                 <div className="col-lg-6"></div>
                 <div className="col-lg-2">
                   {isLogedIn?.role == "admin" ? (
-                    <Link
-                      to="/Religio/Clientregistration/Add"
-                      className="btn btn-gradient-light btn-sm"
-                    >
-                      <i class="fa-solid fa-user-plus"></i>
+                    <Link to="/Religio/Clientregistration/Add">
+                      <i
+                        class="fa-solid fa-user-plus"
+                        style={{ color: "black" }}></i>
                     </Link>
                   ) : (
                     ""
                   )}
                   &nbsp;&nbsp;&nbsp;
-                  <button onClick={exportTable}  className="btn btn-gradient-light btn-sm"><i class="fa-solid fa-file-csv"></i></button>
+                  <label onClick={exportTable}>
+                    <i
+                      class="fa-solid fa-file-csv"
+                      style={{ color: "black", cursor: "pointer" }}></i>
+                  </label>
                 </div>
               </div>
               <br></br>
