@@ -10,24 +10,27 @@ import OurclientEdit from "./includes/OurclientEdit";
 import OurclientView from "./includes/OurclientView";
 
 function OurClientLayouts() {
+  const { pathname } = useLocation();
 
-    const { pathname } = useLocation();
-
-    return (
-        <div className="container-scroller">
-            <Navbar />
-            <div className="container-fluid page-body-wrapper">
-                <Sidemenubar />
-                <div className="main-panel">
-                    {pathname == "/Religio/HomeSections/OurClient" && <OurclientList />}
-                    {pathname == "/Religio/HomeSections/OurClient/Create" && <OurclientCreate />}
-                    {pathname == "" && <OurclientEdit />}
-                    {pathname == "" && <OurclientView />}
-                    <Footer />
-                </div>
-            </div>
+  return (
+    <div className="container-scroller">
+      <Navbar />
+      <div className="container-fluid page-body-wrapper">
+        <Sidemenubar />
+        <div className="main-panel">
+          {pathname == "/Religio/HomeSections/OurClient" && <OurclientList />}
+          {pathname == "/Religio/HomeSections/OurClient/Create" && (
+            <OurclientCreate />
+          )}
+          {pathname.includes("/Religio/HomeSections/OurClient/edit/") && (
+            <OurclientEdit />
+          )}
+          {pathname == "" && <OurclientView />}
+          <Footer />
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default OurClientLayouts;

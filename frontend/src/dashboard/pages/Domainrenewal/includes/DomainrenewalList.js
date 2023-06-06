@@ -12,6 +12,22 @@ import DataTable from "react-data-table-component";
 function DomainrenewalList() {
   // Get User data
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
+  const exportcongregationTable = () => {
+    axios
+      .get(`${ApiUrl}/Religio/Domainrenewal/Export`)
+      .then((response) => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "Domain_Renewal.csv");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Export error:", error);
+      });
+  };
   const navigate = useNavigate();
   const fetchData = () => {
     fetch(`${ApiUrl}/Religio/Domainrenewal/list`)
@@ -198,6 +214,12 @@ function DomainrenewalList() {
                         style={{ color: "black" }}></i>
                     </Link>
                   )}
+                  &nbsp;&nbsp;&nbsp;
+                  <label onClick={exportcongregationTable}>
+                    <i
+                      class="fa-solid fa-file-csv"
+                      style={{ color: "black", cursor: "pointer" }}></i>
+                  </label>
                 </div>
               </div>
               <br></br>

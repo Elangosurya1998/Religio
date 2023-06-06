@@ -105,9 +105,17 @@ class OurclientController extends Controller
      * @param  \App\Models\Ourclient  $Ourclient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ourclient $Ourclient)
+    public function edit($id)
     {
-        //
+        $Ourclientedit = Ourclient::where('id',$id)->get();
+            if(count($Ourclientedit) > 0) {
+                return response()->json(["status" => $this->status, "success" => true, 
+                            "count" => count($Ourclientedit), "data" => $Ourclientedit]);
+            }
+            else {
+                return response()->json(["status" => "failed",
+                "success" => false, "message" => "Whoops! no record found"]);
+            }
     }
 
     /**
@@ -117,9 +125,45 @@ class OurclientController extends Controller
      * @param  \App\Models\Ourclient  $Ourclient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ourclient $Ourclient)
+    public function update(Request $request, $id)
     {
-        //
+        $cong = $request->congregation;
+        $province = $request->province;
+        $client = $request->client;
+        $filename =$request->file('logo');
+        // Retrieve file
+        // Move the file to the desired location
+      
+        if($filename != null){
+            $file = $request->file('logo');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('Ourclient/logo/'), $fileName);
+        }else{
+            $fileName = $request->logo;
+        }
+
+        $input = [
+            'congregation' => $request->congregation,
+            'province' => $province,
+            'client' => $client,
+            'logo' => $fileName
+        ];
+
+        
+
+        $Clientupdate = Ourclient::where('id',$id)->update($input);
+
+  
+
+        if(!is_null($Clientupdate)){ 
+
+            return response()->json(["status" => $this->status, "success" => true, 
+                    "message" => "File uploaded successfully", "data" => $Clientupdate]);
+        }    
+        else {
+            return response()->json(["status" => "failed", "success" => false,
+                        "message" => "Whoops! failed to create."]);
+        } 
     }
 
     /**
