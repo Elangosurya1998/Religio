@@ -160,4 +160,82 @@ class ExportController extends Controller
 
         return new StreamedResponse($callback, 200, $headers);
     }
+    public function OurClientExport(){
+        $data = DB::table('ourclient as oc')
+            ->select('cg.congregation as congregation','pr.province as province','cr.name as name','oc.logo')
+            ->leftjoin('congregation as cg', 'oc.congregation','=','cg.id')
+            ->leftjoin('provinces as pr', 'oc.province','=','pr.id')
+            ->leftjoin('client_registrations as cr', 'oc.client','=','cr.id')
+            ->get();
+            $headers = [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="users_data.csv"',
+            ];
+            $callback = function () use ($data) {
+                $file = fopen('php://output', 'w');
+    
+                // Write CSV headers
+                fputcsv($file, array_keys((array) $data[0]));
+    
+                // Write CSV data
+                foreach ($data as $record) {
+                    fputcsv($file, (array) $record);
+                }
+    
+                fclose($file);
+            };
+    
+            return new StreamedResponse($callback, 200, $headers);
+    }
+    public function domainexport(){
+        $data = DB::table('domainrenewal')->get();
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="users_data.csv"',
+        ];
+        $callback = function () use ($data) {
+            $file = fopen('php://output', 'w');
+
+            // Write CSV headers
+            fputcsv($file, array_keys((array) $data[0]));
+
+            // Write CSV data
+            foreach ($data as $record) {
+                fputcsv($file, (array) $record);
+            }
+
+            fclose($file);
+        };
+
+        return new StreamedResponse($callback, 200, $headers);
+    }
+    public function Ourcustomersayexport(){
+        $data = DB::table('ourcustomersays as cs')
+            ->select('cg.congregation as congregation','pr.province as province','cr.name as name','cs.title','cs.comments')
+            ->leftjoin('congregation as cg', 'cs.congregation','=','cg.id')
+            ->leftjoin('provinces as pr', 'cs.province','=','pr.id')
+            ->leftjoin('client_registrations as cr', 'cs.client','=','cr.id')
+            ->leftjoin('ourclient as oc', 'cs.client','=','oc.client')
+            ->get();
+            $headers = [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="users_data.csv"',
+            ];
+            $callback = function () use ($data) {
+                $file = fopen('php://output', 'w');
+    
+                // Write CSV headers
+                fputcsv($file, array_keys((array) $data[0]));
+    
+                // Write CSV data
+                foreach ($data as $record) {
+                    fputcsv($file, (array) $record);
+                }
+    
+                fclose($file);
+            };
+    
+            return new StreamedResponse($callback, 200, $headers);
+    }
+
 }

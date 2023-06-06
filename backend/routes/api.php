@@ -116,9 +116,9 @@ Route::get('/Religio/Payments/export',[ExportController::class, 'exportpaymentTa
 Route::post('/Religio/HomeSections/OurClient/Store',[OurclientController::class, 'store']);
 Route::get('/Religio/HomeSections/OurClient/list',[OurclientController::class, 'index']);
 Route::get('/Religio/HomeSections/OurClient/edit/{id}',[OurclientController::class, 'edit']);
-Route::put('/Religio/HomeSections/OurClient/update/{id}',[OurclientController::class, 'update']);
+Route::post('/Religio/HomeSections/OurClient/update/{id}',[OurclientController::class, 'update']);
 Route::delete('/Religio/HomeSections/OurClient/delete/{id}',[OurclientController::class, 'destroy']);
-
+Route::get('/Religio/HomeSections/OurClient/Export',[ExportController::class,'OurClientExport']);
 //Home Section - OurClient
 
 Route::post('/Religio/HomeSections/OurCustomerSay/Store',[OurCustomerSayController::class, 'store']);
@@ -128,7 +128,7 @@ Route::get('/Religio/HomeSections/OurCustomerSay/Edit/{id}',[OurCustomerSayContr
 Route::put('/Religio/HomeSections/OurCustomerSay/Update/{id}',[OurCustomerSayController::class, 'update']);
 Route::delete('/Religio/HomeSections/OurCustomerSay/delete/{id}',[OurCustomerSayController::class, 'destroy']);
 Route::get('/Religio/HomeSections/OurCustomerSay/OurCustomerSayindex',[OurCustomerSayController::class, 'OurCustomerSayindex']);
-
+Route::get('/Religio/HomeSections/OurCustomerSay/Export',[ExportController::class,'Ourcustomersayexport']);
 //Home Section - domain
 
 Route::post('/Religio/Domainrenewal/Store',[DomainrenewalController::class, 'store']);
@@ -136,7 +136,7 @@ Route::get('/Religio/Domainrenewal/list',[DomainrenewalController::class, 'index
 Route::get('/Religio/Domainrenewal/edit/{id}',[DomainrenewalController::class, 'domainEdit']);
 Route::put('/Religio/Domainrenewal/update/{id}',[DomainrenewalController::class, 'domainupdate']);
 Route::delete('/Religio/Domainrenewal/delete/{id}',[DomainrenewalController::class, 'destroy']);
-
+Route::get('/Religio/Domainrenewal/Export',[ExportController::class,'domainexport']);
 // hoese and community status
 Route::post('housecommunitycreate', [HousecommunityController::class,'housecommunitycreate']);
 Route::get('/housecommunity',[HousecommunityController::class,'housecommunityList']);

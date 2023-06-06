@@ -21,7 +21,6 @@ function hideshowmenubar() {
 }
 
 function Navbar() {
-
   const isLogedIn = JSON.parse(sessionStorage.getItem("userDetails"));
   const navigate = useNavigate();
   const handleSignOut = () => {
@@ -50,7 +49,6 @@ function Navbar() {
     navigate("/Religio/UpcomingDomainRenewel");
   }
 
-
   return (
     <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -58,11 +56,15 @@ function Navbar() {
           Religio Management
         </a>
         <a className="navbar-brand brand-logo-mini" href="">
-          <img src="./logo.jpg"></img>
+          <img src="/relogio.png"></img>
         </a>
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-stretch">
-        <button className="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" onClick={hidemenubar}>
+        <button
+          className="navbar-toggler navbar-toggler align-self-center"
+          type="button"
+          data-toggle="minimize"
+          onClick={hidemenubar}>
           <span className="mdi mdi-menu" />
         </button>
         {/* <div className="search-field d-none d-md-block">
@@ -108,23 +110,24 @@ function Navbar() {
                   </p>
                 </div>
               </a>
-              <a className="dropdown-item preview-item">
+              {/* <a className="dropdown-item preview-item">
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-warning">
                     <i className="mdi mdi-domain" />
                   </div>
                 </div>
-                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  {/* <h6 className="preview-subject font-weight-normal mb-1">
+                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center"> */}
+              {/* <h6 className="preview-subject font-weight-normal mb-1">
                     Event today
                   </h6> */}
-                  <p
+              {/* <p
                     className="text-gray ellipsis mb-0"
                     onClick={notificationDomain}>
-                    {" "}Upcoming Domain Renewel{" "}
+                    {" "}
+                    Upcoming Domain Renewel{" "}
                   </p>
-                </div>
-              </a>
+                </div> */}
+              {/* </a> */}
             </div>
           </li>
           <li className="nav-item dropdown">&nbsp;</li>
@@ -171,7 +174,8 @@ function Navbar() {
         <button
           className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
           type="button"
-          data-toggle="offcanvas" onClick={hideshowmenubar}>
+          data-toggle="offcanvas"
+          onClick={hideshowmenubar}>
           <span className="mdi mdi-menu" />
         </button>
       </div>
