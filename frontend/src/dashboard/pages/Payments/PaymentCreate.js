@@ -108,26 +108,31 @@ function PaymentCreate() {
       .get(`${ApiUrl}/Religio/PaymentAddress/get/${id}`)
       .then((response) => {
         const resdata = response.data;
-
+        console.log(resdata);
         const Place = resdata.data.place;
         const FinancialYear = resdata.data.financialyear;
         const ClientCode = resdata.data.clientcode;
-        const ProjectValue = resdata.data.projectvalue;
-        const AmcValeue = resdata.data.amcvalue;
         var clienttype = $("#clienttype").val();
         console.log(clienttype);
         if (clienttype === "AMC") {
+          const AmcValeue = resdata.data.amcvalue;
           setOrgvalue(AmcValeue);
+          reset({
+            place: Place,
+            financialyear: FinancialYear,
+            clientcode: ClientCode,
+            amcvalue: AmcValeue,
+          });
         } else {
+          const ProjectValue = resdata.data.projectvalue;
           setOrgvalue(ProjectValue);
+          reset({
+            place: Place,
+            financialyear: FinancialYear,
+            clientcode: ClientCode,
+            projectvalue: ProjectValue,
+          });
         }
-        reset({
-          place: Place,
-          financialyear: FinancialYear,
-          clientcode: ClientCode,
-          projectvalue: ProjectValue,
-          amcvalue: AmcValeue,
-        });
       })
       .catch((err) => {
         console.log(err);

@@ -34,6 +34,11 @@ function NotificationShow() {
       sortable: true,
     },
     {
+      name: "Month",
+      selector: (row) => row.Month,
+      sortable: true,
+    },
+    {
       name: "AMC Value",
       selector: (row) => row.AMC,
       sortable: true,

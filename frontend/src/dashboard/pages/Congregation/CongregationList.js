@@ -100,7 +100,15 @@ function CongregationList() {
     },
     {
       name: "Congregation Name",
-      selector: (row) => row.congregation,
+      cell: (row) => (
+        <>
+          <a
+            onClick={(e) => Viewcongregation(e, row.id)}
+            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            {row.congregation}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {

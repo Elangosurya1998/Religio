@@ -47,6 +47,7 @@ class PaymentController extends Controller
             ->select('pay.*','co.congregation','pr.province')
             ->leftjoin('congregation as co','co.id','pay.congregation')
             ->leftjoin('provinces as pr','pr.id','pay.province')
+            ->orderBy('pay.id','desc')
             ->get();
 
             if(count($payment) > 0) {

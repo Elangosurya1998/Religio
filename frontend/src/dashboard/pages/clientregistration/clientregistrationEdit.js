@@ -6,6 +6,8 @@ import ApiUrl from "../Api/Api";
 import AppUrl from "../Api/Url";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import $ from "jquery";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ClientRegistrationEdit() {
   $("#uniquefile").hide();
@@ -21,6 +23,12 @@ function ClientRegistrationEdit() {
   const value = country.getAllCountries();
   const { id } = useParams();
   const [selectedFile, setSelectedFile] = useState();
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectDate, setSelectDate] = useState(null);
+  const [selectedContractDate, setSelectedContractDate] = useState(null);
+  const [selectContractDate, setselectContractDate] = useState(null);
+  const [selectedAMCDate, setSelectedAMCDate] = useState(null);
+  const [selectAMCDate, setselectAMCDate] = useState(null);
 
   useEffect(() => {
     fetch(`${ApiUrl}/Religio/Registeredit/${id}`)
@@ -28,7 +36,28 @@ function ClientRegistrationEdit() {
         return res.json();
       })
       .then((resp) => {
+        const dateofjoining = resp.data[0].dateofjoining;
+        const parts = dateofjoining.split("-");
+        const datajoning = new Date(parts[0], parts[1], parts[2]);
+        setSelectDate(datajoning);
+        const contract = resp.data[0].dateofcontractsigning;
+        const contractpart = contract.split("-");
+        const contractsigning = new Date(
+          contractpart[0],
+          contractpart[1],
+          contractpart[2]
+        );
+        setselectContractDate(contractsigning);
+        const AMC = resp.data[0].amcdate;
+        const AMCpart = AMC.split("-");
+        const AMCdates = new Date(AMCpart[0], AMCpart[1], AMCpart[2]);
+        setselectAMCDate(AMCdates);
         reset(resp.data[0]);
+
+        setSelectedAMCDate(AMC);
+        setSelectedContractDate(contract);
+        setSelectedDate(dateofjoining);
+
         const value = resp.data[0].country;
         const State = require("country-state-city").State;
         var getValue = State.getStatesOfCountry(value);
@@ -76,8 +105,10 @@ function ClientRegistrationEdit() {
   function onSubmitformregister(data, e) {
     const formData = new FormData();
     formData.append("File", selectedFile);
-    console.log(formData);
-
+    data.dateofjoining = selectedDate;
+    data.dateofcontractsigning = selectedContractDate;
+    data.amcdate = selectedAMCDate;
+    console.log(data);
     axios
       .put(`${ApiUrl}/Religio/Clientregistrationupdate/${id}`, data)
       .then((response) => {
@@ -136,6 +167,52 @@ function ClientRegistrationEdit() {
       $("#uniquefile").hide();
       setSelectedFile(event.target.files[0]);
     }
+  };
+  const handleDateChange = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setSelectDate(date);
+
+    setSelectedDate(datedata);
+  };
+  const handleDateContract = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setselectContractDate(date);
+
+    setSelectedContractDate(datedata);
+  };
+
+  const handleDateAMC = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setselectAMCDate(date);
+
+    setSelectedAMCDate(datedata);
   };
   return (
     <div className="content-wrapper">
@@ -237,7 +314,7 @@ function ClientRegistrationEdit() {
                       <option value="">Select Client Type</option>
                       <option value="Priest">Priest</option>
                       <option value="Sisters">Sisters</option>
-                      <option value="LayBrothers">Lay Brothers</option>
+                      <option value="LayBrothers">Brothers</option>
                     </select>
                     {errors?.clienttype?.type === "required" && (
                       <div className="text-danger text_error">
@@ -329,12 +406,24 @@ function ClientRegistrationEdit() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
+                    {/* <input
                       type="Date"
                       className="form-control regdata"
                       name="dateofjoining"
                       {...register("dateofjoining", { required: true })}
                       aria-invalid={errors?.dateofjoining ? "true" : "false"}
+                    /> */}
+                    <DatePicker
+                      name="dateofjoining"
+                      {...register("dateofjoining")}
+                      className="form-control"
+                      selected={selectDate}
+                      value={selectDate}
+                      onChange={handleDateChange}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.dateofjoining?.type === "required" && (
                       <div className="text-danger text_error">
@@ -380,14 +469,17 @@ function ClientRegistrationEdit() {
                       Contract Signed Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
-                      type="Date"
-                      className="form-control regdata"
+                    <DatePicker
                       name="dateofcontractsigning"
-                      {...register("dateofcontractsigning", { required: true })}
-                      aria-invalid={
-                        errors?.dateofcontractsigning ? "true" : "false"
-                      }
+                      {...register("dateofcontractsigning")}
+                      className="form-control"
+                      selected={selectContractDate}
+                      autoComplete="off"
+                      onChange={handleDateContract}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.dateofcontractsigning?.type === "required" && (
                       <div className="text-danger text_error">
@@ -402,12 +494,17 @@ function ClientRegistrationEdit() {
                       AMC Start Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
-                      type="Date"
-                      className="form-control regdata"
+                    <DatePicker
                       name="amcdate"
-                      {...register("amcdate", { required: true })}
-                      aria-invalid={errors?.amcdate ? "true" : "false"}
+                      {...register("amcdate")}
+                      className="form-control"
+                      selected={selectAMCDate}
+                      autoComplete="off"
+                      onChange={handleDateAMC}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.amcdate?.type === "required" && (
                       <div className="text-danger text_error">
@@ -505,24 +602,40 @@ function ClientRegistrationEdit() {
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="webapplication"
-                          {...register("webapplication")} /> Web Application <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="webapplication"
+                          {...register("webapplication")}
+                        />{" "}
+                        Web Application <i className="input-helper" />
+                      </label>
                     </div>
-
                   </div>
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="app"
-                          {...register("app")} /> Mobile Application <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="app"
+                          {...register("app")}
+                        />{" "}
+                        Mobile Application <i className="input-helper" />
+                      </label>
                     </div>
-
                   </div>
                   <div className="form-group col-md-3">
                     <div className="form-check form-check-flat form-check-primary">
                       <label className="form-check-label">
-                        <input type="checkbox" className="form-check-input" name="website"
-                          {...register("website")} /> Website <i className="input-helper" /></label>
+                        <input
+                          type="checkbox"
+                          className="form-check-input"
+                          name="website"
+                          {...register("website")}
+                        />{" "}
+                        Website <i className="input-helper" />
+                      </label>
                     </div>
                   </div>
                 </div>

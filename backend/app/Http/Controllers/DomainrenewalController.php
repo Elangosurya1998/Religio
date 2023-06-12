@@ -19,11 +19,28 @@ class DomainrenewalController extends Controller
      */
     public function index()
     {
-        $data = Domainrenewal::all();
-
+       
+        $data= DB::table('domainrenewal')->orderBy('id','desc')->get();
+       $alldata=[];
+        foreach ($data as $key => $value) {
+           $id =$value->id;
+           $sitename=$value->sitename;
+           $servername=$value->servername;
+           $siteurl =$value->siteurl;
+            $domain_expire_date = date("d-m-Y", strtotime($value->domain_expire_date));
+            $alldata[] = [
+                'id'=> $id,
+                'sitename'=>$sitename,
+                'servername'=>$servername,
+                'siteurl'=>$siteurl,
+                'domain_expire_date'=>$domain_expire_date
+            ];
+        
+        }
+        
         if(count($data) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
-                        "count" => count($data), "data" => $data]);
+                        "count" => count($data), "data" => $alldata]);
         }
         else {
             return response()->json(["status" => "failed",

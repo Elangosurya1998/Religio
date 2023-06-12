@@ -93,7 +93,15 @@ function PaymentList() {
     },
     {
       name: "Province",
-      selector: (row) => row.province,
+      selector: (row) => (
+        <>
+          <a
+            onClick={(e) => ViewPaymentStatus(e, row.id)}
+            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            {row.province}
+          </a>
+        </>
+      ),
       sortable: true,
       width: "150px",
     },

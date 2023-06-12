@@ -4,6 +4,8 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ApiUrl from "../../Api/Api";
 import { Link, useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function DomainrenewalCreate() {
   const {
@@ -14,9 +16,15 @@ function DomainrenewalCreate() {
   } = useForm({ mode: "onChange" });
 
   const navigate = useNavigate();
-
+  const [DomainCreated, setDomainCreated] = useState(null);
+  const [DomainCreate, setDomainCreate] = useState(null);
+  const [domainexpireDate, setdomainexpireDate] = useState(null);
+  const [domainexpiredDate, setdomainexpiredDate] = useState(null);
   function onSubmitDomainrenewalform(data, e) {
     e.preventDefault();
+    data.domain_create_date = DomainCreated;
+    data.domain_expire_date = domainexpiredDate;
+
     axios
       .post(`${ApiUrl}/Religio/Domainrenewal/Store`, data)
       .then((Response) => {
@@ -38,7 +46,37 @@ function DomainrenewalCreate() {
   const regex = new RegExp(
     "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?"
   );
+  const handledomaincreate = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
 
+    setDomainCreate(date);
+
+    setDomainCreated(datedata);
+  };
+
+  const handledomainexpired = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setdomainexpireDate(date);
+
+    setdomainexpiredDate(datedata);
+  };
   return (
     <div className="content-wrapper">
       <div className="page-header">
@@ -161,14 +199,17 @@ function DomainrenewalCreate() {
                       Domain Create Date &nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
-                      type="Date"
-                      className="form-control"
+                    <DatePicker
                       name="domain_create_date"
-                      {...register("domain_create_date", { required: true })}
-                      aria-invalid={
-                        errors?.domain_create_date ? "true" : "false"
-                      }
+                      {...register("domain_create_date")}
+                      className="form-control"
+                      selected={DomainCreate}
+                      autoComplete="off"
+                      onChange={handledomaincreate}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.domain_create_date?.type === "required" && (
                       <div className="text-danger text_error">
@@ -183,14 +224,17 @@ function DomainrenewalCreate() {
                       Domain Expire Date &nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
-                      type="Date"
-                      className="form-control"
+                    <DatePicker
                       name="domain_expire_date"
-                      {...register("domain_expire_date", { required: true })}
-                      aria-invalid={
-                        errors?.domain_expire_date ? "true" : "false"
-                      }
+                      {...register("domain_expire_date")}
+                      className="form-control"
+                      selected={domainexpireDate}
+                      autoComplete="off"
+                      onChange={handledomainexpired}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.domain_expire_date?.type === "required" && (
                       <div className="text-danger text_error">

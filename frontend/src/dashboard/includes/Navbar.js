@@ -92,7 +92,9 @@ function Navbar() {
               aria-labelledby="notificationDropdown">
               <h6 className="p-3 mb-0">Notifications</h6>
               <div className="dropdown-divider" />
-              <a className="dropdown-item preview-item">
+              <a
+                className="dropdown-item preview-item"
+                onClick={notificationAMC}>
                 <div className="preview-thumbnail">
                   <div className="preview-icon bg-success">
                     <i className="mdi mdi-calendar" />
@@ -102,9 +104,7 @@ function Navbar() {
                   {/* <h6 className="preview-subject font-weight-normal mb-1">
                     Event today
                   </h6> */}
-                  <p
-                    className="text-gray ellipsis mb-0"
-                    onClick={notificationAMC}>
+                  <p className="text-gray ellipsis mb-0">
                     {" "}
                     Upcoming AMC Clients{" "}
                   </p>

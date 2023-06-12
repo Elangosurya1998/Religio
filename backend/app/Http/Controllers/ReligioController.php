@@ -148,18 +148,16 @@ class ReligioController extends Controller
 
         $AmcNotification =  DB::table('client_registrations as cr')
             ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'<=',$currentyear)
-            ->orderBy(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'asc')
+            ->orderByRaw("MONTH(cr.amcdate)")
             ->get();
 
-        //dd($AmcNotification);
+        
         foreach($AmcNotification as $AmcNoti){
 
             $amcdate = date('Y-m', strtotime($AmcNoti->amcdate));
             $currentDate = date('Y-m');
-
             $amcYear = date('Y', strtotime($AmcNoti->amcdate));
             $amcCurrent = date('Y');
-
             $amcCount = $amcCurrent-$amcYear;
         
             $Payments =  DB::table('payments')
@@ -171,6 +169,7 @@ class ReligioController extends Controller
             $date[0] = date('Y');
             $imdate = implode('-',$date);
             $dformat =date("d-m-Y", strtotime($imdate)); 
+            $month =date("F",strtotime($dformat));
             $amc = [];
             $newsales = []; 
             $outstanding = [];
@@ -199,30 +198,33 @@ class ReligioController extends Controller
                         $outstanding[] = 0;
                         break;
                 }
+               
 
             }
-
             $outstandingVal = ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc);
+
             if($outstandingVal > 0){
-                if($currentDate >= $amcCurrent){
+                if($currentDate >= $amcdate){
                     $overAll[] = [
                         'name' => $AmcNoti->name,
                         'amcdate'=>$dformat,
-                        'clientcode' => $AmcNoti->clientcode,
-                        'projectvalue' => $AmcNoti->projectvalue,
+                        'Month'=>$month,
+                        // 'clientcode' => $AmcNoti->clientcode,
+                        // 'projectvalue' => $AmcNoti->projectvalue,
                         // 'GST' => intdiv($AmcNoti->projectvalue,100) * 18,
-                        'TotalProjectPay+GST' => array_sum($newsales) + array_sum($outstanding),
-                        'TotalProjectoutstandingGST' => ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding)),
+                        // 'TotalProjectPay+GST' => array_sum($newsales) + array_sum($outstanding),
+                        // 'TotalProjectoutstandingGST' => ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding)),
                         'AMC' => $AmcNoti->amcvalue,
                         // 'AMC gst' => intdiv($AmcNoti->amcvalue,100) * 18,
-                        'OverallAMC+GST' => $AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18,
-                        'TotalAMCPay+GST' => array_sum($amc),
+                        // 'OverallAMC+GST' => $AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18,
+                        // 'TotalAMCPay+GST' => array_sum($amc),
                         'TotalAMCoutstanding' => ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc)
                     ];
                 }
             }
         }
-           
+        
+        //  dd($AmcNoti->amcvalue);
         if(count($overAll) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
                         "count" => count($overAll), "data" => $overAll]);

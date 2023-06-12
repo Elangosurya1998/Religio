@@ -84,7 +84,19 @@ function DomainrenewalList() {
     },
     {
       name: "Domain Name",
-      selector: (row) => row.sitename,
+      cell: (row) => (
+        <>
+          <a
+            onClick={(e) => handleShow(e, row.id)}
+            style={{
+              cursor: "pointer",
+              paddingRight: 4,
+              color: "black",
+            }}>
+            {row.sitename}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {
