@@ -91,7 +91,13 @@ function OurclientList() {
     },
     {
       name: "Province",
-      selector: (row) => row.prname,
+      selector: (row) => (
+        <>
+          <a onClick={(e) => handleShow(e, row)} style={{ cursor: "pointer" }}>
+            {row.prname}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {

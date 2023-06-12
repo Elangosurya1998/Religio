@@ -79,7 +79,15 @@ function ClientregistrationList() {
     },
     {
       name: "Congregation",
-      selector: (row) => row.congregation,
+      cell: (row) => (
+        <>
+          <a
+            onClick={(e) => peojectstatsadd(e, row.id)}
+            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            {row.congregation}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {

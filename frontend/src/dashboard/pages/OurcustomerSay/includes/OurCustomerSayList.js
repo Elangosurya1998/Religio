@@ -86,7 +86,15 @@ function OurCustomerSayList() {
     },
     {
       name: "Client Name",
-      selector: (row) => row.crname,
+      selector: (row) => (
+        <>
+          <a
+            onClick={(e) => ViewOurCustomerSay(e, row.id)}
+            style={{ cursor: "pointer" }}>
+            {row.crname}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {

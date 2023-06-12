@@ -5,16 +5,28 @@ import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import $ from "jquery";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ClientRegistrationCreate() {
   $("#uniqueclientcode").hide();
   $("#uniquefile").hide();
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectDate, setSelectDate] = useState(null);
+  const [selectedContractDate, setSelectedContractDate] = useState(null);
+  const [selectContractDate, setselectContractDate] = useState(null);
+  const [selectedAMCDate, setSelectedAMCDate] = useState(null);
+  const [selectAMCDate, setselectAMCDate] = useState(null);
+
   const country = require("country-state-city").Country;
   const value = country.getAllCountries();
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({ mode: "onChange" });
   const navigate = useNavigate();
@@ -37,6 +49,9 @@ function ClientRegistrationCreate() {
     const formData = new FormData();
 
     formData.append("File", selectedFile);
+    data.dateofjoining = selectedDate;
+    data.dateofcontractsigning = selectedContractDate;
+    data.amcdate = selectedAMCDate;
 
     axios
       .post(`${ApiUrl}/Religio/Clientregistration/store`, data)
@@ -136,6 +151,54 @@ function ClientRegistrationCreate() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleDateChange = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setSelectDate(date);
+
+    setSelectedDate(datedata);
+  };
+
+  const handleDateContract = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setselectContractDate(date);
+
+    setSelectedContractDate(datedata);
+  };
+
+  const handleDateAMC = (date) => {
+    const month = date.getMonth().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const dates = date.getDate().toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    });
+    const datedata = `${date.getFullYear()}-${month}-${dates}`;
+
+    setselectAMCDate(date);
+
+    setSelectedAMCDate(datedata);
   };
   return (
     <div className="content-wrapper">
@@ -248,7 +311,7 @@ function ClientRegistrationCreate() {
                       <option value="">Select Client Type</option>
                       <option value="Priest">Priest</option>
                       <option value="Sisters">Sisters</option>
-                      <option value="LayBrothers">Lay Brothers</option>
+                      <option value="LayBrothers">Brothers</option>
                     </select>
                     {errors?.clienttype?.type === "required" && (
                       <div className="text-danger text_error">
@@ -350,12 +413,24 @@ function ClientRegistrationCreate() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
+                    {/* <input
                       type="Date"
                       className="form-control"
                       name="dateofjoining"
                       {...register("dateofjoining", { required: true })}
                       aria-invalid={errors?.dateofjoining ? "true" : "false"}
+                    /> */}
+                    <DatePicker
+                      name="dateofjoining"
+                      {...register("dateofjoining")}
+                      className="form-control"
+                      selected={selectDate}
+                      autoComplete="off"
+                      onChange={handleDateChange}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.dateofjoining?.type === "required" && (
                       <div className="text-danger text_error">
@@ -401,7 +476,7 @@ function ClientRegistrationCreate() {
                       Contract Signed Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
+                    {/* <input
                       type="Date"
                       className="form-control"
                       name="dateofcontractsigning"
@@ -409,6 +484,18 @@ function ClientRegistrationCreate() {
                       aria-invalid={
                         errors?.dateofcontractsigning ? "true" : "false"
                       }
+                    /> */}
+                    <DatePicker
+                      name="dateofcontractsigning"
+                      {...register("dateofcontractsigning")}
+                      className="form-control"
+                      selected={selectContractDate}
+                      autoComplete="off"
+                      onChange={handleDateContract}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
                     {errors?.dateofcontractsigning?.type === "required" && (
                       <div className="text-danger text_error">
@@ -423,13 +510,26 @@ function ClientRegistrationCreate() {
                       AMC Start Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <input
+                    {/* <input
                       type="Date"
                       className="form-control"
                       name="amcdate"
                       {...register("amcdate", { required: true })}
                       aria-invalid={errors?.amcdate ? "true" : "false"}
+                    /> */}
+                    <DatePicker
+                      name="amcdate"
+                      {...register("amcdate")}
+                      className="form-control"
+                      selected={selectAMCDate}
+                      autoComplete="off"
+                      onChange={handleDateAMC}
+                      showYearDropdown
+                      scrollableYearDropdown
+                      yearDropdownItemNumber={25}
+                      dateFormat="dd-MM-yyyy"
                     />
+
                     {errors?.amcdate?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">AMC Date is required</label>

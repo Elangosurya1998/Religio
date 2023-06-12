@@ -97,7 +97,15 @@ function ProvinceList() {
     },
     {
       name: "Province",
-      selector: (row) => row.province,
+      selector: (row) => (
+        <>
+          <a
+            onClick={(e) => ViewProvince(e, row.id)}
+            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            {row.province}
+          </a>
+        </>
+      ),
       sortable: true,
     },
     {
