@@ -18,7 +18,7 @@ function ClientRegistrationCreate() {
   const [selectContractDate, setselectContractDate] = useState(null);
   const [selectedAMCDate, setSelectedAMCDate] = useState(null);
   const [selectAMCDate, setselectAMCDate] = useState(null);
-
+  const [error, setError] = useState({});
   const country = require("country-state-city").Country;
   const value = country.getAllCountries();
   const {
@@ -49,6 +49,33 @@ function ClientRegistrationCreate() {
     const formData = new FormData();
 
     formData.append("File", selectedFile);
+    if (selectedDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate: "Date of Joining is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate: "" }));
+    }
+    if (selectedContractDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate1: "Date of Contract Signing is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate1: "" }));
+    }
+    if (selectedAMCDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate2: "AMC Date is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate2: "" }));
+    }
     data.dateofjoining = selectedDate;
     data.dateofcontractsigning = selectedContractDate;
     data.amcdate = selectedAMCDate;
@@ -413,13 +440,6 @@ function ClientRegistrationCreate() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    {/* <input
-                      type="Date"
-                      className="form-control"
-                      name="dateofjoining"
-                      {...register("dateofjoining", { required: true })}
-                      aria-invalid={errors?.dateofjoining ? "true" : "false"}
-                    /> */}
                     <DatePicker
                       name="dateofjoining"
                       {...register("dateofjoining")}
@@ -432,10 +452,10 @@ function ClientRegistrationCreate() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.dateofjoining?.type === "required" && (
+                    {error?.selectedDate != "" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
-                          Date of Joining is required
+                          {error?.selectedDate}
                         </label>
                       </div>
                     )}
@@ -476,15 +496,7 @@ function ClientRegistrationCreate() {
                       Contract Signed Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    {/* <input
-                      type="Date"
-                      className="form-control"
-                      name="dateofcontractsigning"
-                      {...register("dateofcontractsigning", { required: true })}
-                      aria-invalid={
-                        errors?.dateofcontractsigning ? "true" : "false"
-                      }
-                    /> */}
+
                     <DatePicker
                       name="dateofcontractsigning"
                       {...register("dateofcontractsigning")}
@@ -504,6 +516,9 @@ function ClientRegistrationCreate() {
                         </label>
                       </div>
                     )}
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate1}</label>
+                    </div>
                   </div>
                   <div className="form-group col-md-6">
                     <label>
@@ -535,6 +550,9 @@ function ClientRegistrationCreate() {
                         <label className="errlabel">AMC Date is required</label>
                       </div>
                     )}
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate2}</label>
+                    </div>
                   </div>
                 </div>
 

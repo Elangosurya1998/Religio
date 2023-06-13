@@ -86,13 +86,7 @@ function DomainrenewalList() {
       name: "Domain Name",
       cell: (row) => (
         <>
-          <a
-            onClick={(e) => handleShow(e, row.id)}
-            style={{
-              cursor: "pointer",
-              paddingRight: 4,
-              color: "black",
-            }}>
+          <a onClick={(e) => handleShow(e, row.id)} className="my-component">
             {row.sitename}
           </a>
         </>
