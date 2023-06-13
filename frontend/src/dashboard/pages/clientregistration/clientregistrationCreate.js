@@ -440,18 +440,24 @@ function ClientRegistrationCreate() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <DatePicker
-                      name="dateofjoining"
-                      {...register("dateofjoining")}
-                      className="form-control"
-                      selected={selectDate}
-                      autoComplete="off"
-                      onChange={handleDateChange}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="dateofjoining"
+                        {...register("dateofjoining")}
+                        className="form-control"
+                        selected={selectDate}
+                        autoComplete="off"
+                        onChange={handleDateChange}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                        popperModifiers={{}}
+                      />
+                    </div>
                     {error?.selectedDate != "" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
@@ -496,26 +502,23 @@ function ClientRegistrationCreate() {
                       Contract Signed Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-
-                    <DatePicker
-                      name="dateofcontractsigning"
-                      {...register("dateofcontractsigning")}
-                      className="form-control"
-                      selected={selectContractDate}
-                      autoComplete="off"
-                      onChange={handleDateContract}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
-                    {errors?.dateofcontractsigning?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Date of Contract Signing is required
-                        </label>
-                      </div>
-                    )}
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="dateofcontractsigning"
+                        {...register("dateofcontractsigning")}
+                        className="form-control"
+                        selected={selectContractDate}
+                        autoComplete="off"
+                        onChange={handleDateContract}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     <div className="text-danger text_error">
                       <label className="errlabel">{error?.selectedDate1}</label>
                     </div>
@@ -525,31 +528,23 @@ function ClientRegistrationCreate() {
                       AMC Start Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    {/* <input
-                      type="Date"
-                      className="form-control"
-                      name="amcdate"
-                      {...register("amcdate", { required: true })}
-                      aria-invalid={errors?.amcdate ? "true" : "false"}
-                    /> */}
-                    <DatePicker
-                      name="amcdate"
-                      {...register("amcdate")}
-                      className="form-control"
-                      selected={selectAMCDate}
-                      autoComplete="off"
-                      onChange={handleDateAMC}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
-
-                    {errors?.amcdate?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">AMC Date is required</label>
-                      </div>
-                    )}
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="amcdate"
+                        {...register("amcdate")}
+                        className="form-control"
+                        selected={selectAMCDate}
+                        autoComplete="off"
+                        onChange={handleDateAMC}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     <div className="text-danger text_error">
                       <label className="errlabel">{error?.selectedDate2}</label>
                     </div>

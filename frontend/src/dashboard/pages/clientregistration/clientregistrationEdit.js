@@ -434,19 +434,24 @@ function ClientRegistrationEdit() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-
-                    <DatePicker
-                      name="dateofjoining"
-                      {...register("dateofjoining")}
-                      className="form-control"
-                      selected={selectDate}
-                      value={selectDate}
-                      onChange={handleDateChange}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="dateofjoining"
+                        {...register("dateofjoining")}
+                        className="form-control"
+                        selected={selectDate}
+                        autoComplete="off"
+                        onChange={handleDateChange}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                        popperModifiers={{}}
+                      />
+                    </div>
                     <div className="text-danger text_error">
                       <label className="errlabel">{error?.selectedDate}</label>
                     </div>
@@ -487,18 +492,23 @@ function ClientRegistrationEdit() {
                       Contract Signed Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <DatePicker
-                      name="dateofcontractsigning"
-                      {...register("dateofcontractsigning")}
-                      className="form-control"
-                      selected={selectContractDate}
-                      autoComplete="off"
-                      onChange={handleDateContract}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="dateofcontractsigning"
+                        {...register("dateofcontractsigning")}
+                        className="form-control"
+                        selected={selectContractDate}
+                        autoComplete="off"
+                        onChange={handleDateContract}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     <div className="text-danger text_error">
                       <label className="errlabel">{error?.selectedDate1}</label>
                     </div>
@@ -508,18 +518,23 @@ function ClientRegistrationEdit() {
                       AMC Start Date&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <DatePicker
-                      name="amcdate"
-                      {...register("amcdate")}
-                      className="form-control"
-                      selected={selectAMCDate}
-                      autoComplete="off"
-                      onChange={handleDateAMC}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="amcdate"
+                        {...register("amcdate")}
+                        className="form-control"
+                        selected={selectAMCDate}
+                        autoComplete="off"
+                        onChange={handleDateAMC}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     <div className="text-danger text_error">
                       <label className="errlabel">{error?.selectedDate2}</label>
                     </div>
