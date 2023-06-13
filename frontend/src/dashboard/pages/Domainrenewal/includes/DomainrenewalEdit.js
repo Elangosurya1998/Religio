@@ -233,18 +233,23 @@ function DomainrenewalEdit() {
                       Domain Create Date &nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <DatePicker
-                      name="domain_create_date"
-                      {...register("domain_create_date")}
-                      className="form-control"
-                      selected={DomainCreate}
-                      autoComplete="off"
-                      onChange={handledomaincreate}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="domain_create_date"
+                        {...register("domain_create_date")}
+                        className="form-control"
+                        selected={DomainCreate}
+                        autoComplete="off"
+                        onChange={handledomaincreate}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     {errors?.domain_create_date?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
@@ -258,18 +263,23 @@ function DomainrenewalEdit() {
                       Domain Expire Date &nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    <DatePicker
-                      name="domain_expire_date"
-                      {...register("domain_expire_date")}
-                      className="form-control"
-                      selected={domainexpireDate}
-                      autoComplete="off"
-                      onChange={handledomainexpired}
-                      showYearDropdown
-                      scrollableYearDropdown
-                      yearDropdownItemNumber={25}
-                      dateFormat="dd-MM-yyyy"
-                    />
+                    <div className="d-flex">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-calendar-days"></i>
+                      </span>
+                      <DatePicker
+                        name="domain_expire_date"
+                        {...register("domain_expire_date")}
+                        className="form-control"
+                        selected={domainexpireDate}
+                        autoComplete="off"
+                        onChange={handledomainexpired}
+                        showYearDropdown
+                        scrollableYearDropdown
+                        yearDropdownItemNumber={25}
+                        dateFormat="dd-MM-yyyy"
+                      />
+                    </div>
                     {errors?.domain_expire_date?.type === "required" && (
                       <div className="text-danger text_error">
                         <label className="errlabel">
