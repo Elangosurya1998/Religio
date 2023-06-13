@@ -99,9 +99,7 @@ function ProvinceList() {
       name: "Province",
       selector: (row) => (
         <>
-          <a
-            onClick={(e) => ViewProvince(e, row.id)}
-            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+          <a onClick={(e) => ViewProvince(e, row.id)} className="my-component">
             {row.province}
           </a>
         </>

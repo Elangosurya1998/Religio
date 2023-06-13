@@ -90,7 +90,7 @@ function OurCustomerSayList() {
         <>
           <a
             onClick={(e) => ViewOurCustomerSay(e, row.id)}
-            style={{ cursor: "pointer" }}>
+            className="my-component">
             {row.crname}
           </a>
         </>

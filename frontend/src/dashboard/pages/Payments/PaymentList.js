@@ -92,13 +92,13 @@ function PaymentList() {
       width: "70px",
     },
     {
-      name: "Province",
+      name: "Congregation",
       selector: (row) => (
         <>
           <a
             onClick={(e) => ViewPaymentStatus(e, row.id)}
-            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
-            {row.province}
+            className="my-component">
+            {row.congregation}
           </a>
         </>
       ),

@@ -29,6 +29,7 @@ function ClientRegistrationEdit() {
   const [selectContractDate, setselectContractDate] = useState(null);
   const [selectedAMCDate, setSelectedAMCDate] = useState(null);
   const [selectAMCDate, setselectAMCDate] = useState(null);
+  const [error, setError] = useState({});
 
   useEffect(() => {
     fetch(`${ApiUrl}/Religio/Registeredit/${id}`)
@@ -103,6 +104,33 @@ function ClientRegistrationEdit() {
   const navigate = useNavigate();
 
   function onSubmitformregister(data, e) {
+    if (selectedDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate: "Date of Joining is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate: "" }));
+    }
+    if (selectedContractDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate1: "Date of Contract Signing is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate1: "" }));
+    }
+    if (selectedAMCDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate2: "AMC Date is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate2: "" }));
+    }
     const formData = new FormData();
     formData.append("File", selectedFile);
     data.dateofjoining = selectedDate;
@@ -406,13 +434,7 @@ function ClientRegistrationEdit() {
                       Date of Joining&nbsp;
                       <span style={{ color: "red" }}>*</span>
                     </label>
-                    {/* <input
-                      type="Date"
-                      className="form-control regdata"
-                      name="dateofjoining"
-                      {...register("dateofjoining", { required: true })}
-                      aria-invalid={errors?.dateofjoining ? "true" : "false"}
-                    /> */}
+
                     <DatePicker
                       name="dateofjoining"
                       {...register("dateofjoining")}
@@ -425,13 +447,9 @@ function ClientRegistrationEdit() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.dateofjoining?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Date of Joining is required
-                        </label>
-                      </div>
-                    )}
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate}</label>
+                    </div>
                   </div>
                 </div>
                 <div className="form-group">
@@ -481,13 +499,9 @@ function ClientRegistrationEdit() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.dateofcontractsigning?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Date of Contract Signing is required
-                        </label>
-                      </div>
-                    )}
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate1}</label>
+                    </div>
                   </div>
                   <div className="form-group col-md-6">
                     <label>
@@ -506,11 +520,9 @@ function ClientRegistrationEdit() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.amcdate?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">AMC Date is required</label>
-                      </div>
-                    )}
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate2}</label>
+                    </div>
                   </div>
                 </div>
 

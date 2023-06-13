@@ -20,8 +20,28 @@ function DomainrenewalCreate() {
   const [DomainCreate, setDomainCreate] = useState(null);
   const [domainexpireDate, setdomainexpireDate] = useState(null);
   const [domainexpiredDate, setdomainexpiredDate] = useState(null);
+  const [error, setError] = useState({});
+
   function onSubmitDomainrenewalform(data, e) {
     e.preventDefault();
+    if (DomainCreated === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedDate: "Domain Create Date is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedDate: "" }));
+    }
+    if (domainexpiredDate === null) {
+      setError((pre) => ({
+        ...pre,
+        selectedomain: "Domain Expire Date is required",
+      }));
+      return false;
+    } else {
+      setError((pre) => ({ ...pre, selectedomain: "" }));
+    }
     data.domain_create_date = DomainCreated;
     data.domain_expire_date = domainexpiredDate;
 
@@ -211,13 +231,10 @@ function DomainrenewalCreate() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.domain_create_date?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Domain Create Date is required
-                        </label>
-                      </div>
-                    )}
+
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedDate}</label>
+                    </div>
                   </div>
                   <div className="form-group col-md-6">
                     <label>
@@ -236,13 +253,10 @@ function DomainrenewalCreate() {
                       yearDropdownItemNumber={25}
                       dateFormat="dd-MM-yyyy"
                     />
-                    {errors?.domain_expire_date?.type === "required" && (
-                      <div className="text-danger text_error">
-                        <label className="errlabel">
-                          Domain Expire Date is required
-                        </label>
-                      </div>
-                    )}
+
+                    <div className="text-danger text_error">
+                      <label className="errlabel">{error?.selectedomain}</label>
+                    </div>
                   </div>
                 </div>
                 <div className="text-center">

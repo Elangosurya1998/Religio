@@ -104,7 +104,7 @@ function CongregationList() {
         <>
           <a
             onClick={(e) => Viewcongregation(e, row.id)}
-            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            className="my-component">
             {row.congregation}
           </a>
         </>

@@ -93,7 +93,7 @@ function OurclientList() {
       name: "Province",
       selector: (row) => (
         <>
-          <a onClick={(e) => handleShow(e, row)} style={{ cursor: "pointer" }}>
+          <a onClick={(e) => handleShow(e, row)} className="my-component">
             {row.prname}
           </a>
         </>

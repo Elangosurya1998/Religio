@@ -83,7 +83,7 @@ function ClientregistrationList() {
         <>
           <a
             onClick={(e) => peojectstatsadd(e, row.id)}
-            style={{ cursor: "pointer", paddingRight: 4, color: "black" }}>
+            className="my-component">
             {row.congregation}
           </a>
         </>
