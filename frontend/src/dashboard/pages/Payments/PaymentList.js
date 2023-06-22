@@ -103,7 +103,7 @@ function PaymentList() {
         </>
       ),
       sortable: true,
-      width: "150px",
+      width: "250px",
     },
     {
       name: "Financial Year",

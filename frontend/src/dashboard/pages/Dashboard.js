@@ -47,8 +47,8 @@ function Dashboard() {
         getDatatable(resData.dataall);
 
         SetBalance(resData.data);
-        FinancialYear(resData.data.year);
-        FinancialMonth(resData.data.Month);
+        // FinancialYear(resData.data.year);
+        // FinancialMonth(resData.data.Month);
         $(".pericon").hide();
       })
       .catch((err) => {
@@ -56,9 +56,23 @@ function Dashboard() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${ApiUrl}/Religio/ClientType/Getfinancialyears`)
+      .then((response) => {
+        const resData = response.data;
+        FinancialYear(resData.data);
+        console.log(resData.month);
+        FinancialMonth(resData.month);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   function getData(event) {
     $(".monthlabel").text("Select All");
     const values = event.target.text;
+
     if (values === "AMC") {
       $("#hdvalue").text("AMC Cost");
       $("#thisclient").text("Received Amount");
@@ -119,7 +133,7 @@ function Dashboard() {
             const resData = response.data;
 
             SetBalance(resData.data);
-            FinancialYear(resData.data.year);
+            // FinancialYear(resData.data.year);
             FinancialMonth(resData.data.Month);
             Dynamictitle("New Sales");
             getDatatable(resData.dataall);
@@ -150,7 +164,7 @@ function Dashboard() {
             .then((response) => {
               const resData = response.data;
               SetBalance(resData.data);
-              FinancialYear(resData.data.year);
+              // FinancialYear(resData.data.year);
               FinancialMonth(resData.data.Month);
               Dynamictitle(data);
               getDatatable(resData.dataall);
@@ -164,11 +178,11 @@ function Dashboard() {
       const data = "NewSales";
       $("#client").text(values);
       axios
-        .get(`${ApiUrl}/Religio/ClientType/getBalance/selectall/${data}`)
+        .get(`${ApiUrl}/Religio/ClientType/getBalance/${data}`)
         .then((response) => {
           const resData = response.data;
           SetBalance(resData.data);
-          FinancialYear(resData.data.year);
+          // FinancialYear(resData.data.year);
           FinancialMonth(resData.data.Month);
           Dynamictitle(values);
           getDatatable(resData.dataall);
@@ -186,13 +200,13 @@ function Dashboard() {
             const resData = response.data;
             SetBalance(resData.data);
             Dynamictitle(data);
-            FinancialYear(resData.data.year);
+            // FinancialYear(resData.data.year);
             SetClientregister(resData.dataall);
           })
           .catch((response) => {
             const resData = response.data;
             SetBalance(resData);
-            FinancialYear(resData);
+            // FinancialYear(resData);
             FinancialMonth(resData);
           });
       } else {
@@ -201,7 +215,7 @@ function Dashboard() {
           .then((response) => {
             const resData = response.data;
             SetBalance(resData.data);
-            FinancialYear(resData.data.year);
+            // FinancialYear(resData.data.year);
             FinancialMonth(resData.data.Month);
             Dynamictitle(data);
             getDatatable(resData.dataall);
@@ -209,7 +223,7 @@ function Dashboard() {
           .catch((response) => {
             const resData = response.data;
             SetBalance(resData);
-            FinancialYear(resData);
+            // FinancialYear(resData);
             FinancialMonth(resData);
           });
       }

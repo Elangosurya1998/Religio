@@ -44,7 +44,9 @@ function Navbar() {
   function notificationAMC() {
     navigate("/Religio/AMC/Notification");
   }
-
+  function notifiyOutstanding() {
+    navigate("/Religio/Outstanding/Notification");
+  }
   function notificationDomain() {
     navigate("/Religio/UpcomingDomainRenewel");
   }
@@ -108,6 +110,18 @@ function Navbar() {
                     {" "}
                     Upcoming AMC Clients{" "}
                   </p>
+                </div>
+              </a>
+              <a
+                className="dropdown-item preview-item"
+                onClick={notifiyOutstanding}>
+                <div className="preview-thumbnail">
+                  <div className="preview-icon bg-success">
+                    <i className="mdi mdi-receipt" />
+                  </div>
+                </div>
+                <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                  <p className="text-gray ellipsis mb-0">Outstanding</p>
                 </div>
               </a>
               {/* <a className="dropdown-item preview-item">

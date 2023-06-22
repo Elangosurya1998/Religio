@@ -198,16 +198,33 @@ class ProvinceController extends Controller
             ->where('financialyear',$dately)
             ->where('clienttype',$value)
             ->get();
-         
+            $clientyear =DB::table('client_registrations')->select('projectvalue')->where('financialyear',$dately)->get();
+            if($value == 'NewSales'){
 
-            $balance=[];
-            $total=[];
+                $totalval =DB::table('client_registrations')->select('projectvalue')->where('financialyear',$dately)->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totalss[]=$value->projectvalue;
+                   $total[] = ($value->projectvalue + intdiv($value->projectvalue,100) * 18);
+                }
+    
+             }else{
+                $totalval =DB::table('client_registrations')->select('amcvalue')->where('financialyear',$dately)->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totaljj[]=$value->amcvalue;
+                   $total[] = ($value->amcvalue + intdiv($value->amcvalue,100) * 18);
+                }
+    
+             }
+            // $balance=[];
+            // $total=[];
             $Paid=[];
             $Getmonth =[];
 
           foreach ($Balancefilter as $key => $value) {
-            $balance[]= $value->balance;
-            $total[]=$value->total;
+            // $balance[]= $value->balance;
+            // $total[]=$value->total;
             $Paid[]= $value->paid;
             $month = Carbon::parse($value->created_at)->format('F');
 
@@ -222,8 +239,10 @@ class ProvinceController extends Controller
                             $year[] = $yeardata;
                         }  
             }
-          if(count($Balancefilter) > 0) {
-           $balances =array_sum($balance);
+            $balance =array_sum($total) - array_sum($Paid);
+          if(count($clientyear) > 0) {
+
+           $balances = $balance;
            $totalval = array_sum($total);
            $paidval = array_sum($Paid);
            $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
@@ -321,27 +340,44 @@ class ProvinceController extends Controller
         }
         }
     public function GetBalanceall($value){
-
-
            if ($value != "Clients") {
            
-            $Balancefilter =Payment::where('clienttype',$value)->get();
-            $GetallData = DB::table('payments as pay')
-            ->select('pay.*','co.congregation','pr.province')
-            ->leftjoin('congregation as co','co.id','pay.congregation')
-            ->leftjoin('provinces as pr','pr.id','pay.province')
-            ->where('clienttype',$value)
-            ->orderBy('financialyear', 'desc')
-            ->get();
+             $Balancefilter = Payment::where('clienttype',$value)->get();
+
+             $GetallData = DB::table('payments as pay')
+             ->select('pay.*','co.congregation','pr.province')
+             ->leftjoin('congregation as co','co.id','pay.congregation')
+             ->leftjoin('provinces as pr','pr.id','pay.province')
+             ->where('clienttype',$value)
+             ->orderBy('financialyear', 'desc')
+             ->get();
         
-            $balance=[];
-            $total=[];
+             if($value == 'NewSales'){
+                $totalval =DB::table('client_registrations')->select('projectvalue')->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totalss[]=$value->projectvalue;
+                   $total[] = ($value->projectvalue + intdiv($value->projectvalue,100) * 18);
+                }
+    
+             }else{
+                $totalval =DB::table('client_registrations')->select('amcvalue')->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totaljj[]=$value->amcvalue;
+                   $total[] = ($value->amcvalue + intdiv($value->amcvalue,100) * 18);
+                }
+    
+             }
+           
+
+            // $balance=[];
             $Paid=[];
             $Getmonth =[];
             $year =[];
             foreach ($Balancefilter as $key => $value) {
-                $balance[]= $value->balance;
-                $total[]=$value->total;
+                // $balance[]= $value->balance;
+                //
                 $yeardata =$value->financialyear;
                 $Paid[]= $value->paid;
                 $month = Carbon::parse($value->created_at)->format('F');
@@ -352,10 +388,10 @@ class ProvinceController extends Controller
                     $year[] = $yeardata;
                 }
             }
-           
+           $balance =array_sum($total) - array_sum($Paid);
            
             if(count($Balancefilter) > 0) {
-            $balances =array_sum($balance);
+            $balances =$balance;
             $totalval = array_sum($total);
             $paidval = array_sum($Paid);
             $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
@@ -443,14 +479,19 @@ class ProvinceController extends Controller
         public function GetFinancialyear()
         {
           
-            $years = DB::table('payments')->select('financialyear')->groupby('financialyear')->orderBy('financialyear', 'desc')->get();
+            $years = DB::table('client_registrations')->select('financialyear','dateofjoining')->groupby('financialyear')->orderBy('financialyear', 'desc')->get();
             $finnacialyear =[];
+            $Getmonth =[];
             foreach ($years as $key => $value) {
+                $month = Carbon::parse($value->dateofjoining)->format('F');
+                if(!in_array($month,$Getmonth)){
+                    $Getmonth[] = $month;
+                }
                 $finnacialyear[]=$value->financialyear;
             }
                 if(count($finnacialyear) > 0) {
                     return response()->json(["status" => $this->status, "success" => true, 
-                                "count" => count($finnacialyear), "data" => $finnacialyear]);
+                                "count" => count($finnacialyear), "data" => $finnacialyear ,'month' => $Getmonth]);
                 }
                 else {
                     return response()->json(["status" => "failed",
@@ -471,14 +512,32 @@ class ProvinceController extends Controller
             ->where('financialyear',$request->year)
             ->where('clienttype',$request->type)
             ->get();
-            $balance=[];
-            $total=[];
-            $Paid=[];
-            $Getmonth =[];
+           
+            $clientyear =DB::table('client_registrations')->select('projectvalue')->where('financialyear',$request->year)->get();
 
+            if($request->type == 'NewSales'){
+                $totalval =DB::table('client_registrations')->select('projectvalue')->where('financialyear',$request->year)->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totalss[]=$value->projectvalue;
+                   $total[] = ($value->projectvalue + intdiv($value->projectvalue,100) * 18);
+                }
+    
+             }else{
+                $totalval =DB::table('client_registrations')->select('amcvalue')->where('financialyear',$request->year)->get();
+                $total=[];
+                foreach ($totalval as $key => $value) {
+                    $totaljj[]=$value->amcvalue;
+                   $total[] = ($value->amcvalue + intdiv($value->amcvalue,100) * 18);
+                }
+    
+             }
+            //  $balance=[];
+             $Paid=[];
+             $Getmonth =[];
             foreach ($getBalance as $key => $value) {
-                $balance[]= $value->balance;
-                $total[]=$value->total;
+                // $balance[]= $value->balance;
+                // $total[]=$value->total;
                 $Paid[]= $value->paid;
                 $month=Carbon::parse($value->created_at)->format('F'); 
 
@@ -487,8 +546,8 @@ class ProvinceController extends Controller
                 }
 
             }
-
-            $balances =array_sum($balance);
+            $balance =array_sum($total) - array_sum($Paid);
+            $balances =$balance;
             $totalval = array_sum($total);
             $paidval = array_sum($Paid);
             $balanceamount = preg_replace("/(\d+?)(?=(\d\d)+(\d)(?!\d))(\.\d+)?/i", "$1,", $balances);
@@ -498,7 +557,7 @@ class ProvinceController extends Controller
             $perbal =  round(($balances * 100) / $totalval ,2);
             $perpaid = round(($paidval * 100) / $totalval,2);
 
-            if(count($getBalance) > 0) {
+            if(count($clientyear) > 0) {
                 return response()->json(["status" => $this->status, "success" => true, 
                             "count" => count($getBalance), "data" => [
                                 "balance" =>$balanceamount ?? '0',
@@ -595,6 +654,7 @@ class ProvinceController extends Controller
             ->get();
             
             }else{
+
                 $getBalance = DB::table('payments')
             ->select('balance','total','paid','financialyear')
             ->where('clienttype',$request->type)

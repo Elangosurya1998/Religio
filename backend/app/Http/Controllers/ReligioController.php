@@ -147,26 +147,28 @@ class ReligioController extends Controller
         $currentyear = date('y');
 
         $AmcNotification =  DB::table('client_registrations as cr')
-            ->where(DB::raw("(DATE_FORMAT(cr.amcdate,'%y'))"),'<=',$currentyear)
-            ->orderByRaw("MONTH(cr.amcdate)")
+            ->where(DB::raw("(DATE_FORMAT(cr.dateofjoining,'%y'))"),'<=',$currentyear)
+            ->orderByRaw("MONTH(cr.dateofjoining)")
             ->get();
 
         
         foreach($AmcNotification as $AmcNoti){
 
-            $amcdate = date('Y-m', strtotime($AmcNoti->amcdate));
+            $amcdate = date('Y-m', strtotime($AmcNoti->dateofjoining));
             $currentDate = date('Y-m');
-            $amcYear = date('Y', strtotime($AmcNoti->amcdate));
+            $oneYearAgo = date("Y-m", strtotime("-1 year", strtotime($currentDate)));
+            $amcYear = date('Y', strtotime($AmcNoti->dateofjoining));
             $amcCurrent = date('Y');
             $amcCount = $amcCurrent-$amcYear;
-        
+            
             $Payments =  DB::table('payments')
             ->where('payments.clientcode',$AmcNoti->clientcode)
             ->get();
             
-            $AmcDate = $AmcNoti->amcdate;
-            $date = explode('-',$AmcDate);
-            $date[0] = date('Y');
+            $dateofjoining = $AmcNoti->dateofjoining;
+            $joindate =date("d-m-Y", strtotime($dateofjoining)); 
+            $date = explode('-',$dateofjoining);
+             $date[0] = date('Y');
             $imdate = implode('-',$date);
             $dformat =date("d-m-Y", strtotime($imdate)); 
             $month =date("F",strtotime($dformat));
@@ -201,14 +203,16 @@ class ReligioController extends Controller
                
 
             }
+
             $outstandingVal = ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc);
 
             if($outstandingVal > 0){
-                if($currentDate >= $amcdate){
+                if($oneYearAgo >= $amcdate){
                     $overAll[] = [
                         'name' => $AmcNoti->name,
                         'amcdate'=>$dformat,
                         'Month'=>$month,
+                        'Joindate' =>$joindate,
                         // 'clientcode' => $AmcNoti->clientcode,
                         // 'projectvalue' => $AmcNoti->projectvalue,
                         // 'GST' => intdiv($AmcNoti->projectvalue,100) * 18,
@@ -224,7 +228,7 @@ class ReligioController extends Controller
             }
         }
         
-        //  dd($AmcNoti->amcvalue);
+    
         if(count($overAll) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
                         "count" => count($overAll), "data" => $overAll]);
@@ -236,6 +240,80 @@ class ReligioController extends Controller
         
     }
 
+    public function OutstandingNotification(){
+       
+        $AmcNotification =  DB::table('client_registrations')
+            ->orderBy('financialyear', 'asc')
+            ->get();
+      
+        
+        foreach($AmcNotification as $AmcNoti){  
+            $Payments =  DB::table('payments')
+            ->where('payments.clientcode',$AmcNoti->clientcode)
+            ->get();
+            
+            $amc = [];
+            $newsales = []; 
+            $outstanding = [];
+            $paytotal = [];  
+
+            foreach($Payments as $pay){
+                switch ($pay->clienttype) {
+                    case 'AMC':
+                        $amc[] = $pay->paid;
+                        $newsales[] = 0;
+                        $outstanding[] =  0;
+                        break;
+                    case 'NewSales':
+                        $amc[] = 0;
+                        $newsales[] = $pay->paid;
+                        $outstanding[] = 0;
+                        break;
+                    case 'Outstanding':
+                        $amc[] = 0;
+                        $newsales[] = 0;
+                        $outstanding[] = $pay->paid;
+                        break;
+                    default:
+                        $amc[] = 0;
+                        $newsales[] = 0;
+                        $outstanding[] = 0;
+                        break;
+                }
+            }
+            
+
+            $outstandingVal = ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding));
+
+                
+                if ($newsales) {
+                    $paidamount = $newsales;
+                }else{
+                    $paidamount = 0;
+                }
+            if($outstandingVal > 0){
+                    $overAll[] = [
+                        'name' => $AmcNoti->name,
+                        'financialyear'=>$AmcNoti->financialyear,
+                        'clientcode'=>$AmcNoti->clientcode,
+                        'paid' =>$paidamount,
+                        'type' =>'New Sales',
+                        'projectvalue' => $AmcNoti->projectvalue,
+                        'TotalAMCoutstanding' => ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding))
+                    ];  
+            }
+        }
+       
+    
+        if(count($overAll) > 0) {
+            return response()->json(["status" => $this->status, "success" => true, 
+                        "count" => count($overAll), "data" => $overAll]);
+        }
+        else {
+            return response()->json(["status" => "failed",
+            "success" => false, "message" => "Whoops! no record found"]);
+        }
+    }
     public function AMCOutstanding($clientCode)
     {
         $currentMonth = date('m');

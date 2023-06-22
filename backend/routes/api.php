@@ -209,6 +209,7 @@ Route::get('/Religio/ClientType/Getfinancialyears',[ProvinceController::class, '
 
 //notification filter
 Route::get('/Religio/Balance/notification',[ReligioController::class, 'BalanceNotification']);
+Route::get('/Religio/Outstanding/notification',[ReligioController::class, 'OutstandingNotification']);
 Route::get('/Religio/AMC/Outstanding/{id}',[ReligioController::class, 'AMCOutstanding']);
 
 
