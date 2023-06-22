@@ -6,6 +6,7 @@ import ApiUrl from "../Api/Api";
 function OutstandingShow() {
   const [Notifydata, notificationData] = useState([]);
   const [filteroutdata, OutstandingFilter] = useState([]);
+  const [total, setTotal] = useState("");
 
   useEffect(() => {
     axios
@@ -14,6 +15,7 @@ function OutstandingShow() {
         const resData = response.data;
         notificationData(resData.data);
         OutstandingFilter(resData.data);
+        setTotal(resData.total);
       })
       .catch((err) => {
         console.log(err);
@@ -155,14 +157,9 @@ function OutstandingShow() {
                   />
                 </div>
 
-                <div className="col-lg-6"></div>
-                <div className="col-lg-2">
-                  {/* &nbsp;&nbsp;&nbsp;
-                  <label onClick={exportcongregationTable}>
-                    <i
-                      class="fa-solid fa-file-csv"
-                      style={{ color: "black", cursor: "pointer" }}></i>
-                  </label> */}
+                <div className="col-lg-2"></div>
+                <div className="col-lg-6">
+                  <strong>Total Outstanding :</strong> {total}
                 </div>
               </div>
               <br></br>

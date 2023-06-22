@@ -162,28 +162,27 @@ class ProjectsController extends Controller
 
      
         $alldashboard = DB::table('payments as pay')
-
         ->select(
             DB::raw('(CASE 
             WHEN pay.status IS NOT NULL THEN pay.status 
             ELSE "Pending"
             END) AS status'),
-            'co.congregation','pr.province',
-            'cr.name','cr.clienttype','cr.projectvalue','cr.amcvalue','cr.amcdate','cr.amcvalue',
-            'cr.dateofjoining','cr.dateofcontractsigning','cr.projectstatus','cr.clientcode','cr.financialyear',
-            'cr.mobile','cr.email','cr.country','cr.webapplication','cr.address1','cr.state','cr.address2','cr.city',
-            'cr.country','cr.postcode','cr.address2','cr.place',
             'pay.product','pay.pi','pay.balancepaid','pay.renewelmonth','pay.gst','pay.total','pay.paid','pay.balance',
             'pay.id')
-        ->leftjoin('congregation as co', 'co.id', 'pay.congregation')
-        ->leftjoin('provinces as pr', 'pr.id', 'pay.province')
         ->leftjoin('client_registrations as cr','cr.id','=','pay.id')
         ->where('cr.id',$id)
         ->get();
-// dd($alldashboard);
-        if(count($alldashboard) > 0) {
+            $clientview =DB::table('client_registrations as cl')->select('cl.*','co.congregation','pr.province')
+            ->leftjoin('congregation as co', 'co.id', 'cl.congregation')
+            ->leftjoin('provinces as pr', 'pr.id', 'cl.province')
+            ->where('cl.id',$id)->get();
+            // dd($clientviewname,$alldashboard);
+            // $bindData = [
+            //     'name'=>
+            // ];
+        if(count($clientview) > 0) {
             return response()->json(["status" => $this->status, "success" => true,
-                        "count" => count($alldashboard), "data" => $alldashboard]);
+                        "count" => count($alldashboard), "data" => $clientview ,'payment'=> $alldashboard]);
         }
         else {
             return response()->json(["status" => "failed",
