@@ -149,7 +149,7 @@ function PaymentList() {
     },
     {
       name: "Status",
-      selector: (row) => [row.balance == 0 ? "Completed" : "Pending"],
+      selector: (row) => row.status,
       sortable: true,
       width: "100px",
     },
@@ -212,6 +212,7 @@ function PaymentList() {
       "total",
       "paid",
       "balance",
+      "status",
     ];
 
     const filter = filterregister?.filter((item) =>
