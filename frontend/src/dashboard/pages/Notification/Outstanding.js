@@ -3,13 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ApiUrl from "../Api/Api";
 
-function NotificationShow() {
+function OutstandingShow() {
   const [Notifydata, notificationData] = useState([]);
   const [filteroutdata, OutstandingFilter] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${ApiUrl}/Religio/Balance/notification`)
+      .get(`${ApiUrl}/Religio/Outstanding/notification`)
       .then((response) => {
         const resData = response.data;
         notificationData(resData.data);
@@ -33,31 +33,36 @@ function NotificationShow() {
       width: "200px",
     },
     {
-      name: "Join Date",
-      selector: (row) => row.Joindate,
+      name: "Client Type",
+      selector: (row) => row.type,
       sortable: true,
-      width: "120px",
+      width: "150px",
     },
     {
-      name: "AMC Date",
-      selector: (row) => row.amcdate,
-      sortable: true,
-      width: "120px",
-    },
-
-    {
-      name: "Month",
-      selector: (row) => row.Month,
+      name: "Clientcode",
+      selector: (row) => row.clientcode,
       width: "120px",
       sortable: true,
     },
     {
-      name: "AMC Value",
-      selector: (row) => row.AMC,
+      name: "Financial Year",
+      selector: (row) => row.financialyear,
+      sortable: true,
+      width: "150px",
+    },
+    {
+      name: "Project Value",
+      selector: (row) => row.projectvalue,
       sortable: true,
     },
     {
-      name: "AMC Balance",
+      name: "Paid",
+      selector: (row) => row.paid,
+      sortable: true,
+      width: "100px",
+    },
+    {
+      name: "Pending",
       selector: (row) => row.TotalAMCoutstanding,
       sortable: true,
       width: "120px",
@@ -100,7 +105,7 @@ function NotificationShow() {
   function filterdata(event) {
     var value = event.target.value;
 
-    const keys = ["name", "Joindate", "amcdate", "Month", "AMC"];
+    const keys = ["name", "type", "projectvalue", "paid", "clientcode"];
 
     const filter = filteroutdata?.filter((item) =>
       keys.some((key) =>
@@ -109,14 +114,30 @@ function NotificationShow() {
     );
     notificationData(filter);
   }
+  const exportcongregationTable = () => {
+    axios
+      .get(`${ApiUrl}/Religio/Outstanding/export`)
+      .then((response) => {
+        // Trigger file download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "congregation_data.csv");
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Export error:", error);
+      });
+  };
   return (
     <div className="content-wrapper">
       <div className="page-header">
         <h3 className="page-title">
           <span className="page-title-icon bg-gradient-primary text-white me-2">
-            <i className="mdi mdi-lan-pending" />
-          </span>{" "}
-          Upcoming AMC Clients
+            <i className="mdi mdi-account-plus menu-icon" />
+          </span>
+          Total Outstanding
         </h3>
       </div>
       <div className="row">
@@ -160,4 +181,4 @@ function NotificationShow() {
   );
 }
 
-export default NotificationShow;
+export default OutstandingShow;

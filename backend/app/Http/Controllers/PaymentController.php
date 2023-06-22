@@ -44,9 +44,10 @@ class PaymentController extends Controller
 
     public function Paymentlist() {
             $payment = DB::table('payments as pay')
-            ->select('pay.*','co.congregation','pr.province')
+            ->select('pay.*','co.congregation','pr.province','cl.amcvalue','cl.projectvalue')
             ->leftjoin('congregation as co','co.id','pay.congregation')
             ->leftjoin('provinces as pr','pr.id','pay.province')
+            ->leftjoin('client_registrations as cl','cl.province','pay.province')
             ->orderBy('pay.id','desc')
             ->get();
 

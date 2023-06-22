@@ -62,6 +62,7 @@ import OurCustomerSayLayouts from "./dashboard/pages/OurcustomerSay/OurCustomerS
 import NotificationShowlayout from "./dashboard/pages/Notification/NotificationLayout";
 
 import DomainRenewalLayouts from "./dashboard/pages/Domainrenewal/DomainrenewalLayouts";
+import OutstandingShowlayout from "./dashboard/pages/Notification/OutstandingLayout";
 
 function App() {
   return (
@@ -309,6 +310,11 @@ function App() {
             exact
             path="/Religio/AMC/Notification"
             element={<NotificationShowlayout />}
+          />
+          <Route
+            exact
+            path="/Religio/Outstanding/Notification"
+            element={<OutstandingShowlayout />}
           />
           <Route
             exact
