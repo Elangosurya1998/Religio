@@ -203,12 +203,13 @@ class ReligioController extends Controller
                
 
             }
-
             $outstandingVal = ($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc);
 
             if($outstandingVal > 0){
                 if($oneYearAgo >= $amcdate){
-                    $overAll[] = [
+                     $totaldata[]=($AmcNoti->amcvalue*$amcCount + intdiv($AmcNoti->amcvalue*$amcCount,100) * 18) - array_sum($amc);
+                     $totalamcbalance =array_sum($totaldata);
+                     $overAll[] = [
                         'name' => $AmcNoti->name,
                         'amcdate'=>$dformat,
                         'Month'=>$month,
@@ -227,11 +228,10 @@ class ReligioController extends Controller
                 }
             }
         }
-        
-    
+       
         if(count($overAll) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
-                        "count" => count($overAll), "data" => $overAll]);
+                        "count" => count($overAll), "data" => $overAll ,'total'=>$totalamcbalance]);
         }
         else {
             return response()->json(["status" => "failed",
@@ -245,8 +245,8 @@ class ReligioController extends Controller
         $AmcNotification =  DB::table('client_registrations')
             ->orderBy('financialyear', 'asc')
             ->get();
+            
       
-        
         foreach($AmcNotification as $AmcNoti){  
             $Payments =  DB::table('payments')
             ->where('payments.clientcode',$AmcNoti->clientcode)
@@ -256,7 +256,7 @@ class ReligioController extends Controller
             $newsales = []; 
             $outstanding = [];
             $paytotal = [];  
-
+            
             foreach($Payments as $pay){
                 switch ($pay->clienttype) {
                     case 'AMC':
@@ -285,12 +285,13 @@ class ReligioController extends Controller
 
             $outstandingVal = ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding));
 
-                
                 if ($newsales) {
                     $paidamount = $newsales;
                 }else{
                     $paidamount = 0;
                 }
+        $data[] = ($AmcNoti->projectvalue + intdiv($AmcNoti->projectvalue,100) * 18)-(array_sum($newsales)+array_sum($outstanding));
+
             if($outstandingVal > 0){
                     $overAll[] = [
                         'name' => $AmcNoti->name,
@@ -303,11 +304,12 @@ class ReligioController extends Controller
                     ];  
             }
         }
-       
+
+        $totaloutstanding =array_sum($data);
     
         if(count($overAll) > 0) {
             return response()->json(["status" => $this->status, "success" => true, 
-                        "count" => count($overAll), "data" => $overAll]);
+                        "count" => count($overAll), "data" => $overAll,'total' =>$totaloutstanding]);
         }
         else {
             return response()->json(["status" => "failed",
